@@ -12,7 +12,7 @@ import {
   AllDataSourceTypes,
   type WidgetJson
 } from 'jimu-core'
-import { Switch, Radio, Label, Alert, Checkbox, TextInput, defaultMessages as jimuDefaultMessages } from 'jimu-ui'
+import { Switch, Radio, Label, Alert, Checkbox, TextInput, Button, defaultMessages as jimuDefaultMessages } from 'jimu-ui'
 import {
   MapWidgetSelector,
   SettingSection,
@@ -46,6 +46,8 @@ export interface WidgetSettingState {
   // Whether loadGroupLayerInfos has finished running for the active view.
   // Drives the empty-state message versus a "loading" placeholder.
   groupLayerInfosLoaded: boolean
+  // Transient feedback for the XML import/export of settings.
+  importStatus?: { kind: 'success' | 'error', message: string }
 }
 
 export type WidgetSettingProps = AllWidgetSettingProps<IMConfig> & ExtraProps
@@ -60,6 +62,23 @@ WidgetSettingState
   ])
 
   customizeLayersTrigger = createRef<HTMLDivElement>()
+  // Hidden file input used by the "Import settings" button.
+  importFileRef = createRef<HTMLInputElement>()
+
+  // Config keys that the XML import/export covers: the Options and Enhanced
+  // options. The map selection is deliberately excluded (no useMapWidgetIds,
+  // no useMapWidget source toggle, no per-map customizeLayerOptions), so a file
+  // can be moved between apps without dragging a specific map's layers along.
+  static readonly PORTABLE_KEYS: Array<keyof Config> = [
+    'goto', 'label', 'opacity', 'information', 'setVisibility', 'enableLegend',
+    'useTickBoxes', 'showAllLegend', 'reorderLayers', 'searchLayers',
+    'expandAllLayers', 'showTables', 'popup', 'visibilityRange', 'layerBatchOptions',
+    'changeSymbolForRuntimeLayers', 'soloLayer', 'showLayerCount', 'collapsibleList',
+    'startCollapsed', 'filterPlaceholder', 'enableLayerViews', 'autoShowParentLayers',
+    'extraLayerTools', 'enableAddLayer', 'enableMasterOpacity', 'enableBasemapSwitcher',
+    'enableLegendPanel', 'toolFlash', 'toolCopyUrl', 'toolRefresh', 'toolDetails',
+    'toolSpotlight', 'toolMove', 'symbolOption'
+  ]
 
   static mapExtraStateProps = (state: IMState): ExtraProps => {
     return {
@@ -75,7 +94,8 @@ WidgetSettingState
       viewIdsFromMapWidget: null,
       activeCustomizeJmvId: '',
       groupLayerInfos: [],
-      groupLayerInfosLoaded: false
+      groupLayerInfosLoaded: false,
+      importStatus: null
     }
     // this.setDefaultConfig()
   }
@@ -98,6 +118,97 @@ WidgetSettingState
 
   getFormattedMessage (stringId: string) {
     return <FormattedMessage id={stringId} defaultMessage={allDefaultMessages[stringId]} />
+  }
+
+  // ----- Import / export of the Options + Enhanced options as XML -----------
+  buildSettingsXml = (): string => {
+    const cfg: any = this.props.config ? this.props.config.asMutable({ deep: true }) : {}
+    const esc = (s: any) => String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+    const lines: string[] = []
+    lines.push('<?xml version="1.0" encoding="UTF-8"?>')
+    lines.push('<mapLayersCustomSettings schemaVersion="1">')
+    Setting.PORTABLE_KEYS.forEach((k) => {
+      const v = cfg[k as string]
+      if (v === undefined || v === null) return
+      const type = typeof v
+      if (type !== 'boolean' && type !== 'number' && type !== 'string') return
+      lines.push(`  <option key="${esc(k)}" type="${type}">${esc(v)}</option>`)
+    })
+    lines.push('</mapLayersCustomSettings>')
+    return lines.join('\n')
+  }
+
+  exportSettingsXml = () => {
+    try {
+      const xml = this.buildSettingsXml()
+      const blob = new Blob([xml], { type: 'text/xml;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'map-layers-custom-settings.xml'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      window.setTimeout(() => { URL.revokeObjectURL(url) }, 1000)
+    } catch (e) {
+      this.setState({ importStatus: { kind: 'error', message: this.getTranslatedString('exportError') } })
+    }
+  }
+
+  parseSettingsXml = (text: string): Partial<Config> => {
+    const doc = new DOMParser().parseFromString(text, 'text/xml')
+    if (doc.getElementsByTagName('parsererror').length > 0) throw new Error('parse')
+    const root = doc.documentElement
+    if (!root || root.nodeName !== 'mapLayersCustomSettings') throw new Error('root')
+    const allowed = new Set<string>(Setting.PORTABLE_KEYS as string[])
+    const out: any = {}
+    const opts = root.getElementsByTagName('option')
+    for (let i = 0; i < opts.length; i++) {
+      const el = opts[i]
+      const key = el.getAttribute('key')
+      if (!key || !allowed.has(key)) continue   // ignore anything outside the portable option set
+      const type = el.getAttribute('type') || 'string'
+      const raw = el.textContent != null ? el.textContent : ''
+      if (type === 'boolean') {
+        out[key] = (raw.trim() === 'true')
+      } else if (type === 'number') {
+        const n = Number(raw)
+        if (!Number.isNaN(n)) out[key] = n
+      } else {
+        out[key] = raw
+      }
+    }
+    return out
+  }
+
+  onImportFileChosen = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target
+    const file = input.files && input.files[0]
+    if (!file) return
+    const finish = (status: { kind: 'success' | 'error', message: string }) => {
+      this.setState({ importStatus: status })
+      input.value = ''   // allow re-importing the same file
+    }
+    file.text().then((text) => {
+      let parsed: Partial<Config>
+      try {
+        parsed = this.parseSettingsXml(text)
+      } catch (err) {
+        finish({ kind: 'error', message: this.getTranslatedString('importError') }); return
+      }
+      const keys = Object.keys(parsed)
+      if (keys.length === 0) {
+        finish({ kind: 'error', message: this.getTranslatedString('importEmpty') }); return
+      }
+      let cfg = this.props.config || Immutable({} as Config)
+      keys.forEach((k) => { cfg = cfg.set(k, (parsed as any)[k]) })
+      this.props.onSettingChange({ id: this.props.id, config: cfg })
+      finish({ kind: 'success', message: this.getTranslatedString('importSuccess') })
+    }).catch(() => {
+      finish({ kind: 'error', message: this.getTranslatedString('importError') })
+    })
   }
 
   getSwitchOption(optionKeys: keyof Omit<Config, 'customizeLayerOptions' | 'symbolOption'>, stringKey?: string) {
@@ -822,6 +933,47 @@ WidgetSettingState
               {this.getEnhancedOptionsContent()}
             </SettingSection>
           }
+
+          <SettingSection
+            title={this.getTranslatedString('importExportLabel')}
+            role="group"
+            aria-label={this.getTranslatedString('importExportLabel')}
+          >
+            <SettingRow flow='wrap'>
+              <Label className='enhanced-options-desc'>{this.getTranslatedString('importExportDesc')}</Label>
+            </SettingRow>
+            <SettingRow>
+              <Button type='primary' size='sm' onClick={this.exportSettingsXml}>
+                {this.getTranslatedString('exportSettings')}
+              </Button>
+              <Button
+                type='default'
+                size='sm'
+                className='ml-2'
+                onClick={() => { this.importFileRef.current && this.importFileRef.current.click() }}
+              >
+                {this.getTranslatedString('importSettings')}
+              </Button>
+              <input
+                ref={this.importFileRef}
+                type='file'
+                accept='.xml,text/xml,application/xml'
+                style={{ display: 'none' }}
+                onChange={this.onImportFileChosen}
+              />
+            </SettingRow>
+            {this.state.importStatus &&
+              <SettingRow>
+                <Alert
+                  type={this.state.importStatus.kind === 'success' ? 'success' : 'error'}
+                  text={this.state.importStatus.message}
+                  withIcon
+                  closable
+                  onClose={() => { this.setState({ importStatus: null }) }}
+                />
+              </SettingRow>
+            }
+          </SettingSection>
         </div>
       </div>
     )

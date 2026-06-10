@@ -46,5 +46,13 @@ export default {
   collapsibleList: 'Allow collapsing the layer list',
   startCollapsed: 'Start collapsed when the app loads',
   filterPlaceholderLabel: 'Filter box placeholder text',
-  filterPlaceholderHint: 'Filter layers'
+  filterPlaceholderHint: 'Filter layers',
+  importExportLabel: 'Import / export settings',
+  importExportDesc: 'Save the Options and Enhanced options to an XML file, or load them from one. The map selection is not included.',
+  exportSettings: 'Export settings (XML)',
+  importSettings: 'Import settings (XML)',
+  importSuccess: 'Settings imported. Remember to save the widget.',
+  importError: 'Could not read that file. Make sure it is an XML file exported from this widget.',
+  importEmpty: 'No recognized settings were found in that file.',
+  exportError: 'Could not export the settings.'
 }
