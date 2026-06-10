@@ -1,0 +1,28 @@
+Map Layers Custom
+Copyright 2026 City of Grand Junction, CO
+
+This product is a derivative work based on the ArcGIS Experience Builder
+"Map Layers" widget by Esri (Esri R&D Center Beijing), which Esri publishes
+under the Apache License, Version 2.0. This product modifies and extends that
+widget. The original and the modifications are both distributed under the
+Apache License, Version 2.0 (see the LICENSE file).
+
+Original work:
+  ArcGIS Experience Builder Map Layers widget
+  Copyright Esri
+  Licensed under the Apache License, Version 2.0
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Modifications:
+  Copyright 2026 City of Grand Junction, CO
+
+This product is built against, but does not bundle or redistribute, the
+following, which remain the property of their respective owners and are
+provided at build or run time by ArcGIS Experience Builder:
+  - ArcGIS Experience Builder framework modules (jimu-core, jimu-ui,
+    jimu-arcgis, and related packages), by Esri.
+  - ArcGIS Maps SDK for JavaScript, by Esri.
+
+The widget declares the following third-party dependency, which is installed
+from npm by Experience Builder and is governed by its own license:
+  - shpjs (used only to read zipped shapefiles in the Add data tool).

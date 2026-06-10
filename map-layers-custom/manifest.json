@@ -1,0 +1,79 @@
+{
+  "name": "map-layers-custom",
+  "label": "Map Layers Custom",
+  "type": "widget",
+  "version": "1.36.0",
+  "exbVersion": "1.20.0",
+  "author": "Esri R&D Center Beijing (customized)",
+  "description": "Customized Map Layers widget: auto-include new sub-layers, solo/isolate action, live visible-layer count, collapsible list, and enhanced filtering & batch tools.",
+  "copyright": "City of Grand Junction, CO",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "publishMessages": [],
+  "messageActions": [],
+  "defaultSize": {
+    "width": 400,
+    "height": 400
+  },
+  "properties": {
+    "canConsumeDataAction": true,
+    "coverLayoutBackground": true
+  },
+  "extensions": [
+    {
+      "name": "appConfigOperations",
+      "point": "APP_CONFIG_OPERATIONS",
+      "uri": "tools/app-config-operations"
+    }
+  ],
+  "dependency": "jimu-arcgis",
+  "excludeDataActions": [
+    "arcgis-map.*",
+    "exportSelected",
+    "elevation-profile.*",
+    "table.viewInTable",
+    "relatedData",
+    "directions.*"
+  ],
+  "translatedLocales": [
+    "en",
+    "ar",
+    "bg",
+    "bs",
+    "ca",
+    "cs",
+    "da",
+    "de",
+    "el",
+    "es",
+    "et",
+    "fi",
+    "fr",
+    "he",
+    "hr",
+    "hu",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "lt",
+    "lv",
+    "no",
+    "nl",
+    "pl",
+    "pt-br",
+    "pt-pt",
+    "ro",
+    "ru",
+    "sk",
+    "sl",
+    "sr",
+    "sv",
+    "th",
+    "tr",
+    "zh-cn",
+    "uk",
+    "vi",
+    "zh-hk",
+    "zh-tw"
+  ]
+}

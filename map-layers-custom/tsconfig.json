@@ -1,0 +1,14 @@
+{
+  // Lets editors / IDEs (e.g. Visual Studio) resolve the same settings the
+  // Experience Builder client build uses (the jimu-* path aliases, lib target,
+  // etc.), and ensures this widget's own src — including typings.d.ts, which
+  // declares the *.svg module imports — is part of the program so asset imports
+  // resolve. The EXB build itself uses the client tsconfig and ignores this.
+  // If your client lives somewhere other than three levels up, adjust "extends".
+  "extends": "../../../tsconfig.json",
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.d.ts"
+  ]
+}
