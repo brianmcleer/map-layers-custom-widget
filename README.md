@@ -45,8 +45,10 @@ The script mirrors the widget from the EB folder into the `map-layers-custom` su
 
 ## Esri Community
 
-Post link: add the Esri Community thread URL here once the widget is posted.
+Post: https://community.esri.com/t5/experience-builder-custom-widgets/map-layers-custom/ba-p/1707477
 
-## License
+## Credits and license
 
-Apache-2.0. See [LICENSE](LICENSE). Copyright City of Grand Junction, CO.
+This widget is a derivative work based on Esri's ArcGIS Experience Builder "Map Layers" widget (by Esri R&D Center Beijing), which Esri publishes under the Apache License, Version 2.0. It has been modified and extended by the City of Grand Junction, CO.
+
+Licensed under Apache-2.0. See [LICENSE](LICENSE) for the full terms and [NOTICE](NOTICE) for attribution. Original work copyright Esri; modifications copyright City of Grand Junction, CO. This software is free to use, modify, and redistribute under those terms.

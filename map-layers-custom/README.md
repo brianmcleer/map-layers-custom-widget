@@ -49,7 +49,7 @@ If removing one copy makes the widget disappear from the Entrypoint list entirel
 
 ## Feedback
 
-Questions and issues are welcome on the Esri Community Experience Builder Custom Widgets board, or as a GitHub issue on this repository.
+Questions and issues are welcome on the Esri Community Experience Builder Custom Widgets board (https://community.esri.com/t5/experience-builder-custom-widgets/map-layers-custom/ba-p/1707477), or as a GitHub issue on this repository.
 
 ## Credits and license
 
