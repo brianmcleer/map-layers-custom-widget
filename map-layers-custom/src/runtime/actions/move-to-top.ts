@@ -24,7 +24,15 @@ export default class MoveToTop extends Action {
     const w: any = this.widget
     const view = w.viewFromMapWidget || w.jmvFromMap?.view
     const layerList = w.layerListRef?.current
-    try { if (layerItem?.layer?.id != null) { (w._promotedLayerIds || (w._promotedLayerIds = new Set())).add(layerItem.layer.id) } } catch (e) { /* noop */ }
+    // Only promote (bypass the customize whitelist) when the layer is actually
+    // being lifted OUT of a group. Reordering a top-level layer or group must
+    // not promote it, or hidden layers would reappear on a simple move.
+    try {
+      const insideGroup = !!(layerItem?.parent?.layer?.layers)
+      if (insideGroup && layerItem?.layer?.id != null) {
+        (w._promotedLayerIds || (w._promotedLayerIds = new Set())).add(layerItem.layer.id)
+      }
+    } catch (e) { /* noop */ }
     reorderLayerItem(view, layerList, layerItem, 'top')
   }
 }

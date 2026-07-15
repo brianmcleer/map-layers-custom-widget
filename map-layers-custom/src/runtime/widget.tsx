@@ -100,6 +100,10 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     // True while Layer focus is restoring; suppresses the visibility watcher's
     // open/collapse coupling so the tree's expand state can be restored cleanly.
     _spotlightAdjusting: boolean = false
+    // Layer focus (isolate) working state, assigned by the spotlight actions.
+    _spotlightVisBackup: Map<any, boolean> = null
+    _spotlightOpenBackup: Map<any, boolean> = null
+    _spotlightLayerId: string = null
 
     constructor(props) {
         super(props)
@@ -413,10 +417,14 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             }
             // 'after-add' fires only for layers added AFTER this point, so the
             // initial (already-present) layers are not affected — only moves.
+            // IMPORTANT: this only re-applies visibility to layers that were
+            // EXPLICITLY promoted (via "move out of group"). It must NOT add
+            // layers to the promoted set on its own, or a plain reorder (which
+            // removes and re-adds a layer/group to the map) would wrongly
+            // bypass the customize whitelist and reveal hidden layers.
             this._reparentHandle = map.layers.on('after-add', (event: any) => {
                 const lyr = event && event.item
-                if (lyr && lyr.id != null) {
-                    this._promotedLayerIds.add(lyr.id)
+                if (lyr && lyr.id != null && this._promotedLayerIds.has(lyr.id)) {
                     try {
                         const item = this.findListItemByLayer(layerList.operationalItems, lyr)
                         if (item) item.hidden = false
@@ -1139,7 +1147,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                                 ? <div style={{ fontSize: 14, color: '#4a4a4a', lineHeight: 1.4 }}>
                                     Restoring your layers…
                                   </div>
-                                : <>
+                                : <React.Fragment>
                                     <div style={{ fontSize: 14, color: '#4a4a4a', marginBottom: 18, lineHeight: 1.4 }}>
                                         Showing only <strong>{this.state.spotlightLayerName}</strong> on the map. Every other layer is hidden until you exit.
                                     </div>
@@ -1151,7 +1159,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                                             Exit focus
                                         </button>
                                     </div>
-                                  </>
+                                  </React.Fragment>
                             }
                         </div>
                     </div>
