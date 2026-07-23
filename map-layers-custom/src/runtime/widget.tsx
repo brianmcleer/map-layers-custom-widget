@@ -14,7 +14,6 @@ import type Action from './actions/action'
 import defaultMessages from './translations/default'
 import layerListIcon from '../../icon.svg'
 import { versionManager } from '../version-manager'
-import type { ReactNode } from 'react'
 import MapLayersActionList from './components/map-layers-action-list'
 import { TableOutlined } from 'jimu-icons/outlined/data/table'
 import { getLayerListActions } from './actions'
@@ -30,7 +29,15 @@ export enum LoadStatus {
     Rejected = 'Rejected',
 }
 
-export interface WidgetProps extends AllWidgetProps<IMConfig> { }
+export interface WidgetProps extends AllWidgetProps<IMConfig> {
+    // Experience Builder injects these at runtime, but the EB 1.21 editor
+    // declarations do not consistently expose them under pnpm/Visual Studio.
+    id?: string
+    originVersion?: string
+    useDataSources?: any[]
+    useMapWidgetIds?: string[]
+    enableDataAction?: boolean
+}
 
 export interface WidgetState {
     mapWidgetId: string
@@ -39,7 +46,7 @@ export interface WidgetState {
     listLoadStatus: LoadStatus
     tableLoadStatus: LoadStatus
     isActionListPopperOpen: boolean
-    actionListDOM: ReactNode
+    actionListDOM: React.ReactNode
     nativeActionPopper: React.JSX.Element
     oldConfigUpdated: boolean
     headerKey: string
@@ -60,6 +67,16 @@ interface ExtraProps {
 }
 
 export class Widget extends React.PureComponent<WidgetProps & ExtraProps, WidgetState> {
+    // Type-only declarations for Visual Studio under the EB 1.21 pnpm layout.
+    // They restore the React instance members when VS fails to follow React's
+    // inherited type declarations. `declare` fields emit no JavaScript.
+    declare readonly props: Readonly<WidgetProps & ExtraProps>
+    declare state: Readonly<WidgetState>
+    declare setState: (
+        state: Partial<WidgetState> | ((previousState: Readonly<WidgetState>, props: Readonly<WidgetProps & ExtraProps>) => Partial<WidgetState> | null),
+        callback?: () => void
+    ) => void
+
     public viewFromMapWidget: any | any
     // This is used by the popup action
     public jmvFromMap: JimuMapView
@@ -650,8 +667,8 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
 
             const customizeLayerOptions = this.props?.config?.customizeLayerOptions?.[this.state.jimuMapViewId]
             if (customizeLayerOptions && customizeLayerOptions.isEnabled) {
-                const hiddenLayerSet = new Set(customizeLayerOptions?.hiddenJimuLayerViewIds)
-                const showLayerSet = new Set(customizeLayerOptions?.showJimuLayerViewIds)
+                const hiddenLayerSet = new Set<string>(Array.from(customizeLayerOptions?.hiddenJimuLayerViewIds ?? []) as string[])
+                const showLayerSet = new Set<string>(Array.from(customizeLayerOptions?.showJimuLayerViewIds ?? []) as string[])
                 const currentJimuLayerViewId = this.jimuMapView.getJimuLayerViewIdByAPILayer(listItem.layer)
                 if (hiddenLayerSet.has(currentJimuLayerViewId)) {
                     listItem.hidden = true
@@ -666,7 +683,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                     if (listItem.hidden) {
                         const autoIncludeIds = customizeLayerOptions?.autoIncludeChildrenGroupIds
                         if (autoIncludeIds && autoIncludeIds.length > 0) {
-                            const autoIncludeSet = new Set(autoIncludeIds)
+                            const autoIncludeSet = new Set<string>(Array.from(autoIncludeIds) as string[])
                             if (this.isUnderAutoIncludeGroup(listItem.layer, autoIncludeSet)) {
                                 listItem.hidden = false
                             }

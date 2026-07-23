@@ -2,12 +2,10 @@
 import { jsx, css, React, type MapDataSource } from 'jimu-core'
 import { DataActionList, DropdownItem } from 'jimu-ui'
 import type Action from '../actions/action'
-import type { ReactNode } from 'react'
 import type { JimuMapView } from 'jimu-arcgis'
-import { styled } from 'jimu-theme'
 import { ACTION_INDEXES } from '../actions/constants'
 
-const Wrapper = styled.div`
+const wrapperStyle = css`
   min-width: 120px;
   min-height: 20px;
 `
@@ -31,7 +29,7 @@ interface ActionListProps {
   mapDataSource: MapDataSource
   actionObjects: Action[]
   listItem: any
-  children?: ReactNode
+  children?: React.ReactNode
   onActionListItemClick: () => void
   shouldHideEmptyList?: boolean
   enableDataAction?: boolean
@@ -39,6 +37,9 @@ interface ActionListProps {
 }
 
 interface ActionListItemProps {
+  // Included only to satisfy Visual Studio when React's IntrinsicAttributes
+  // are not resolved through pnpm. React still handles this specially.
+  key?: React.Key
   /**
    * Icon could be an Esri icon class name or a custom Icon component
    */
@@ -100,8 +101,8 @@ export default function MapLayersActionList (props: ActionListProps) {
         if (listRef.current) {
           // If the DataActionList is reused, the actionElement will flicker for the first time
           const dataActionList = (
-            <div className="data-action-list-wrapper" css={dataActionListStyle}>
-              <DataActionList key={Math.random()} widgetId={widgetId} dataSets={dataSets} hideGroupTitle shouldHideEmptyList={shouldHideEmptyList} onActionListItemClick={onActionListItemClick} actionPanelRefDOM={optionBtnRef.current} whenListLoaded={() => { setIsLoading(false) }}></DataActionList>
+            <div key={Math.random()} className="data-action-list-wrapper" css={dataActionListStyle}>
+              <DataActionList widgetId={widgetId} dataSets={dataSets} hideGroupTitle shouldHideEmptyList={shouldHideEmptyList} onActionListItemClick={onActionListItemClick} actionPanelRefDOM={optionBtnRef.current} whenListLoaded={() => { setIsLoading(false) }}></DataActionList>
             </div>
           )
           setDataActionList(dataActionList)
@@ -113,7 +114,7 @@ export default function MapLayersActionList (props: ActionListProps) {
   }, [enableDataAction, listItem.layer, onActionListItemClick, shouldHideEmptyList, widgetId, jimuMapView, mapDataSource, optionBtnRef])
 
   return (
-    <Wrapper ref={listRef}>
+    <div css={wrapperStyle} ref={listRef}>
       {
         actionObjects.map((actionObject, index) => {
           return createListItem(actionObject, index, true)
@@ -123,6 +124,6 @@ export default function MapLayersActionList (props: ActionListProps) {
       {!isLoading && actionObjects.filter(actionObject => actionObject.group === ACTION_INDEXES.Remove).map((actionObject) => {
         return createListItem(actionObject, 'remove-key')
       })}
-    </Wrapper>
+    </div>
   )
 }

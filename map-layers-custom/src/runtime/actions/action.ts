@@ -6,7 +6,7 @@ export default class Action {
   className: string = 'esri-icon'
   group: number = 0
   widget: Widget = null
-  icon?: React.JSX.Element = null
+  icon?: any = null
 
   useMapWidget (): boolean {
     return this.widget.props.config.useMapWidget
@@ -14,5 +14,5 @@ export default class Action {
 
   isValid = (layerItem: any, isTableList: boolean = false): boolean => false
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  execute = (layerItem: any): void | React.JSX.Element => {}
+  execute = (layerItem: any): void | any => {}
 }

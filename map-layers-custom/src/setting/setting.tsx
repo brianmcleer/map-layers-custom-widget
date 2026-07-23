@@ -27,7 +27,6 @@ import defaultMessages from './translations/default'
 import MapThumb from './components/map-thumb'
 import { getStyle } from './lib/style'
 import { type JimuMapView, JimuMapViewComponent, MapViewManager } from 'jimu-arcgis'
-import { createRef } from 'react'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
 
@@ -50,20 +49,36 @@ export interface WidgetSettingState {
   importStatus?: { kind: 'success' | 'error', message: string }
 }
 
-export type WidgetSettingProps = AllWidgetSettingProps<IMConfig> & ExtraProps
+export type WidgetSettingProps = AllWidgetSettingProps<IMConfig> & ExtraProps & {
+  // Builder-injected properties that are missing from some EB 1.21 editor
+  // type surfaces even though they are present at runtime.
+  id: string
+  useDataSources?: UseDataSource[] | any
+  useMapWidgetIds?: string[] | any
+}
 
 export default class Setting extends React.PureComponent<
-AllWidgetSettingProps<IMConfig> & ExtraProps,
+WidgetSettingProps,
 WidgetSettingState
 > {
+  // Type-only declarations for Visual Studio under the EB 1.21 pnpm layout.
+  // They restore the React instance members when VS fails to follow React's
+  // inherited type declarations. `declare` fields emit no JavaScript.
+  declare readonly props: Readonly<WidgetSettingProps>
+  declare state: Readonly<WidgetSettingState>
+  declare setState: (
+    state: Partial<WidgetSettingState> | ((previousState: Readonly<WidgetSettingState>, props: Readonly<WidgetSettingProps>) => Partial<WidgetSettingState> | null),
+    callback?: () => void
+  ) => void
+
   supportedDsTypes = Immutable([
     AllDataSourceTypes.WebMap,
     AllDataSourceTypes.WebScene
   ])
 
-  customizeLayersTrigger = createRef<HTMLDivElement>()
+  customizeLayersTrigger = React.createRef<HTMLDivElement>()
   // Hidden file input used by the "Import settings" button.
-  importFileRef = createRef<HTMLInputElement>()
+  importFileRef = React.createRef<HTMLInputElement>()
 
   // Config keys that the XML import/export covers: the Options and Enhanced
   // options. The map selection is deliberately excluded (no useMapWidgetIds,

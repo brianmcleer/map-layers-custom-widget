@@ -12,6 +12,16 @@ interface States {
 }
 
 export default class MapThumb extends React.PureComponent<Props, States> {
+  // Type-only declarations for Visual Studio under the EB 1.21 pnpm layout.
+  // They restore the React instance members when VS fails to follow React's
+  // inherited type declarations. `declare` fields emit no JavaScript.
+  declare readonly props: Readonly<Props>
+  declare state: Readonly<States>
+  declare setState: (
+    state: Partial<States> | ((previousState: Readonly<States>, props: Readonly<Props>) => Partial<States> | null),
+    callback?: () => void
+  ) => void
+
   unmount = false
 
   constructor (props) {
