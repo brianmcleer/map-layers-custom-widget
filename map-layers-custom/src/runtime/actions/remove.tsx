@@ -1,4 +1,4 @@
-import { ExBAddedJSAPIProperties, CONSTANTS } from 'jimu-core'
+import { React, ExBAddedJSAPIProperties, CONSTANTS } from 'jimu-core'
 import Action from './action'
 import type { Widget } from '../widget'
 import { ACTION_INDEXES } from './constants'

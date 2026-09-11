@@ -20,6 +20,10 @@ import { getLayerListActions } from './actions'
 import { restoreSpotlight } from './actions/spotlight'
 import MapLayersHeader from './components/map-layers-header'
 import { ACTION_INDEXES } from './actions/constants'
+import HelpPopup from './components/HelpPopup'
+import FirstRunHint from './components/FirstRunHint'
+import { buildHelpSections } from './helpSections'
+import type { HelpFeatures } from './helpSections'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
 
@@ -32,10 +36,13 @@ export enum LoadStatus {
 export interface WidgetProps extends AllWidgetProps<IMConfig> {
     // Experience Builder injects these at runtime, but the EB 1.21 editor
     // declarations do not consistently expose them under pnpm/Visual Studio.
-    id?: string
+    // useDataSources and useMapWidgetIds are typed loosely on purpose: the
+    // widget reads them with plain indexing, and the real props are immutable
+    // arrays whose element access works the same way.
+    id: string
     originVersion?: string
-    useDataSources?: any[]
-    useMapWidgetIds?: string[]
+    useDataSources?: any
+    useMapWidgetIds?: any
     enableDataAction?: boolean
 }
 
@@ -59,6 +66,9 @@ export interface WidgetState {
     // True briefly while exiting focus: keeps the overlay up (hiding the tree
     // reflow) and swaps the card to a "restoring" state until the tree settles.
     spotlightExiting?: boolean
+    // In-widget help guide (shared pattern, see WIDGETHANDOFF Section 10).
+    helpOpen: boolean
+    showFirstRunHint: boolean
 }
 
 interface ExtraProps {
@@ -137,7 +147,9 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             headerKey: null,
             isListCollapsed: props.config?.collapsibleList ? (props.config?.startCollapsed ?? false) : false,
             spotlightLayerName: null,
-            spotlightExiting: false
+            spotlightExiting: false,
+            helpOpen: false,
+            showFirstRunHint: false
         }
         this.renderPromise = Promise.resolve()
         this.layerListActions = getLayerListActions(this)
@@ -159,6 +171,135 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
 
     componentDidMount() {
         this.bindClickHandler()
+        // First-run hint shows until the user dismisses it once (or opens the guide)
+        if (!this.readHintDismissed()) this.setState({ showFirstRunHint: true })
+    }
+
+    // ==================== In-widget help guide (shared pattern, see WIDGETHANDOFF Section 10) ====================
+
+    /** Translate helper for the guide. Uses the widget's intl so the help strings localize with the rest of the UI. */
+    private readonly t = (id: string, values?: Record<string, string>): string => {
+        return this.props.intl.formatMessage({ id, defaultMessage: allDefaultMessages[id] }, values)
+    }
+
+    /** Storage key for the first-run hint dismissal, namespaced by widget id so two copies in one app do not share it. */
+    private get firstRunHintKey(): string {
+        return `mapLayersCustom.helpHintDismissed.${this.props.id}`
+    }
+
+    private readHintDismissed(): boolean {
+        try {
+            return typeof window !== 'undefined' && !!window.localStorage && window.localStorage.getItem(this.firstRunHintKey) === '1'
+        } catch (_) {
+            // Private browsing can throw on read; the guide is not worth breaking the widget over.
+            return false
+        }
+    }
+
+    private readonly dismissFirstRunHint = (): void => {
+        try {
+            if (typeof window !== 'undefined' && window.localStorage) window.localStorage.setItem(this.firstRunHintKey, '1')
+        } catch (_) { /* private browsing */ }
+        this.setState({ showFirstRunHint: false })
+    }
+
+    /** Opening the guide counts as answering the hint, so it dismisses the hint too. */
+    private readonly openHelp = (): void => {
+        if (this.state.showFirstRunHint) this.dismissFirstRunHint()
+        this.setState({ helpOpen: true })
+    }
+
+    private readonly closeHelp = (): void => {
+        this.setState({ helpOpen: false })
+    }
+
+    /**
+     * Feature flags for the guide, computed with the same checks the list, the header and the
+     * layer actions use, so the guide never describes a control that is not on screen.
+     * Header controls and most layer actions exist only in map-widget mode (see the header's
+     * isMapWidgetMode gating and each action's isValid).
+     */
+    private helpFeatures(): HelpFeatures {
+        const config: any = this.props.config || {}
+        const mapMode = !!config.useMapWidget
+        const extra = !!config.extraLayerTools
+        const tr = this.translate
+        return {
+            mapMode,
+            tickBoxes: !!config.useTickBoxes,
+            autoShowParents: config.autoShowParentLayers !== false,
+            reorder: !!config.reorderLayers,
+            layerLegend: mapMode && !!config.enableLegend,
+            tables: !!config.showTables,
+            search: !!config.searchLayers,
+            batch: !!config.layerBatchOptions,
+            layerCount: !!config.showLayerCount,
+            collapsible: !!config.collapsibleList,
+            savedViews: mapMode && !!config.enableLayerViews,
+            addLayer: mapMode && !!config.enableAddLayer,
+            masterOpacity: mapMode && !!config.enableMasterOpacity,
+            basemapSwitcher: mapMode && !!config.enableBasemapSwitcher,
+            legendPanel: mapMode && !!config.enableLegendPanel,
+            goto: mapMode && !!config.goto,
+            labels: mapMode && !!config.label,
+            popup: !!config.popup,
+            transparency: !!config.opacity,
+            visibilityRange: !!config.visibilityRange,
+            information: !!config.information,
+            changeSymbol: !!config.changeSymbolForRuntimeLayers,
+            solo: mapMode && !!config.soloLayer,
+            flash: mapMode && extra && config.toolFlash !== false,
+            copyUrl: extra && config.toolCopyUrl !== false,
+            refresh: extra && config.toolRefresh !== false,
+            details: extra && config.toolDetails !== false,
+            spotlight: mapMode && extra && config.toolSpotlight !== false,
+            move: mapMode && extra && config.toolMove !== false,
+            labelsText: {
+                tables: tr('tables'),
+                batchOptions: tr('batchOptions'),
+                turnOnAllLayers: tr('turnOnAllLayers'),
+                turnOffAllLayers: tr('turnOffAllLayers'),
+                resetVisibility: tr('resetVisibility'),
+                zoomToVisible: tr('zoomToVisible'),
+                exportMapImage: tr('exportMapImage'),
+                showVisibleOnly: tr('showVisibleOnly'),
+                showAllLayers: tr('showAllLayers'),
+                expandAllLayers: tr('expandAllLayers'),
+                collapseAllLayers: tr('collapseAllLayers'),
+                savedViews: tr('savedViews'),
+                saveCurrentView: tr('saveCurrentView'),
+                save: tr('save'),
+                exportViews: tr('exportViews'),
+                importViews: tr('importViews'),
+                addLayer: tr('addLayer'),
+                addLayerTitle: tr('addLayerTitle'),
+                addLayerSubmit: tr('addLayerSubmit'),
+                addLayerError: tr('addLayerError'),
+                masterOpacity: tr('masterOpacity'),
+                basemap: tr('basemap'),
+                legend: tr('legend'),
+                goto: tr('goto'),
+                showLabels: tr('showLabels'),
+                hideLabels: tr('hideLabels'),
+                enablePopup: tr('enablePopup'),
+                disablePopup: tr('disablePopup'),
+                transparency: tr('transparency'),
+                visibilityRange: tr('visibilityRange'),
+                information: tr('information'),
+                changeSymbol: tr('changeSymbol'),
+                soloLayer: tr('soloLayer'),
+                flashLayer: tr('flashLayer'),
+                copyUrl: tr('copyUrl'),
+                refreshLayer: tr('refreshLayer'),
+                layerDetails: tr('layerDetails'),
+                spotlight: tr('spotlight'),
+                clearSpotlight: tr('clearSpotlight'),
+                moveToTop: tr('moveToTop'),
+                moveToBottom: tr('moveToBottom'),
+                moveOutOfGroup: tr('moveOutOfGroup'),
+                remove: tr('remove')
+            }
+        }
     }
 
     componentDidUpdate(prevProps: WidgetProps & ExtraProps, prevState: WidgetState) {
@@ -240,6 +381,10 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
 
     needToPreventRefreshList(prevProps: WidgetProps & ExtraProps, prevState: WidgetState) {
         if (prevState.isActionListPopperOpen !== this.state.isActionListPopperOpen || prevState.nativeActionPopper !== this.state.nativeActionPopper || prevState.listLoadStatus !== this.state.listLoadStatus || prevState.tableLoadStatus !== this.state.tableLoadStatus || prevState.headerKey !== this.state.headerKey || prevState.isListCollapsed !== this.state.isListCollapsed) {
+            return true
+        }
+        // Opening or closing the help guide, or dismissing its hint, never refreshes the layer list
+        if (prevState.helpOpen !== this.state.helpOpen || prevState.showFirstRunHint !== this.state.showFirstRunHint) {
             return true
         }
         if (prevState.actionListDOM !== this.state.actionListDOM) {
@@ -1077,7 +1222,9 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                 loadingContent = <div className="jimu-secondary-loading" />
             }
 
-            const shouldShowHeader = !loadingContent && (this.props.config.layerBatchOptions || this.props.config.searchLayers || this.props.config.showLayerCount || this.props.config.collapsibleList || this.props.config.enableLayerViews || this.props.config.enableAddLayer || this.props.config.enableMasterOpacity || this.props.config.enableBasemapSwitcher || this.props.config.enableLegendPanel)
+            // The header always renders once the list has loaded: it carries the Help button
+            // (shared help pattern) even when every other header control is switched off.
+            const shouldShowHeader = !loadingContent
 
             const isCollapsible = this.props.config?.collapsibleList ?? false
             const isCollapsed = isCollapsible && this.state.isListCollapsed
@@ -1110,7 +1257,19 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                             enableMasterOpacity={this.props.config?.enableMasterOpacity ?? false}
                             enableBasemapSwitcher={this.props.config?.enableBasemapSwitcher ?? false}
                             enableLegendPanel={this.props.config?.enableLegendPanel ?? false}
+                            onHelp={this.openHelp}
+                            helpLabel={this.t('helpTitle')}
                         ></MapLayersHeader>
+                    }
+                    {(shouldShowHeader && this.state.showFirstRunHint) &&
+                        <FirstRunHint
+                            title={this.t('firstRunTitle')}
+                            body={this.t('firstRunBody')}
+                            linkLabel={this.t('firstRunHelpLink')}
+                            dismissLabel={this.t('firstRunDismiss')}
+                            onOpenHelp={this.openHelp}
+                            onDismiss={this.dismissFirstRunHint}
+                        />
                     }
                     <div className='map-layers-collapsible-region' style={{ display: isCollapsed ? 'none' : 'block' }}>
                         <div ref={this.layerListContainerRef} />
@@ -1188,6 +1347,16 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                     </Popper>
                 }
                 {this.state.nativeActionPopper}
+                <HelpPopup
+                    open={this.state.helpOpen}
+                    onClose={this.closeHelp}
+                    sections={buildHelpSections(this.t, this.helpFeatures())}
+                    title={this.t('helpTitle')}
+                    intro={this.t('helpIntro')}
+                    searchPlaceholder={this.t('helpSearchPlaceholder')}
+                    noMatches={this.t('helpNoMatches')}
+                    closeLabel={this.t('close')}
+                />
             </Paper>
         )
     }

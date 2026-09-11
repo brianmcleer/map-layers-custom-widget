@@ -12,3 +12,7 @@ dist/
 # OS cruft
 .DS_Store
 Thumbs.db
+
+# Cowork working folder (scratch, never shipped)
+Claude outputs/
+*.zip

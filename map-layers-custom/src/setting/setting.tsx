@@ -271,7 +271,7 @@ WidgetSettingState
       setting.useMapWidgetIds = []
     }
 
-    this.props.onSettingChange(setting)
+    this.props.onSettingChange(setting as any)
 
     this.setState({
       useMapWidget: useMapWidget
@@ -730,7 +730,7 @@ WidgetSettingState
   isDataSourceEmpty = (): boolean => {
     const mapViews = MapViewManager.getInstance().getJimuMapViewGroup(this.props.useMapWidgetIds[0])?.jimuMapViews || {}
     // The connected widget only have ONE map view & have no data source
-    if (Object.keys(mapViews).length === 1 && !Object.values(mapViews)?.[0]?.dataSourceId) {
+    if (Object.keys(mapViews).length === 1 && !(Object.values(mapViews) as any[])?.[0]?.dataSourceId) {
       return true
     } else {
       return false

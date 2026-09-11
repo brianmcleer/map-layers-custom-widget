@@ -6,6 +6,7 @@ import { SelectOptionOutlined } from 'jimu-icons/outlined/editor/select-option'
 import { UpOutlined } from 'jimu-icons/outlined/directional/up'
 import { DownOutlined } from 'jimu-icons/outlined/directional/down'
 import { Button, Dropdown, DropdownButton, DropdownItem, DropdownMenu, TextInput, Tooltip } from 'jimu-ui'
+import { CalciteIcon } from 'calcite-components'
 import LayerViews from './layer-views'
 import AddLayer from './add-layer'
 import MasterOpacity from './master-opacity'
@@ -37,6 +38,10 @@ interface MapLayersHeaderProps {
     enableMasterOpacity?: boolean
     enableBasemapSwitcher?: boolean
     enableLegendPanel?: boolean
+    // In-widget help guide (shared pattern): the Help button sits at the far right
+    // of this bar. Both are supplied by widget.tsx; the button renders when onHelp is set.
+    onHelp?: () => void
+    helpLabel?: string
 }
 
 const getStyle = (theme: IMThemeVariables) => {
@@ -150,7 +155,7 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
         collapsible = false, isCollapsed = false, onToggleCollapse, filterPlaceholder,
         viewFromMapWidget, widgetId, enableLayerViews = false, autoShowParents = true,
         enableAddLayer = false, enableMasterOpacity = false, enableBasemapSwitcher = false,
-        enableLegendPanel = false
+        enableLegendPanel = false, onHelp, helpLabel
     } = props
 
     const translate = hooks.useTranslation(message)
@@ -418,7 +423,7 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
         defaultVisibilityRef.current = new Map()
     }, [headerKey])
 
-    if (!enableBatchOption && !enableSearch && !showLayerCount && !collapsible && !enableLayerViews && !enableAddLayer && !enableMasterOpacity && !enableBasemapSwitcher && !enableLegendPanel) {
+    if (!enableBatchOption && !enableSearch && !showLayerCount && !collapsible && !enableLayerViews && !enableAddLayer && !enableMasterOpacity && !enableBasemapSwitcher && !enableLegendPanel && !onHelp) {
         return null
     }
 
@@ -539,6 +544,12 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
                             {isCollapsed ? <DownOutlined></DownOutlined> : <UpOutlined></UpOutlined>}
                         </Button>
                     </Tooltip>
+                }
+                {
+                    onHelp &&
+                    <Button size="sm" type="tertiary" icon onClick={onHelp} title={helpLabel} aria-label={helpLabel} style={{ flexShrink: 0 }}>
+                        <CalciteIcon icon="question" scale="s" />
+                    </Button>
                 }
             </div>
         </div>

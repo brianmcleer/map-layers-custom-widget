@@ -16,6 +16,7 @@ A customized version of Esri's Map Layers widget for ArcGIS Experience Builder. 
 - Enhanced search and filtering, including a match count that includes service sub-layers, plus a visible-only filter.
 - Batch tools: turn all on or off, reset visibility, zoom to visible, export the map image, and expand or collapse all.
 - Per-layer tools: flash, copy URL, refresh, layer details, move to top or bottom, and move out of group, each individually toggleable.
+- In-widget help guide: a Help button in the header opens a short, searchable, plain-language guide that only describes the features the builder has turned on, plus a dismissable first-run hint. Same look and wording as the other GIS Division widgets.
 
 ## Requirements
 
@@ -46,6 +47,25 @@ This means the widget name is registered more than once, so a second copy is pre
 3. A stale compiled build in `client/dist/widgets`. Stop the client, delete the matching folder under `dist/widgets` (or run a clean build), then start again. This is common after moving a widget between EB versions.
 
 If removing one copy makes the widget disappear from the Entrypoint list entirely, the copy that remains is nested too deep. Move it so the manifest is directly inside the widget folder.
+
+## Visual Studio (EB 1.21)
+
+Webpack (`npm start` in `client`) is the only type authority. Visual Studio's Error List is a separate, IDE-only analysis, and on EB 1.21 (pnpm) it cannot read `client\node_modules`, which shows up as `IDE1100 Access to the path ... is denied` plus a flood of jimu-core errors. This widget ships a self-contained `tsconfig.json` (no `paths`, classic `jsx: "react"`, `noEmit`) and two type-only shim files so the Error List reads zero without touching the build:
+
+- `src/exb-editor-shims.d.ts` is the shared editor master copied from the widget family. Do not edit it; copy a newer master in when the family updates it.
+- `src/typings.d.ts` holds the declarations this widget needs on top of the master (extra jimu members, named icon exports, `shpjs`).
+
+Open the widget folder on its own (`File > Open > Folder`), not `client`. To verify from a terminal opened in the widget folder (Command Prompt or PowerShell, regular user): `npx tsc -p .` should report 0 errors (add `--ignoreDeprecations 6.0` with TypeScript 6). If the Error List still shows jimu-core files, close Visual Studio, delete the widget's `.vs` folder, and reopen.
+
+## Tests
+
+`tests/` holds Node tests for the help guide that run without Experience Builder (Command Prompt or PowerShell, regular user, from the widget folder):
+
+```
+node --test tests/*.cjs
+```
+
+They check that every help string resolves, that feature gating hides the text for switched-off features, that the writing rules hold (no em dashes, no jargon, control names spelled as the interface spells them), and that the files copied from the widget family are still byte-identical to the masters.
 
 ## Feedback
 

@@ -82,5 +82,124 @@ export default {
   bmNavigation: 'Navigation',
   bmOceans: 'Oceans',
   bmOSM: 'OpenStreetMap',
-  bmTerrain: 'Terrain'
+  bmTerrain: 'Terrain',
+
+  /* ---- In-widget help guide (shared pattern, see WIDGETHANDOFF Section 10) ----
+     Shared keys use the same wording in every widget. {tokens} are filled in by
+     helpSections.ts with the control names exactly as the interface shows them. */
+  helpTitle: 'Help',
+  helpIntro: 'See which layers are on the map, turn them on or off, find the one you need, and change how it looks.',
+  helpSearchPlaceholder: 'Search the guide (try "filter" or "legend")',
+  helpNoMatches: 'Nothing in the guide matches that word. Try another, or open the sections above.',
+  helpAnd: 'and',
+  firstRunTitle: 'New here?',
+  firstRunBody: 'Tick a layer to show it on the map, and click the three dots beside a layer for more options.',
+  firstRunHelpLink: 'Open the guide.',
+  firstRunDismiss: 'Dismiss',
+
+  /* Start here */
+  helpStartTitle: 'Start here: three steps',
+  helpStart1Search: 'Find the layer you want in the list. Type part of its name in the box at the top to shorten the list.',
+  helpStart1: 'Find the layer you want in the list. Click the arrow beside a group name to see the layers inside it.',
+  helpStart2Tick: 'Tick the box beside the layer to show it on the map. Untick it to hide it.',
+  helpStart2Eye: 'Click the eye beside the layer to show it on the map. Click it again to hide it.',
+  helpStart3Menu: 'Click the three dots beside a layer for more options, such as {firstAction}.',
+  helpStart3: 'Give the map a moment to redraw after each change.',
+
+  /* Turning layers on and off */
+  helpLayersTitle: 'Turning layers on and off',
+  helpLayersTick: 'A ticked box means the layer is on the map. A grey name means the layer is outside its visible range: zoom in or out and it appears.',
+  helpLayersEye: 'An open eye means the layer is on the map. A grey name means the layer is outside its visible range: zoom in or out and it appears.',
+  helpLayersGroups: 'Layers can sit inside a group. Click the arrow beside the group name to open it.',
+  helpLayersParentOn: 'Turning on a layer inside a group also turns on the group, so the layer shows right away.',
+  helpLayersParentOff: 'A layer inside a group shows only when the group is on too. If a ticked layer is missing from the map, check its group.',
+  helpLayersCount: 'The badge at the top shows how many layers are on out of the total, and updates as you go.',
+  helpLayersLegend: 'Click the small arrow beside a layer name to see its legend, the symbols it uses on the map.',
+  helpLayersReorder: 'Drag a layer up or down to change which one draws on top.',
+  helpLayersTables: 'Tables are listed below the layers, under {tables}. They hold records without a location, so they have no tick box.',
+  helpLayersCollapse: 'Use the arrow at the far right of the top bar to fold the whole list down to the bar, and again to bring it back.',
+
+  /* Finding a layer */
+  helpFindTitle: 'Finding a layer',
+  helpFindType: 'Type part of a layer name in the box at the top. The list shrinks to matching layers and opens the groups they sit in.',
+  helpFindCount: 'A count beside the box tells you how many layers match.',
+  helpFindClear: 'Clear the box with the x at its end to see the full list again.',
+  helpFindButton: 'The funnel button at the right of the top bar hides or shows the box. Hiding it clears the search too.',
+  helpFindVisibleOnly: 'In the {batchOptions} menu, choose {showVisibleOnly} to list only the layers that are on. Choose {showAllLayers} to go back.',
+
+  /* The layer menu */
+  helpMenuTitle: 'The layer menu, button by button',
+  helpMenuIntro: 'Click the three dots beside a layer to open its menu. Only the options that apply to that layer are listed.',
+  helpMenuGoto: '{goto}: moves the map to where the layer is.',
+  helpMenuLabels: '{showLabels} or {hideLabels}: turns the layer’s text labels on or off on the map.',
+  helpMenuPopup: '{enablePopup} or {disablePopup}: decides whether clicking a feature on the map opens a pop-up.',
+  helpMenuTransparency: '{transparency}: fades the layer so what is underneath shows through. Drag the slider.',
+  helpMenuVisibilityRange: '{visibilityRange}: sets how far in or out you must be zoomed before the layer draws.',
+  helpMenuInformation: '{information}: opens the layer’s page with its description and source.',
+  helpMenuChangeSymbol: '{changeSymbol}: picks a new color or symbol for a layer you added yourself.',
+  helpMenuSolo: '{soloLayer}: turns every other layer off in one click so only this one is left on the map.',
+  helpMenuFlash: '{flashLayer}: moves the map to the layer and blinks its outline so you can spot it.',
+  helpMenuCopyUrl: '{copyUrl}: copies the layer’s web address, ready to paste into an email or another map.',
+  helpMenuRefresh: '{refreshLayer}: reloads the layer from its source to pick up recent edits.',
+  helpMenuDetails: '{layerDetails}: opens a panel with the layer type, feature count, fields and a link to the service.',
+  helpMenuSpotlight: '{spotlight}: shows only this layer and covers the list with a card while you look. Click Exit focus on the card, or {clearSpotlight} in the menu, to bring the other layers back.',
+  helpMenuMove: '{moveToTop} and {moveToBottom}: change which layer draws over the others. {moveOutOfGroup} lifts a layer out of its group.',
+  helpMenuRemove: '{remove}: takes a layer you added yourself off the map. Layers that came with the map cannot be removed.',
+
+  /* The top bar */
+  helpBarTitle: 'The buttons along the top',
+  helpBarIntro: 'Everything in the bar above the list works on the whole map, not one layer.',
+  helpBarBatch: '{batchOptions} (the checklist icon): {batchItems}.',
+  helpBarViews: '{savedViews} (the bookmark icon): keep a set of layers to come back to. See the Saved views section.',
+  helpBarAdd: '{addLayer} (the plus icon): put your own layer on the map from a web address or a file. See the Adding your own layer section.',
+  helpBarOpacity: '{masterOpacity}: one slider that fades every layer at once, handy for seeing the basemap underneath.',
+  helpBarBasemap: '{basemap}: swaps the background map, for example imagery instead of streets.',
+  helpBarLegend: '{legend}: opens one legend for every layer that is on, so you can read all the symbols in one place.',
+  helpBarCollapse: 'The arrow at the far right folds the list down to just this bar.',
+  helpBatchTurnOn: '{turnOnAllLayers} and {turnOffAllLayers} switch every layer at once',
+  helpBatchReset: '{resetVisibility} puts every layer back the way it was when the page opened',
+  helpBatchZoom: '{zoomToVisible} moves the map so every layer that is on fits in view',
+  helpBatchExport: '{exportMapImage} saves a picture of the map as a PNG file',
+  helpBatchExpand: '{expandAllLayers} and {collapseAllLayers} open or close every group',
+
+  /* Saved views */
+  helpViewsTitle: 'Saved views',
+  helpViewsIntro: 'A view is a snapshot of which layers are on and off. Save one for each job you do often.',
+  helpViews1: 'Turn on the layers you want, click the bookmark icon, choose {saveCurrentView}, type a name and click {save}.',
+  helpViews2: 'To use a view later, click the bookmark icon and pick its name. The layers switch to match.',
+  helpViews3: 'Hover a view in the list and use the trash icon to delete it.',
+  helpViews4: '{exportViews} saves your views to a file. {importViews} loads them on another computer or shares them with a colleague.',
+
+  /* Adding your own layer */
+  helpAddTitle: 'Adding your own layer',
+  helpAddIntro: 'Click the plus icon in the top bar to open the {addLayerTitle} panel.',
+  helpAdd1: 'On the URL tab, paste a web address for the layer (an ArcGIS service, WMS, WMTS, GeoJSON, CSV or KML link) or a 32-character ArcGIS item ID, then click {addLayerSubmit}.',
+  helpAdd2: 'On the File tab, choose a file from your computer: GeoJSON, CSV with coordinates, KML, or a zipped shapefile.',
+  helpAdd3: 'The new layer appears at the top of the list. Use its three-dot menu to change its symbol or remove it.',
+
+  /* Where things live */
+  helpKeepTitle: 'Where things live',
+  helpKeepViews: 'Saved views are kept in this browser on this computer. They are not on the map itself, and another computer or browser will not have them unless you export and import.',
+  helpKeepViewsClear: 'Clearing your browser data removes saved views. Export them first if you want to keep them.',
+  helpKeepAdded: 'Layers you add from a web address or file last until the page reloads. Reload the page and they are gone.',
+  helpKeepTicks: 'Turning layers on and off changes only your screen. The map everyone else sees is not affected.',
+
+  /* Troubleshooting */
+  helpTroubleTitle: 'If something looks wrong',
+  helpTroubleGrey: 'A layer name is grey and nothing shows on the map: the layer only draws between certain zoom levels. Zoom in, or out, until the name turns dark.',
+  helpTroubleGroupOff: 'A layer is ticked but missing from the map: its group is off. Tick the group too.',
+  helpTroubleNoMatches: 'The filter shows no layers: check the spelling, or clear the box with the x to see everything again.',
+  helpTroubleAdd: '{addLayerError}: make sure the address is the layer itself, not a web page, and that you can open it in a new tab.',
+  helpTroubleFocus: 'Most layers vanished and a Layer focus card is showing: click Exit focus on the card to bring them back.',
+  helpTroubleReset: 'You changed a lot and want to start over: open the {batchOptions} menu and choose {resetVisibility}.',
+  helpTroubleReload: 'The list is empty or stuck loading: reload the page. The map takes a moment to connect on slow networks.',
+  helpTroubleContact: 'Still stuck? Contact the GIS Division and mention the Map Layers name and this app.',
+
+  /* Good to know */
+  helpTipsTitle: 'Good to know',
+  helpTipsHover: 'Hover a layer name to read the full title when it is cut off.',
+  helpTipsSolo: '{soloLayer} in a layer’s menu is the fastest way to compare one layer against the basemap.',
+  helpTipsExport: '{exportMapImage} in the {batchOptions} menu gives you a picture to paste into a document or email.',
+  helpTipsViews: 'Save a view before you start clicking around. Getting back is then one click.',
+  helpTipsOpacity: 'Fading a layer with {transparency} often shows more than turning others off.'
 }
