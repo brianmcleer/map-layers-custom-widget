@@ -25,6 +25,12 @@ map-layers-custom-widget/        <- this repo
 
 See [map-layers-custom/README.md](map-layers-custom/README.md). In short: download the release zip, place the `map-layers-custom` folder so its `manifest.json` sits directly inside `client/your-extensions/widgets/map-layers-custom/`, then run `npm install` in the `client` folder and restart.
 
+### The release zip and the editor shims
+
+The zip is the widget only. The Visual Studio type shims in the repo (`map-layers-custom/src/exb-editor-shims.d.ts`, `map-layers-custom/src/typings.d.ts`) are left out on purpose: their ambient `declare module` blocks are not file-scoped and would rewrite the react, jimu and esri types for every other widget in your `your-extensions` folder.
+
+If you clone the repository instead of using the zip, delete `map-layers-custom/src/exb-editor-shims.d.ts` and the other shim files listed above before building; nothing else depends on them.
+
 ## Requirements
 
 - ArcGIS Experience Builder Developer Edition 1.19 or 1.20 (React 19). EB 1.18 and earlier are not supported.
