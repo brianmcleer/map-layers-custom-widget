@@ -189,6 +189,13 @@ try {
             if ($leaked) {
                 throw "Editor shim still in release stage: $($leaked.FullName -join ', '). Add it to `$ReleaseOnlyExclude."
             }
+            # Warn on any other ambient declaration of a real package name (jszip, xlsx, ...).
+            # Those shadow the neighbours' @types the same way; only wildcard names (*.svg) are safe.
+            Get-ChildItem -Path $stageCopy -Recurse -File -Filter "*.d.ts" | ForEach-Object {
+                $hits = Select-String -Path $_.FullName -Pattern "declare module ['`"]([^'`"*][^'`"]*)['`"]" -AllMatches |
+                    ForEach-Object { $_.Matches } | ForEach-Object { $_.Groups[1].Value }
+                if ($hits) { Write-Warning "$($_.FullName.Substring($stageCopy.Length + 1)) ships ambient declarations of: $($hits -join ', '). Move them to src\vendor-shims.d.ts so they stay out of the zip." }
+            }
 
             Compress-Archive -Path $stageCopy -DestinationPath $zip
             Remove-Item $stage -Recurse -Force
