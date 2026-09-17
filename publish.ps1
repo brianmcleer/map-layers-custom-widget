@@ -201,7 +201,9 @@ try {
             Remove-Item $stage -Recurse -Force
 
             $notes = "Download $WidgetName.zip, extract, and drop the $WidgetName folder into client\your-extensions\widgets so manifest.json sits directly inside it. Then install dependencies in the client folder (npm install on Experience Builder 1.20 and earlier; pnpm install on 1.21 and later) and restart the client. Visual Studio type shims (src/*.d.ts editor files) are left out of this zip on purpose; they are in the GitHub repo if you want them."
-            gh release create $Release "$zip" --title "$RepoName $Release" --notes $notes
+            # Tag the branch that was just pushed, not the default branch (a fork may sit on another branch).
+            $branch = (git rev-parse --abbrev-ref HEAD).Trim()
+            gh release create $Release "$zip" --title "$RepoName $Release" --notes $notes --target $branch
         }
     }
 
