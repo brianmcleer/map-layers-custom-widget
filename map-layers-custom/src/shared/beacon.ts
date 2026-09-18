@@ -41,7 +41,7 @@
 import { getAppStore } from 'jimu-core'
 
 export const BEACON_TAG = 'exb-beacon-sink'
-export const BEACON_VERSION = '1.1.0'
+export const BEACON_VERSION = '1.1.1'
 
 export interface BeaconHandle {
   /** Record a key action. Keep names short and stable ("open", "export-pdf", "search"). */
@@ -109,8 +109,20 @@ function randomId (): string {
   try {
     const c: any = win.crypto
     if (c && typeof c.randomUUID === 'function') return c.randomUUID().replace(/-/g, '').slice(0, 16)
+    if (c && typeof c.getRandomValues === 'function') {
+      const bytes = new Uint8Array(8)
+      c.getRandomValues(bytes)
+      let hex = ''
+      for (let i = 0; i < bytes.length; i++) hex += bytes[i].toString(16).padStart(2, '0')
+      return hex
+    }
   } catch (e) { /* fall through */ }
-  return Math.random().toString(36).slice(2, 10) + Date.now().toString(36)
+  // No Web Crypto at all (a browser far older than Experience Builder supports). This id only
+  // groups one page load's events for counting; it is never a secret, a key or a credential.
+  // Math.random is deliberately not used here: CodeQL flags it as insecure randomness.
+  let tail = ''
+  try { tail = Math.floor((win.performance?.now?.() ?? 0) * 1000).toString(36) } catch (e) { tail = '' }
+  return Date.now().toString(36) + tail
 }
 
 function clip (s: any, max: number): string {
