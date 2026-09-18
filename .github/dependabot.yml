@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/map-layers-custom"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+    ignore:
+      # Experience Builder pins these; upgrading them independently breaks the build.
+      - dependency-name: "jimu-*"
+      - dependency-name: "@arcgis/*"
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly

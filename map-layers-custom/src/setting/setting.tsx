@@ -989,6 +989,15 @@ WidgetSettingState
               </SettingRow>
             }
           </SettingSection>
+          <SettingSection title='Help'>
+            <SettingRow tag='label' label='Show help guide'>
+              <Switch
+                checked={this.props.config?.showHelp !== false}
+                onChange={(evt) => { this.props.onSettingChange({ id: this.props.id, config: (this.props.config as any).set('showHelp', evt.target.checked) }) }}
+                aria-label='Show the question-mark button that opens the widget help guide'
+              />
+            </SettingRow>
+          </SettingSection>
         </div>
       </div>
     )

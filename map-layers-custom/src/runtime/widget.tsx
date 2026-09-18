@@ -1267,11 +1267,11 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                             enableMasterOpacity={this.props.config?.enableMasterOpacity ?? false}
                             enableBasemapSwitcher={this.props.config?.enableBasemapSwitcher ?? false}
                             enableLegendPanel={this.props.config?.enableLegendPanel ?? false}
-                            onHelp={this.openHelp}
+                            onHelp={this.props.config?.showHelp !== false ? this.openHelp : undefined}
                             helpLabel={this.t('helpTitle')}
                         ></MapLayersHeader>
                     }
-                    {(shouldShowHeader && this.state.showFirstRunHint) &&
+                    {this.props.config?.showHelp !== false && (shouldShowHeader && this.state.showFirstRunHint) &&
                         <FirstRunHint
                             title={this.t('firstRunTitle')}
                             body={this.t('firstRunBody')}

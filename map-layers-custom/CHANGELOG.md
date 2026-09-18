@@ -2,6 +2,10 @@
 
 Newest first. Every release bumps `manifest.json` and `package.json` together.
 
+## 1.39.4 (2026-09-18)
+
+- Settings: a **Show help guide** option. Turn it off and the question-mark button and the first-run hint both disappear; the guide itself is untouched. Undefined means on, so apps configured before this release keep their help button.
+
 ## 1.39.3 (2026-09-18)
 
 - Security: the beacon's session id now falls back to `crypto.getRandomValues` and then to a clock value instead of `Math.random`, which CodeQL flags as insecure randomness (shared beacon 1.1.1). The id only groups one page load's events; it is never a secret or a credential.

@@ -1,6 +1,9 @@
 import type { ImmutableObject } from 'jimu-core'
 
 export interface Config {
+  /** Show the question-mark button that opens the help guide. Undefined means on,
+   *  so apps configured before this setting existed keep their help button. */
+  showHelp?: boolean
   goto?: boolean
   label?: boolean
   opacity?: boolean
