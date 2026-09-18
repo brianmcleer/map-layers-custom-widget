@@ -24,6 +24,8 @@ import HelpPopup from './components/HelpPopup'
 import FirstRunHint from './components/FirstRunHint'
 import { buildHelpSections } from './helpSections'
 import type { HelpFeatures } from './helpSections'
+import { beacon } from '../shared/beacon'
+import type { BeaconHandle } from '../shared/beacon'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
 
@@ -86,6 +88,8 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         state: Partial<WidgetState> | ((previousState: Readonly<WidgetState>, props: Readonly<WidgetProps & ExtraProps>) => Partial<WidgetState> | null),
         callback?: () => void
     ) => void
+
+    private beacon: BeaconHandle | null = null
 
     public viewFromMapWidget: any | any
     // This is used by the popup action
@@ -170,6 +174,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     }
 
     componentDidMount() {
+        this.beacon = beacon.init(this.props)
         this.bindClickHandler()
         // First-run hint shows until the user dismisses it once (or opens the guide)
         if (!this.readHintDismissed()) this.setState({ showFirstRunHint: true })
@@ -873,6 +878,8 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             (actionObj) => actionObj.id === action.id
         )
 
+        this.beacon?.action('apply-action', actionObj?.id)
+
         if (actionObj.id === 'option-action') {
             // Popup the window when click option-action
             const supportedActionObjects = this.layerListActions.filter((actionObj) => {
@@ -921,6 +928,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                 headerKey: Math.random().toString()
             })
         } catch (error) {
+            this.beacon?.error(error, 'load-layers')
             console.error(error)
         }
     }
@@ -935,6 +943,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                 this.destroyTableList()
             }
         } catch (error) {
+            this.beacon?.error(error, 'load-tables')
             console.error(error)
         }
     }
@@ -1172,6 +1181,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     // focus overlay.
     onExitFocus = () => {
         if (this.state.spotlightExiting) return
+        this.beacon?.action('exit-focus')
         try { this.setState({ spotlightExiting: true }) } catch (e) { /* noop */ }
         try { restoreSpotlight(this, { deferOverlayDismiss: true }) } catch (e) { /* noop */ }
     }
