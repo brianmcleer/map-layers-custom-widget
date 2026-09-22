@@ -2,6 +2,12 @@
 
 Newest first. Every release bumps `manifest.json` and `package.json` together.
 
+## 1.39.5 (2026-09-22)
+
+- Fixed: "Cannot read properties of null (reading 'appendChild')" in `createLayerList` (94 beacon reports on 1.39.3 across six apps, Sept 19 to 22). The layer list builds asynchronously; when the widget closed or its page changed before the LayerList module and view finished loading, the build wrote into a container React had already removed. The build now checks the container after every await and stops quietly if it is gone. Same guard on the table list.
+- Fixed: the widget had no unmount cleanup. It now cancels the pending refresh timer, removes the map's layer-view listener and the reparent watcher, and destroys the LayerList and TableList when it unmounts, so reopening a panel no longer stacks listeners on the view.
+- The deferred refresh in `componentDidUpdate` is debounced, so a burst of prop updates schedules one rebuild instead of several racing ones.
+
 ## 1.39.4 (2026-09-18)
 
 - Settings: a **Show help guide** option. Turn it off and the question-mark button and the first-run hint both disappear; the guide itself is untouched. Undefined means on, so apps configured before this release keep their help button.

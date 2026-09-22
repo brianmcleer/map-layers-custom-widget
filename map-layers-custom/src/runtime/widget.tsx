@@ -90,6 +90,11 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     ) => void
 
     private beacon: BeaconHandle | null = null
+    // Set in componentWillUnmount. Async list builds check it after every await so a widget that
+    // closed mid-load (panel closed, page switched) never touches a detached container.
+    private _unmounted = false
+    // Debounce handle for the deferred list refresh scheduled in componentDidUpdate.
+    private _refreshTimer: ReturnType<typeof setTimeout> | null = null
 
     public viewFromMapWidget: any | any
     // This is used by the popup action
@@ -173,7 +178,25 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         })
     }
 
+    componentWillUnmount() {
+        this._unmounted = true
+        if (this._refreshTimer) {
+            clearTimeout(this._refreshTimer)
+            this._refreshTimer = null
+        }
+        if (this.jmvFromMap) {
+            try { this.jmvFromMap.removeJimuLayerViewCreatedListener(this._addJlvCreatedListener) } catch (_) { /* view already gone */ }
+        }
+        if (this._reparentHandle && typeof this._reparentHandle.remove === 'function') {
+            try { this._reparentHandle.remove() } catch (_) { /* noop */ }
+            this._reparentHandle = null
+        }
+        this.destroyLayerList()
+        this.destroyTableList()
+    }
+
     componentDidMount() {
+        this._unmounted = false
         this.beacon = beacon.init(this.props)
         this.bindClickHandler()
         // First-run hint shows until the user dismisses it once (or opens the guide)
@@ -339,8 +362,12 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
 
         if ((this.props.config.useMapWidget && this.state.mapWidgetId === this.currentUseMapWidgetId) ||
             (!this.props.config.useMapWidget && this.state.mapDataSourceId === this.currentUseDataSourceId)) {
-            // Put the layerlist render into the next marco task, so it will not slow down the setting panel UI
-            setTimeout(() => {
+            // Put the layerlist render into the next marco task, so it will not slow down the setting panel UI.
+            // Debounced: a burst of updates schedules one refresh, and unmount cancels it.
+            if (this._refreshTimer) clearTimeout(this._refreshTimer)
+            this._refreshTimer = setTimeout(() => {
+                this._refreshTimer = null
+                if (this._unmounted) return
                 this.syncRenderer(this.renderPromise)
             }, 150)
         }
@@ -500,9 +527,13 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         this.setState({ tableLoadStatus: LoadStatus.Pending })
         await this.getModule('esri/widgets/TableList', () => this.TableList, (value) => { this.TableList = value })
 
+        // The host div is gone if the widget unmounted or showTables flipped off while the module loaded
+        const host = this.tableListContainerRef.current
+        if (this._unmounted || !host) return null
+
         const container = document && document.createElement('div')
         container.className = 'table-list'
-        this.tableListContainerRef.current.appendChild(container)
+        host.appendChild(container)
 
         this.destroyTableList()
 
@@ -529,9 +560,14 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             this.LayerList = modules[0]
         }
 
+        // The host div is gone if the widget unmounted (panel closed, page switched) or fell back to the
+        // placeholder while the LayerList module or the view loaded. Bail quietly: nothing to render into.
+        const host = this.layerListContainerRef.current
+        if (this._unmounted || !host) return null
+
         const container = document && document.createElement('div')
         container.className = 'jimu-widget'
-        this.layerListContainerRef.current.appendChild(container)
+        host.appendChild(container)
 
         this.destroyLayerList()
 
@@ -569,6 +605,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         })
 
         this.layerListRef.current = layerList
+        return layerList
     }
 
     // Watches the map's top-level layer collection. When a layer is added there
@@ -922,7 +959,9 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             if (this.props.config?.showTables) {
                 await this.renderTableList()
             }
-            await this.createLayerList(view)
+            if (this._unmounted) return
+            const layerList = await this.createLayerList(view)
+            if (this._unmounted || !layerList) return
             this.setState({
                 listLoadStatus: LoadStatus.Fulfilled,
                 headerKey: Math.random().toString()
@@ -936,8 +975,10 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     async renderTableList() {
         try {
             const view = await this.createView() as any | any
+            if (this._unmounted) return
             if (this.props.config?.showTables) {
-                await this.createTableList(view)
+                const tableList = await this.createTableList(view)
+                if (this._unmounted || !tableList) return
                 this.setState({ tableLoadStatus: LoadStatus.Fulfilled })
             } else {
                 this.destroyTableList()
@@ -949,6 +990,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     }
 
     async syncRenderer(preRenderPromise) {
+        if (this._unmounted) return
         this.jimuMapView = MapViewManager.getInstance().getJimuMapViewById(this.state.jimuMapViewId)
 
         // The datasource mode does not have a jimuMapView
@@ -956,6 +998,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             await this.jimuMapView.whenJimuMapViewLoaded()
         }
         await preRenderPromise
+        if (this._unmounted) return
 
         this.renderPromise = this.renderLayerList()
     }
