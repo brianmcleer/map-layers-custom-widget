@@ -1,6 +1,6 @@
 # Map Layers Custom widget
 
-[![License](https://img.shields.io/github/license/brianmcleer/map-layers-custom-widget)](LICENSE) [![Release](https://img.shields.io/github/v/release/brianmcleer/=tag)](https://github.com/brianmcleer/map-layers-custom-widget/releases) [![Issues](https://img.shields.io/github/issues/brianmcleer/map-layers-custom-widget)](https://github.com/brianmcleer/map-layers-custom-widget/issues)
+[![License](https://img.shields.io/github/license/brianmcleer/map-layers-custom-widget)](LICENSE) [![Release](https://img.shields.io/github/v/release/brianmcleer/map-layers-custom-widget?display_name=tag)](https://github.com/brianmcleer/map-layers-custom-widget/releases) [![Issues](https://img.shields.io/github/issues/brianmcleer/map-layers-custom-widget)](https://github.com/brianmcleer/map-layers-custom-widget/issues)
 
 A customized ArcGIS Experience Builder Map Layers widget for the City of Grand Junction, CO. It extends Esri's stock Map Layers widget with auto-include of new sub-layers, layer focus (isolate), add data, master opacity, a basemap switcher, a legend panel, saved views, and enhanced search and batch tools.
 
@@ -10,17 +10,17 @@ The downloadable widget lives in the `map-layers-custom` subfolder. Download a r
 
 ```
 map-layers-custom-widget/        <- this repo
-â”œâ”€â”€ README.md                    <- this file (GitHub landing page)
-â”œâ”€â”€ LICENSE                      <- Apache-2.0
-â”œâ”€â”€ .gitignore                   <- ignores node_modules, .vs, dist, OS cruft
-â”œâ”€â”€ publish.ps1                  <- one-command publish/update automation
-â””â”€â”€ map-layers-custom/           <- the widget (drops into your-extensions/widgets)
-    â”œâ”€â”€ package.json
-    â”œâ”€â”€ package-lock.json        <- generated in the EB environment
-    â”œâ”€â”€ manifest.json
-    â”œâ”€â”€ README.md                <- install steps and feature list
-    â”œâ”€â”€ LICENSE
-    â””â”€â”€ src/ ...
+├── README.md                    <- this file (GitHub landing page)
+├── LICENSE                      <- Apache-2.0
+├── .gitignore                   <- ignores node_modules, .vs, dist, OS cruft
+├── publish.ps1                  <- one-command publish/update automation
+└── map-layers-custom/           <- the widget (drops into your-extensions/widgets)
+    ├── package.json
+    ├── package-lock.json        <- generated in the EB environment
+    ├── manifest.json
+    ├── README.md                <- install steps and feature list
+    ├── LICENSE
+    └── src/ ...
 ```
 
 ## Install (for users)
