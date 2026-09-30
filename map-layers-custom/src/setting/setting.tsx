@@ -27,6 +27,8 @@ import defaultMessages from './translations/default'
 import MapThumb from './components/map-thumb'
 import { getStyle } from './lib/style'
 import { type JimuMapView, JimuMapViewComponent, MapViewManager } from 'jimu-arcgis'
+import { visibleLayerIds } from '../runtime/lib/share-link'
+import type { PresetView } from '../config'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
 
@@ -47,6 +49,11 @@ export interface WidgetSettingState {
   groupLayerInfosLoaded: boolean
   // Transient feedback for the XML import/export of settings.
   importStatus?: { kind: 'success' | 'error', message: string }
+  // GroupLayers per map view, for the "Pick one layer per group" switches.
+  // Keyed by jimuMapViewId; a key present in pickOneLoaded means the walk for
+  // that view has finished (drives the loading versus empty-state message).
+  pickOneGroupInfos: { [jmvId: string]: Array<{ jlvId: string, title: string }> }
+  pickOneLoaded: { [jmvId: string]: boolean }
 }
 
 export type WidgetSettingProps = AllWidgetSettingProps<IMConfig> & ExtraProps & {
@@ -92,7 +99,10 @@ WidgetSettingState
     'startCollapsed', 'filterPlaceholder', 'enableLayerViews', 'autoShowParentLayers',
     'extraLayerTools', 'enableAddLayer', 'enableMasterOpacity', 'enableBasemapSwitcher',
     'enableLegendPanel', 'toolFlash', 'toolCopyUrl', 'toolRefresh', 'toolDetails',
-    'toolSpotlight', 'toolMove', 'symbolOption'
+    'toolSpotlight', 'toolMove', 'symbolOption', 'enablePickOneGroups',
+    'enableShareLink', 'telemetryLayers', 'reportBrokenLayers', 'searchLayerDescriptions', 'enableLayerCsv',
+    'enableLayerHealth', 'layerHealthMinutes', 'cleanLayerNames', 'cleanNamePrefix', 'cleanNameTitleCase',
+    'enableFavorites', 'enableImageryIndex', 'imageryIndexUrl', 'toolZoomToScale'
   ]
 
   static mapExtraStateProps = (state: IMState): ExtraProps => {
@@ -110,7 +120,9 @@ WidgetSettingState
       activeCustomizeJmvId: '',
       groupLayerInfos: [],
       groupLayerInfosLoaded: false,
-      importStatus: null
+      importStatus: null,
+      pickOneGroupInfos: {},
+      pickOneLoaded: {}
     }
     // this.setDefaultConfig()
   }
@@ -332,6 +344,9 @@ WidgetSettingState
       if (this.state.activeCustomizeJmvId) {
         this.loadGroupLayerInfos(this.state.activeCustomizeJmvId)
       }
+      if (this.props.config?.enablePickOneGroups) {
+        this.loadPickOneGroupInfos()
+      }
     })
   }
 
@@ -381,13 +396,22 @@ WidgetSettingState
       return
     }
 
-    const PARENT_TYPES = new Set([
+    const result = await this.collectParentLayers(jmv, new Set([
       'esri.layers.GroupLayer',
       'esri.layers.MapImageLayer',
       'esri.layers.TileLayer',
       'esri.layers.CatalogLayer'
-    ])
+    ]))
 
+    if (this.state.activeCustomizeJmvId === jmvId) {
+      this.setState({ groupLayerInfos: result, groupLayerInfosLoaded: true })
+    }
+  }
+
+  // Walks every layer in a map view (loading each so nested collections are
+  // ready) and returns the jimuLayerViewId + title of each layer whose class is
+  // in `types`, in map order, without duplicates.
+  collectParentLayers = async (jmv: JimuMapView, types: Set<string>): Promise<Array<{ jlvId: string, title: string }>> => {
     const result: Array<{ jlvId: string, title: string }> = []
     const seen = new Set<string>()
 
@@ -404,7 +428,7 @@ WidgetSettingState
         if (layer.load && layer.loadStatus !== 'loaded') {
           try { await layer.load() } catch (e) { /* ignore */ }
         }
-        if (PARENT_TYPES.has(layer.declaredClass)) {
+        if (types.has(layer.declaredClass)) {
           try {
             const jlvId = jmv.getJimuLayerViewIdByAPILayer(layer)
             if (jlvId && !seen.has(jlvId)) {
@@ -412,18 +436,229 @@ WidgetSettingState
               result.push({ jlvId, title: layer.title || layer.id || jlvId })
             }
           } catch (e) { /* ignore unresolved */ }
-          // Recurse into nested children
-          if (layer.layers) await visit(layer.layers)
-          else if (layer.sublayers) await visit(layer.sublayers)
         }
+        // Recurse into nested children (groups can hold groups)
+        if (layer.layers) await visit(layer.layers)
+        else if (layer.sublayers) await visit(layer.sublayers)
       }
     }
 
     await visit(jmv.view.map.layers)
+    return result
+  }
 
-    if (this.state.activeCustomizeJmvId === jmvId) {
-      this.setState({ groupLayerInfos: result, groupLayerInfosLoaded: true })
+  // ----- Pick one layer per group (radio buttons) ---------------------------
+
+  // Every map view the connected map widget exposes, keyed by jimuMapViewId.
+  getAllMapViews = (): { [jmvId: string]: JimuMapView } => {
+    const fromState = this.state.mapViews
+    if (fromState && Object.keys(fromState).length > 0) return fromState
+    return MapViewManager.getInstance().getJimuMapViewGroup(this.props.useMapWidgetIds?.[0])?.jimuMapViews || {}
+  }
+
+  // Loads the GroupLayers of every map view for the pick-one switches. Only
+  // true GroupLayers qualify: exclusive visibility is a GroupLayer feature.
+  loadPickOneGroupInfos = async () => {
+    const views = this.getAllMapViews()
+    const ids = Object.keys(views)
+    if (ids.length === 0) return
+    for (const jmvId of ids) {
+      const jmv = views[jmvId]
+      let infos: Array<{ jlvId: string, title: string }> = []
+      try {
+        if (jmv?.view && (jmv.view as any).when) {
+          await (jmv.view as any).when()
+        }
+        if (jmv?.view?.map) {
+          infos = await this.collectParentLayers(jmv, new Set(['esri.layers.GroupLayer']))
+        }
+      } catch (e) { /* leave empty */ }
+      this.setState((prev) => ({
+        pickOneGroupInfos: { ...prev.pickOneGroupInfos, [jmvId]: infos },
+        pickOneLoaded: { ...prev.pickOneLoaded, [jmvId]: true }
+      }))
     }
+  }
+
+  isPickOneEnabled = (jmvId: string, jlvId: string): boolean => {
+    const ids = this.props.config?.pickOneGroupIds?.[jmvId]
+    return !!ids && ids.indexOf(jlvId) !== -1
+  }
+
+  onPickOneGroupChange = (jmvId: string, jlvId: string, enabled: boolean) => {
+    const existing: string[] = Array.from(this.props.config?.pickOneGroupIds?.[jmvId] || [])
+    const nextIds = enabled
+      ? (existing.indexOf(jlvId) === -1 ? [...existing, jlvId] : existing)
+      : existing.filter(id => id !== jlvId)
+    this.props.onSettingChange({
+      id: this.props.id,
+      config: this.props.config.setIn(['pickOneGroupIds', jmvId], nextIds)
+    })
+  }
+
+  onEnablePickOneChange = (enabled: boolean) => {
+    this.onOptionsChanged(enabled, 'enablePickOneGroups')
+    if (enabled) {
+      this.setState({ pickOneGroupInfos: {}, pickOneLoaded: {} }, () => { this.loadPickOneGroupInfos() })
+    }
+  }
+
+  // The per-view, per-group switch list shown under the pick-one option.
+  getPickOneGroupList = () => {
+    const views = this.getAllMapViews()
+    const jmvIds = Object.keys(views)
+    const multi = jmvIds.length > 1
+
+    const rowsFor = (jmvId: string): React.ReactNode => {
+      const infos = this.state.pickOneGroupInfos[jmvId]
+      const loaded = !!this.state.pickOneLoaded[jmvId]
+      if (!loaded) {
+        return <div className='auto-include-empty'>{this.getTranslatedString('pickOneLoading')}</div>
+      }
+      if (!infos || infos.length === 0) {
+        return <div className='auto-include-empty'>{this.getTranslatedString('pickOneNoGroups')}</div>
+      }
+      return infos.map(info => (
+        <SettingRow key={info.jlvId} tag='label' label={info.title} className='auto-include-row'>
+          <Switch
+            className='can-x-switch'
+            aria-label={`${this.getTranslatedString('pickOneAria')} ${info.title}`}
+            checked={this.isPickOneEnabled(jmvId, info.jlvId)}
+            onChange={(evt) => { this.onPickOneGroupChange(jmvId, info.jlvId, evt.target.checked) }}
+          />
+        </SettingRow>
+      ))
+    }
+
+    const viewLabel = (jmvId: string): string => {
+      const dsId = views[jmvId]?.dataSourceId
+      return (dsId && this.props.dsJsons?.[dsId]?.label) || dsId || jmvId
+    }
+
+    return (
+      <div className='auto-include-section w-100' role='group' aria-label={this.getTranslatedString('enablePickOneGroups')}>
+        <div className='auto-include-header-row'>
+          <Label className='auto-include-header'>{this.getTranslatedString('pickOneGroupsLabel')}</Label>
+          <a
+            className='auto-include-refresh'
+            role='button'
+            tabIndex={0}
+            onClick={() => { this.loadPickOneGroupInfos() }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') { this.loadPickOneGroupInfos() }
+            }}
+          >
+            {this.getTranslatedString('pickOneRefresh')}
+          </a>
+        </div>
+        <div className='auto-include-desc'>{this.getTranslatedString('pickOneDesc')}</div>
+        {jmvIds.length === 0 && <div className='auto-include-empty'>{this.getTranslatedString('pickOneLoading')}</div>}
+        {jmvIds.map(jmvId => (
+          <div key={jmvId}>
+            {multi && <div className='auto-include-desc'><strong>{viewLabel(jmvId)}</strong></div>}
+            {rowsFor(jmvId)}
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  // ----- Preset views (captured in the builder, read-only in the app) -----
+
+  getPresets = (jmvId: string): PresetView[] => {
+    const raw: any = this.props.config?.presetViews?.[jmvId]
+    return raw ? (raw.asMutable ? raw.asMutable({ deep: true }) : Array.from(raw)) : []
+  }
+
+  setPresets = (jmvId: string, next: PresetView[]) => {
+    this.props.onSettingChange({ id: this.props.id, config: this.props.config.setIn(['presetViews', jmvId], next) })
+  }
+
+  // The layers currently on in the builder's copy of the map view.
+  captureLayerIds = (jmvId: string): string[] | null => {
+    const jmv = this.getAllMapViews()[jmvId]
+    const allLayers = jmv?.view?.map?.allLayers
+    if (!allLayers) return null
+    return visibleLayerIds(allLayers)
+  }
+
+  onAddPreset = (jmvId: string) => {
+    const ids = this.captureLayerIds(jmvId)
+    if (!ids) return
+    const presets = this.getPresets(jmvId)
+    presets.push({ id: `preset-${Date.now()}`, name: `${this.getTranslatedString('presetDefaultName')} ${presets.length + 1}`, layerIds: ids })
+    this.setPresets(jmvId, presets)
+  }
+
+  onUpdatePreset = (jmvId: string, id: string) => {
+    const ids = this.captureLayerIds(jmvId)
+    if (!ids) return
+    this.setPresets(jmvId, this.getPresets(jmvId).map(p => (p.id === id ? { ...p, layerIds: ids } : p)))
+  }
+
+  onRenamePreset = (jmvId: string, id: string, name: string) => {
+    this.setPresets(jmvId, this.getPresets(jmvId).map(p => (p.id === id ? { ...p, name } : p)))
+  }
+
+  onDeletePreset = (jmvId: string, id: string) => {
+    this.setPresets(jmvId, this.getPresets(jmvId).filter(p => p.id !== id))
+  }
+
+  onMovePreset = (jmvId: string, id: string, delta: number) => {
+    const presets = this.getPresets(jmvId)
+    const i = presets.findIndex(p => p.id === id)
+    const j = i + delta
+    if (i < 0 || j < 0 || j >= presets.length) return
+    const [moved] = presets.splice(i, 1)
+    presets.splice(j, 0, moved)
+    this.setPresets(jmvId, presets)
+  }
+
+  getPresetViewsSection = () => {
+    const views = this.getAllMapViews()
+    const jmvIds = Object.keys(views)
+    const multi = jmvIds.length > 1
+    const viewLabel = (jmvId: string): string => {
+      const dsId = views[jmvId]?.dataSourceId
+      return (dsId && this.props.dsJsons?.[dsId]?.label) || dsId || jmvId
+    }
+    return (
+      <div className='auto-include-section w-100' role='group' aria-label={this.getTranslatedString('presetViewsLabel')}>
+        <div className='auto-include-header-row'>
+          <Label className='auto-include-header'>{this.getTranslatedString('presetViewsLabel')}</Label>
+        </div>
+        <div className='auto-include-desc'>{this.getTranslatedString('presetViewsDesc')}</div>
+        {jmvIds.length === 0 && <div className='auto-include-empty'>{this.getTranslatedString('pickOneLoading')}</div>}
+        {jmvIds.map(jmvId => {
+          const presets = this.getPresets(jmvId)
+          return (
+            <div key={jmvId}>
+              {multi && <div className='auto-include-desc'><strong>{viewLabel(jmvId)}</strong></div>}
+              {presets.length === 0 && <div className='auto-include-empty'>{this.getTranslatedString('presetNone')}</div>}
+              {presets.map((p, i) => (
+                <div key={p.id} className='preset-row'>
+                  <TextInput
+                    size='sm'
+                    className='w-100'
+                    value={p.name}
+                    aria-label={this.getTranslatedString('presetName')}
+                    onChange={(evt) => { this.onRenamePreset(jmvId, p.id, evt.target.value) }}
+                  />
+                  <div className='preset-row-meta'>
+                    <span className='preset-row-count'>{`${p.layerIds.length} ${this.getTranslatedString('presetLayersOn')}`}</span>
+                    <Button size='sm' type='tertiary' onClick={() => { this.onUpdatePreset(jmvId, p.id) }} title={this.getTranslatedString('presetUpdateHint')}>{this.getTranslatedString('presetUpdate')}</Button>
+                    <Button size='sm' type='tertiary' icon disabled={i === 0} aria-label={this.getTranslatedString('presetMoveUp')} title={this.getTranslatedString('presetMoveUp')} onClick={() => { this.onMovePreset(jmvId, p.id, -1) }}>↑</Button>
+                    <Button size='sm' type='tertiary' icon disabled={i === presets.length - 1} aria-label={this.getTranslatedString('presetMoveDown')} title={this.getTranslatedString('presetMoveDown')} onClick={() => { this.onMovePreset(jmvId, p.id, 1) }}>↓</Button>
+                    <Button size='sm' type='tertiary' aria-label={`${this.getTranslatedString('presetDelete')}: ${p.name}`} onClick={() => { this.onDeletePreset(jmvId, p.id) }}>{this.getTranslatedString('presetDelete')}</Button>
+                  </div>
+                </div>
+              ))}
+              <Button size='sm' type='primary' className='mt-2' onClick={() => { this.onAddPreset(jmvId) }}>{this.getTranslatedString('presetAdd')}</Button>
+            </div>
+          )
+        })}
+      </div>
+    )
   }
 
   isAutoIncludeEnabled = (jlvId: string): boolean => {
@@ -487,10 +722,28 @@ WidgetSettingState
     )
   }
 
+  // Indented sub-switch that defaults to OFF.
+  getToolSwitchOff = (key: string, labelKey: string) => {
+    return (
+      <SettingRow tag='label' label={this.getTranslatedString(labelKey)} className='ml-3'>
+        <Switch
+          className='can-x-switch'
+          checked={!!(this.props.config && (this.props.config as any)[key])}
+          data-key={key}
+          onChange={(evt) => { this.onOptionsChanged(evt.target.checked, key) }}
+        />
+      </SettingRow>
+    )
+  }
+
   getEnhancedOptionsContent = () => {
     const collapsibleOn = !!(this.props.config && this.props.config.collapsibleList)
     const searchOn = !!(this.props.config && this.props.config.searchLayers)
     const extraToolsOn = !!(this.props.config && this.props.config.extraLayerTools)
+    const pickOneOn = !!(this.props.config && this.props.config.enablePickOneGroups)
+    const healthOn = !!(this.props.config && this.props.config.enableLayerHealth)
+    const addLayerOn = !!(this.props.config && this.props.config.enableAddLayer)
+    const cleanOn = !!(this.props.config && this.props.config.cleanLayerNames)
     return (
       <React.Fragment>
         <SettingRow tag='label' label={this.getFormattedMessage('autoShowParentLayers')}>
@@ -502,6 +755,46 @@ WidgetSettingState
           />
         </SettingRow>
         {this.getSwitchOption('soloLayer')}
+        <SettingRow tag='label' label={this.getFormattedMessage('enablePickOneGroups')}>
+          <Switch
+            className='can-x-switch'
+            checked={pickOneOn}
+            data-key='enablePickOneGroups'
+            onChange={(evt) => { this.onEnablePickOneChange(evt.target.checked) }}
+          />
+        </SettingRow>
+        {pickOneOn && this.getPickOneGroupList()}
+        {this.getSwitchOption('enableShareLink')}
+        {(this.props.config?.enableShareLink && !this.props.config?.layerBatchOptions) &&
+          <SettingRow flow='wrap'>
+            <Label className='enhanced-options-desc'>{this.getTranslatedString('shareLinkNeedsBatch')}</Label>
+          </SettingRow>
+        }
+        {this.getToolSwitch('telemetryLayers', 'telemetryLayers')}
+        {this.getToolSwitch('reportBrokenLayers', 'reportBrokenLayers')}
+        {this.getSwitchOption('enableLayerCsv')}
+        {(this.props.config?.enableLayerCsv && !this.props.config?.layerBatchOptions) &&
+          <SettingRow flow='wrap'>
+            <Label className='enhanced-options-desc'>{this.getTranslatedString('layerCsvNeedsBatch')}</Label>
+          </SettingRow>
+        }
+        {this.getSwitchOption('enableLayerHealth')}
+        {healthOn &&
+          <SettingRow flow='wrap' label={this.getFormattedMessage('layerHealthMinutes')} className='ml-3'>
+            <TextInput
+              className='w-100'
+              size='sm'
+              type='number'
+              min={1}
+              max={120}
+              value={String(this.props.config?.layerHealthMinutes ?? 5)}
+              onChange={(evt) => {
+                const n = Math.max(1, Math.min(120, Math.round(Number(evt.target.value)) || 5))
+                this.props.onSettingChange({ id: this.props.id, config: this.props.config.set('layerHealthMinutes', n) })
+              }}
+            />
+          </SettingRow>
+        }
         {this.getSwitchOption('extraLayerTools')}
         {extraToolsOn &&
           <React.Fragment>
@@ -511,14 +804,44 @@ WidgetSettingState
             {this.getToolSwitch('toolDetails', 'layerDetails')}
             {this.getToolSwitch('toolSpotlight', 'spotlight')}
             {this.getToolSwitch('toolMove', 'moveLayer')}
+            {this.getToolSwitch('toolZoomToScale', 'zoomToScale')}
           </React.Fragment>
         }
         {this.getSwitchOption('enableAddLayer')}
+        {addLayerOn && this.getToolSwitchOff('enableImageryIndex', 'enableImageryIndex')}
+        {addLayerOn && this.props.config?.enableImageryIndex &&
+          <SettingRow flow='wrap' label={this.getFormattedMessage('imageryIndexUrl')} className='ml-3'>
+            <TextInput
+              className='w-100'
+              size='sm'
+              value={this.props.config?.imageryIndexUrl || ''}
+              placeholder='https://osmlab.github.io/editor-layer-index/imagery.geojson'
+              onChange={(evt) => { this.props.onSettingChange({ id: this.props.id, config: this.props.config.set('imageryIndexUrl', evt.target.value) }) }}
+            />
+          </SettingRow>
+        }
+        {this.getSwitchOption('enableFavorites')}
+        {this.getSwitchOption('cleanLayerNames')}
+        {cleanOn &&
+          <React.Fragment>
+            <SettingRow flow='wrap' label={this.getFormattedMessage('cleanNamePrefix')} className='ml-3'>
+              <TextInput
+                className='w-100'
+                size='sm'
+                value={this.props.config?.cleanNamePrefix || ''}
+                placeholder={this.getTranslatedString('cleanNamePrefixHint')}
+                onChange={(evt) => { this.props.onSettingChange({ id: this.props.id, config: this.props.config.set('cleanNamePrefix', evt.target.value) }) }}
+              />
+            </SettingRow>
+            {this.getToolSwitchOff('cleanNameTitleCase', 'cleanNameTitleCase')}
+          </React.Fragment>
+        }
         {this.getSwitchOption('enableMasterOpacity')}
         {this.getSwitchOption('enableBasemapSwitcher')}
         {this.getSwitchOption('enableLegendPanel')}
         {this.getSwitchOption('showLayerCount')}
         {this.getSwitchOption('enableLayerViews')}
+        {this.getPresetViewsSection()}
         {this.getSwitchOption('collapsibleList')}
         {collapsibleOn &&
           <SettingRow tag='label' label={this.getFormattedMessage('startCollapsed')} className='ml-3'>
@@ -530,6 +853,7 @@ WidgetSettingState
             />
           </SettingRow>
         }
+        {searchOn && this.getToolSwitchOff('searchLayerDescriptions', 'searchLayerDescriptions')}
         {searchOn &&
           <SettingRow flow='wrap' label={this.getFormattedMessage('filterPlaceholderLabel')}>
             <TextInput

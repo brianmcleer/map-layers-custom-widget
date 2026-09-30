@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/brianmcleer/map-layers-custom-widget)](LICENSE) [![Release](https://img.shields.io/github/v/release/brianmcleer/map-layers-custom-widget?display_name=tag)](https://github.com/brianmcleer/map-layers-custom-widget/releases) [![Issues](https://img.shields.io/github/issues/brianmcleer/map-layers-custom-widget)](https://github.com/brianmcleer/map-layers-custom-widget/issues)
 
-A customized ArcGIS Experience Builder Map Layers widget for the City of Grand Junction, CO. It extends Esri's stock Map Layers widget with auto-include of new sub-layers, layer focus (isolate), add data, master opacity, a basemap switcher, a legend panel, saved views, and enhanced search and batch tools.
+A customized ArcGIS Experience Builder Map Layers widget for the City of Grand Junction, CO. It extends Esri's stock Map Layers widget with auto-include of new sub-layers, pick-one groups, layer focus (isolate), add data, imagery nearby, master opacity, a basemap switcher, a legend panel, saved and preset views, shareable layer links, favorites, a layer health check, broken layer reports, and enhanced search and batch tools.
 
 The downloadable widget lives in the `map-layers-custom` subfolder. Download a release, drop that folder into your Experience Builder install, and run the standard client `npm install`. See the widget's own README for the feature list and install steps.
 
@@ -35,7 +35,7 @@ If you clone the repository instead of using the zip, delete `map-layers-custom/
 
 ## Requirements
 
-- ArcGIS Experience Builder Developer Edition 1.19 or 1.20 (React 19). EB 1.18 and earlier are not supported.
+- ArcGIS Experience Builder Developer Edition 1.19 through 1.21 (React 19). EB 1.18 and earlier are not supported.
 
 ## Publishing updates (for the maintainer)
 

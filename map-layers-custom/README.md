@@ -5,6 +5,13 @@ A customized version of Esri's Map Layers widget for ArcGIS Experience Builder. 
 ## Features
 
 - Auto-include new sub-layers. Designate a parent group so layers added to it later appear automatically in deployed apps, with no whitelist edits or redeploy.
+- Pick one layer per group (radio buttons). Choose group layers that allow only one layer on at a time; with tick boxes on, those layers show round buttons.
+- Copy link to these layers. A batch option that copies a page address opening the app with the same layers on.
+- Export layer list (CSV). A batch option that saves every layer, group and sublayer with its state and URL.
+- Layer health check. Services behind the list are checked on a timer; a layer whose service does not answer is marked in the list and reported to telemetry.
+- Broken layer reports. A layer that fails to load (not authorized, not found, server error, timed out), fails to draw, or names a sublayer its service no longer has is reported once per page load, at any group depth. On by default.
+- Imagery nearby. Aerial and satellite sources from the OpenStreetMap Editor Layer Index that cover the current view, added under your layers.
+- Clean layer names, favorites with a favorites-only filter, and a Zoom until visible tool for greyed-out layers.
 - Layer focus (isolate). Show only the chosen layer or service sub-layer and hide everything else, with a clear exit. Works on real layers and on map-service sub-layers.
 - Live visible-layer count badge.
 - Collapsible layer list with an optional start-collapsed state.
@@ -12,15 +19,15 @@ A customized version of Esri's Map Layers widget for ArcGIS Experience Builder. 
 - Master opacity. A popover slider that sets opacity across all layers at once.
 - Basemap switcher using your organization's basemaps.
 - Legend panel.
-- Saved views, with export and import to JSON.
-- Enhanced search and filtering, including a match count that includes service sub-layers, plus a visible-only filter.
+- Saved views, with export and import to JSON, plus builder-authored preset views that every user sees.
+- Enhanced search and filtering, including a match count that includes service sub-layers, a visible-only filter, and optional matching on layer descriptions and tags.
 - Batch tools: turn all on or off, reset visibility, zoom to visible, export the map image, and expand or collapse all.
 - Per-layer tools: flash, copy URL, refresh, layer details, move to top or bottom, and move out of group, each individually toggleable.
 - In-widget help guide: a Help button in the header opens a short, searchable, plain-language guide that only describes the features the builder has turned on, plus a dismissable first-run hint. Same look and wording as the other GIS Division widgets.
 
 ## Requirements
 
-- ArcGIS Experience Builder Developer Edition 1.19 or 1.20 (built and tested on these; they run React 19).
+- ArcGIS Experience Builder Developer Edition 1.19 through 1.21 (built and tested on these; they run React 19).
 - Experience Builder 1.18 and earlier run React 18 and are not supported.
 
 ## Install
@@ -40,7 +47,7 @@ The widget then appears in the builder's widget panel as "Map Layers Custom."
 
 ## Usage telemetry
 
-This widget records anonymous usage counts and errors so the GIS Division can see which widgets and versions are in use and which errors users hit. It records the app id and title, widget name and version, the action name, a truncated error message, the site host name and browser family. It never records usernames, coordinates, addresses, attribute values or URLs with query strings. Where the data goes: on page load the widget asks the app's portal for a public item tagged `exb-beacon-sink` and posts to that table. If your portal has no such item, nothing is sent anywhere. To turn it off for an app, set `"telemetry": false` in the widget's config, or users can enable Do Not Track in their browser. The shared module is `src/shared/beacon.ts`.
+This widget records anonymous usage counts and errors so the GIS Division can see which widgets and versions are in use and which errors users hit. It records the app id and title, widget name and version, the action name, a truncated error message, the site host name and browser family. Layer on and off clicks are recorded with the layer name and its group path, at any depth (for example `Utilities > Water > Water Mains`; switch off with "Record layer on and off clicks" in Enhanced options). Broken layers are recorded with the same path and a short reason such as "not found (HTTP 404)", never the raw error message (switch off with "Report layers that fail to load or draw"). It never records usernames, coordinates, addresses, attribute values or URLs with query strings. Where the data goes: on page load the widget asks the app's portal for a public item tagged `exb-beacon-sink` and posts to that table. If your portal has no such item, nothing is sent anywhere. To turn it off for an app, set `"telemetry": false` in the widget's config, or users can enable Do Not Track in their browser. The shared module is `src/shared/beacon.ts`.
 
 ## Troubleshooting: `map-layers-custom is duplicated`
 

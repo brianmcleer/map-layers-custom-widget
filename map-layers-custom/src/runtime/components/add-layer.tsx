@@ -6,14 +6,51 @@ import {
   Tabs, Tab, Dropdown, DropdownButton, DropdownMenu, DropdownItem
 } from 'jimu-ui'
 import message from '../translations/default'
+import { parseEli, nearby, toLayerSpec, type EliEntry } from '../lib/eli'
 
 interface AddLayerProps {
   theme: IMThemeVariables
   jimuMapViewId: string
   viewFromMapWidget?: any
+  // "Imagery nearby" tab fed by the OSM Editor Layer Index.
+  enableImagery?: boolean
+  imageryIndexUrl?: string
+  onImageryAdded?: (name: string) => void
 }
 
-const { useState, useCallback, useRef } = React
+const { useState, useCallback, useRef, useEffect } = React
+
+export const ELI_DEFAULT_URL = 'https://osmlab.github.io/editor-layer-index/imagery.geojson'
+
+// The index is a few megabytes; read it once per page and share it between widgets.
+const eliCache: { [url: string]: Promise<EliEntry[]> } = {}
+const loadEli = (url: string): Promise<EliEntry[]> => {
+  if (!eliCache[url]) {
+    // esri/request, not window.fetch: some City deployments wrap fetch with a CDN shim that
+    // rewrites absolute URLs (see the Mailing Labels geocode fix).
+    eliCache[url] = loadArcGISJSAPIModules(['esri/request']).then(([esriRequest]: any[]) =>
+      esriRequest(url, { responseType: 'json', timeout: 60000 })
+    ).then((res: any) => parseEli(res?.data)).catch((e: any) => { delete eliCache[url]; throw e })
+  }
+  return eliCache[url]
+}
+
+// The view's extent as [xmin, ymin, xmax, ymax] in WGS84, or null when it cannot be projected.
+const extentToWgs84 = async (view: any): Promise<number[] | null> => {
+  try {
+    const ext = view?.extent
+    if (!ext) return null
+    const wkid = ext.spatialReference?.wkid
+    if (wkid === 4326) return [ext.xmin, ext.ymin, ext.xmax, ext.ymax]
+    const [projectOperator, SpatialReference] = await loadArcGISJSAPIModules(['esri/geometry/operators/projectOperator', 'esri/geometry/SpatialReference'])
+    if (typeof projectOperator.isLoaded === 'function' && !projectOperator.isLoaded()) await projectOperator.load()
+    const out: any = projectOperator.execute(ext, new SpatialReference({ wkid: 4326 }))
+    if (!out) return null
+    return [out.xmin, out.ymin, out.xmax, out.ymax]
+  } catch (e) {
+    return null
+  }
+}
 
 type Phase = 'idle' | 'working' | 'error' | 'success'
 
@@ -140,6 +177,15 @@ const getBodyStyle = (theme: IMThemeVariables) => css`
   .al-drop-main { font-weight: 500; margin-bottom: 4px; }
   .al-drop-sub { font-size: 0.8125rem; opacity: .75; }
   .al-formats { font-size: 0.75rem; opacity: .6; margin-top: 8px; }
+  .al-eli-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; border: 1px solid ${theme.sys.color.divider.secondary}; border-radius: 4px; }
+  .al-eli-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-bottom: 1px solid ${theme.sys.color.divider.secondary}; font-size: 0.8125rem; }
+  .al-eli-row:last-child { border-bottom: none; }
+  .al-eli-text { flex: 1 1 auto; min-width: 0; }
+  .al-eli-name { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .al-eli-meta { font-size: 0.75rem; opacity: .7; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .al-eli-best { font-size: 0.6875rem; padding: 0 5px; border-radius: 8px; background: ${theme.sys.color.primary.main}; color: ${theme.sys.color.primary.text}; margin-left: 4px; }
+  .al-eli-note { font-size: 0.75rem; opacity: .7; margin-top: 8px; line-height: 1.4; }
+  .al-tabpanel.al-eli { display: flex; flex-direction: column; height: 100%; min-height: 0; }
   .al-file { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; padding: 6px 8px 6px 12px; background: ${theme.ref.palette.neutral[300]}; border-radius: 4px; font-size: 0.8125rem; }
 `
 
@@ -151,7 +197,7 @@ const CloseGlyph = () => (
 )
 
 export default function AddLayer (props: AddLayerProps) {
-  const { theme, jimuMapViewId, viewFromMapWidget } = props
+  const { theme, jimuMapViewId, viewFromMapWidget, enableImagery = false, imageryIndexUrl, onImageryAdded } = props
   const translate = hooks.useTranslation(message)
   const [open, setOpen] = useState(false)
   const [tab, setTab] = useState('url')
@@ -168,6 +214,12 @@ export default function AddLayer (props: AddLayerProps) {
   const busy = phase === 'working'
   const selectedType = URL_TYPES.find(t => t.id === typeId) || URL_TYPES[0]
 
+  // Imagery nearby (Editor Layer Index)
+  const [eliEntries, setEliEntries] = useState<EliEntry[] | null>(null)
+  const [eliExtent, setEliExtent] = useState<number[] | null>(null)
+  const [eliQuery, setEliQuery] = useState('')
+  const [eliState, setEliState] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
+
   const resolveView = useCallback((): any => {
     if (viewFromMapWidget) return viewFromMapWidget
     const jmv = MapViewManager.getInstance().getJimuMapViewById(jimuMapViewId)
@@ -178,6 +230,45 @@ export default function AddLayer (props: AddLayerProps) {
     if (inFlight.current) return
     setOpen(false); setUrl(''); setFile(null); setDragging(false); setPhase('idle'); setStatusText('')
   }, [])
+
+  // Load the index and the current extent when the Imagery tab opens.
+  useEffect(() => {
+    if (!open || !enableImagery || tab !== 'imagery') return
+    let cancelled = false
+    setEliState('loading')
+    const view = resolveView()
+    Promise.all([loadEli(imageryIndexUrl || ELI_DEFAULT_URL), extentToWgs84(view)]).then(([entries, extent]) => {
+      if (cancelled) return
+      setEliEntries(entries); setEliExtent(extent); setEliState('ready')
+    }).catch((e: any) => {
+      console.error('Imagery index failed', e)
+      if (!cancelled) setEliState('error')
+    })
+    return () => { cancelled = true }
+  }, [open, tab, enableImagery, imageryIndexUrl, resolveView])
+
+  const addImagery = useCallback((entry: EliEntry) => {
+    if (inFlight.current) return
+    const view = resolveView()
+    if (!view || !view.map) { setError(translate('addLayerNoView')); return }
+    const spec = toLayerSpec(entry)
+    if (!spec) { setError(translate('imageryNotAddable')); return }
+    inFlight.current = true; setPhase('working'); setStatusText(translate('addLayerWorking'))
+    const modulePath = spec.kind === 'webtile' ? 'esri/layers/WebTileLayer' : 'esri/layers/WMSLayer'
+    loadArcGISJSAPIModules([modulePath]).then(([Ctor]: any[]) => {
+      const layer = spec.kind === 'webtile'
+        ? new Ctor({ urlTemplate: spec.urlTemplate, subDomains: spec.subDomains, title: spec.title, copyright: spec.copyright, opacity: 1 })
+        : new Ctor({ url: spec.url, title: spec.title, copyright: spec.copyright, sublayers: spec.layers.map((name: string) => ({ name })), imageFormat: spec.imageFormat, version: spec.version })
+      // Imagery goes under every operational layer, like a second basemap.
+      view.map.add(layer, 0)
+      inFlight.current = false
+      setPhase('success'); setStatusText(translate('imageryAdded').replace('{name}', entry.name))
+      onImageryAdded && onImageryAdded(entry.name)
+      window.setTimeout(() => { close() }, 900)
+    }).catch((e: any) => { console.error('Add imagery failed', e); setError(translate('addLayerError')) })
+  }, [resolveView, close, translate, onImageryAdded])
+
+  const eliVisible = eliEntries ? nearby(eliEntries, eliExtent, eliQuery).slice(0, 80) : []
 
   const clearErr = () => { if (phase === 'error') { setPhase('idle'); setStatusText('') } }
   const setError = (text: string) => { inFlight.current = false; setPhase('error'); setStatusText(text) }
@@ -370,6 +461,42 @@ export default function AddLayer (props: AddLayerProps) {
                 {statusAlert}
               </div>
             </Tab>
+
+            {enableImagery &&
+              <Tab id='imagery' title={translate('imageryTab')}>
+                <div className='al-tabpanel al-eli'>
+                  <div className='al-intro'>{translate('imageryIntro')}</div>
+                  <div className='al-field'>
+                    <TextInput
+                      size='sm' style={{ width: '100%' }} allowClear value={eliQuery} disabled={eliState !== 'ready'}
+                      placeholder={translate('imagerySearch')}
+                      onChange={(e) => { setEliQuery(e.target.value) }}
+                    />
+                  </div>
+                  {eliState === 'loading' && <div className='al-eli-note'>{translate('imageryLoading')}</div>}
+                  {eliState === 'error' && <Alert className='al-alert' open type='error' text={translate('imageryError')} />}
+                  {eliState === 'ready' &&
+                    <div className='al-eli-list' role='list'>
+                      {eliVisible.length === 0 && <div className='al-eli-note' style={{ padding: 8 }}>{translate('imageryNone')}</div>}
+                      {eliVisible.map((entry: EliEntry) => (
+                        <div className='al-eli-row' key={entry.id} role='listitem'>
+                          <div className='al-eli-text'>
+                            <div className='al-eli-name' title={entry.name}>
+                              {entry.name}
+                              {entry.best && <span className='al-eli-best'>{translate('imageryBest')}</span>}
+                            </div>
+                            <div className='al-eli-meta' title={entry.attribution}>{entry.type.toUpperCase()}{entry.attribution ? ` · ${entry.attribution}` : ''}</div>
+                          </div>
+                          <Button size='sm' type='tertiary' disabled={busy} onClick={() => { addImagery(entry) }} aria-label={`${translate('add')}: ${entry.name}`}>{translate('add')}</Button>
+                        </div>
+                      ))}
+                    </div>
+                  }
+                  {eliState === 'ready' && <div className='al-eli-note'>{translate('imageryLicense')}</div>}
+                  {statusAlert}
+                </div>
+              </Tab>
+            }
 
             <Tab id='file' title='File'>
               <div className='al-tabpanel'>

@@ -11,6 +11,8 @@ export enum ACTION_INDEXES {
   CopyUrl = 9,
   Refresh = 10,
   Details = 11,
+  ZoomToScale = 12,
+  Favorite = 19,
   Spotlight = 13,
   ClearSpotlight = 14,
   MoveTop = 15,

@@ -13,6 +13,11 @@ import MasterOpacity from './master-opacity'
 import BasemapSwitcher from './basemap-switcher'
 import LegendPanel from './legend-panel'
 import message from '../translations/default'
+import { buildShareLink, visibleLayerIds } from '../lib/share-link'
+import { buildLayerCsv } from '../lib/layer-csv'
+import { buildSearchIndex, type SearchIndex } from '../lib/search-index'
+import type { PresetViewProp } from './layer-views'
+import { getFavorites, subscribeFavorites } from '../lib/favorites'
 
 interface MapLayersHeaderProps {
     theme: IMThemeVariables
@@ -42,6 +47,23 @@ interface MapLayersHeaderProps {
     // of this bar. Both are supplied by widget.tsx; the button renders when onHelp is set.
     onHelp?: () => void
     helpLabel?: string
+    // "Copy link to these layers" in the batch menu (needs batch options).
+    enableShareLink?: boolean
+    onLinkCopied?: () => void
+    // The search box also matches descriptions and tags (index built per list refresh).
+    searchDescriptions?: boolean
+    // "Export layer list (CSV)" in the batch menu (needs batch options).
+    enableLayerCsv?: boolean
+    onCsvExported?: () => void
+    // Builder-authored preset views for this map view; shown even when saved views are off.
+    presets?: PresetViewProp[]
+    onApplyPreset?: (name: string) => void
+    // "Show favorites only" in the batch menu.
+    enableFavorites?: boolean
+    // Add layer panel: "Imagery nearby" tab.
+    enableImagery?: boolean
+    imageryIndexUrl?: string
+    onImageryAdded?: (name: string) => void
 }
 
 const getStyle = (theme: IMThemeVariables) => {
@@ -102,14 +124,35 @@ const { useState, useCallback, useEffect, useRef } = React
 // any predicate). Tolerates list items without a layer/title (group nodes,
 // tables, runtime layers still loading) and opens matched ancestors so the
 // match is actually visible in the tree.
-const buildFilterPredicate = (searchContent: string, visibleOnly: boolean) => {
+const itemMatches = (item: any, needle: string, index: SearchIndex | null): boolean => {
+    const title = (item?.title || item?.layer?.title || '')
+    if (title.toLowerCase().includes(needle)) return true
+    if (index && item?.layer) {
+        const extra = index.get(item.layer)
+        if (extra && extra.includes(needle)) return true
+    }
+    return false
+}
+
+const buildFilterPredicate = (searchContent: string, visibleOnly: boolean, index: SearchIndex | null, favorites: Set<string> | null) => {
     const needle = (searchContent || '').toLowerCase()
-    if (!needle && !visibleOnly) {
+    if (!needle && !visibleOnly && !favorites) {
         return null
     }
     return (item) => {
         if (!item) {
             return true
+        }
+        if (favorites) {
+            // A group stays when any descendant is a favorite, so the star is reachable.
+            const hasFav = (it: any): boolean => {
+                if (it?.layer && it.layer.id != null && favorites.has(String(it.layer.id))) return true
+                const kids = it?.children ? (it.children.toArray ? it.children.toArray() : it.children) : []
+                return kids.some((k: any) => hasFav(k))
+            }
+            if (!hasFav(item)) return false
+            let cur = item
+            while (cur) { cur.open = true; cur = cur.parent }
         }
         if (visibleOnly) {
             const isVisible = item?.layer ? item.layer.visible !== false : (item.visible !== false)
@@ -118,8 +161,7 @@ const buildFilterPredicate = (searchContent: string, visibleOnly: boolean) => {
             }
         }
         if (needle) {
-            const title = (item?.title || item?.layer?.title || '')
-            const matched = title.toLowerCase().includes(needle)
+            const matched = itemMatches(item, needle, index)
             if (matched) {
                 let currItem = item
                 while (currItem) {
@@ -136,14 +178,13 @@ const buildFilterPredicate = (searchContent: string, visibleOnly: boolean) => {
 // Counts list items whose own title matches the search. Walks the full item
 // tree — including service sublayers, which are NOT present in map.allLayers —
 // so the "N matches" count agrees with what the filter actually shows.
-const countMatchingItems = (items: any, needle: string, visibleOnly: boolean): number => {
+const countMatchingItems = (items: any, needle: string, visibleOnly: boolean, index: SearchIndex | null): number => {
     if (!items || !needle) return 0
     let n = 0
     items.forEach((item: any) => {
         const visible = item?.layer ? item.layer.visible !== false : (item?.visible !== false)
-        const title = (item?.title || item?.layer?.title || '').toLowerCase()
-        if ((!visibleOnly || visible) && title.includes(needle)) n += 1
-        if (item?.children && item.children.length) n += countMatchingItems(item.children, needle, visibleOnly)
+        if ((!visibleOnly || visible) && itemMatches(item, needle, index)) n += 1
+        if (item?.children && item.children.length) n += countMatchingItems(item.children, needle, visibleOnly, index)
     })
     return n
 }
@@ -155,7 +196,9 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
         collapsible = false, isCollapsed = false, onToggleCollapse, filterPlaceholder,
         viewFromMapWidget, widgetId, enableLayerViews = false, autoShowParents = true,
         enableAddLayer = false, enableMasterOpacity = false, enableBasemapSwitcher = false,
-        enableLegendPanel = false, onHelp, helpLabel
+        enableLegendPanel = false, onHelp, helpLabel, enableShareLink = false, onLinkCopied,
+        searchDescriptions = false, enableLayerCsv = false, onCsvExported, presets = [], onApplyPreset,
+        enableFavorites = false, enableImagery = false, imageryIndexUrl, onImageryAdded
     } = props
 
     const translate = hooks.useTranslation(message)
@@ -163,8 +206,15 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
     const [isSearchOpen, setIsSearchOpen] = useState(true)
     const [searchInput, setSearchInput] = useState('')
     const [visibleOnly, setVisibleOnly] = useState(false)
+    const [favoritesOnly, setFavoritesOnly] = useState(false)
+    // Bumped when a star is toggled so the favorites filter recomputes.
+    const [favTick, setFavTick] = useState(0)
     const [counts, setCounts] = useState<{ visible: number, total: number }>({ visible: 0, total: 0 })
     const [matchCount, setMatchCount] = useState<number | null>(null)
+    // Short "Link copied" note beside the batch menu, cleared after a moment.
+    const [linkNote, setLinkNote] = useState<string>('')
+    // Description and tag text per layer for the deep search; null until built.
+    const [searchIndex, setSearchIndex] = useState<SearchIndex | null>(null)
     const originalExpandStatesRef = useRef<Map<any, boolean>>(new Map())
     const hadActiveSearchRef = useRef(false)
     // Snapshot of the authored default visibility, captured once per refresh,
@@ -309,6 +359,76 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
         }).catch((e: any) => { console.error('Export map image failed', e) })
     }, [resolveView])
 
+    useEffect(() => {
+        if (!enableFavorites) { setFavoritesOnly(false); return }
+        return subscribeFavorites((id: string) => { if (id === widgetId) setFavTick((n: number) => n + 1) })
+    }, [enableFavorites, widgetId])
+
+    // Builds the description/tag index once per list refresh when deep search is on.
+    useEffect(() => {
+        if (!enableSearch || !searchDescriptions) { setSearchIndex(null); return }
+        let cancelled = false
+        const view = resolveView()
+        const allLayers: any = view?.map?.allLayers
+        if (!allLayers) return
+        buildSearchIndex(allLayers).then((idx: SearchIndex) => { if (!cancelled) setSearchIndex(idx) }).catch(() => { /* search stays name-only */ })
+        return () => { cancelled = true }
+    }, [enableSearch, searchDescriptions, headerKey, resolveView])
+
+    // Saves every list item (layers, sublayers, groups) to a CSV file.
+    const onExportCsv = useCallback(() => {
+        const items = layerListRef.current?.operationalItems
+        if (!items) return
+        try {
+            const csv = buildLayerCsv(items, {
+                layer: translate('csvLayer'), group: translate('csvGroup'), type: translate('csvType'), on: translate('csvOn'),
+                opacity: translate('csvOpacity'), minScale: translate('csvMinScale'), maxScale: translate('csvMaxScale'), url: translate('csvUrl'),
+                yes: translate('csvYes'), no: translate('csvNo')
+            })
+            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' })
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = 'map-layers.csv'
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+            window.setTimeout(() => { URL.revokeObjectURL(url) }, 1000)
+            onCsvExported && onCsvExported()
+        } catch (e) { console.error('Export layer list failed', e) }
+    }, [layerListRef, translate, onCsvExported])
+
+    // Copies a page address that opens this app with the same layers on (?mlc=ids).
+    const onCopyLink = useCallback(() => {
+        const view = resolveView()
+        const allLayers: any = view?.map?.allLayers
+        if (!allLayers) return
+        let link = ''
+        try { link = buildShareLink(window.location.href, visibleLayerIds(allLayers)) } catch (e) { return }
+        const done = () => {
+            setLinkNote(translate('linkCopied'))
+            window.setTimeout(() => { setLinkNote('') }, 2500)
+            onLinkCopied && onLinkCopied()
+        }
+        const fallback = () => {
+            try {
+                const ta = document.createElement('textarea')
+                ta.value = link
+                ta.style.position = 'fixed'
+                ta.style.opacity = '0'
+                document.body.appendChild(ta)
+                ta.select()
+                document.execCommand('copy')
+                document.body.removeChild(ta)
+                done()
+            } catch (e) { setLinkNote(translate('linkCopyFailed')) }
+        }
+        try {
+            if (navigator?.clipboard?.writeText) navigator.clipboard.writeText(link).then(done).catch(fallback)
+            else fallback()
+        } catch (e) { fallback() }
+    }, [resolveView, translate, onLinkCopied])
+
     // Restore each layer to the visibility it had when the list first loaded.
     const onResetVisibility = useCallback(() => {
         const view = resolveView()
@@ -373,7 +493,7 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
     }, [showLayerCount, enableBatchOption, headerKey, resolveView, computeCounts])
 
     useEffect(() => {
-        const filterActive = searchInput !== '' || visibleOnly
+        const filterActive = searchInput !== '' || visibleOnly || (enableFavorites && favoritesOnly)
 
         // No active filter: clear predicate and restore the pre-filter tree state.
         if (!filterActive) {
@@ -395,19 +515,20 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
             hadActiveSearchRef.current = true
         }
 
-        const predicate = buildFilterPredicate(searchInput, visibleOnly)
+        const favorites = (enableFavorites && favoritesOnly) ? getFavorites(widgetId) : null
+        const predicate = buildFilterPredicate(searchInput, visibleOnly, searchIndex, favorites)
         layerListRef.current && (layerListRef.current.filterPredicate = predicate)
         tableListRef.current && (tableListRef.current.filterPredicate = predicate)
 
         // Tally matching leaf layers for the live "N matches" hint (text filter only).
         if (searchInput !== '') {
             const needle = searchInput.toLowerCase()
-            const n = countMatchingItems(layerListRef.current?.operationalItems, needle, visibleOnly)
+            const n = countMatchingItems(layerListRef.current?.operationalItems, needle, visibleOnly, searchIndex)
             setMatchCount(n)
         } else {
             setMatchCount(null)
         }
-    }, [layerListRef, searchInput, visibleOnly, tableListRef, saveExpandStates, restoreExpandStates, resolveView])
+    }, [layerListRef, searchInput, visibleOnly, tableListRef, saveExpandStates, restoreExpandStates, resolveView, searchIndex, enableFavorites, favoritesOnly, favTick, widgetId])
 
     useEffect(() => {
         // Close the search input box when disable searching
@@ -423,7 +544,8 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
         defaultVisibilityRef.current = new Map()
     }, [headerKey])
 
-    if (!enableBatchOption && !enableSearch && !showLayerCount && !collapsible && !enableLayerViews && !enableAddLayer && !enableMasterOpacity && !enableBasemapSwitcher && !enableLegendPanel && !onHelp) {
+    const showViews = isMapWidgetMode && (enableLayerViews || presets.length > 0)
+    if (!enableBatchOption && !enableSearch && !showLayerCount && !collapsible && !showViews && !enableAddLayer && !enableMasterOpacity && !enableBasemapSwitcher && !enableLegendPanel && !onHelp) {
         return null
     }
 
@@ -454,6 +576,9 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
                     </div>
             }
             <div className='map-layers-header-icons d-flex align-items-center'>
+                {linkNote !== '' &&
+                    <span className='map-layers-match-count' role='status' aria-live='polite'>{linkNote}</span>
+                }
                 {(isSearchOpen && enableSearch && matchCount !== null) &&
                     <span className='map-layers-match-count'>
                         {`${matchCount} ${translate('matches')}`}
@@ -473,10 +598,17 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
                                         <DropdownItem onClick={onResetVisibility}>{translate('resetVisibility')}</DropdownItem>
                                         <DropdownItem onClick={onZoomToVisible}>{translate('zoomToVisible')}</DropdownItem>
                                         <DropdownItem onClick={onExportMapImage}>{translate('exportMapImage')}</DropdownItem>
+                                        {enableShareLink && <DropdownItem onClick={onCopyLink}>{translate('copyLayerLink')}</DropdownItem>}
+                                        {enableLayerCsv && <DropdownItem onClick={onExportCsv}>{translate('exportLayerCsv')}</DropdownItem>}
                                         <DropdownItem divider></DropdownItem>
                                         <DropdownItem active={visibleOnly} onClick={() => { setVisibleOnly(!visibleOnly) }}>
                                             {visibleOnly ? translate('showAllLayers') : translate('showVisibleOnly')}
                                         </DropdownItem>
+                                        {enableFavorites &&
+                                            <DropdownItem active={favoritesOnly} onClick={() => { setFavoritesOnly(!favoritesOnly) }}>
+                                                {favoritesOnly ? translate('showAllLayers') : translate('showFavoritesOnly')}
+                                            </DropdownItem>
+                                        }
                                         <DropdownItem divider></DropdownItem>
                                     </React.Fragment>
                                 )
@@ -487,7 +619,7 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
                     </Dropdown>
                 }
                 {
-                    (enableLayerViews && isMapWidgetMode) &&
+                    showViews &&
                     <LayerViews
                         theme={theme}
                         widgetId={widgetId}
@@ -495,6 +627,9 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
                         viewFromMapWidget={viewFromMapWidget}
                         autoShowParents={autoShowParents}
                         layerListRef={layerListRef}
+                        presets={presets}
+                        allowUserViews={enableLayerViews}
+                        onApplyPreset={onApplyPreset}
                     />
                 }
                 {
@@ -503,6 +638,9 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
                         theme={theme}
                         jimuMapViewId={jimuMapViewId}
                         viewFromMapWidget={viewFromMapWidget}
+                        enableImagery={enableImagery}
+                        imageryIndexUrl={imageryIndexUrl}
+                        onImageryAdded={onImageryAdded}
                     />
                 }
                 {

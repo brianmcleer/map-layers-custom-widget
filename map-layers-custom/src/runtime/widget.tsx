@@ -26,6 +26,9 @@ import { buildHelpSections } from './helpSections'
 import type { HelpFeatures } from './helpSections'
 import { beacon } from '../shared/beacon'
 import type { BeaconHandle } from '../shared/beacon'
+import { readShareIds, applyShareIds } from './lib/share-link'
+import { cleanTitle, decorateTitle } from './lib/display-title'
+import { isFavorite, subscribeFavorites } from './lib/favorites'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
 
@@ -89,7 +92,28 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         callback?: () => void
     ) => void
 
-    private beacon: BeaconHandle | null = null
+    public beacon: BeaconHandle | null = null
+    // The ?mlc= layer ids are applied once per widget life, the first time the list is ready.
+    private _shareApplied = false
+    // Layer on/off telemetry is buffered so a batch action becomes one row, not fifty.
+    private _layerEvents: Array<{ on: boolean, title: string }> = []
+    private _layerEventTimer: ReturnType<typeof setTimeout> | null = null
+    // True while the widget itself is switching layers (share link on load), so those
+    // changes are not counted as user clicks.
+    private _suppressLayerTelemetry = false
+    // Layer telemetry watches the map itself (every layer and sublayer at any depth), not the
+    // list items, so groups inside groups, map-image sublayers and layers added later all count.
+    private _layerTelHandles: any[] = []
+    private _layerTelWatched: WeakSet<any> = new WeakSet()
+    private _autoParentOn: WeakSet<any> = new WeakSet()
+    // Broken layers already reported this page load (by path), so each is one row.
+    private _brokenReported: Set<string> = new Set()
+    // Layer health: service url -> false while it is not answering. Timer for the next check.
+    private _serviceDown: Map<string, boolean> = new Map<string, boolean>()
+    private _healthTimer: ReturnType<typeof setTimeout> | null = null
+    private _healthRunning = false
+    private _esriRequest: any = null
+    private _unsubscribeFavorites: (() => void) | null = null
     // Set in componentWillUnmount. Async list builds check it after every await so a widget that
     // closed mid-load (panel closed, page switched) never touches a detached container.
     private _unmounted = false
@@ -140,6 +164,10 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     _spotlightVisBackup: Map<any, boolean> = null
     _spotlightOpenBackup: Map<any, boolean> = null
     _spotlightLayerId: string = null
+    // Group layers this widget switched into pick-one (exclusive) mode, with
+    // the visibilityMode each had before, so a config change or unmount can
+    // put the map back the way the web map author left it.
+    _pickOneOriginalModes: Map<any, string> = new Map<any, string>()
 
     constructor(props) {
         super(props)
@@ -184,6 +212,14 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             clearTimeout(this._refreshTimer)
             this._refreshTimer = null
         }
+        this.stopLayerHealth()
+        this.teardownLayerTelemetry()
+        if (this._unsubscribeFavorites) { this._unsubscribeFavorites(); this._unsubscribeFavorites = null }
+        if (this._layerEventTimer) {
+            clearTimeout(this._layerEventTimer)
+            this._layerEventTimer = null
+            this.flushLayerEvents()
+        }
         if (this.jmvFromMap) {
             try { this.jmvFromMap.removeJimuLayerViewCreatedListener(this._addJlvCreatedListener) } catch (_) { /* view already gone */ }
         }
@@ -191,6 +227,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             try { this._reparentHandle.remove() } catch (_) { /* noop */ }
             this._reparentHandle = null
         }
+        this.restorePickOneGroups(new Set<string>())
         this.destroyLayerList()
         this.destroyTableList()
     }
@@ -199,6 +236,10 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         this._unmounted = false
         this.beacon = beacon.init(this.props)
         this.bindClickHandler()
+        // A star toggled from the layer menu updates the list titles and the favorites filter.
+        this._unsubscribeFavorites = subscribeFavorites((widgetId: string) => {
+            if (widgetId === this.props.id) this.refreshAllTitles()
+        })
         // First-run hint shows until the user dismisses it once (or opens the guide)
         if (!this.readHintDismissed()) this.setState({ showFirstRunHint: true })
     }
@@ -264,6 +305,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             layerCount: !!config.showLayerCount,
             collapsible: !!config.collapsibleList,
             savedViews: mapMode && !!config.enableLayerViews,
+            presetViews: mapMode && this.currentPresets().length > 0,
             addLayer: mapMode && !!config.enableAddLayer,
             masterOpacity: mapMode && !!config.enableMasterOpacity,
             basemapSwitcher: mapMode && !!config.enableBasemapSwitcher,
@@ -276,6 +318,14 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             information: !!config.information,
             changeSymbol: !!config.changeSymbolForRuntimeLayers,
             solo: mapMode && !!config.soloLayer,
+            pickOne: mapMode && this.pickOneGroupIdSet().size > 0,
+            shareLink: mapMode && !!config.layerBatchOptions && !!config.enableShareLink,
+            searchDeep: !!config.searchLayers && !!config.searchLayerDescriptions,
+            layerCsv: mapMode && !!config.layerBatchOptions && !!config.enableLayerCsv,
+            layerHealth: mapMode && !!config.enableLayerHealth,
+            favorites: mapMode && !!config.enableFavorites,
+            imagery: mapMode && !!config.enableAddLayer && !!config.enableImageryIndex,
+            zoomToScale: mapMode && extra && config.toolZoomToScale !== false,
             flash: mapMode && extra && config.toolFlash !== false,
             copyUrl: extra && config.toolCopyUrl !== false,
             refresh: extra && config.toolRefresh !== false,
@@ -295,6 +345,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                 expandAllLayers: tr('expandAllLayers'),
                 collapseAllLayers: tr('collapseAllLayers'),
                 savedViews: tr('savedViews'),
+                presetViews: tr('presetViews'),
                 saveCurrentView: tr('saveCurrentView'),
                 save: tr('save'),
                 exportViews: tr('exportViews'),
@@ -325,7 +376,15 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                 moveToTop: tr('moveToTop'),
                 moveToBottom: tr('moveToBottom'),
                 moveOutOfGroup: tr('moveOutOfGroup'),
-                remove: tr('remove')
+                remove: tr('remove'),
+                copyLayerLink: tr('copyLayerLink'),
+                exportLayerCsv: tr('exportLayerCsv'),
+                layerUnavailable: tr('layerUnavailable'),
+                favoriteAdd: tr('favoriteAdd'),
+                favoriteRemove: tr('favoriteRemove'),
+                showFavoritesOnly: tr('showFavoritesOnly'),
+                imageryTab: tr('imageryTab'),
+                zoomToScale: tr('zoomToScale')
             }
         }
     }
@@ -598,6 +657,22 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             // Set up visibility watchers after the layer list is ready
             this.setLayerVisibilityWatchers(layerList);
 
+            // The widget's own load-time changes (pick-one trim, share link) are not user
+            // clicks: keep the layer telemetry quiet until the SDK has fired their watchers.
+            this._suppressLayerTelemetry = true
+
+            // Pick-one groups: switch the configured groups into exclusive
+            // visibility (radio buttons) and release any no longer configured.
+            this.applyPickOneGroups();
+
+            // Layer state from the page address (?mlc=), once per widget life.
+            this.applyShareLinkOnce();
+
+            setTimeout(() => { this._suppressLayerTelemetry = false }, 800)
+
+            // Service health: first check shortly after load, then on the configured timer.
+            this.startLayerHealth();
+
             // Keep any layer that gets moved OUT to the top level (via drag or
             // the Move-out menu) visible, even though it no longer matches the
             // group-based whitelist.
@@ -606,6 +681,396 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
 
         this.layerListRef.current = layerList
         return layerList
+    }
+
+    // Builder-authored presets for the active map view (plain arrays for the header).
+    currentPresets(): Array<{ id: string, name: string, layerIds: string[] }> {
+        const raw: any = this.props.config?.presetViews?.[this.state.jimuMapViewId]
+        if (!raw) return []
+        const arr: any[] = raw.asMutable ? raw.asMutable({ deep: true }) : Array.from(raw)
+        return arr.filter((p: any) => p && p.name).map((p: any) => ({ id: String(p.id), name: String(p.name), layerIds: Array.from(p.layerIds || []) as string[] }))
+    }
+
+    // ==================== Layer state in the URL (?mlc=) ====================
+
+    // Reads the ?mlc= parameter the first time the list is ready and switches the map's
+    // layers to match. Layers the map does not have are ignored. Runs once per widget life so
+    // a later list rebuild (config change, runtime layer added) does not undo the user's clicks.
+    applyShareLinkOnce() {
+        if (this._shareApplied) return
+        const config: any = this.props.config || {}
+        if (!config.useMapWidget || !config.layerBatchOptions || !config.enableShareLink) return
+        this._shareApplied = true
+        let ids: string[] | null = null
+        try { ids = readShareIds(typeof window !== 'undefined' ? window.location.search : '') } catch (e) { ids = null }
+        if (!ids) return
+        const view = this.viewFromMapWidget || this.jmvFromMap?.view
+        const allLayers = view?.map?.allLayers
+        if (!allLayers) return
+        try {
+            const found = applyShareIds(allLayers, ids)
+            // Groups holding a linked layer must be on for it to draw.
+            if (config.autoShowParentLayers !== false) {
+                allLayers.forEach((layer: any) => {
+                    if (layer && layer.visible === true && layer.declaredClass !== 'esri.layers.GroupLayer') this.ensureAncestorsVisible(layer)
+                })
+            }
+            this.beacon?.action('open-share-link', `${found} of ${ids.length}`)
+        } catch (e) {
+            this.beacon?.error(e, 'open-share-link')
+        }
+    }
+
+    // ==================== Layer on/off telemetry ====================
+
+    // Watches visibility on every operational layer at every depth: map.allLayers (flattened
+    // across group layers) plus each layer's sublayers, walked recursively (map image, tile,
+    // WMS, KML). New layers and sublayers are picked up as they arrive. Each row carries the
+    // path, for example "Utilities > Water > Water Mains", so two "Mains" layers stay apart.
+    setupLayerTelemetry(view: any) {
+        this.teardownLayerTelemetry()
+        const map = view && view.map
+        if (!map || !map.allLayers) return
+        const keep = (h: any) => { if (h) this._layerTelHandles.push(h) }
+        const watchSublayers = (coll: any) => {
+            if (!coll || typeof coll.forEach !== 'function') return
+            coll.forEach((sub: any) => watchOne(sub))
+            if (typeof coll.on === 'function') keep(coll.on('change', (e: any) => { (e.added || []).forEach((sub: any) => watchOne(sub)) }))
+        }
+        const watchOne = (lyr: any) => {
+            if (!lyr || typeof lyr.watch !== 'function' || this._layerTelWatched.has(lyr)) return
+            if (this.telemetrySkips(lyr)) return
+            this._layerTelWatched.add(lyr)
+            // Broken layers: a layer whose load fails (bad URL, 403, 404, deleted item, token).
+            if (lyr.declaredClass !== 'esri.layers.support.Sublayer') {
+                if (lyr.loadStatus === 'failed') this.reportBrokenLayer(lyr, lyr.loadError, 'load')
+                else keep(lyr.watch('loadStatus', (st: string) => { if (st === 'failed') this.reportBrokenLayer(lyr, lyr.loadError, 'load') }))
+            }
+            keep(lyr.watch('visible', (v: boolean) => {
+                if (v && this._autoParentOn.has(lyr)) { this._autoParentOn.delete(lyr); return }
+                this.recordLayerEvent(!!v, this.layerPath(lyr))
+            }))
+            // Sublayers exist once the service description has loaded; watch for both.
+            if (lyr.sublayers) watchSublayers(lyr.sublayers)
+            else if (typeof lyr.when === 'function' && lyr.declaredClass !== 'esri.layers.support.Sublayer') {
+                lyr.when(() => { if (!this._unmounted && lyr.sublayers) watchSublayers(lyr.sublayers) }).catch(() => { /* failed layers have nothing to watch */ })
+            }
+            if (lyr.declaredClass === 'esri.layers.support.Sublayer' && typeof lyr.watch === 'function') {
+                keep(lyr.watch('sublayers', (coll: any) => watchSublayers(coll)))
+            }
+        }
+        map.allLayers.forEach((l: any) => watchOne(l))
+        keep(map.allLayers.on('change', (e: any) => { (e.added || []).forEach((l: any) => watchOne(l)) }))
+        // A layer that loads but cannot draw (bad renderer, projection, WebGL, missing field).
+        if (typeof view.on === 'function') {
+            keep(view.on('layerview-create-error', (e: any) => { if (e && e.layer && !this.telemetrySkips(e.layer)) this.reportBrokenLayer(e.layer, e.error, 'draw') }))
+        }
+    }
+
+    // One layer-broken row per layer per page load: "Group > Layer | reason". The reason is a
+    // short category and HTTP status, never the raw message (which can carry URLs or tokens).
+    reportBrokenLayer(lyr: any, err: any, stage: 'load' | 'draw' | 'missing') {
+        if (!this.beacon || this.props.config?.reportBrokenLayers === false) return
+        const path = this.layerPath(lyr)
+        if (!path || this._brokenReported.has(path)) return
+        this._brokenReported.add(path)
+        this.beacon.action('layer-broken', `${path} | ${this.brokenReason(err, stage)}`)
+    }
+
+    brokenReason(err: any, stage: 'load' | 'draw' | 'missing'): string {
+        if (stage === 'missing') return 'not in the service any more'
+        const d: any = (err && err.details) || {}
+        const status = Number(d.httpStatus || (d.error && d.error.code) || (d.raw && d.raw.error && d.raw.error.code) || (d.messageCode && 0) || 0)
+        const name = String((err && err.name) || '')
+        const pre = stage === 'draw' ? 'could not draw' : 'could not load'
+        if (status === 401 || status === 403 || status === 498 || status === 499 || /not-authorized|identity-manager/i.test(name)) return `${pre}: not authorized${status ? ` (HTTP ${status})` : ''}`
+        if (status === 404 || /not-found|notfound/i.test(name)) return `${pre}: not found${status ? ' (HTTP 404)' : ''}`
+        if (status >= 500) return `${pre}: server error (HTTP ${status})`
+        if (/timeout/i.test(name) || /timeout/i.test(String((err && err.message) || ''))) return `${pre}: timed out`
+        if (status) return `${pre}: HTTP ${status}`
+        if (name) return `${pre}: ${name.replace(/[^\w:.-]/g, '').slice(0, 60)}`
+        return pre
+    }
+
+    teardownLayerTelemetry() {
+        this._layerTelHandles.forEach((h: any) => { try { h.remove() } catch (e) { /* already gone */ } })
+        this._layerTelHandles = []
+        this._layerTelWatched = new WeakSet()
+    }
+
+    // Layers nobody clicks: basemap layers, hidden ones (listMode hide), the draw layer.
+    telemetrySkips(lyr: any): boolean {
+        if (lyr.listMode === 'hide') return true
+        if (typeof lyr.id === 'string' && (lyr.id.startsWith('jimu-draw') || lyr.id === 'DrawGL')) return true
+        let p: any = lyr.parent
+        for (let i = 0; p && i < 20; i++) {
+            if (p.declaredClass === 'esri.Basemap') return true
+            if (p.declaredClass === 'esri.Map' || p.declaredClass === 'esri.WebMap') return false
+            if (p.listMode === 'hide-children' || p.listMode === 'hide') return false
+            p = p.parent
+        }
+        return false
+    }
+
+    // "Group > Subgroup > Layer" from the layer up to the map (groups and parent sublayers).
+    layerPath(lyr: any): string {
+        const names: string[] = []
+        let cur: any = lyr
+        for (let i = 0; cur && i < 12; i++) {
+            const dc = cur.declaredClass || ''
+            if (dc === 'esri.Map' || dc === 'esri.WebMap' || dc === 'esri.Basemap') break
+            const t = String(cur.title ?? cur.name ?? cur.id ?? '').trim()
+            if (t) names.unshift(t)
+            cur = cur.parent
+        }
+        return names.join(' > ') || String(lyr.title ?? lyr.id ?? '')
+    }
+
+    // Buffers layer visibility changes for 600 ms. A handful become one row each
+    // (layer-on / layer-off with the title); a burst (batch action, saved view, share
+    // link) becomes a single layers-batch row with the counts.
+    recordLayerEvent(on: boolean, title: string) {
+        if (!this.beacon || this._suppressLayerTelemetry) return
+        if (this.props.config?.telemetryLayers === false) return
+        this._layerEvents.push({ on, title: String(title ?? '') })
+        if (this._layerEventTimer) clearTimeout(this._layerEventTimer)
+        this._layerEventTimer = setTimeout(() => { this._layerEventTimer = null; this.flushLayerEvents() }, 600)
+    }
+
+    flushLayerEvents() {
+        const events = this._layerEvents.splice(0, this._layerEvents.length)
+        if (events.length === 0 || !this.beacon) return
+        if (events.length > 5) {
+            const on = events.filter(e => e.on).length
+            this.beacon.action('layers-batch', `${on} on, ${events.length - on} off`)
+            return
+        }
+        for (const e of events) this.beacon.action(e.on ? 'layer-on' : 'layer-off', e.title)
+    }
+
+    // ==================== Layer health (service not answering) ====================
+
+    // Service root url for a layer, or null for layers with nothing to ping (groups, graphics,
+    // the draw layer). Sublayers report their parent service so one request covers them all.
+    healthUrlFor(layer: any): string | null {
+        if (!layer) return null
+        if (layer.declaredClass === 'esri.layers.GroupLayer') return null
+        if (layer.declaredClass === 'esri.layers.support.Sublayer') return this.healthUrlFor(layer.layer)
+        if (typeof layer.id === 'string' && layer.id.startsWith('jimu-draw')) return null
+        // Basemap layers are not in the list; leave them to the basemap switcher.
+        if (layer.parent && layer.parent.declaredClass === 'esri.Basemap') return null
+        const url = layer.url
+        if (typeof url !== 'string' || !/^https?:\/\//i.test(url)) return null
+        return url.replace(/\/+$/, '')
+    }
+
+    startLayerHealth() {
+        this.stopLayerHealth()
+        const config: any = this.props.config || {}
+        if (!config.useMapWidget || !config.enableLayerHealth) return
+        this._healthTimer = setTimeout(() => { this.runLayerHealth() }, 4000)
+    }
+
+    stopLayerHealth() {
+        if (this._healthTimer) {
+            clearTimeout(this._healthTimer)
+            this._healthTimer = null
+        }
+    }
+
+    scheduleNextHealth() {
+        this.stopLayerHealth()
+        if (this._unmounted) return
+        const config: any = this.props.config || {}
+        if (!config.enableLayerHealth) return
+        const minutes = Math.max(1, Math.min(120, Number(config.layerHealthMinutes) || 5))
+        this._healthTimer = setTimeout(() => { this.runLayerHealth() }, minutes * 60000)
+    }
+
+    // Asks every distinct service behind the list for its JSON description (esri/request, so
+    // the app's sign-in and proxy rules apply and the CityMap fetch shim is bypassed). A
+    // service that errors or times out is "not answering": its layers get a note in the list
+    // and the outage is reported once. Recovery clears the note and is reported too.
+    async runLayerHealth() {
+        if (this._healthRunning || this._unmounted) return
+        this._healthRunning = true
+        try {
+            if (!this._esriRequest) {
+                const mods = await loadArcGISJSAPIModules(['esri/request'])
+                this._esriRequest = mods[0]
+            }
+            const view = this.viewFromMapWidget || this.jmvFromMap?.view
+            const allLayers = view?.map?.allLayers
+            if (!allLayers || this._unmounted) return
+            const byUrl: Map<string, any[]> = new Map()
+            allLayers.forEach((layer: any) => {
+                const url = this.healthUrlFor(layer)
+                if (!url) return
+                if (!byUrl.has(url)) byUrl.set(url, [])
+                byUrl.get(url).push(layer)
+            })
+            const urls = Array.from(byUrl.keys())
+            const batch = 4
+            for (let i = 0; i < urls.length && !this._unmounted; i += batch) {
+                await Promise.all(urls.slice(i, i + batch).map(async (url: string) => {
+                    let ok = true
+                    try {
+                        const res = await this._esriRequest(url, { query: { f: 'json' }, responseType: 'json', timeout: 10000 })
+                        if (!res || !res.data || res.data.error) ok = false
+                        // The service answers but a sublayer the map uses is gone from it.
+                        else if (Array.isArray(res.data.layers)) {
+                            const ids = new Set(res.data.layers.map((x: any) => Number(x.id)))
+                            ;(byUrl.get(url) || []).forEach((lyr: any) => {
+                                const subs = lyr.allSublayers || lyr.sublayers
+                                if (subs && typeof subs.forEach === 'function' && lyr.declaredClass !== 'esri.layers.support.Sublayer') {
+                                    subs.forEach((sub: any) => { if (sub && typeof sub.id === 'number' && !ids.has(sub.id)) this.reportBrokenLayer(sub, null, 'missing') })
+                                }
+                            })
+                        }
+                    } catch (e) { ok = false }
+                    const wasDown = this._serviceDown.get(url) === true
+                    if (!ok && !wasDown) {
+                        this._serviceDown.set(url, true)
+                        this.beacon?.action('layer-unreachable', String(byUrl.get(url)[0]?.title ?? url))
+                    } else if (ok && wasDown) {
+                        this._serviceDown.delete(url)
+                        this.beacon?.action('layer-recovered', String(byUrl.get(url)[0]?.title ?? url))
+                    }
+                }))
+            }
+            this.refreshHealthMarks()
+        } catch (e) {
+            this.beacon?.error(e, 'layer-health')
+        } finally {
+            this._healthRunning = false
+            this.scheduleNextHealth()
+        }
+    }
+
+    refreshHealthMarks() {
+        this.refreshAllTitles()
+    }
+
+    // ==================== List titles (clean names, favorite star, health note) ====================
+
+    // The name shown for a layer: the web map title, cleaned when the builder asked for it.
+    // The layer's own title is never changed.
+    displayTitle(layer: any): string {
+        const config: any = this.props.config || {}
+        return cleanTitle(String(layer?.title ?? ''), {
+            clean: !!config.cleanLayerNames,
+            prefix: config.cleanNamePrefix || '',
+            titleCase: !!config.cleanNameTitleCase
+        })
+    }
+
+    // Sets a list item's title from the display name plus its marks. Safe to call often:
+    // it only writes when the value changes, so the LayerList does not re-render for nothing.
+    refreshItemTitle(listItem: any) {
+        const layer: any = listItem?.layer
+        if (!layer) return
+        const config: any = this.props.config || {}
+        const url = this.healthUrlFor(layer)
+        const down = !!config.enableLayerHealth && !!url && this._serviceDown.get(url) === true
+        const fav = !!config.enableFavorites && layer.declaredClass !== 'esri.layers.GroupLayer' && isFavorite(this.props.id, layer.id)
+        const next = decorateTitle(this.displayTitle(layer), { favorite: fav, unavailable: down ? this.translate('layerUnavailable') : undefined })
+        try { if (listItem.title !== next) listItem.title = next } catch (e) { /* title not settable on this item */ }
+    }
+
+    refreshAllTitles() {
+        const list: any = this.layerListRef && this.layerListRef.current
+        if (!list || !list.operationalItems) return
+        const walk = (items: any) => {
+            const arr = items.toArray ? items.toArray() : items
+            for (const item of arr) {
+                if (!item) continue
+                this.refreshItemTitle(item)
+                if (item.children && item.children.length > 0) walk(item.children)
+            }
+        }
+        walk(list.operationalItems)
+    }
+
+    // ==================== Pick one layer per group (radio buttons) ====================
+
+    // The group jimuLayerViewIds configured for the active map view, or an empty
+    // set when the option is off. Same check the settings panel and the help
+    // guide use, so the three never disagree.
+    pickOneGroupIdSet(): Set<string> {
+        const config: any = this.props.config || {}
+        if (!config.useMapWidget || !config.enablePickOneGroups) return new Set<string>()
+        const ids = config.pickOneGroupIds?.[this.state.jimuMapViewId]
+        return new Set<string>(ids ? Array.from(ids) as string[] : [])
+    }
+
+    // Walks the map and puts every configured GroupLayer into the SDK's
+    // exclusive visibility mode (one child on at a time). Before flipping the
+    // mode, trims the group to a single visible child (the one highest in the
+    // list) so the SDK never sees two radio buttons on. Groups that were
+    // switched by an earlier apply but are no longer configured go back to
+    // their original mode.
+    applyPickOneGroups() {
+        const wanted = this.pickOneGroupIdSet()
+        this.restorePickOneGroups(wanted)
+        if (wanted.size === 0) return
+        const jmv = this.jimuMapView
+        const view = this.viewFromMapWidget || jmv?.view
+        const map = view && view.map
+        if (!jmv || !map || !map.layers) return
+
+        const visit = (layers: any) => {
+            if (!layers) return
+            const arr: any[] = layers.toArray ? layers.toArray() : (Array.isArray(layers) ? layers : [])
+            for (const layer of arr) {
+                if (!layer) continue
+                if (layer.declaredClass === 'esri.layers.GroupLayer') {
+                    let jlvId: string = null
+                    try { jlvId = jmv.getJimuLayerViewIdByAPILayer(layer) } catch (e) { /* unresolved */ }
+                    if (jlvId && wanted.has(jlvId)) {
+                        try {
+                            if (!this._pickOneOriginalModes.has(layer)) {
+                                this._pickOneOriginalModes.set(layer, layer.visibilityMode || 'independent')
+                            }
+                            this.trimToOneVisibleChild(layer)
+                            if (layer.visibilityMode !== 'exclusive') layer.visibilityMode = 'exclusive'
+                        } catch (e) { /* some layers refuse the mode; leave them */ }
+                    }
+                    visit(layer.layers)
+                }
+            }
+        }
+        visit(map.layers)
+    }
+
+    // Leaves at most one child visible in a group: the topmost in the list
+    // (the last one in the collection, since the list draws in reverse order).
+    trimToOneVisibleChild(group: any) {
+        const children: any[] = group?.layers?.toArray ? group.layers.toArray() : []
+        let keep: any = null
+        for (let i = children.length - 1; i >= 0; i--) {
+            const child = children[i]
+            if (child && child.visible === true) { keep = child; break }
+        }
+        if (!keep) return
+        for (const child of children) {
+            if (child && child !== keep && child.visible === true) {
+                try { child.visible = false } catch (e) { /* noop */ }
+            }
+        }
+    }
+
+    // Puts back the original visibilityMode on every group this widget changed
+    // that is not in `keep`. Called with an empty set on unmount.
+    restorePickOneGroups(keep: Set<string>) {
+        if (!this._pickOneOriginalModes || this._pickOneOriginalModes.size === 0) return
+        const jmv = this.jimuMapView
+        this._pickOneOriginalModes.forEach((mode: string, layer: any) => {
+            let jlvId: string = null
+            try { jlvId = jmv ? jmv.getJimuLayerViewIdByAPILayer(layer) : null } catch (e) { /* unresolved */ }
+            if (jlvId && keep.has(jlvId)) return
+            try { if (layer && !layer.destroyed) layer.visibilityMode = mode } catch (e) { /* noop */ }
+            this._pickOneOriginalModes.delete(layer)
+        })
     }
 
     // Watches the map's top-level layer collection. When a layer is added there
@@ -690,6 +1155,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             // service layer's visibility anyway.
             const isSublayer = parent.declaredClass === 'esri.layers.support.Sublayer'
             if (!isSublayer && typeof parent.visible === 'boolean' && parent.visible !== true) {
+                this._autoParentOn.add(parent)
                 try { parent.visible = true } catch (e) { /* some layers are not toggleable */ }
             }
             parent = parent.parent;
@@ -806,6 +1272,9 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                     try { listItem.open = this._spotlightOpenBackup.get(k) } catch (e) { /* noop */ }
                 }
             }
+
+            // Display name plus marks (favorite star, service note) survive list rebuilds.
+            if (!isTableList && listItem.layer) this.refreshItemTitle(listItem)
 
             if (!isTableList && this.props.config?.useMapWidget && this.props.config?.enableLegend && listItem.layer.legendEnabled) {
                 if (typeof listItem.layer?.id !== 'string' || !listItem.layer.id.startsWith('jimu-draw')) {
@@ -1022,6 +1491,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             jimuMapView.addJimuLayerViewCreatedListener(this._addJlvCreatedListener)
 
             this.viewFromMapWidget = jimuMapView && jimuMapView.view
+            this.setupLayerTelemetry(this.viewFromMapWidget)
             this.setState({
                 nativeActionPopper: null
             }, function afterPopperClose() {
@@ -1310,6 +1780,17 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                             enableMasterOpacity={this.props.config?.enableMasterOpacity ?? false}
                             enableBasemapSwitcher={this.props.config?.enableBasemapSwitcher ?? false}
                             enableLegendPanel={this.props.config?.enableLegendPanel ?? false}
+                            enableShareLink={this.props.config?.enableShareLink ?? false}
+                            onLinkCopied={() => { this.beacon?.action('copy-share-link') }}
+                            searchDescriptions={this.props.config?.searchLayerDescriptions ?? false}
+                            enableLayerCsv={this.props.config?.enableLayerCsv ?? false}
+                            onCsvExported={() => { this.beacon?.action('export-layer-csv') }}
+                            enableFavorites={this.props.config?.enableFavorites ?? false}
+                            enableImagery={this.props.config?.enableImageryIndex ?? false}
+                            imageryIndexUrl={this.props.config?.imageryIndexUrl}
+                            onImageryAdded={(name: string) => { this.beacon?.action('add-imagery', name) }}
+                            presets={this.currentPresets()}
+                            onApplyPreset={(name: string) => { this.beacon?.action('apply-preset', name) }}
                             onHelp={this.props.config?.showHelp !== false ? this.openHelp : undefined}
                             helpLabel={this.t('helpTitle')}
                         ></MapLayersHeader>

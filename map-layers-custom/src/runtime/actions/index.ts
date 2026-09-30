@@ -11,6 +11,8 @@ import Flash from './flash'
 import CopyUrl from './copy-url'
 import Refresh from './refresh'
 import LayerDetails from './layer-details'
+import ZoomToScale from './zoom-to-scale'
+import Favorite from './favorite'
 import Spotlight from './spotlight'
 import ClearSpotlight from './clear-spotlight'
 import MoveToTop from './move-to-top'
@@ -71,6 +73,15 @@ export function getLayerListActions (widget) {
     new LayerDetails(
       widget,
       translate('layerDetails')
+    ),
+    new ZoomToScale(
+      widget,
+      translate('zoomToScale')
+    ),
+    new Favorite(
+      widget,
+      translate('favoriteAdd'),
+      translate('favoriteRemove')
     ),
     new Spotlight(
       widget,

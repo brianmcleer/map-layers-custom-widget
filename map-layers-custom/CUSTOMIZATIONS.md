@@ -51,6 +51,22 @@ operational features. All additions are behind config switches and default to
 | `collapsibleList` | boolean | off | Adds the collapse/expand control |
 | `startCollapsed` | boolean | off | List starts collapsed (needs `collapsibleList`) |
 | `filterPlaceholder` | string | "" | Custom filter box placeholder (falls back to localized default) |
+| `enablePickOneGroups` | boolean | off | Pick one layer per group: configured groups run in exclusive visibility (radio buttons with tick boxes on) |
+| `pickOneGroupIds` | object | {} | Group jimuLayerViewIds per map view that run in pick-one mode (added 1.40.0) |
+| `enableShareLink` | boolean | off | "Copy link to these layers" in batch options; `?mlc=` read on load (1.41.0) |
+| `telemetryLayers` | boolean | on | Layer on/off clicks in usage telemetry, title only (1.41.0) |
+| `searchLayerDescriptions` | boolean | off | Search box also matches descriptions and tags (1.42.0) |
+| `enableLayerCsv` | boolean | off | "Export layer list (CSV)" in batch options (1.42.0) |
+| `enableLayerHealth` | boolean | off | Timer check of layer services, "(service not answering)" mark (1.42.0) |
+| `layerHealthMinutes` | number | 5 | Minutes between health checks, 1 to 120 (1.42.0) |
+| `presetViews` | object | {} | Builder-authored presets per map view: `{ id, name, layerIds[] }` (1.43.0) |
+| `enableImageryIndex` | boolean | off | Imagery nearby tab in Add layer (1.44.0) |
+| `imageryIndexUrl` | string | "" | Index URL; blank uses osmlab.github.io (1.44.0) |
+| `cleanLayerNames` | boolean | off | Underscores to spaces in list titles (1.44.0) |
+| `cleanNamePrefix` | string | "" | Regex prefix stripped from list titles (1.44.0) |
+| `cleanNameTitleCase` | boolean | off | Title Case list titles (1.44.0) |
+| `enableFavorites` | boolean | off | Star layers, favorites-only filter (1.44.0) |
+| `toolZoomToScale` | boolean | on | "Zoom until visible" extra tool (1.44.0) |
 
 ## Files touched
 `src/config.ts`, `src/runtime/actions/constants.ts`, `src/runtime/actions/solo.ts` (new),

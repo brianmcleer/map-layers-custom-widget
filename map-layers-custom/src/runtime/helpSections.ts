@@ -20,6 +20,8 @@ export interface HelpFeatures {
   layerCount: boolean
   collapsible: boolean
   savedViews: boolean
+  /* builder-authored presets exist for this map view */
+  presetViews: boolean
   addLayer: boolean
   masterOpacity: boolean
   basemapSwitcher: boolean
@@ -33,6 +35,22 @@ export interface HelpFeatures {
   information: boolean
   changeSymbol: boolean
   solo: boolean
+  /* at least one group in this map view runs in pick-one (radio button) mode */
+  pickOne: boolean
+  /* batch options menu has Copy link to these layers */
+  shareLink: boolean
+  /* search box also reads descriptions and tags */
+  searchDeep: boolean
+  /* batch options menu has Export layer list (CSV) */
+  layerCsv: boolean
+  /* services are checked on a timer and marked when they do not answer */
+  layerHealth: boolean
+  /* star layers and filter to them */
+  favorites: boolean
+  /* Add layer has the Imagery nearby tab */
+  imagery: boolean
+  /* Zoom until visible tool */
+  zoomToScale: boolean
   flash: boolean
   copyUrl: boolean
   refresh: boolean
@@ -56,6 +74,7 @@ export interface HelpLabels {
   expandAllLayers: string
   collapseAllLayers: string
   savedViews: string
+  presetViews: string
   saveCurrentView: string
   save: string
   exportViews: string
@@ -87,6 +106,14 @@ export interface HelpLabels {
   moveToBottom: string
   moveOutOfGroup: string
   remove: string
+  copyLayerLink: string
+  exportLayerCsv: string
+  layerUnavailable: string
+  favoriteAdd: string
+  favoriteRemove: string
+  showFavoritesOnly: string
+  imageryTab: string
+  zoomToScale: string
 }
 
 type T = (id: string, values?: Record<string, string>) => string
@@ -111,6 +138,8 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
     ...(f.copyUrl ? [t('helpMenuCopyUrl', { copyUrl: L.copyUrl })] : []),
     ...(f.refresh ? [t('helpMenuRefresh', { refreshLayer: L.refreshLayer })] : []),
     ...(f.details ? [t('helpMenuDetails', { layerDetails: L.layerDetails })] : []),
+    ...(f.zoomToScale ? [t('helpMenuZoomScale', { zoomToScale: L.zoomToScale })] : []),
+    ...(f.favorites ? [t('helpMenuFavorite', { favoriteAdd: L.favoriteAdd, favoriteRemove: L.favoriteRemove })] : []),
     ...(f.spotlight ? [t('helpMenuSpotlight', { spotlight: L.spotlight, clearSpotlight: L.clearSpotlight })] : []),
     ...(f.move ? [t('helpMenuMove', { moveToTop: L.moveToTop, moveToBottom: L.moveToBottom, moveOutOfGroup: L.moveOutOfGroup })] : []),
     ...(f.addLayer ? [t('helpMenuRemove', { remove: L.remove })] : [])
@@ -138,13 +167,15 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
           t('helpBatchTurnOn', { turnOnAllLayers: L.turnOnAllLayers, turnOffAllLayers: L.turnOffAllLayers }),
           t('helpBatchReset', { resetVisibility: L.resetVisibility }),
           t('helpBatchZoom', { zoomToVisible: L.zoomToVisible }),
-          t('helpBatchExport', { exportMapImage: L.exportMapImage })
+          t('helpBatchExport', { exportMapImage: L.exportMapImage }),
+          ...(f.shareLink ? [t('helpBatchLink', { copyLayerLink: L.copyLayerLink })] : []),
+          ...(f.layerCsv ? [t('helpBatchCsv', { exportLayerCsv: L.exportLayerCsv })] : [])
         ]
       : []),
     t('helpBatchExpand', { expandAllLayers: L.expandAllLayers, collapseAllLayers: L.collapseAllLayers })
   ])
 
-  const anyHeader = f.batch || f.savedViews || f.addLayer || f.masterOpacity || f.basemapSwitcher || f.legendPanel || f.collapsible
+  const anyHeader = f.batch || f.savedViews || f.presetViews || f.addLayer || f.masterOpacity || f.basemapSwitcher || f.legendPanel || f.collapsible
 
   const sections: HelpSection[] = [
     {
@@ -165,11 +196,13 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       body: [
         f.tickBoxes ? t('helpLayersTick') : t('helpLayersEye'),
         t('helpLayersGroups'),
+        ...when(f.pickOne, f.tickBoxes ? 'helpLayersPickOneTick' : 'helpLayersPickOneEye'),
         f.autoShowParents ? t('helpLayersParentOn') : t('helpLayersParentOff'),
         ...when(f.layerCount, 'helpLayersCount'),
         ...when(f.layerLegend, 'helpLayersLegend'),
         ...when(f.reorder, 'helpLayersReorder'),
         ...(f.tables ? [t('helpLayersTables', { tables: L.tables })] : []),
+        ...(f.layerHealth ? [t('helpLayersHealth', { layerUnavailable: L.layerUnavailable })] : []),
         ...when(f.collapsible, 'helpLayersCollapse')
       ]
     }
@@ -182,10 +215,12 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       title: t('helpFindTitle'),
       body: [
         t('helpFindType'),
+        ...when(f.searchDeep, 'helpFindDeep'),
         t('helpFindCount'),
         t('helpFindClear'),
         t('helpFindButton'),
-        ...(f.batch && f.mapMode ? [t('helpFindVisibleOnly', { batchOptions: L.batchOptions, showVisibleOnly: L.showVisibleOnly, showAllLayers: L.showAllLayers })] : [])
+        ...(f.batch && f.mapMode ? [t('helpFindVisibleOnly', { batchOptions: L.batchOptions, showVisibleOnly: L.showVisibleOnly, showAllLayers: L.showAllLayers })] : []),
+        ...(f.batch && f.mapMode && f.favorites ? [t('helpFindFavorites', { batchOptions: L.batchOptions, showFavoritesOnly: L.showFavoritesOnly, showAllLayers: L.showAllLayers })] : [])
       ]
     })
   }
@@ -208,7 +243,7 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       intro: t('helpBarIntro'),
       body: [
         ...(f.batch ? [t('helpBarBatch', { batchOptions: L.batchOptions, batchItems })] : []),
-        ...(f.savedViews ? [t('helpBarViews', { savedViews: L.savedViews })] : []),
+        ...(f.savedViews ? [t('helpBarViews', { savedViews: L.savedViews })] : (f.presetViews ? [t('helpBarPresets', { savedViews: L.savedViews })] : [])),
         ...(f.addLayer ? [t('helpBarAdd', { addLayer: L.addLayer })] : []),
         ...(f.masterOpacity ? [t('helpBarOpacity', { masterOpacity: L.masterOpacity })] : []),
         ...(f.basemapSwitcher ? [t('helpBarBasemap', { basemap: L.basemap })] : []),
@@ -218,17 +253,22 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
     })
   }
 
-  if (f.savedViews) {
+  if (f.savedViews || f.presetViews) {
     sections.push({
       key: 'views',
       icon: 'bookmark',
       title: t('helpViewsTitle'),
       intro: t('helpViewsIntro'),
       body: [
-        t('helpViews1', { saveCurrentView: L.saveCurrentView, save: L.save }),
-        t('helpViews2'),
-        t('helpViews3'),
-        t('helpViews4', { exportViews: L.exportViews, importViews: L.importViews })
+        ...(f.presetViews ? [t('helpViewsPresets', { presetViews: L.presetViews })] : []),
+        ...(f.savedViews
+          ? [
+              t('helpViews1', { saveCurrentView: L.saveCurrentView, save: L.save }),
+              t('helpViews2'),
+              t('helpViews3'),
+              t('helpViews4', { exportViews: L.exportViews, importViews: L.importViews })
+            ]
+          : [])
       ]
     })
   }
@@ -242,12 +282,13 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       body: [
         t('helpAdd1', { addLayerSubmit: L.addLayerSubmit }),
         t('helpAdd2'),
+        ...(f.imagery ? [t('helpAddImagery', { imageryTab: L.imageryTab })] : []),
         t('helpAdd3')
       ]
     })
   }
 
-  if (f.savedViews || f.addLayer) {
+  if (f.savedViews || f.addLayer || (f.shareLink && f.batch && f.mapMode)) {
     sections.push({
       key: 'keep',
       icon: 'folder',
@@ -255,6 +296,7 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       body: [
         ...when(f.savedViews, 'helpKeepViews', 'helpKeepViewsClear'),
         ...when(f.addLayer, 'helpKeepAdded'),
+        ...when(f.shareLink && f.batch && f.mapMode, 'helpKeepLink'),
         t('helpKeepTicks')
       ]
     })
@@ -267,9 +309,13 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
     body: [
       t('helpTroubleGrey'),
       ...when(!f.autoShowParents, 'helpTroubleGroupOff'),
+      ...when(f.pickOne, 'helpTroublePickOne'),
       ...when(f.search, 'helpTroubleNoMatches'),
       ...(f.addLayer ? [t('helpTroubleAdd', { addLayerError: L.addLayerError })] : []),
       ...when(f.spotlight, 'helpTroubleFocus'),
+      ...when(f.shareLink && f.batch && f.mapMode, 'helpTroubleLink'),
+      ...(f.layerHealth ? [t('helpTroubleHealth', { layerUnavailable: L.layerUnavailable })] : []),
+      ...(f.addLayer && f.imagery ? [t('helpTroubleImagery', { imageryTab: L.imageryTab })] : []),
       ...(f.batch && f.mapMode ? [t('helpTroubleReset', { batchOptions: L.batchOptions, resetVisibility: L.resetVisibility })] : []),
       t('helpTroubleReload'),
       t('helpTroubleContact')
@@ -285,7 +331,8 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       ...(f.solo ? [t('helpTipsSolo', { soloLayer: L.soloLayer })] : []),
       ...(f.batch && f.mapMode ? [t('helpTipsExport', { exportMapImage: L.exportMapImage, batchOptions: L.batchOptions })] : []),
       ...when(f.savedViews, 'helpTipsViews'),
-      ...(f.transparency ? [t('helpTipsOpacity', { transparency: L.transparency })] : [])
+      ...(f.transparency ? [t('helpTipsOpacity', { transparency: L.transparency })] : []),
+      ...(f.shareLink && f.batch && f.mapMode ? [t('helpTipsLink', { copyLayerLink: L.copyLayerLink })] : [])
     ]
   })
 

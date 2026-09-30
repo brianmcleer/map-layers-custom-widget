@@ -48,6 +48,12 @@ const buildParentMap = (map: any): Map<any, any> => {
   return pm
 }
 
+export interface PresetViewProp {
+  id: string
+  name: string
+  layerIds: string[]
+}
+
 interface LayerViewsProps {
   theme: IMThemeVariables
   widgetId: string
@@ -55,6 +61,11 @@ interface LayerViewsProps {
   viewFromMapWidget?: any
   autoShowParents?: boolean
   layerListRef?: { current: any }
+  // Builder-authored presets, listed first and read-only.
+  presets?: PresetViewProp[]
+  // False hides the user's own views (save, delete, import, export) and shows presets only.
+  allowUserViews?: boolean
+  onApplyPreset?: (name: string) => void
 }
 
 const { useState, useCallback, useEffect, useRef } = React
@@ -109,7 +120,7 @@ const BookmarkGlyph = () => (
 )
 
 export default function LayerViews (props: LayerViewsProps) {
-  const { theme, widgetId, jimuMapViewId, viewFromMapWidget, autoShowParents = true, layerListRef } = props
+  const { theme, widgetId, jimuMapViewId, viewFromMapWidget, autoShowParents = true, layerListRef, presets = [], allowUserViews = true, onApplyPreset } = props
   const translate = hooks.useTranslation(message)
 
   const [views, setViews] = useState<SavedView[]>([])
@@ -307,6 +318,23 @@ export default function LayerViews (props: LayerViewsProps) {
     setTimeout(openAncestors, 350)
   }, [resolveView, autoShowParents, layerListRef])
 
+  // A preset names the switchable layers that are on; every other switchable layer goes off.
+  // Uses the legacy flat apply, which walks map.allLayers and turns parent groups on.
+  const applyPreset = useCallback((preset: PresetViewProp) => {
+    const v = resolveView()
+    const allLayers: any = v?.map?.allLayers
+    if (!allLayers) return
+    const wanted = new Set<string>(preset.layerIds || [])
+    const state: { [layerId: string]: boolean } = {}
+    allLayers.forEach((layer: any) => {
+      if (!layer || layer.id == null || typeof layer.visible !== 'boolean') return
+      if (layer.listMode === 'hide' || layer.declaredClass === 'esri.layers.GroupLayer') return
+      state[layer.id] = wanted.has(String(layer.id))
+    })
+    applyLegacy(state)
+    onApplyPreset && onApplyPreset(preset.name)
+  }, [resolveView, applyLegacy, onApplyPreset])
+
   const applyView = useCallback((view: SavedView) => {
     if (!view || !view.state) return
     if (Array.isArray(view.state)) {
@@ -429,12 +457,23 @@ export default function LayerViews (props: LayerViewsProps) {
           </DropdownButton>
         </Tooltip>
         <DropdownMenu>
-          <DropdownItem onClick={beginSave}>{translate('saveCurrentView')}</DropdownItem>
-          <DropdownItem divider></DropdownItem>
-          {views.length === 0 &&
+          {presets.length > 0 &&
+            <React.Fragment>
+              <div className='lv-empty'>{translate('presetViews')}</div>
+              {presets.map(preset => (
+                <DropdownItem key={preset.id} onClick={() => { applyPreset(preset) }} title={`${translate('applyView')}: ${preset.name}`}>
+                  <div className='lv-view-row'><span className='lv-view-name'>{preset.name}</span></div>
+                </DropdownItem>
+              ))}
+              {allowUserViews && <DropdownItem divider></DropdownItem>}
+            </React.Fragment>
+          }
+          {allowUserViews && <DropdownItem onClick={beginSave}>{translate('saveCurrentView')}</DropdownItem>}
+          {allowUserViews && <DropdownItem divider></DropdownItem>}
+          {allowUserViews && views.length === 0 &&
             <div className='lv-empty'>{translate('noSavedViews')}</div>
           }
-          {views.map(view => (
+          {allowUserViews && views.map(view => (
             <DropdownItem key={view.id} onClick={() => { applyView(view) }} title={`${translate('applyView')}: ${view.name}`}>
               <div className='lv-view-row'>
                 <span className='lv-view-name'>{view.name}</span>
@@ -451,11 +490,11 @@ export default function LayerViews (props: LayerViewsProps) {
               </div>
             </DropdownItem>
           ))}
-          <DropdownItem divider></DropdownItem>
-          {views.length > 0 &&
+          {allowUserViews && <DropdownItem divider></DropdownItem>}
+          {allowUserViews && views.length > 0 &&
             <DropdownItem onClick={exportViews}>{translate('exportViews')}</DropdownItem>
           }
-          <DropdownItem onClick={triggerImport}>{translate('importViews')}</DropdownItem>
+          {allowUserViews && <DropdownItem onClick={triggerImport}>{translate('importViews')}</DropdownItem>}
         </DropdownMenu>
       </Dropdown>
       <input

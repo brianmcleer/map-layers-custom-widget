@@ -88,6 +88,22 @@ export function getStyle (theme: IMThemeVariables): SerializedStyles {
       .auto-include-section .auto-include-row {
         margin-bottom: 4px;
       }
+      .auto-include-section .preset-row {
+        padding: 6px 0;
+        border-bottom: 1px solid ${theme.sys.color.divider.secondary};
+      }
+      .auto-include-section .preset-row-meta {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2px;
+        margin-top: 4px;
+        font-size: ${polished.rem(12)};
+      }
+      .auto-include-section .preset-row-count {
+        margin-right: auto;
+        color: ${theme.ref.palette.neutral[900]};
+      }
       .auto-include-section .auto-include-empty {
         font-size: ${polished.rem(12)};
         color: ${theme.ref.palette.neutral[900]};

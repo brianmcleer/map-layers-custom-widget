@@ -38,12 +38,13 @@ const t = (id, values) => {
 
 const LABEL_KEYS = [
   'tables', 'batchOptions', 'turnOnAllLayers', 'turnOffAllLayers', 'resetVisibility', 'zoomToVisible',
-  'exportMapImage', 'showVisibleOnly', 'showAllLayers', 'expandAllLayers', 'collapseAllLayers', 'savedViews',
+  'exportMapImage', 'showVisibleOnly', 'showAllLayers', 'expandAllLayers', 'collapseAllLayers', 'savedViews', 'presetViews',
   'saveCurrentView', 'save', 'exportViews', 'importViews', 'addLayer', 'addLayerTitle', 'addLayerSubmit',
   'addLayerError', 'masterOpacity', 'basemap', 'legend', 'goto', 'showLabels', 'hideLabels', 'enablePopup',
   'disablePopup', 'transparency', 'visibilityRange', 'information', 'changeSymbol', 'soloLayer', 'flashLayer',
   'copyUrl', 'refreshLayer', 'layerDetails', 'spotlight', 'clearSpotlight', 'moveToTop', 'moveToBottom',
-  'moveOutOfGroup', 'remove'
+  'moveOutOfGroup', 'remove', 'copyLayerLink', 'exportLayerCsv', 'layerUnavailable', 'favoriteAdd', 'favoriteRemove',
+  'showFavoritesOnly', 'imageryTab', 'zoomToScale'
 ]
 /* Strings that come from jimu-ui's shared messages at runtime, not this widget's file. */
 const JIMU_LABELS = {
@@ -56,9 +57,9 @@ LABEL_KEYS.forEach((k) => { labelsText[k] = messages[k] ?? JIMU_LABELS[k]; asser
 
 const FLAGS = [
   'mapMode', 'tickBoxes', 'autoShowParents', 'reorder', 'layerLegend', 'tables', 'search', 'batch', 'layerCount',
-  'collapsible', 'savedViews', 'addLayer', 'masterOpacity', 'basemapSwitcher', 'legendPanel', 'goto', 'labels',
-  'popup', 'transparency', 'visibilityRange', 'information', 'changeSymbol', 'solo', 'flash', 'copyUrl', 'refresh',
-  'details', 'spotlight', 'move'
+  'collapsible', 'savedViews', 'presetViews', 'addLayer', 'masterOpacity', 'basemapSwitcher', 'legendPanel', 'goto', 'labels',
+  'popup', 'transparency', 'visibilityRange', 'information', 'changeSymbol', 'solo', 'pickOne', 'shareLink', 'searchDeep', 'layerCsv', 'layerHealth', 'favorites', 'imagery', 'zoomToScale', 'flash', 'copyUrl',
+  'refresh', 'details', 'spotlight', 'move'
 ]
 const features = (on, overrides = {}) => {
   const f = { labelsText }
@@ -115,7 +116,7 @@ test('feature gating: sections appear with their flag and vanish without it', ()
   }
   for (const [flag, key] of Object.entries(expect)) {
     const on = buildHelpSections(t, features(false, { [flag]: true, mapMode: true }))
-    const off = buildHelpSections(t, features(true, { [flag]: false }))
+    const off = buildHelpSections(t, features(true, { [flag]: false, presetViews: false }))
     assert.ok(on.some((s) => s.key === key), `${key} missing with ${flag} on`)
     assert.ok(!off.some((s) => s.key === key), `${key} present with ${flag} off`)
   }
@@ -137,14 +138,25 @@ test('feature gating: the words for an off feature are absent from the whole gui
     spotlight: labelsText.spotlight, move: labelsText.moveToTop, goto: 'moves the map to where the layer is', labels: labelsText.showLabels,
     popup: labelsText.enablePopup, visibilityRange: labelsText.visibilityRange, information: labelsText.information,
     changeSymbol: labelsText.changeSymbol, tables: labelsText.tables, layerCount: 'badge', reorder: 'Drag a layer up or down',
-    search: 'funnel', batch: labelsText.batchOptions
+    search: 'funnel', batch: labelsText.batchOptions, pickOne: 'one layer at a time',
+    shareLink: labelsText.copyLayerLink, searchDeep: 'description and tags', layerCsv: labelsText.exportLayerCsv,
+    layerHealth: labelsText.layerUnavailable, presetViews: 'came with the app', favorites: labelsText.favoriteAdd,
+    imagery: labelsText.imageryTab, zoomToScale: labelsText.zoomToScale
   }
   for (const [flag, word] of Object.entries(wordFor)) {
-    const txt = textOf(buildHelpSections(t, features(true, { [flag]: false })))
+    const txt = textOf(buildHelpSections(t, features(true, { [flag]: false, ...(flag === 'savedViews' ? { presetViews: false } : {}) })))
     assert.ok(!txt.includes(word), `"${word}" still in the guide with ${flag} off`)
     const txtOn = textOf(buildHelpSections(t, allOn))
     assert.ok(txtOn.includes(word), `"${word}" missing from the guide with everything on`)
   }
+})
+
+test('pick-one wording follows the tick box setting', () => {
+  const tick = textOf(buildHelpSections(t, features(true, { pickOne: true, tickBoxes: true })))
+  const eye = textOf(buildHelpSections(t, features(true, { pickOne: true, tickBoxes: false })))
+  assert.ok(tick.includes('round button'))
+  assert.ok(!eye.includes('round button'))
+  assert.ok(eye.includes('one layer at a time'))
 })
 
 test('map-widget-only controls stay out of the guide in data-source mode', () => {
