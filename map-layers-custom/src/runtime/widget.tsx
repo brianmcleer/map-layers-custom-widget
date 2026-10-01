@@ -81,7 +81,7 @@ interface ExtraProps {
     resourceSessions: ImmutableObject<ResourceSessions>
 }
 
-export class Widget extends React.PureComponent<WidgetProps & ExtraProps, WidgetState> {
+export class Widget extends React.PureComponent<any, WidgetState> {
     // Type-only declarations for Visual Studio under the EB 1.21 pnpm layout.
     // They restore the React instance members when VS fails to follow React's
     // inherited type declarations. `declare` fields emit no JavaScript.
