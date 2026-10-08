@@ -249,5 +249,19 @@ export default {
   helpTipsExport: '{exportMapImage} in the {batchOptions} menu gives you a picture to paste into a document or email.',
   helpTipsViews: 'Save a view before you start clicking around. Getting back is then one click.',
   helpTipsOpacity: 'Fading a layer with {transparency} often shows more than turning others off.',
-  helpTipsLink: 'Set the layers up once, choose {copyLayerLink}, and paste the link into an email so a colleague opens the same view.'
+  helpTipsLink: 'Set the layers up once, choose {copyLayerLink}, and paste the link into an email so a colleague opens the same view.',
+  addALayerThatAlreadyLives: 'Add a layer that already lives online by pasting its web address. Use this for a hosted service, or for a GeoJSON, CSV, or KML file that is published on the web.',
+  exampleSample: 'Example: {sample}',
+  urlOrItemId: 'URL or item ID',
+  file: 'File',
+  addAFileSavedOnYour: 'Add a file saved on your computer. It is added to the map for this session only — it is not uploaded or saved.',
+  dragAFileFromYourComputer: 'Drag a file from your computer, or click to browse',
+  symbologyAndStructureAreKeptWhere: 'Symbology and structure are kept where supported.',
+  geoJSONCsvKmlOrAZipped: 'GeoJSON, CSV, KML, or a zipped shapefile (.zip)',
+  removeFile: 'Remove file',
+  mapContainer: 'mapContainer',
+  restoringYourLayers: 'Restoring your layers…',
+  showingOnly: 'Showing only',
+  onTheMapEveryOtherLayer: 'on the map. Every other layer is hidden until you exit.',
+  exitFocus: 'Exit focus'
 }

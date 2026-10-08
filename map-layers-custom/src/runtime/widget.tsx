@@ -81,7 +81,7 @@ interface ExtraProps {
     resourceSessions: ImmutableObject<ResourceSessions>
 }
 
-export class Widget extends React.PureComponent<any, WidgetState> {
+export class Widget extends React.PureComponent<WidgetProps & ExtraProps, WidgetState> {
     // Type-only declarations for Visual Studio under the EB 1.21 pnpm layout.
     // They restore the React instance members when VS fails to follow React's
     // inherited type declarations. `declare` fields emit no JavaScript.
@@ -108,6 +108,10 @@ export class Widget extends React.PureComponent<any, WidgetState> {
     private _autoParentOn: WeakSet<any> = new WeakSet()
     // Broken layers already reported this page load (by path), so each is one row.
     private _brokenReported: Set<string> = new Set()
+    // Layer status heartbeat for City Map Beacon (layers-status rows).
+    private _statusTimer: ReturnType<typeof setTimeout> | null = null
+    private _lastStatus = ''
+    private _lastStatusAt = 0
     // Layer health: service url -> false while it is not answering. Timer for the next check.
     private _serviceDown: Map<string, boolean> = new Map<string, boolean>()
     private _healthTimer: ReturnType<typeof setTimeout> | null = null
@@ -213,6 +217,7 @@ export class Widget extends React.PureComponent<any, WidgetState> {
             this._refreshTimer = null
         }
         this.stopLayerHealth()
+        this.stopLayerStatus()
         this.teardownLayerTelemetry()
         if (this._unsubscribeFavorites) { this._unsubscribeFavorites(); this._unsubscribeFavorites = null }
         if (this._layerEventTimer) {
@@ -672,6 +677,8 @@ export class Widget extends React.PureComponent<any, WidgetState> {
 
             // Service health: first check shortly after load, then on the configured timer.
             this.startLayerHealth();
+            // Status heartbeat for the dashboard (after the first health check has had time to run).
+            this.startLayerStatus();
 
             // Keep any layer that gets moved OUT to the top level (via drag or
             // the Move-out menu) visible, even though it no longer matches the
@@ -846,6 +853,62 @@ export class Widget extends React.PureComponent<any, WidgetState> {
             return
         }
         for (const e of events) this.beacon.action(e.on ? 'layer-on' : 'layer-off', e.title)
+        // Layer clicks go out now, not on the beacon's 10 s batch, so the dashboard's Right now
+        // feed shows them within seconds.
+        try { beacon.flush() } catch (e) { /* ignore */ }
+    }
+
+    // ==================== Layer status heartbeat ====================
+
+    // One layers-status row per open page: once shortly after the list is ready, then on the
+    // health check interval (default 5 minutes), only while the page is visible. Detail:
+    //   "on 7 | down 0 | broken 1 | Water Mains; Parcels; Zoning; ..."
+    // counts first, then the names of the layers drawing now (clipped to fit). It is the
+    // positive signal the dashboard needs: "this page is fine" clears an outage or a broken
+    // layer at once, and "these layers are on" feeds its Right now tab. An unchanged status is
+    // not resent more than once every 15 minutes.
+    startLayerStatus() {
+        this.stopLayerStatus()
+        if (!this.beacon || this.props.config?.telemetryLayers === false) return
+        this._statusTimer = setTimeout(() => { this.sendLayerStatus() }, 10000)
+    }
+
+    stopLayerStatus() {
+        if (this._statusTimer) { clearTimeout(this._statusTimer); this._statusTimer = null }
+    }
+
+    sendLayerStatus() {
+        this._statusTimer = null
+        if (this._unmounted || !this.beacon) return
+        const minutes = Math.max(1, Math.min(120, Number(this.props.config?.layerHealthMinutes) || 5))
+        const next = () => { if (!this._unmounted) this._statusTimer = setTimeout(() => { this.sendLayerStatus() }, minutes * 60000) }
+        try {
+            if (typeof document !== 'undefined' && document.visibilityState === 'hidden') { next(); return }
+            const view = this.viewFromMapWidget || this.jmvFromMap?.view
+            const allLayers = view?.map?.allLayers
+            if (!allLayers) { next(); return }
+            const on: string[] = []
+            const drawing = (l: any): boolean => { let p: any = l; for (let i = 0; p && i < 20; i++) { if (p.visible === false) return false; const dc = p.declaredClass || ''; if (dc === 'esri.Map' || dc === 'esri.WebMap') return true; p = p.parent } return true }
+            const addLeaf = (l: any) => { const t = String(l.title ?? l.name ?? '').trim(); if (t) on.push(t) }
+            allLayers.forEach((l: any) => {
+                if (!l || this.telemetrySkips(l) || l.declaredClass === 'esri.layers.GroupLayer' || !drawing(l)) return
+                const subs = l.allSublayers
+                if (subs && typeof subs.forEach === 'function' && subs.length) {
+                    subs.forEach((s: any) => { if (s && !(s.sublayers && s.sublayers.length) && drawing(s)) addLeaf(s) })
+                } else addLeaf(l)
+            })
+            const down = Array.from(this._serviceDown.values()).filter(Boolean).length
+            const head = `on ${on.length} | down ${down} | broken ${this._brokenReported.size} | `
+            let names = ''
+            for (const n of on) { const piece = (names ? '; ' : '') + n.replace(/[|;]/g, ' '); if (head.length + names.length + piece.length > 240) { names += names ? '; ...' : '...'; break } names += piece }
+            const detail = head + names
+            const now = Date.now()
+            if (detail !== this._lastStatus || now - this._lastStatusAt > 15 * 60000) {
+                this._lastStatus = detail; this._lastStatusAt = now
+                this.beacon.action('layers-status', detail)
+            }
+        } catch (e) { /* status is best effort */ }
+        next()
     }
 
     // ==================== Layer health (service not answering) ====================
@@ -1827,7 +1890,7 @@ export class Widget extends React.PureComponent<any, WidgetState> {
                     </div>
                     {/* Fix double scroll bar problem in the widget controller */}
                     <div style={{ position: 'absolute', opacity: 0, top: 0, left: 0, zIndex: -1 }} ref={this.mapContainerRef}>
-                        mapContainer
+                        {this.translate('mapContainer')}
                     </div>
                     <div style={{ position: 'absolute', display: 'none' }}>
                         {dataSourceContent}
@@ -1852,21 +1915,21 @@ export class Widget extends React.PureComponent<any, WidgetState> {
                         style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 16 }}
                     >
                         <div style={{ background: '#fff', borderRadius: 6, padding: '20px 24px', maxWidth: 320, boxShadow: '0 4px 20px rgba(0,0,0,0.25)' }}>
-                            <div style={{ fontSize: 18, fontWeight: 600, marginBottom: 8, color: '#1a1a1a' }}>Layer focus</div>
+                            <div style={{ fontSize: 18, fontWeight: 600, marginBottom: 8, color: '#1a1a1a' }}>{this.translate('spotlight')}</div>
                             {this.state.spotlightExiting
                                 ? <div style={{ fontSize: 14, color: '#4a4a4a', lineHeight: 1.4 }}>
-                                    Restoring your layers…
+                                    {this.translate('restoringYourLayers')}
                                   </div>
                                 : <React.Fragment>
                                     <div style={{ fontSize: 14, color: '#4a4a4a', marginBottom: 18, lineHeight: 1.4 }}>
-                                        Showing only <strong>{this.state.spotlightLayerName}</strong> on the map. Every other layer is hidden until you exit.
+                                        {this.translate('showingOnly')} <strong>{this.state.spotlightLayerName}</strong> {this.translate('onTheMapEveryOtherLayer')}
                                     </div>
                                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                                         <button
                                             onClick={this.onExitFocus}
                                             style={{ background: '#076fe5', color: '#fff', border: 'none', borderRadius: 4, padding: '7px 16px', cursor: 'pointer', fontSize: 14, fontWeight: 500 }}
                                         >
-                                            Exit focus
+                                            {this.translate('exitFocus')}
                                         </button>
                                     </div>
                                   </React.Fragment>

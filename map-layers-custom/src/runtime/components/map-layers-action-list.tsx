@@ -4,6 +4,9 @@ import { DataActionList, DropdownItem } from 'jimu-ui'
 import type Action from '../actions/action'
 import type { JimuMapView } from 'jimu-arcgis'
 import { ACTION_INDEXES } from '../actions/constants'
+import { hooks as __exbI18nHooks } from 'jimu-core';
+import __exbI18nMessages from '../translations/default';
+
 
 const wrapperStyle = css`
   min-width: 120px;
@@ -61,6 +64,7 @@ function ActionListItem (props: ActionListItemProps) {
 }
 
 export default function MapLayersActionList (props: ActionListProps) {
+  const t = __exbI18nHooks.useTranslation(__exbI18nMessages);
   const { widgetId, actionObjects, listItem, onActionListItemClick, jimuMapView, shouldHideEmptyList, enableDataAction = true, mapDataSource, optionBtnRef } = props
   const [dataActionList, setDataActionList] = React.useState(null)
   const [isLoading, setIsLoading] = React.useState(enableDataAction)

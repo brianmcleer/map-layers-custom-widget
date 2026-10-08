@@ -2,6 +2,9 @@
 import { React, classNames, css, getAppStore, jsx, utils, polished } from 'jimu-core'
 import { FloatingPanel, Slider } from 'jimu-ui'
 import type Widget from '../widget'
+import { hooks as __exbI18nHooks } from 'jimu-core';
+import __exbI18nMessages from '../translations/default';
+
 
 interface Props {
   widget: Widget
@@ -43,6 +46,7 @@ const getLocalizedPercentage = (locale: string, percentage: string) => {
 }
 
 export default function TransparencySlider (props: Props) {
+  const t = __exbI18nHooks.useTranslation(__exbI18nMessages);
   const { widget, listItem } = props
   const [isOpen, setIsOpen] = useState(true)
   const { isRTL, locale } = getAppStore().getState().appContext

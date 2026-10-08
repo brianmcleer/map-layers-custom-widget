@@ -2,6 +2,11 @@
 
 Newest first. Every release bumps `manifest.json` and `package.json` together.
 
+## 1.47.0 (2026-09-30)
+
+- Added: **layer status heartbeat** for City Map Beacon. Each open page sends one `layers-status` row about 10 seconds after the list is ready, then on the health check interval (default 5 minutes), only while the page is visible, and an unchanged status at most every 15 minutes. Detail: `on 7 | down 0 | broken 1 | Water Mains; Parcels; ...` (counts, then the names of the layers drawing now, clipped to fit). The dashboard uses it to clear a restored layer or service at once and to show which layers are on right now. Rides on the layer telemetry switch (`telemetryLayers`).
+- Changed: layer on and off rows are sent immediately instead of on the beacon's 10 second batch, so they reach the dashboard's Right now feed within seconds.
+
 ## 1.46.0 (2026-09-30)
 
 - Added: **broken layer reports** (`reportBrokenLayers`, on by default, under Enhanced options next to the layer telemetry switch). One `layer-broken` row per layer per page load, detail `Group > Layer | reason`: a layer whose load fails (not authorized, not found, server error, timed out, with the HTTP status), a layer that loads but cannot draw (`layerview-create-error`), and, when the layer health check is on, a map service sublayer the service no longer lists. The reason is a short category, never the raw message, so no URLs or tokens reach the table. Basemap, hidden and draw layers are skipped, same as the on/off telemetry.

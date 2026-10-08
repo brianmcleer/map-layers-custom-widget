@@ -3,6 +3,9 @@ import { ExBAddedJSAPIProperties, React, css, jsx, polished } from 'jimu-core'
 import { FloatingPanel, Label, Radio } from 'jimu-ui'
 import type Widget from '../widget'
 import { JimuSymbolType, SymbolList } from 'jimu-ui/advanced/map'
+import { hooks as __exbI18nHooks } from 'jimu-core';
+import __exbI18nMessages from '../translations/default';
+
 
 interface Props {
   widget: Widget
@@ -40,6 +43,7 @@ const getStyle = (symbolType) => {
 }
 
 export default function ChangeSymbolPopper(props: Props) {
+  const t = __exbI18nHooks.useTranslation(__exbI18nMessages);
   const { widget, listItem, symbolType } = props
   const [symbolOption, setSymbolOption] = useState(
     listItem.layer[ExBAddedJSAPIProperties.EXB_PREDEFINED_RENDERER] ? 'custom' : 'predefined'

@@ -2,6 +2,9 @@ import { React } from 'jimu-core'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, TextInput } from 'jimu-ui'
 import { CalciteIcon } from 'calcite-components'
 import { useTokens } from '../theme'
+import { hooks as __exbI18nHooks } from 'jimu-core';
+import __exbI18nMessages from '../translations/default';
+
 
 const { useState, useEffect } = React
 
@@ -38,6 +41,7 @@ const HelpPopup: React.FC<HelpPopupProps> = ({
   open, onClose, sections, initialKey = 'start',
   title, intro, searchPlaceholder, noMatches, closeLabel
 }) => {
+  const t = __exbI18nHooks.useTranslation(__exbI18nMessages);
   const tokens = useTokens()
   // One section open at a time, so the guide never grows past the screen.
   const [openKey, setOpenKey] = useState<string>(initialKey)

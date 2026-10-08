@@ -430,9 +430,9 @@ export default function AddLayer (props: AddLayerProps) {
           <Tabs type='underline' fill value={tab} onChange={(v: any) => setTab(v)}>
             <Tab id='url' title='URL'>
               <div className='al-tabpanel'>
-                <div className='al-intro'>Add a layer that already lives online by pasting its web address. Use this for a hosted service, or for a GeoJSON, CSV, or KML file that is published on the web.</div>
+                <div className='al-intro'>{translate('addALayerThatAlreadyLives')}</div>
                 <div className='al-field'>
-                  <Label>Type</Label>
+                  <Label>{translate('detailType')}</Label>
                   <Dropdown className='al-type-dd' size='sm'>
                     <DropdownButton size='sm' disabled={busy}>{selectedType.label}</DropdownButton>
                     <DropdownMenu>
@@ -441,11 +441,11 @@ export default function AddLayer (props: AddLayerProps) {
                       ))}
                     </DropdownMenu>
                   </Dropdown>
-                  <div className='al-sample'>Example: {selectedType.sample}</div>
+                  <div className='al-sample'>{translate('exampleSample', { sample: selectedType.sample })}</div>
                 </div>
 
                 <div className='al-field'>
-                  <Label>{typeId === 'auto' ? 'URL or item ID' : 'URL'}</Label>
+                  <Label>{typeId === 'auto' ? translate('urlOrItemId') : 'URL'}</Label>
                   <TextInput
                     size='sm' style={{ width: '100%' }} autoFocus value={url} disabled={busy}
                     placeholder={selectedType.sample}
@@ -456,7 +456,7 @@ export default function AddLayer (props: AddLayerProps) {
 
                 <div className='al-actions'>
                   <Button size='sm' type='tertiary' disabled={busy} onClick={close}>{translate('cancel')}</Button>
-                  <Button size='sm' type='primary' disabled={busy || !url.trim()} onClick={addFromUrl}>Add layer</Button>
+                  <Button size='sm' type='primary' disabled={busy || !url.trim()} onClick={addFromUrl}>{translate('addLayerSubmit')}</Button>
                 </div>
                 {statusAlert}
               </div>
@@ -498,9 +498,9 @@ export default function AddLayer (props: AddLayerProps) {
               </Tab>
             }
 
-            <Tab id='file' title='File'>
+            <Tab id='file' title={translate('file')}>
               <div className='al-tabpanel'>
-                <div className='al-intro'>Add a file saved on your computer. It is added to the map for this session only — it is not uploaded or saved.</div>
+                <div className='al-intro'>{translate('addAFileSavedOnYour')}</div>
                 <div
                   className={`al-drop ${dragging ? 'drag' : ''}`}
                   onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
@@ -510,9 +510,9 @@ export default function AddLayer (props: AddLayerProps) {
                   role='button' tabIndex={0}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') fileInputRef.current?.click() }}
                 >
-                  <div className='al-drop-main'>Drag a file from your computer, or click to browse</div>
-                  <div className='al-drop-sub'>Symbology and structure are kept where supported.</div>
-                  <div className='al-formats'>GeoJSON, CSV, KML, or a zipped shapefile (.zip)</div>
+                  <div className='al-drop-main'>{translate('dragAFileFromYourComputer')}</div>
+                  <div className='al-drop-sub'>{translate('symbologyAndStructureAreKeptWhere')}</div>
+                  <div className='al-formats'>{translate('geoJSONCsvKmlOrAZipped')}</div>
                 </div>
                 <input
                   ref={fileInputRef} type='file' hidden accept='.geojson,.json,.csv,.kml,.zip'
@@ -521,13 +521,13 @@ export default function AddLayer (props: AddLayerProps) {
                 {file &&
                   <div className='al-file'>
                     <span>{file.name}</span>
-                    <Button type='tertiary' icon size='sm' aria-label='Remove file' disabled={busy} onClick={() => setFile(null)}><CloseGlyph /></Button>
+                    <Button type='tertiary' icon size='sm' aria-label={translate('removeFile')} disabled={busy} onClick={() => setFile(null)}><CloseGlyph /></Button>
                   </div>
                 }
 
                 <div className='al-actions'>
                   <Button size='sm' type='tertiary' disabled={busy} onClick={close}>{translate('cancel')}</Button>
-                  <Button size='sm' type='primary' disabled={busy || !file} onClick={addFromFile}>Add layer</Button>
+                  <Button size='sm' type='primary' disabled={busy || !file} onClick={addFromFile}>{translate('addLayerSubmit')}</Button>
                 </div>
                 {statusAlert}
               </div>

@@ -2,6 +2,9 @@ import { React } from 'jimu-core'
 import { Button } from 'jimu-ui'
 import { CalciteIcon } from 'calcite-components'
 import { useTokens } from '../theme'
+import { hooks as __exbI18nHooks } from 'jimu-core';
+import __exbI18nMessages from '../translations/default';
+
 
 /**
  * The first-run banner from the shared help pattern. The parent widget is a class component
@@ -18,6 +21,7 @@ export interface FirstRunHintProps {
 }
 
 const FirstRunHint: React.FC<FirstRunHintProps> = ({ title, body, linkLabel, dismissLabel, onOpenHelp, onDismiss }) => {
+  const t = __exbI18nHooks.useTranslation(__exbI18nMessages);
   const tokens = useTokens()
   return (
     <div role="note" style={{ margin: '0 14px 10px 14px', padding: '10px 12px', display: 'flex', alignItems: 'flex-start', gap: '10px', background: tokens.infoBg, color: tokens.text, border: `1px solid ${tokens.divider}`, borderLeft: `3px solid ${tokens.primary}`, borderRadius: tokens.radius, fontSize: '12px', lineHeight: 1.5 }}>

@@ -4,6 +4,9 @@ import { FloatingPanel } from 'jimu-ui'
 import type Widget from '../widget'
 import * as reactiveUtils from 'esri/core/reactiveUtils'
 import { useTheme } from 'jimu-theme'
+import { hooks as __exbI18nHooks } from 'jimu-core';
+import __exbI18nMessages from '../translations/default';
+
 
 interface Props {
   widget: Widget
@@ -44,6 +47,7 @@ const getStyle = (theme: IMThemeVariables) => {
 }
 
 export default function VisibilityRangeSlider (props: Props) {
+  const t = __exbI18nHooks.useTranslation(__exbI18nMessages);
   const { widget, listItem, scaleRangeSliderClass } = props
   const [isOpen, setIsOpen] = useState(true)
   const [scaleRangeSlider, setScaleRangeSlider] = useState(null)

@@ -784,6 +784,7 @@ WidgetSettingState
             <TextInput
               className='w-100'
               size='sm'
+              type='number'
               min={1}
               max={120}
               value={String(this.props.config?.layerHealthMinutes ?? 5)}

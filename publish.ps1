@@ -57,7 +57,8 @@ $ReleaseOnlyExclude = @(
     "src\editor-shims.d.ts",
     "src\runtime\esri.d.ts",
     "src\typings.d.ts",   # widget-specific ambient jimu-core / jimu-icons additions beside the master shim
-    "tools"
+    "tools",
+    "i18n"            # exb-i18n-kit lock + status: for contributors, not for installs
 )
 
 $RepoPath   = $PSScriptRoot
@@ -92,7 +93,9 @@ if ($Release -ne "") {
 
 Write-Host "`n==> Syncing widget files (skipping $($ExcludeDirs -join ', '))..."
 # robocopy wants each excluded name as its own argument after /XD and /XF
-$xd = @("/XD") + $ExcludeDirs
+# exb-i18n-kit: localize snapshots (i18n\backup) stay local; i18n\STATUS.md and the lock still publish.
+$backupSource = Join-Path $ExbWidgetPath "i18n\backup"
+$xd = @("/XD") + $ExcludeDirs + @($backupSource)
 $xf = @("/XF") + $ExcludeFiles
 robocopy "$ExbWidgetPath" "$WidgetDest" /MIR @xd @xf /NFL /NDL /NJH /NJS /NP | Out-Null
 if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" }
@@ -105,6 +108,13 @@ foreach ($dir in $ExcludeDirs) {
         Write-Host "    Removing excluded folder from repo copy: $dir"
         Remove-Item $stale -Recurse -Force
     }
+}
+
+# /MIR does not delete excluded folders in the destination; remove snapshots an older run left.
+$staleBackup = Join-Path $WidgetDest "i18n\backup"
+if (Test-Path $staleBackup) {
+    Write-Host "    Removing translation backup snapshots from repo copy."
+    Remove-Item $staleBackup -Recurse -Force
 }
 
 # The manifest has to sit directly inside the widget folder. A second level of nesting is

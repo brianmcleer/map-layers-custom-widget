@@ -1,6 +1,6 @@
 /*
   beacon.ts  -  usage and error telemetry for the GIS Division's Experience Builder widgets.
-  City of Grand Junction GIS Division. Shared file: the master lives in
+  Shared file for the GIS Division's widgets: the master lives in
   client\your-extensions\widgets\_shared\beacon.ts and sync-shared.ps1 copies it byte for
   byte into every widget's src\shared\. Never edit a widget's copy; edit the master and re-sync.
 
