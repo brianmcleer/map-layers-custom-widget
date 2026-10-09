@@ -39,6 +39,7 @@
 */
 
 import { getAppStore } from 'jimu-core'
+import { __t } from '../runtime/i18n-t'
 
 export const BEACON_TAG = 'exb-beacon-sink'
 export const BEACON_VERSION = '1.1.1'
@@ -260,12 +261,12 @@ function record (widget: string, version: string, action: string, detail?: strin
 
 function errorToText (err: unknown): string {
   try {
-    if (!err) return 'unknown error'
+    if (!err) return __t("unknownError")
     const anyErr: any = err
     const msg = anyErr.message ?? String(err)
     const stack = anyErr.stack ? String(anyErr.stack).split('\n').slice(0, 6).join(' | ') : ''
     return stack && stack.indexOf(msg) >= 0 ? stack : `${msg}${stack ? ' | ' + stack : ''}`
-  } catch (e) { return 'unserializable error' }
+  } catch (e) { return __t("unserializableError") }
 }
 
 /** Attribute an unhandled error to a widget when its dist folder shows up in the stack. */

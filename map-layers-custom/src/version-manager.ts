@@ -6,7 +6,7 @@ class VersionManager extends BaseVersionManager {
   versions = [
     {
       version: '1.12.0',
-      description: __t("disableOldAppDataActionDelete"),
+      get description () { return __t("disableOldAppDataActionDelete") },
       upgrader: (oldConfig: IMConfig) => {
         let newConfig: any = oldConfig
         newConfig = newConfig.without('selectedJimuLayerIds')

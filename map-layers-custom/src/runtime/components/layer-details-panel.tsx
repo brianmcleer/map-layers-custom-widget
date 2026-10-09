@@ -3,6 +3,7 @@ import { React, css, hooks, jsx, polished } from 'jimu-core'
 import { FloatingPanel } from 'jimu-ui'
 import type { Widget } from '../widget'
 import message from '../translations/default'
+import { __locale, __setIntl } from '../i18n-t'
 
 interface Props {
   widget: Widget
@@ -47,6 +48,7 @@ const getStyle = () => {
 const titleCase = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s)
 
 export default function LayerDetailsPanel (props: Props) {
+  __setIntl((props as any).intl)
   const { widget, listItem } = props
   const translate = hooks.useTranslation(message)
   const [isOpen, setIsOpen] = useState(true)
@@ -69,7 +71,7 @@ export default function LayerDetailsPanel (props: Props) {
     }
     setFeatureCount(translate('detailCounting'))
     layer.queryFeatureCount()
-      .then((count: number) => { if (!cancelled) setFeatureCount(Number(count).toLocaleString()) })
+      .then((count: number) => { if (!cancelled) setFeatureCount(Number(count).toLocaleString(__locale())) })
       .catch(() => { if (!cancelled) setFeatureCount('—') })
     return () => { cancelled = true }
   }, [layer, translate])
@@ -88,7 +90,7 @@ export default function LayerDetailsPanel (props: Props) {
   const minS = layer?.minScale
   const maxS = layer?.maxScale
   if (minS || maxS) {
-    const fmt = (n: number) => n ? `1:${Number(n).toLocaleString()}` : translate('detailNoLimit')
+    const fmt = (n: number) => n ? `1:${Number(n).toLocaleString(__locale())}` : translate('detailNoLimit')
     rows.push({ label: translate('detailScale'), value: `${fmt(maxS)} – ${fmt(minS)}` })
   }
 

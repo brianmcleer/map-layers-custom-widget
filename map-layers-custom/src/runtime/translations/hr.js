@@ -262,7 +262,11 @@ System.register([], function (e) {
         basemapValue: "Basemap {value}",
         unknownError: "unknown error",
         unserializableError: "unserializable error",
-        disableOldAppDataActionDelete: "disable old app data-action, delete unused config prop selectedJimuLayerIds"
+        disableOldAppDataActionDelete: "disable old app data-action, delete unused config prop selectedJimuLayerIds",
+        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
+        thatValue1: "That {value1}",
+        that: "That",
+        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
       })
     }
   }

@@ -58,14 +58,14 @@ type Phase = 'idle' | 'working' | 'error' | 'success'
 // URL data types, each mapped to the JS API layer module that handles it and a
 // realistic sample URL — mirrors Esri's Add Data "URL" tab.
 const URL_TYPES: Array<{ id: string, label: string, module?: string, sample: string }> = [
-  { id: 'auto', label: __t("autoDetectServiceUrlOrItem"), sample: 'https://services.arcgis.com/…/FeatureServer  ·  or a 32-char item ID' },
-  { id: 'arcgis', label: __t("arcGISWebService"), module: 'esri/layers/Layer', sample: 'https://services.arcgis.com/<org>/arcgis/rest/services/<name>/FeatureServer' },
-  { id: 'vectortile', label: __t("vectorTileService"), module: 'esri/layers/VectorTileLayer', sample: 'https://<host>/arcgis/rest/services/<name>/VectorTileServer' },
+  { id: 'auto', get label () { return __t("autoDetectServiceUrlOrItem") }, sample: 'https://services.arcgis.com/…/FeatureServer  ·  or a 32-char item ID' },
+  { id: 'arcgis', get label () { return __t("arcGISWebService") }, module: 'esri/layers/Layer', sample: 'https://services.arcgis.com/<org>/arcgis/rest/services/<name>/FeatureServer' },
+  { id: 'vectortile', get label () { return __t("vectorTileService") }, module: 'esri/layers/VectorTileLayer', sample: 'https://<host>/arcgis/rest/services/<name>/VectorTileServer' },
   { id: 'wms', label: 'WMS', module: 'esri/layers/WMSLayer', sample: 'https://<host>/geoserver/wms?service=WMS&request=GetCapabilities' },
   { id: 'wmts', label: 'WMTS', module: 'esri/layers/WMTSLayer', sample: 'https://<host>/service/wmts/1.0.0/WMTSCapabilities.xml' },
-  { id: 'geojson', label: __t("geoJSONWebLink"), module: 'esri/layers/GeoJSONLayer', sample: 'https://<host>/data.geojson' },
-  { id: 'csv', label: __t("csvWebLink"), module: 'esri/layers/CSVLayer', sample: 'https://<host>/data.csv' },
-  { id: 'kml', label: __t("kmlWebLink"), module: 'esri/layers/KMLLayer', sample: 'https://<host>/data.kml' }
+  { id: 'geojson', get label () { return __t("geoJSONWebLink") }, module: 'esri/layers/GeoJSONLayer', sample: 'https://<host>/data.geojson' },
+  { id: 'csv', get label () { return __t("csvWebLink") }, module: 'esri/layers/CSVLayer', sample: 'https://<host>/data.csv' },
+  { id: 'kml', get label () { return __t("kmlWebLink") }, module: 'esri/layers/KMLLayer', sample: 'https://<host>/data.kml' }
 ]
 
 // Minimal, dependency-free KML -> GeoJSON. KMLLayer relies on a hosted Esri
@@ -307,7 +307,7 @@ export default function AddLayer (props: AddLayerProps) {
       }).then(finish).catch((e: any) => { console.error('Add layer (url) failed', e); setError(__t("thatLayerCouldnTBeAdded2")) })
     } else {
       loadArcGISJSAPIModules([t.module]).then(([Ctor]: any[]) => { finish(new Ctor({ url: raw })) })
-        .catch((e: any) => { console.error('Add layer (typed url) failed', e); setError('That ' + t.label + ' layer couldn’t be added. Check the URL.') })
+        .catch((e: any) => { console.error('Add layer (typed url) failed', e); setError(__t("thatValue1LayerCouldnTBe", { value1: t.label })) })
     }
   }, [url, typeId, resolveView, finish])
 

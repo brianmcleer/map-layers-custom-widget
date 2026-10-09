@@ -35,3 +35,10 @@ export const __m: any = new Proxy(__messages as any, {
     return typeof m === 'string' ? m : v
   }
 })
+
+/** Current app locale for number/date formatting; browser locale before intl is available. */
+export function __locale (): string | undefined {
+  const locale = intl && intl.locale
+  if (typeof locale !== 'string' || !locale) return undefined
+  try { return Intl.getCanonicalLocales(locale)[0] } catch (e) { return undefined }
+}
