@@ -58,6 +58,18 @@ System.register([], function (e) {
         cleanNamePrefix: "Prefix to strip (regular expression, case-insensitive)",
         cleanNamePrefixHint: "for example: GJ_|CityOf_|sde\\.",
         cleanNameTitleCase: "Title Case the names",
+        translateLayerNames: "Show layer names in the app language",
+        translateLayerNamesHint: "Display only: the web map titles do not change. Follows ?locale=, the browser, the ArcGIS profile and the Language Switcher, live.",
+        layerNamesFromMemory: "Use the shared translation memory",
+        layerNameMemoryUrl: "Translation memory URL (folder with <locale>.json)",
+        layerNameMtUrl: "LibreTranslate server for untranslated names (optional)",
+        layerNameMtKey: "LibreTranslate API key (optional)",
+        layerNameKeep: "Keep these names as they are (one per line)",
+        layerNameOverrides: "Your translations (JSON: name -> { locale: text })",
+        layerNameOverridesBad: "Not valid JSON yet; the last valid version is kept.",
+        collectLayerNames: "Collect layer names",
+        collectLayerNamesHint: "Adds every layer name in the map to your translations below, and copies a file the shared memory can read (save it in a repo and add its raw URL to exb-i18n-kit memory/sources.json).",
+        collectLayerNamesDone: "{count} names collected and copied to the clipboard.",
         presetViewsLabel: "Preset views (built into the app)",
         presetViewsDesc: "Turn on the layers you want in the map, then click Add preset from map. Presets appear at the top of the Saved views menu for every user and cannot be changed by them. They show even when saved layer views are off.",
         presetNone: "No presets yet.",
@@ -94,7 +106,10 @@ System.register([], function (e) {
         importSuccess: "Settings imported. Remember to save the widget.",
         importError: "Could not read that file. Make sure it is an XML file exported from this widget.",
         importEmpty: "No recognized settings were found in that file.",
-        exportError: "Could not export the settings."
+        exportError: "Could not export the settings.",
+        help: "Pomoć",
+        showHelpGuide: "Show help guide",
+        showTheQuestionMarkButtonThat: "Show the question-mark button that opens the widget help guide"
       })
     }
   }

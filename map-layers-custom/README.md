@@ -12,6 +12,7 @@ A customized version of Esri's Map Layers widget for ArcGIS Experience Builder. 
 - Broken layer reports. A layer that fails to load (not authorized, not found, server error, timed out), fails to draw, or names a sublayer its service no longer has is reported once per page load, at any group depth. On by default.
 - Imagery nearby. Aerial and satellite sources from the OpenStreetMap Editor Layer Index that cover the current view, added under your layers.
 - Clean layer names, favorites with a favorites-only filter, and a Zoom until visible tool for greyed-out layers.
+- Layer names in the app language: translated live when the locale changes (?locale=, browser, ArcGIS profile, Language Switcher), from your own translations, the shared exb-i18n-kit memory, or an optional LibreTranslate server. Display only; the web map is untouched.
 - Layer focus (isolate). Show only the chosen layer or service sub-layer and hide everything else, with a clear exit. Works on real layers and on map-service sub-layers.
 - Live visible-layer count badge.
 - Collapsible layer list with an optional start-collapsed state.

@@ -3,8 +3,8 @@
   "generator": "exb-i18n-kit",
   "parts": {
     "runtime": {
-      "en": "20c11cb26bab",
-      "keys": 241,
+      "en": "c7315cf7a70e",
+      "keys": 260,
       "hashes": {
         "_widgetLabel": "e29679599257",
         "goto": "0a0075fdea0c",
@@ -246,278 +246,727 @@
         "restoringYourLayers": "46e7450f36e0",
         "showingOnly": "93a9715544cd",
         "onTheMapEveryOtherLayer": "676eeed11f0a",
-        "exitFocus": "64cefdd6e324"
+        "exitFocus": "64cefdd6e324",
+        "thisLayer": "4438adaec099",
+        "autoDetectServiceUrlOrItem": "97f3197039c2",
+        "arcGISWebService": "906a483616c6",
+        "vectorTileService": "18d738f23b76",
+        "geoJSONWebLink": "a76dc8147c80",
+        "csvWebLink": "bc66194c3edf",
+        "kmlWebLink": "67e4fe645907",
+        "thatLayerCouldnTBeAdded": "8795b0c37540",
+        "thatLayerCouldnTBeAdded2": "bc9b68fb27c4",
+        "thatFileCouldnTBeAdded": "cac2cf085c5f",
+        "noDrawingsWereFoundInThat": "ded5bca7ca7f",
+        "noMapFeaturesWereFoundIn": "a8d6c19d3887",
+        "thatKmlCouldnTBeRead": "1dde16e4afe0",
+        "thatShapefileCouldnTBeRead": "607aef554dcc",
+        "unsupportedFileUseGeoJSONCsvKml": "09018a7cc20c",
+        "basemapValue": "8b0e764c53db",
+        "unknownError": "af6321ca7a8b",
+        "unserializableError": "76e73551597a",
+        "disableOldAppDataActionDelete": "fac561742c0b"
       },
       "locales": {
         "ar": {
-          "file": "353fd93cc790",
+          "file": "df5b02f197b4",
           "counts": {
-            "esri": 57,
-            "esri-check": 2,
+            "esri": 232,
+            "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 10,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "resetVisibility": {
+              "t": "Reset to default visibility",
+              "src": "machine",
+              "h": "ff2c8d62c415"
+            },
+            "presetViews": {
+              "t": "Presets",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "shapefile": {
+              "t": "Shapefile",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "addLayer": {
+              "t": "إضافة طبقة من طراز URL",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "bmHybrid": {
+              "t": "Imagery Hybrid",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "exportLayerCsv": {
+              "t": "قائمة طبقات التصدير (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "helpTroubleNoMatches": {
+              "t": "المرشّح لا يظهر أي طبقات: تفقد التهجئة، أو نظف الصندوق مع X لرؤية كل شيء مرة أخرى.",
+              "src": "machine",
+              "h": "1edd055b49ff"
+            },
+            "urlOrItemId": {
+              "t": "URL or item ID",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            },
+            "geoJSONCsvKmlOrAZipped": {
+              "t": "GeoJSON, CSV, KML, or a zipped shapefile (.zip)",
+              "src": "machine",
+              "h": "5f1a09894b64"
+            }
+          }
         },
         "bg": {
-          "file": "250013efa45a",
+          "file": "753a9e3e417f",
           "counts": {
-            "esri": 58,
+            "esri": 241,
+            "esri-check": 0,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
+            "machine": 1,
+            "stale": 0,
+            "missing": 18
+          },
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            }
+          }
+        },
+        "bs": {
+          "file": "e8e7d9a50ecd",
+          "counts": {
+            "esri": 55,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
-        },
-        "bs": {
-          "file": "98a83e32a78e",
-          "counts": {
-            "esri": 57,
-            "esri-check": 2,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
+            "missing": 204
           },
           "entries": {}
         },
         "ca": {
-          "file": "dfe4bff84ebb",
+          "file": "24c2e4ef9924",
           "counts": {
-            "esri": 56,
-            "esri-check": 3,
+            "esri": 237,
+            "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 3,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmOceans": {
+              "t": "Oceans",
+              "src": "machine",
+              "h": "e3e836850e85"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
         },
         "cs": {
-          "file": "4ada857b785f",
+          "file": "43d6b12bf276",
           "counts": {
-            "esri": 56,
-            "esri-check": 3,
+            "esri": 237,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 4,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmHybrid": {
+              "t": "Imagery Hybrid",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "helpKeepTitle": {
+              "t": "Where things live",
+              "src": "machine",
+              "h": "7a475a9b4308"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
         },
         "da": {
-          "file": "e3e2ae888d74",
+          "file": "3c0df1702d1d",
           "counts": {
-            "esri": 55,
-            "esri-check": 4,
+            "esri": 230,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 11,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "presetViews": {
+              "t": "Presets",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "detailType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "shapefile": {
+              "t": "Shapefile",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "bmImagery": {
+              "t": "Imagery",
+              "src": "machine",
+              "h": "8e72e49ebf47"
+            },
+            "bmHybrid": {
+              "t": "Imagery Hybrid",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmNavigation": {
+              "t": "Navigation",
+              "src": "machine",
+              "h": "cf03cf2e9cdf"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "csvType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
         },
         "de": {
-          "file": "2888c57b5f0a",
+          "file": "2d505ef43f37",
           "counts": {
-            "esri": 54,
-            "esri-check": 5,
+            "esri": 234,
+            "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 6,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "presetViews": {
+              "t": "Presets",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "bmDarkGray": {
+              "t": "Dark Gray",
+              "src": "machine",
+              "h": "076862719447"
+            },
+            "bmNavigation": {
+              "t": "Navigation",
+              "src": "machine",
+              "h": "cf03cf2e9cdf"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
         },
         "el": {
-          "file": "e478bdbfc0a9",
+          "file": "e398bc118d1d",
           "counts": {
-            "esri": 55,
-            "esri-check": 3,
+            "esri": 237,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 182
+            "missing": 19
           },
           "entries": {
             "goto": {
               "t": "Εστίαση σε",
               "src": "existing",
               "h": "0a0075fdea0c"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
             }
           }
         },
         "es": {
-          "file": "7c538326601d",
+          "file": "5b7ce8486953",
           "counts": {
-            "esri": 56,
-            "esri-check": 3,
+            "esri": 232,
+            "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 8,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "presetViews": {
+              "t": "Presets",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "applyView": {
+              "t": "Apply view",
+              "src": "machine",
+              "h": "01d8a5f8c458"
+            },
+            "shapefile": {
+              "t": "Shapefile",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "masterOpacity": {
+              "t": "Master opacity",
+              "src": "machine",
+              "h": "06fcab24f867"
+            },
+            "bmLightGray": {
+              "t": "Light Gray",
+              "src": "machine",
+              "h": "3ef03be05859"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
         },
         "et": {
-          "file": "ac3cb5569028",
+          "file": "f3511633b434",
           "counts": {
-            "esri": 52,
-            "esri-check": 7,
+            "esri": 237,
+            "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 3,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
         },
         "fi": {
-          "file": "858bf3fbe6c8",
+          "file": "d9eb6073f2bb",
           "counts": {
-            "esri": 56,
-            "esri-check": 3,
+            "esri": 241,
+            "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 1,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            }
+          }
         },
         "fr": {
-          "file": "510c7a88b4b3",
+          "file": "6f9cc09e75f9",
           "counts": {
-            "esri": 54,
-            "esri-check": 5,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
-        },
-        "he": {
-          "file": "04832f3f5cc8",
-          "counts": {
-            "esri": 55,
+            "esri": 232,
             "esri-check": 4,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 6,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "detailType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "detailSource": {
+              "t": "Source",
+              "src": "machine",
+              "h": "6da13addb000"
+            },
+            "bmNavigation": {
+              "t": "Navigation",
+              "src": "machine",
+              "h": "cf03cf2e9cdf"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "csvType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
         },
-        "hr": {
-          "file": "98a83e32a78e",
+        "he": {
+          "file": "8d115baa8d15",
           "counts": {
-            "esri": 57,
-            "esri-check": 2,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
-        },
-        "hu": {
-          "file": "79fbc6fdb238",
-          "counts": {
-            "esri": 57,
-            "esri-check": 2,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
-        },
-        "id": {
-          "file": "3a5f33f6a3db",
-          "counts": {
-            "esri": 54,
-            "esri-check": 5,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
-        },
-        "it": {
-          "file": "ebf7cc12cf1f",
-          "counts": {
-            "esri": 56,
+            "esri": 231,
             "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 8,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "shapefile": {
+              "t": "Shapefile",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "addLayer": {
+              "t": "הוסף שכבה מ-URL",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerLabel": {
+              "t": "כתובת URL או פריט מזהה",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerError": {
+              "t": "את השכבה הזאת לא ניתן להוסיף. בדוק את כתובת ה-URL או את מזהה הפריט ולנסות שוב.",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "exportLayerCsv": {
+              "t": "רשימת שכבת היצוא (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "urlOrItemId": {
+              "t": "כתובת URL או פריט מזהה",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            }
+          }
         },
-        "ja": {
-          "file": "e76ca8562400",
+        "hr": {
+          "file": "e8e7d9a50ecd",
           "counts": {
-            "esri": 57,
-            "esri-check": 2,
+            "esri": 55,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 182
+            "missing": 204
           },
           "entries": {}
         },
-        "ko": {
-          "file": "5a99ede894c5",
+        "hu": {
+          "file": "be9a58a98aab",
           "counts": {
-            "esri": 52,
-            "esri-check": 5,
+            "esri": 239,
+            "esri-check": 1,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
+            "machine": 2,
+            "stale": 0,
+            "missing": 18
+          },
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
+        },
+        "id": {
+          "file": "879458ae9e9d",
+          "counts": {
+            "esri": 229,
+            "esri-check": 3,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
+            "machine": 9,
+            "stale": 0,
+            "missing": 19
+          },
+          "entries": {
+            "presetViews": {
+              "t": "Presets",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "shapefile": {
+              "t": "Shapefile",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "bmLightGray": {
+              "t": "Light Gray",
+              "src": "machine",
+              "h": "3ef03be05859"
+            },
+            "bmDarkGray": {
+              "t": "Dark Gray",
+              "src": "machine",
+              "h": "076862719447"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "helpKeepTitle": {
+              "t": "Where things live",
+              "src": "machine",
+              "h": "7a475a9b4308"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
+        },
+        "it": {
+          "file": "004b3fc33370",
+          "counts": {
+            "esri": 239,
+            "esri-check": 1,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
+            "machine": 2,
+            "stale": 0,
+            "missing": 18
+          },
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "file": {
+              "t": "File",
+              "src": "machine",
+              "h": "2c3cafa4db3f"
+            }
+          }
+        },
+        "ja": {
+          "file": "2e01092145e7",
+          "counts": {
+            "esri": 235,
+            "esri-check": 0,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
+            "machine": 7,
+            "stale": 0,
+            "missing": 18
+          },
+          "entries": {
+            "copyUrl": {
+              "t": "サービスURLのコピー",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "addLayer": {
+              "t": "URLからレイヤーを追加",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerLabel": {
+              "t": "サービスURLまたはアイテムID",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerError": {
+              "t": "レイヤーを追加できません。 URL または項目 ID をチェックし、もう一度お試しください。",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "exportLayerCsv": {
+              "t": "輸出層リスト(CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "helpTroubleContact": {
+              "t": "まだ立ち往生? GIS部門に連絡し、マップレイヤーの名前とこのアプリについて言及してください。",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            },
+            "urlOrItemId": {
+              "t": "URL または項目 ID",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            }
+          }
+        },
+        "ko": {
+          "file": "bc5c7c2eb526",
+          "counts": {
+            "esri": 230,
+            "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 2,
-            "machine": 0,
+            "machine": 8,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
           "entries": {
             "goto": {
@@ -529,318 +978,737 @@
               "t": "현재 표시할 항목이 없습니다.",
               "src": "existing",
               "h": "3ea339bc1cd3"
+            },
+            "copyUrl": {
+              "t": "복사 서비스 URL",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "addLayer": {
+              "t": "URL에서 레이어 추가",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerLabel": {
+              "t": "서비스 URL 또는 항목 ID",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerError": {
+              "t": "해당 레이어가 추가될 수 없습니다. URL 또는 항목 ID를 확인하고 다시 시도하십시오.",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "exportLayerCsv": {
+              "t": "수출 층 목록 (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "helpTroubleNoMatches": {
+              "t": "필터는 층을 표시하지 않습니다 : 철자를 확인하거나 X 박스를 클리어하여 다시 모든 것을 볼 수 있습니다.",
+              "src": "machine",
+              "h": "1edd055b49ff"
+            },
+            "helpTroubleContact": {
+              "t": "아직도 붙어? GIS 사업부에 연락하여 맵 레이어 이름과 이 앱을 언급합니다.",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            },
+            "urlOrItemId": {
+              "t": "URL 또는 항목 ID",
+              "src": "machine",
+              "h": "dad658ea3fe1"
             }
           }
         },
         "lt": {
-          "file": "2ed089f6b188",
+          "file": "4583a098063e",
           "counts": {
-            "esri": 57,
-            "esri-check": 1,
+            "esri": 238,
+            "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 0,
+            "machine": 3,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
           "entries": {
             "goto": {
               "t": "Pritraukti iki",
               "src": "existing",
               "h": "0a0075fdea0c"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
             }
           }
         },
         "lv": {
-          "file": "7811c067d0f0",
+          "file": "55ef8ced1863",
           "counts": {
-            "esri": 54,
-            "esri-check": 4,
+            "esri": 237,
+            "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 0,
+            "machine": 1,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
           "entries": {
             "goto": {
               "t": "Tālummaiņa",
               "src": "existing",
               "h": "0a0075fdea0c"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
             }
           }
         },
         "no": {
-          "file": "ec6e14d9f756",
+          "file": "518d711d4c1c",
           "counts": {
-            "esri": 58,
-            "esri-check": 1,
+            "esri": 235,
+            "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 7,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "detailType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "bmHybrid": {
+              "t": "Imagery Hybrid",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "csvType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
         },
         "nl": {
-          "file": "6a00268a9e4e",
+          "file": "7a2f1c1dd17b",
           "counts": {
-            "esri": 57,
+            "esri": 237,
+            "esri-check": 0,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
+            "machine": 4,
+            "stale": 0,
+            "missing": 19
+          },
+          "entries": {
+            "detailType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvType": {
+              "t": "Type",
+              "src": "machine",
+              "h": "3deb74565196"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
+        },
+        "pl": {
+          "file": "3a3aab41975f",
+          "counts": {
+            "esri": 237,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 3,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "shapefile": {
+              "t": "Shapefile",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
         },
-        "pl": {
-          "file": "46ed7ec65792",
+        "pt-br": {
+          "file": "12a502c6a03e",
           "counts": {
-            "esri": 55,
+            "esri": 236,
             "esri-check": 4,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
-        },
-        "pt-br": {
-          "file": "2dd763ccdad1",
-          "counts": {
-            "esri": 54,
-            "esri-check": 5,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
         },
         "pt-pt": {
-          "file": "b5507a83b7c9",
+          "file": "c98257438a82",
           "counts": {
-            "esri": 56,
-            "esri-check": 3,
+            "esri": 237,
+            "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 3,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            }
+          }
         },
         "ro": {
-          "file": "5d4432424be4",
+          "file": "cd0da1a8ec3d",
           "counts": {
-            "esri": 55,
-            "esri-check": 3,
+            "esri": 238,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
           "entries": {
             "emptyListTip": {
               "t": "În prezent, nu există elemente disponibile pentru afișare.",
               "src": "existing",
               "h": "3ea339bc1cd3"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
             }
           }
         },
         "ru": {
-          "file": "0beeca825492",
+          "file": "3a17fe0f32ef",
           "counts": {
-            "esri": 57,
-            "esri-check": 2,
+            "esri": 240,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 1,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            }
+          }
         },
         "sk": {
-          "file": "3281ad637555",
+          "file": "fbf306772afe",
           "counts": {
-            "esri": 54,
-            "esri-check": 5,
+            "esri": 239,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
         },
         "sl": {
-          "file": "1a6310db6c41",
+          "file": "e2d44bc80fa2",
           "counts": {
-            "esri": 53,
-            "esri-check": 5,
+            "esri": 238,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
           "entries": {
             "goto": {
               "t": "Povečaj na",
               "src": "existing",
               "h": "0a0075fdea0c"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
             }
           }
         },
         "sr": {
-          "file": "b2387be9e66a",
+          "file": "0df7afd7e0ee",
           "counts": {
-            "esri": 56,
-            "esri-check": 3,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
-        },
-        "sv": {
-          "file": "5bbb14625309",
-          "counts": {
-            "esri": 58,
+            "esri": 55,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 182
+            "missing": 204
           },
           "entries": {}
+        },
+        "sv": {
+          "file": "632f3cb5fe8f",
+          "counts": {
+            "esri": 236,
+            "esri-check": 0,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
+            "machine": 6,
+            "stale": 0,
+            "missing": 18
+          },
+          "entries": {
+            "shapefile": {
+              "t": "Shapefile",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "masterOpacity": {
+              "t": "Master opacity",
+              "src": "machine",
+              "h": "06fcab24f867"
+            },
+            "bmImagery": {
+              "t": "Imagery",
+              "src": "machine",
+              "h": "8e72e49ebf47"
+            },
+            "bmDarkGray": {
+              "t": "Dark Gray",
+              "src": "machine",
+              "h": "076862719447"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
         },
         "th": {
-          "file": "3cd78a44bd30",
+          "file": "1417855c64b0",
           "counts": {
-            "esri": 57,
-            "esri-check": 2,
+            "esri": 233,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 8,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "copyUrl": {
+              "t": "คัดลอกที่อยู่ URL ของบริการ",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "addLayer": {
+              "t": "เพิ่มเลเยอร์จากที่อยู่ URL",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerHint": {
+              "t": "วางที่อยู่ URL หรือที่อยู่ URL ของบริการบนแผนที่ หรือหมายเลขรายการของอาร์กจีซิส",
+              "src": "machine",
+              "h": "3327586431a3"
+            },
+            "addLayerLabel": {
+              "t": "ที่อยู่ URL หรือหมายเลขรายการ",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerError": {
+              "t": "ชั้น นั้น ไม่ อาจ ใส่ ได้. โปรดตรวจสอบที่อยู่ URL หรือหมายเลขรายการ แล้วลองใหม่อีกครั้ง",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "exportLayerCsv": {
+              "t": "ส่งออกรายการเลเยอร์ (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "helpTroubleContact": {
+              "t": "ยังติดอยู่อีกเหรอ? ติดต่อแผนก GIS และพูดถึงชื่อบนแผนที่และแอพนี้",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            },
+            "urlOrItemId": {
+              "t": "ที่อยู่ URL หรือหมายเลขรายการ",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            }
+          }
         },
         "tr": {
-          "file": "66032eb2ca93",
+          "file": "a168dfb42dd1",
           "counts": {
-            "esri": 54,
-            "esri-check": 5,
+            "esri": 229,
+            "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 10,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "savedViews": {
+              "t": "Saved views",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            },
+            "presetViews": {
+              "t": "Presets",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "viewNamePlaceholder": {
+              "t": "View name",
+              "src": "machine",
+              "h": "f13b6b7a495d"
+            },
+            "detailOpenService": {
+              "t": "Open service",
+              "src": "machine",
+              "h": "732f6445cc8f"
+            },
+            "bmHybrid": {
+              "t": "Imagery Hybrid",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmDarkGray": {
+              "t": "Dark Gray",
+              "src": "machine",
+              "h": "076862719447"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "helpBarBatch": {
+              "t": "{batchOptions} (The checklist icon): {batchItems}.",
+              "src": "machine",
+              "h": "bdfd36d6a2b9"
+            },
+            "helpViewsTitle": {
+              "t": "Saved views",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            }
+          }
         },
         "zh-cn": {
-          "file": "255eb5de1b93",
+          "file": "115f17f9229b",
           "counts": {
-            "esri": 55,
-            "esri-check": 4,
-            "community": 0,
-            "manual": 0,
-            "existing": 0,
-            "machine": 0,
-            "stale": 0,
-            "missing": 182
-          },
-          "entries": {}
-        },
-        "uk": {
-          "file": "5049e4b73aea",
-          "counts": {
-            "esri": 57,
+            "esri": 233,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
+            "machine": 7,
+            "stale": 0,
+            "missing": 18
+          },
+          "entries": {
+            "copyUrl": {
+              "t": "复制服务 URL",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "addLayer": {
+              "t": "从 URL 添加层",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerLabel": {
+              "t": "服务 URL 或项目 ID",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerError": {
+              "t": "这层无法添加。 检查 URL 或项 ID 再试一次 。",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "exportLayerCsv": {
+              "t": "导出层列表( CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "helpTroubleContact": {
+              "t": "还卡住了? 联系GIS分部,并提及地图层名称和这个应用程序.",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            },
+            "urlOrItemId": {
+              "t": "URL 或项目标识",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            }
+          }
+        },
+        "uk": {
+          "file": "4567b1552afb",
+          "counts": {
+            "esri": 241,
+            "esri-check": 1,
+            "community": 0,
+            "manual": 0,
+            "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
           "entries": {}
         },
         "vi": {
-          "file": "b83a11a97716",
+          "file": "e6f2bcd6be35",
           "counts": {
-            "esri": 54,
-            "esri-check": 5,
+            "esri": 237,
+            "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            }
+          }
         },
         "zh-hk": {
-          "file": "0ff6f157617c",
+          "file": "b4836217c227",
           "counts": {
-            "esri": 57,
-            "esri-check": 2,
+            "esri": 236,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 5,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "addLayer": {
+              "t": "從 URL 新增層次",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerLabel": {
+              "t": "服務 URL 或項目代碼",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerError": {
+              "t": "這層子無法新增。 檢查 URL 或項目 ID 再試一次 。",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "exportLayerCsv": {
+              "t": "匯出層次列表 (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "helpTroubleContact": {
+              "t": "還卡著? 聯繫 GIS 區域, 並提到地圖層名與這個應用程式 。",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            }
+          }
         },
         "zh-tw": {
-          "file": "0ff6f157617c",
+          "file": "b4836217c227",
           "counts": {
-            "esri": 57,
-            "esri-check": 2,
+            "esri": 236,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 5,
             "stale": 0,
-            "missing": 182
+            "missing": 18
           },
-          "entries": {}
+          "entries": {
+            "addLayer": {
+              "t": "從 URL 新增層次",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerLabel": {
+              "t": "服務 URL 或項目代碼",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerError": {
+              "t": "這層子無法新增。 檢查 URL 或項目 ID 再試一次 。",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "exportLayerCsv": {
+              "t": "匯出層次列表 (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "helpTroubleContact": {
+              "t": "還卡著? 聯繫 GIS 區域, 並提到地圖層名與這個應用程式 。",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            }
+          }
         }
       }
     },
     "setting": {
-      "en": "7a450cc43cef",
-      "keys": 92,
+      "en": "6201c8b376f2",
+      "keys": 107,
       "hashes": {
         "sourceLabel": "6da13addb000",
         "sourceDescript": "3ce702e26c07",
@@ -897,6 +1765,18 @@
         "cleanNamePrefix": "e361c4daabe8",
         "cleanNamePrefixHint": "aaf18174f507",
         "cleanNameTitleCase": "3ebc8b8676ff",
+        "translateLayerNames": "a19db8ac493c",
+        "translateLayerNamesHint": "9a9173809d13",
+        "layerNamesFromMemory": "0ab6d9284790",
+        "layerNameMemoryUrl": "87a2b5dfacee",
+        "layerNameMtUrl": "9d36c626a00b",
+        "layerNameMtKey": "da74da9da949",
+        "layerNameKeep": "316f187836a5",
+        "layerNameOverrides": "c378016275f9",
+        "layerNameOverridesBad": "1bf414f6c5c9",
+        "collectLayerNames": "b00d4a11820c",
+        "collectLayerNamesHint": "1006ac04fd95",
+        "collectLayerNamesDone": "da3c9159f3aa",
         "presetViewsLabel": "cc7f83870863",
         "presetViewsDesc": "f0938e95997f",
         "presetNone": "6e9162a71ea7",
@@ -933,90 +1813,129 @@
         "importSuccess": "300b8b3e68d9",
         "importError": "a9edbe244d56",
         "importEmpty": "cd1d16092e10",
-        "exportError": "6ebc6bd9c4b7"
+        "exportError": "6ebc6bd9c4b7",
+        "help": "c47ae15370cf",
+        "showHelpGuide": "03e9f0b81336",
+        "showTheQuestionMarkButtonThat": "62c4e81a84ca"
       },
       "locales": {
         "ar": {
-          "file": "fe63c09c5350",
+          "file": "1e892a1881bf",
           "counts": {
-            "esri": 29,
+            "esri": 88,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 7,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "imageryIndexUrl": {
+              "t": "الفهرس URL (أطلق فارغاً من أجل نسخة أوسمب.",
+              "src": "machine",
+              "h": "8d3044bb2878"
+            },
+            "cleanNamePrefix": {
+              "t": "Prefix to strip (regular expression, case-insensitive)",
+              "src": "machine",
+              "h": "e361c4daabe8"
+            },
+            "presetUpdate": {
+              "t": "Update from map",
+              "src": "machine",
+              "h": "567b8541147a"
+            },
+            "enableAddLayer": {
+              "t": "إضافة طبقة من طراز URL (رؤوس)",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "exportSettings": {
+              "t": "(XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "(XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importEmpty": {
+              "t": "No recognized settings were found in that file.",
+              "src": "machine",
+              "h": "cd1d16092e10"
+            }
+          }
         },
         "bg": {
-          "file": "114fa5776118",
+          "file": "34811104bafb",
           "counts": {
-            "esri": 29,
+            "esri": 95,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "bs": {
-          "file": "78e3b9df003e",
+          "file": "d51806b5e0c2",
           "counts": {
-            "esri": 29,
+            "esri": 30,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 77
           },
           "entries": {}
         },
         "ca": {
-          "file": "a03eb8004692",
+          "file": "68bf2b82a2ea",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "cs": {
-          "file": "8afc776e5265",
+          "file": "b986dd8a0108",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "da": {
-          "file": "eee46f9b0f07",
+          "file": "2b558961a32e",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "layerTransparency": {
@@ -1027,30 +1946,41 @@
           }
         },
         "de": {
-          "file": "68fc2a663981",
+          "file": "972e01b1ff21",
           "counts": {
-            "esri": 28,
+            "esri": 92,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "enableBasemapSwitcher": {
+              "t": "Basemap Switcher (Header)",
+              "src": "machine",
+              "h": "5d881263120e"
+            },
+            "showHelpGuide": {
+              "t": "Show Help Guide",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            }
+          }
         },
         "el": {
-          "file": "ce931291e4a1",
+          "file": "eb79b9afcd45",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "goto": {
@@ -1061,30 +1991,30 @@
           }
         },
         "es": {
-          "file": "174d4cfa92f3",
+          "file": "2f5d3da95cb3",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "et": {
-          "file": "cdcca81d48bd",
+          "file": "6bbf8d959181",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "customizeDescription": {
@@ -1095,128 +2025,212 @@
           }
         },
         "fi": {
-          "file": "df8e35b7794c",
+          "file": "0d299b398d1b",
           "counts": {
-            "esri": 29,
+            "esri": 95,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "fr": {
-          "file": "135d18f5295a",
+          "file": "8e19f6111f00",
           "counts": {
-            "esri": 29,
+            "esri": 94,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 1,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "sourceLabel": {
+              "t": "Source",
+              "src": "machine",
+              "h": "6da13addb000"
+            }
+          }
         },
         "he": {
-          "file": "1c5f0945d616",
+          "file": "3e02faa1be81",
           "counts": {
-            "esri": 29,
+            "esri": 90,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 5,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "enableAddLayer": {
+              "t": "הוסף שכבה מ-URL (ראש)",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "importExportDesc": {
+              "t": "שמור את האפשרויות ואפשרויות משופרת לקובץ XML, או לטעון אותם מאחד. בחירת המפה אינה נכללת.",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "הגדרות יצוא (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "הגדרות ייבוא (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importError": {
+              "t": "לא יכול לקרוא את הקובץ הזה. ודא כי זה קובץ XML מייצא מן הווידג'ט הזה.",
+              "src": "machine",
+              "h": "a9edbe244d56"
+            }
+          }
         },
         "hr": {
-          "file": "78e3b9df003e",
+          "file": "d51806b5e0c2",
           "counts": {
-            "esri": 29,
+            "esri": 30,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 77
           },
           "entries": {}
         },
         "hu": {
-          "file": "da0a11062879",
+          "file": "bf87df09aae6",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "id": {
-          "file": "fb0af2a5e91f",
+          "file": "f28a507ecac6",
           "counts": {
-            "esri": 28,
+            "esri": 92,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 2,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "pickOneAria": {
+              "t": "One layer at a time in",
+              "src": "machine",
+              "h": "6b997154a8b2"
+            },
+            "flashLayer": {
+              "t": "Flash / locate",
+              "src": "machine",
+              "h": "a45bb9429bb4"
+            }
+          }
         },
         "it": {
-          "file": "de7b3775beec",
+          "file": "eedc67f56cb9",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "ja": {
-          "file": "31984a7e188a",
+          "file": "d47e2345481e",
           "counts": {
-            "esri": 28,
+            "esri": 86,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 8,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "enableLayerCsv": {
+              "t": "バッチオプションに「エクスポートレイヤーリスト(CSV)」を追加",
+              "src": "machine",
+              "h": "a2547b86d5d2"
+            },
+            "extraLayerTools": {
+              "t": "レイヤーツールの追加(フラッシュ、URLのコピー、リフレッシュ、詳細)",
+              "src": "machine",
+              "h": "64ee59c260b7"
+            },
+            "enableAddLayer": {
+              "t": "URL(ヘッダー)からレイヤーを追加します。",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "copyUrl": {
+              "t": "サービスURLのコピー",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "importExportDesc": {
+              "t": "オプションを保存し、XML ファイルにオプションを強化したり、そこからそれらをロードしたりします。 地図選択は含まれていません。",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "エクスポート設定(XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "インポート設定(XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importError": {
+              "t": "ファイルが読み込まれない。 このウィジェットからエクスポートされたXMLファイルであることを確認してください。",
+              "src": "machine",
+              "h": "a9edbe244d56"
+            }
+          }
         },
         "ko": {
-          "file": "7f97a9aa14b4",
+          "file": "2b3c0f0c38a4",
           "counts": {
-            "esri": 23,
-            "esri-check": 4,
+            "esri": 86,
+            "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 2,
-            "machine": 0,
+            "machine": 6,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "sourceDescript": {
@@ -1228,20 +2242,50 @@
               "t": "확대",
               "src": "existing",
               "h": "0a0075fdea0c"
+            },
+            "enableAddLayer": {
+              "t": "URL에서 레이어 추가 (헤더)",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "copyUrl": {
+              "t": "복사 서비스 URL",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "importExportDesc": {
+              "t": "XML 파일에 옵션과 향상된 옵션을 저장하거나 하나에서로드하십시오. 지도 선택은 포함되지 않습니다.",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "수출 설정 (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "가져오기 설정 (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importError": {
+              "t": "그 파일을 읽을 수 없습니다. 이 위젯에서 수출 된 XML 파일인지 확인하십시오.",
+              "src": "machine",
+              "h": "a9edbe244d56"
             }
           }
         },
         "lt": {
-          "file": "216f912833b6",
+          "file": "d098ea7bb04c",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "goto": {
@@ -1252,16 +2296,16 @@
           }
         },
         "lv": {
-          "file": "93cc8a18e7b3",
+          "file": "f4cfba931960",
           "counts": {
-            "esri": 24,
-            "esri-check": 3,
+            "esri": 93,
+            "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 2,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "goto": {
@@ -1277,44 +2321,44 @@
           }
         },
         "no": {
-          "file": "a1d21f2d64ef",
+          "file": "bcee236e47e6",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "nl": {
-          "file": "9bcf2bbcd205",
+          "file": "a2e6d9336b6b",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "pl": {
-          "file": "0c1c6b3bd7ac",
+          "file": "48405699ee0b",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "sourceLabel": {
@@ -1325,86 +2369,86 @@
           }
         },
         "pt-br": {
-          "file": "d291ca35cc3d",
+          "file": "a2057349c75d",
           "counts": {
-            "esri": 29,
+            "esri": 95,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "pt-pt": {
-          "file": "91cbb4ffab40",
+          "file": "f967cd7e5262",
           "counts": {
-            "esri": 28,
+            "esri": 94,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "ro": {
-          "file": "e6d71a3c702e",
+          "file": "7cbbdd390594",
           "counts": {
-            "esri": 29,
+            "esri": 95,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "ru": {
-          "file": "85cc7d4de72e",
+          "file": "0a2e9411bbc2",
           "counts": {
-            "esri": 29,
+            "esri": 95,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "sk": {
-          "file": "75ac8ab1ee7b",
+          "file": "497d866ca72a",
           "counts": {
-            "esri": 29,
+            "esri": 95,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "sl": {
-          "file": "8a526c2a40d7",
+          "file": "fb51af0778da",
           "counts": {
-            "esri": 27,
+            "esri": 93,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "goto": {
@@ -1415,44 +2459,65 @@
           }
         },
         "sr": {
-          "file": "7b923ceeaacf",
+          "file": "e38572fe8f78",
           "counts": {
-            "esri": 28,
+            "esri": 29,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 77
           },
           "entries": {}
         },
         "sv": {
-          "file": "0ffd8b59ec06",
+          "file": "4f8feca73bd6",
           "counts": {
-            "esri": 29,
+            "esri": 91,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 4,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "enableMasterOpacity": {
+              "t": "Master opacity slider (header)",
+              "src": "machine",
+              "h": "b0dbdc1cf4ca"
+            },
+            "enableBasemapSwitcher": {
+              "t": "Basemap switcher (header)",
+              "src": "machine",
+              "h": "5d881263120e"
+            },
+            "flashLayer": {
+              "t": "Flash / Locate",
+              "src": "machine",
+              "h": "a45bb9429bb4"
+            },
+            "filterPlaceholderLabel": {
+              "t": "Filter box placeholder text",
+              "src": "machine",
+              "h": "845520a6cdc7"
+            }
+          }
         },
         "th": {
-          "file": "3af0b6abc892",
+          "file": "b053662f843c",
           "counts": {
-            "esri": 26,
+            "esri": 86,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 2,
-            "machine": 0,
+            "machine": 6,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "sourceDescript": {
@@ -1464,68 +2529,149 @@
               "t": "เลือกชั้นข้อมูลที่จะแสดงผลสำหรับผู้ใช้",
               "src": "existing",
               "h": "43b6d47bcdd3"
+            },
+            "enableAddLayer": {
+              "t": "เพิ่มเลเยอร์จากที่อยู่ URL (ส่วนหัว)",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "copyUrl": {
+              "t": "คัดลอกที่อยู่ URL ของบริการ",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "importExportDesc": {
+              "t": "บันทึกตัวเลือกและเพิ่มตัวเลือกไปยังแฟ้ม XML หรือโหลดมาจากแฟ้มเดียว การคัดเลือกแผนที่ไม่ได้รวมไปด้วย",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "ตั้งค่าต่าง ๆ (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "ตั้งค่าต่าง ๆ (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importError": {
+              "t": "ไม่สามารถอ่านแฟ้มนี้ได้ ให้แน่ใจว่าเป็นแฟ้ม XML ที่ส่งออกมาจากวิดเจ็ตนี้",
+              "src": "machine",
+              "h": "a9edbe244d56"
             }
           }
         },
         "tr": {
-          "file": "3886171aecc7",
+          "file": "4c4adcb4ccaa",
           "counts": {
-            "esri": 28,
+            "esri": 91,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 3,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "presetName": {
+              "t": "Preset name",
+              "src": "machine",
+              "h": "eb39e1d78db8"
+            },
+            "filterPlaceholderLabel": {
+              "t": "Filter box placeholder text",
+              "src": "machine",
+              "h": "845520a6cdc7"
+            },
+            "showHelpGuide": {
+              "t": "Show help guide",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            }
+          }
         },
         "zh-cn": {
-          "file": "8ac78ace0af6",
+          "file": "6819c162fef5",
           "counts": {
-            "esri": 28,
+            "esri": 87,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 0,
+            "machine": 7,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "layerTransparency": {
               "t": "调整图层透明度。",
               "src": "existing",
               "h": "535b81b2c056"
+            },
+            "enableLayerCsv": {
+              "t": "在批量选项中添加“ 输出层列表( CSV) ”",
+              "src": "machine",
+              "h": "a2547b86d5d2"
+            },
+            "enableAddLayer": {
+              "t": "从 URL (标题) 添加图层",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "copyUrl": {
+              "t": "复制服务 URL",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "importExportDesc": {
+              "t": "将“选项”和“增强”选项保存到 XML 文件,或者从一个文件装入。 不包含地图选择 。",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "导出设置 (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "导入设置 (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importError": {
+              "t": "无法读取该文件 。 确定它是从此部件导出的一个 XML 文件 。",
+              "src": "machine",
+              "h": "a9edbe244d56"
             }
           }
         },
         "uk": {
-          "file": "3f5789c1aae0",
+          "file": "e70042aa8f2b",
           "counts": {
-            "esri": 29,
+            "esri": 95,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {}
         },
         "vi": {
-          "file": "c15dd45a1a5c",
+          "file": "e627f26c2ac0",
           "counts": {
-            "esri": 27,
+            "esri": 93,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
             "machine": 0,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
           "entries": {
             "visibilityRange": {
@@ -1536,32 +2682,94 @@
           }
         },
         "zh-hk": {
-          "file": "c1b7f79212a5",
+          "file": "e5e1b92b65af",
           "counts": {
-            "esri": 29,
+            "esri": 89,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 6,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "enableLayerCsv": {
+              "t": "在批量選項中加入「 匯出層面清單( CSV) 」",
+              "src": "machine",
+              "h": "a2547b86d5d2"
+            },
+            "enableAddLayer": {
+              "t": "從 URL (信頭) 新增層次",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "importExportDesc": {
+              "t": "將選項與增强選項儲存到 XML 檔案, 或是從其中載入 。 不包括地圖選擇 。",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "匯出設定值 (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "匯入設定值 (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importError": {
+              "t": "無法讀取檔案 。 請確定它是從此元件匯出的一个 XML 檔案 。",
+              "src": "machine",
+              "h": "a9edbe244d56"
+            }
+          }
         },
         "zh-tw": {
-          "file": "c1b7f79212a5",
+          "file": "e5e1b92b65af",
           "counts": {
-            "esri": 29,
+            "esri": 89,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 6,
             "stale": 0,
-            "missing": 63
+            "missing": 12
           },
-          "entries": {}
+          "entries": {
+            "enableLayerCsv": {
+              "t": "在批量選項中加入「 匯出層面清單( CSV) 」",
+              "src": "machine",
+              "h": "a2547b86d5d2"
+            },
+            "enableAddLayer": {
+              "t": "從 URL (信頭) 新增層次",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "importExportDesc": {
+              "t": "將選項與增强選項儲存到 XML 檔案, 或是從其中載入 。 不包括地圖選擇 。",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "匯出設定值 (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "匯入設定值 (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importError": {
+              "t": "無法讀取檔案 。 請確定它是從此元件匯出的一个 XML 檔案 。",
+              "src": "machine",
+              "h": "a9edbe244d56"
+            }
+          }
         }
       }
     }

@@ -12,7 +12,7 @@ import {
   AllDataSourceTypes,
   type WidgetJson
 } from 'jimu-core'
-import { Switch, Radio, Label, Alert, Checkbox, TextInput, Button, defaultMessages as jimuDefaultMessages } from 'jimu-ui'
+import { Switch, Radio, Label, Alert, Checkbox, TextInput, TextArea, Button, defaultMessages as jimuDefaultMessages } from 'jimu-ui'
 import {
   MapWidgetSelector,
   SettingSection,
@@ -28,7 +28,9 @@ import MapThumb from './components/map-thumb'
 import { getStyle } from './lib/style'
 import { type JimuMapView, JimuMapViewComponent, MapViewManager } from 'jimu-arcgis'
 import { visibleLayerIds } from '../runtime/lib/share-link'
+import { DEFAULT_MEMORY_URL, namesAsDefaultTs } from '../runtime/lib/layer-name-i18n'
 import type { PresetView } from '../config'
+import { __setIntl, __t } from './i18n-t'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
 
@@ -102,7 +104,8 @@ WidgetSettingState
     'toolSpotlight', 'toolMove', 'symbolOption', 'enablePickOneGroups',
     'enableShareLink', 'telemetryLayers', 'reportBrokenLayers', 'searchLayerDescriptions', 'enableLayerCsv',
     'enableLayerHealth', 'layerHealthMinutes', 'cleanLayerNames', 'cleanNamePrefix', 'cleanNameTitleCase',
-    'enableFavorites', 'enableImageryIndex', 'imageryIndexUrl', 'toolZoomToScale'
+    'enableFavorites', 'enableImageryIndex', 'imageryIndexUrl', 'toolZoomToScale',
+    'translateLayerNames', 'layerNamesFromMemory', 'layerNameMemoryUrl', 'layerNameMtUrl', 'layerNameMtKey', 'layerNameKeep', 'layerNameOverrides'
   ]
 
   static mapExtraStateProps = (state: IMState): ExtraProps => {
@@ -736,6 +739,90 @@ WidgetSettingState
     )
   }
 
+  // ---- Layer names in the app language ----
+  setConfigValue = (key: string, value: any) => {
+    this.props.onSettingChange({ id: this.props.id, config: this.props.config.set(key, value) })
+  }
+
+  // Every layer title in the builder's map views (groups and sublayers included).
+  collectNames = (): string[] => {
+    const out: string[] = []
+    const views: any = this.getAllMapViews() || {}
+    for (const id of Object.keys(views)) {
+      const all = views[id]?.view?.map?.allLayers
+      const arr = all ? (all.toArray ? all.toArray() : all) : []
+      for (const l of arr) {
+        if (l?.title) out.push(String(l.title))
+        const subs = l?.allSublayers ? (l.allSublayers.toArray ? l.allSublayers.toArray() : l.allSublayers) : []
+        for (const s of subs) if (s?.title) out.push(String(s.title))
+      }
+    }
+    return Array.from(new Set(out.map(s => s.trim()).filter(Boolean))).sort((a, b) => a.localeCompare(b))
+  }
+
+  onCollectNames = () => {
+    const names = this.collectNames()
+    const raw: any = this.props.config?.layerNameOverrides
+    const current: any = raw ? (raw.asMutable ? raw.asMutable({ deep: true }) : { ...raw }) : {}
+    for (const n of names) if (!current[n]) current[n] = {}
+    this.setConfigValue('layerNameOverrides', current)
+    this.setState({ layerNameText: JSON.stringify(current, null, 2), layerNameMsg: this.getTranslatedString('collectLayerNamesDone').replace('{count}', String(names.length)) } as any)
+    try { (navigator as any).clipboard?.writeText(namesAsDefaultTs(names)) } catch (e) { /* clipboard blocked */ }
+  }
+
+  getLayerNameLanguageContent = () => {
+    const cfg: any = this.props.config || {}
+    const plain = (v: any) => (v && typeof v.asMutable === 'function' ? v.asMutable({ deep: true }) : v)
+    const st: any = this.state || {}
+    const overridesText = st.layerNameText ?? JSON.stringify(plain(cfg.layerNameOverrides) || {}, null, 2)
+    const keepText = st.layerNameKeepText ?? (plain(cfg.layerNameKeep) || []).join('\n')
+    return (
+      <React.Fragment>
+        <SettingRow flow='wrap' className='ml-3'>
+          <Label className='enhanced-options-desc'>{this.getTranslatedString('translateLayerNamesHint')}</Label>
+        </SettingRow>
+        {this.getToolSwitch('layerNamesFromMemory', 'layerNamesFromMemory')}
+        {cfg.layerNamesFromMemory !== false &&
+          <SettingRow flow='wrap' label={this.getFormattedMessage('layerNameMemoryUrl')} className='ml-3'>
+            <TextInput className='w-100' size='sm' value={cfg.layerNameMemoryUrl || ''} placeholder={DEFAULT_MEMORY_URL}
+              onChange={(evt) => { this.setConfigValue('layerNameMemoryUrl', evt.target.value) }} />
+          </SettingRow>
+        }
+        <SettingRow flow='wrap' label={this.getFormattedMessage('layerNameMtUrl')} className='ml-3'>
+          <TextInput className='w-100' size='sm' value={cfg.layerNameMtUrl || ''} placeholder='https://libretranslate.example.org'
+            onChange={(evt) => { this.setConfigValue('layerNameMtUrl', evt.target.value) }} />
+        </SettingRow>
+        {!!cfg.layerNameMtUrl &&
+          <SettingRow flow='wrap' label={this.getFormattedMessage('layerNameMtKey')} className='ml-3'>
+            <TextInput className='w-100' size='sm' type='password' value={cfg.layerNameMtKey || ''}
+              onChange={(evt) => { this.setConfigValue('layerNameMtKey', evt.target.value) }} />
+          </SettingRow>
+        }
+        <SettingRow flow='wrap' label={this.getFormattedMessage('layerNameKeep')} className='ml-3'>
+          <TextArea className='w-100' height={80} value={keepText}
+            onChange={(evt: any) => {
+              const text = String(evt.target.value)
+              this.setState({ layerNameKeepText: text } as any)
+              this.setConfigValue('layerNameKeep', text.split(/\r?\n/).map(s => s.trim()).filter(Boolean))
+            }} />
+        </SettingRow>
+        <SettingRow flow='wrap' className='ml-3'>
+          <Button size='sm' type='secondary' onClick={this.onCollectNames}>{this.getTranslatedString('collectLayerNames')}</Button>
+          <Label className='enhanced-options-desc mt-1'>{st.layerNameMsg || this.getTranslatedString('collectLayerNamesHint')}</Label>
+        </SettingRow>
+        <SettingRow flow='wrap' label={this.getFormattedMessage('layerNameOverrides')} className='ml-3'>
+          <TextArea className='w-100' height={160} value={overridesText}
+            onChange={(evt: any) => {
+              const text = String(evt.target.value)
+              let ok = true
+              try { const obj = JSON.parse(text || '{}'); if (obj && typeof obj === 'object' && !Array.isArray(obj)) this.setConfigValue('layerNameOverrides', obj); else ok = false } catch (e) { ok = false }
+              this.setState({ layerNameText: text, layerNameMsg: ok ? '' : this.getTranslatedString('layerNameOverridesBad') } as any)
+            }} />
+        </SettingRow>
+      </React.Fragment>
+    )
+  }
+
   getEnhancedOptionsContent = () => {
     const collapsibleOn = !!(this.props.config && this.props.config.collapsibleList)
     const searchOn = !!(this.props.config && this.props.config.searchLayers)
@@ -836,6 +923,8 @@ WidgetSettingState
             {this.getToolSwitchOff('cleanNameTitleCase', 'cleanNameTitleCase')}
           </React.Fragment>
         }
+        {this.getSwitchOption('translateLayerNames')}
+        {this.props.config?.translateLayerNames && this.getLayerNameLanguageContent()}
         {this.getSwitchOption('enableMasterOpacity')}
         {this.getSwitchOption('enableBasemapSwitcher')}
         {this.getSwitchOption('enableLegendPanel')}
@@ -1062,6 +1151,7 @@ WidgetSettingState
   }
 
   render () {
+    __setIntl((this.props as any).intl)
     const portalUrl = this.getPortUrl()
 
     let setDataContent = null
@@ -1313,12 +1403,12 @@ WidgetSettingState
               </SettingRow>
             }
           </SettingSection>
-          <SettingSection title='Help'>
-            <SettingRow tag='label' label='Show help guide'>
+          <SettingSection title={__t("help")}>
+            <SettingRow tag='label' label={__t("showHelpGuide")}>
               <Switch
                 checked={this.props.config?.showHelp !== false}
                 onChange={(evt) => { this.props.onSettingChange({ id: this.props.id, config: (this.props.config as any).set('showHelp', evt.target.checked) }) }}
-                aria-label='Show the question-mark button that opens the widget help guide'
+                aria-label={__t("showTheQuestionMarkButtonThat")}
               />
             </SettingRow>
           </SettingSection>

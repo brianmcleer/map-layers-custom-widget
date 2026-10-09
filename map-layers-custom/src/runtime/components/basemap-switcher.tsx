@@ -3,6 +3,7 @@ import { css, hooks, type IMThemeVariables, jsx, React } from 'jimu-core'
 import { MapViewManager, loadArcGISJSAPIModules } from 'jimu-arcgis'
 import { Dropdown, DropdownButton, DropdownMenu, DropdownItem, Tooltip } from 'jimu-ui'
 import message from '../translations/default'
+import { __setIntl, __t } from '../i18n-t'
 
 interface Props {
   theme: IMThemeVariables
@@ -27,6 +28,7 @@ const BasemapGlyph = () => (
 )
 
 export default function BasemapSwitcher (props: Props) {
+  __setIntl((props as any).intl)
   const { theme, jimuMapViewId, viewFromMapWidget } = props
   const translate = hooks.useTranslation(message)
   const [items, setItems] = useState<Array<{ id: string, title: string, basemap: any }>>([])
@@ -65,7 +67,7 @@ export default function BasemapSwitcher (props: Props) {
         const list = (basemaps || []).map((bm: any, i: number) => {
           const title = bm.title || (bm.portalItem && bm.portalItem.title) ||
             (bm.baseLayers && bm.baseLayers.length && bm.baseLayers.getItemAt(0).title) ||
-            `Basemap ${i + 1}`
+            __t("basemapValue", { value: i + 1 })
           return { id: bm.id || `basemap-${i}`, title, basemap: bm }
         })
         setItems(list)

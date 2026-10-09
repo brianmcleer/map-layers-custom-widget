@@ -2,6 +2,10 @@
 
 Newest first. Every release bumps `manifest.json` and `package.json` together.
 
+## 1.48.0 (2026-10-09)
+
+- Added: **layer names in the app language** (`translateLayerNames`, under Enhanced options). The list shows each web map name translated for the current locale and switches live when the locale changes (`?locale=`, the browser, the ArcGIS profile, the Language Switcher). Display only: layer titles never change, so search, popups, other widgets and saved views keep working on the web map names. Sources, first match wins: a "keep as is" list (proper nouns, acronyms), the builder's own translations (JSON in settings), the shared exb-i18n-kit translation memory (`layerNamesFromMemory`, on; `layerNameMemoryUrl` for your own), an optional LibreTranslate server for names nobody translated yet (`layerNameMtUrl`, `layerNameMtKey`, cached per page), then the web map name. **Collect layer names** in settings adds every name in the map to your translations and copies a file the shared memory can read. The list filter matches the translated names. `src/runtime/lib/layer-name-i18n.ts`, no Experience Builder imports.
+
 ## 1.47.0 (2026-09-30)
 
 - Added: **layer status heartbeat** for City Map Beacon. Each open page sends one `layers-status` row about 10 seconds after the list is ready, then on the health check interval (default 5 minutes), only while the page is visible, and an unchanged status at most every 15 minutes. Detail: `on 7 | down 0 | broken 1 | Water Mains; Parcels; ...` (counts, then the names of the layers drawing now, clipped to fit). The dashboard uses it to clear a restored layer or service at once and to show which layers are on right now. Rides on the layer telemetry switch (`telemetryLayers`).

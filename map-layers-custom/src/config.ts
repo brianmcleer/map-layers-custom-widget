@@ -96,6 +96,20 @@ export interface Config {
   cleanLayerNames?: boolean
   cleanNamePrefix?: string
   cleanNameTitleCase?: boolean
+  // Show layer names in the app language (display only; the web map titles never change).
+  // Updates when the locale changes (?locale=, browser, ArcGIS profile, Language Switcher).
+  translateLayerNames?: boolean
+  // Use the shared translation memory (exb-i18n-kit on GitHub). Undefined means on.
+  layerNamesFromMemory?: boolean
+  // Folder URL with <locale>.json memory files; empty = the exb-i18n-kit memory.
+  layerNameMemoryUrl?: string
+  // Optional LibreTranslate server for names nobody translated yet (results cached per page).
+  layerNameMtUrl?: string
+  layerNameMtKey?: string
+  // Names always shown as in the web map (proper nouns, acronyms).
+  layerNameKeep?: string[]
+  // The builder's own translations: web map name -> { locale -> name }. Win over the memory.
+  layerNameOverrides?: { [english: string]: { [locale: string]: string } }
   // Star layers from the layer menu (per browser) and filter the list to them.
   enableFavorites?: boolean
   // Add layer panel gains an "Imagery nearby" tab fed by the OSM Editor Layer Index.

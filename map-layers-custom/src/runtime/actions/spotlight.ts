@@ -1,6 +1,7 @@
 import Action from './action'
 import type { Widget } from '../widget'
 import { ACTION_INDEXES } from './constants'
+import { __tc } from '../i18n-t'
 
 const getView = (widget: any): any => {
   return widget.viewFromMapWidget || widget.jmvFromMap?.view
@@ -208,7 +209,7 @@ export default class Spotlight extends Action {
     })
 
     w._spotlightLayerId = targetNode.id
-    const name = targetNode.title || target.title || 'this layer'
+    const name = __tc(targetNode.title || target.title, "thisLayer")
     try { if (typeof w.setState === 'function') w.setState({ spotlightLayerName: name }) } catch (e) { /* noop */ }
 
     // Cover the enter-time list rebuild: while this flag is up, items recreated

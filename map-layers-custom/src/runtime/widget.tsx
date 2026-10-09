@@ -28,7 +28,9 @@ import { beacon } from '../shared/beacon'
 import type { BeaconHandle } from '../shared/beacon'
 import { readShareIds, applyShareIds } from './lib/share-link'
 import { cleanTitle, decorateTitle } from './lib/display-title'
+import { loadMemory, machineTranslate, translateName, memoryLocale, DEFAULT_MEMORY_URL } from './lib/layer-name-i18n'
 import { isFavorite, subscribeFavorites } from './lib/favorites'
+import { __setIntl } from './i18n-t'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
 
@@ -118,6 +120,12 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     private _healthRunning = false
     private _esriRequest: any = null
     private _unsubscribeFavorites: (() => void) | null = null
+    // Layer names in the app language: the locale they were loaded for, the shared memory for it,
+    // and a counter so a slow load for an old locale never overwrites a newer one.
+    private _nameLocale = ''
+    private _nameKey = ''
+    private _nameMemory: Map<string, string> | null = null
+    private _nameSeq = 0
     // Set in componentWillUnmount. Async list builds check it after every await so a widget that
     // closed mid-load (panel closed, page switched) never touches a detached container.
     private _unmounted = false
@@ -247,6 +255,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         })
         // First-run hint shows until the user dismisses it once (or opens the guide)
         if (!this.readHintDismissed()) this.setState({ showFirstRunHint: true })
+        this.syncNameLanguage()
     }
 
     // ==================== In-widget help guide (shared pattern, see WIDGETHANDOFF Section 10) ====================
@@ -395,6 +404,8 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     }
 
     componentDidUpdate(prevProps: WidgetProps & ExtraProps, prevState: WidgetState) {
+        // Layer names follow the app language (and the name settings) without a reload.
+        this.syncNameLanguage()
         if (this.props.isDesignMode && this.props.isDesignMode !== prevProps.isDesignMode) {
             // Clean up the native popper when switch to the design mode
             this.setState({ nativeActionPopper: null })
@@ -1020,11 +1031,89 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     // The layer's own title is never changed.
     displayTitle(layer: any): string {
         const config: any = this.props.config || {}
-        return cleanTitle(String(layer?.title ?? ''), {
+        const original = String(layer?.title ?? '')
+        const cleaned = cleanTitle(original, {
             clean: !!config.cleanLayerNames,
             prefix: config.cleanNamePrefix || '',
             titleCase: !!config.cleanNameTitleCase
         })
+        if (!config.translateLayerNames) return cleaned
+        // The web map name first (exact match), then the cleaned one.
+        const opts = this.nameOptions()
+        const locale = this.appLocale()
+        const byOriginal = translateName(original, locale, opts, this._nameMemory || undefined)
+        if (byOriginal !== original) return byOriginal
+        return translateName(cleaned, locale, opts, this._nameMemory || undefined)
+    }
+
+    // ==================== Layer names in the app language ====================
+
+    // The app language: the widget intl (?locale=, browser, ArcGIS profile, Language Switcher).
+    appLocale(): string {
+        const intl: any = (this.props as any).intl
+        let loc: string = intl?.locale || ''
+        if (!loc) { try { loc = (getAppStore().getState() as any)?.appContext?.locale || '' } catch (e) { /* no store */ } }
+        return loc || (typeof navigator !== 'undefined' ? navigator.language : 'en') || 'en'
+    }
+
+    nameOptions() {
+        const config: any = this.props.config || {}
+        const plain = (v: any) => (v && typeof v.asMutable === 'function' ? v.asMutable({ deep: true }) : v)
+        return {
+            overrides: plain(config.layerNameOverrides) || {},
+            keep: plain(config.layerNameKeep) || [],
+            useMemory: config.layerNamesFromMemory !== false,
+            memoryUrl: config.layerNameMemoryUrl || DEFAULT_MEMORY_URL,
+            mtUrl: config.layerNameMtUrl || '',
+            mtApiKey: config.layerNameMtKey || ''
+        }
+    }
+
+    // Every web map title in the list (and its cleaned form), for the machine-translation fallback.
+    listTitles(): string[] {
+        const out: string[] = []
+        const list: any = this.layerListRef && this.layerListRef.current
+        if (!list || !list.operationalItems) return out
+        const config: any = this.props.config || {}
+        const walk = (items: any) => {
+            const arr = items.toArray ? items.toArray() : items
+            for (const item of arr) {
+                const t = String(item?.layer?.title ?? '')
+                if (t) out.push(cleanTitle(t, { clean: !!config.cleanLayerNames, prefix: config.cleanNamePrefix || '', titleCase: !!config.cleanNameTitleCase }))
+                if (item?.children && item.children.length > 0) walk(item.children)
+            }
+        }
+        walk(list.operationalItems)
+        return out
+    }
+
+    // Loads what the current locale needs and redraws the list titles. Cheap when nothing changed.
+    syncNameLanguage() {
+        const config: any = this.props.config || {}
+        const locale = this.appLocale()
+        const opts = this.nameOptions()
+        const key = [config.translateLayerNames ? 1 : 0, memoryLocale(locale), opts.useMemory ? opts.memoryUrl : '', opts.mtUrl,
+            JSON.stringify(opts.overrides), JSON.stringify(opts.keep)].join('|')
+        if (key === this._nameKey) return
+        const localeChanged = memoryLocale(locale) !== this._nameLocale
+        this._nameKey = key
+        this._nameLocale = memoryLocale(locale)
+        if (!config.translateLayerNames) { this._nameMemory = null; this.refreshAllTitles(); return }
+        if (localeChanged) this._nameMemory = null
+        this.refreshAllTitles() // overrides and keep list apply right away
+        const seq = ++this._nameSeq
+        ;(async () => {
+            const memory = opts.useMemory ? await loadMemory(opts.memoryUrl, locale) : null
+            if (this._unmounted || seq !== this._nameSeq) return
+            this._nameMemory = memory
+            this.refreshAllTitles()
+            if (opts.mtUrl) {
+                const missing = this.listTitles().filter(t => translateName(t, locale, opts, memory || undefined) === t)
+                await machineTranslate(missing, locale, opts.mtUrl, opts.mtApiKey)
+                if (this._unmounted || seq !== this._nameSeq) return
+                this.refreshAllTitles()
+            }
+        })()
     }
 
     // Sets a list item's title from the display name plus its marks. Safe to call often:
@@ -1763,6 +1852,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     }
 
     render() {
+    __setIntl((this.props as any).intl)
         const useMapWidget = this.props.useMapWidgetIds && this.props.useMapWidgetIds[0]
         const useDataSource = this.props.useDataSources && this.props.useDataSources[0]
 

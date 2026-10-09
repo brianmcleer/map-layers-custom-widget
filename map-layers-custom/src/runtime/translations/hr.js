@@ -243,7 +243,26 @@ System.register([], function (e) {
         restoringYourLayers: "Restoring your layers…",
         showingOnly: "Showing only",
         onTheMapEveryOtherLayer: "on the map. Every other layer is hidden until you exit.",
-        exitFocus: "Exit focus"
+        exitFocus: "Exit focus",
+        thisLayer: "this layer",
+        autoDetectServiceUrlOrItem: "Auto-detect (service URL or item ID)",
+        arcGISWebService: "ArcGIS web service",
+        vectorTileService: "Usluga vektorskih ploča",
+        geoJSONWebLink: "GeoJSON (web link)",
+        csvWebLink: "CSV (web link)",
+        kmlWebLink: "KML (web link)",
+        thatLayerCouldnTBeAdded: "That layer couldn’t be added. Check the source and try again.",
+        thatLayerCouldnTBeAdded2: "That layer couldn’t be added. Check the URL or item ID.",
+        thatFileCouldnTBeAdded: "That file couldn’t be added.",
+        noDrawingsWereFoundInThat: "No drawings were found in that file.",
+        noMapFeaturesWereFoundIn: "No map features were found in that KML.",
+        thatKmlCouldnTBeRead: "That KML couldn’t be read.",
+        thatShapefileCouldnTBeRead: "That shapefile couldn’t be read. Use a .zip containing .shp, .dbf, and .prj.",
+        unsupportedFileUseGeoJSONCsvKml: "Unsupported file. Use GeoJSON, CSV, KML, or a zipped shapefile.",
+        basemapValue: "Basemap {value}",
+        unknownError: "unknown error",
+        unserializableError: "unserializable error",
+        disableOldAppDataActionDelete: "disable old app data-action, delete unused config prop selectedJimuLayerIds"
       })
     }
   }
