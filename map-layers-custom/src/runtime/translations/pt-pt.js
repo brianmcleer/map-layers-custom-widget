@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "erro desconhecido",
         unserializableError: "erro inserializável",
         disableOldAppDataActionDelete: "desactivar a acção de dados da aplicação antiga, apagar o suporte de configuração não utilizado seleccionadoJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Isso. {value1} Não foi possível adicionar camada. Verifique o URL.",
+        thatValue1: "Isso. {value1}",
+        that: "Isso.",
+        layerCouldnTBeAddedCheck: "Não foi possível adicionar camada. Verifique o URL."
       })
     }
   }

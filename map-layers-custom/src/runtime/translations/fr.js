@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "erreur inconnue",
         unserializableError: "Erreur non sérialisable",
         disableOldAppDataActionDelete: "désactiver l'ancienne application data-action, supprimer la configuration inutilisée prop sélectionnéJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Ça {value1} La couche ne pouvait pas être ajoutée. Vérifiez l'URL.",
+        thatValue1: "Ça {value1}",
+        that: "Ça",
+        layerCouldnTBeAddedCheck: "La couche ne pouvait pas être ajoutée. Vérifiez l'URL."
       })
     }
   }

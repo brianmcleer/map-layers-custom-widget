@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "Unbekannter Fehler",
         unserializableError: "nichtialisierbarer Fehler",
         disableOldAppDataActionDelete: "alte App Data-Action deaktivieren, unbenutzte Config Prop selectedJimuLayerIds löschen",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Das {value1} Layer konnte nicht hinzugefügt werden. Überprüfen Sie die URL.",
+        thatValue1: "Das {value1}",
+        that: "Das",
+        layerCouldnTBeAddedCheck: "Layer konnte nicht hinzugefügt werden. Überprüfen Sie die URL."
       })
     }
   }

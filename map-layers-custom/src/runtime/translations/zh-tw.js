@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "未知的錯誤",
         unserializableError: "不串連的錯誤",
         disableOldAppDataActionDelete: "禁用舊的應用程式資料動作, 刪除未使用的配置 prop 選取 JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "那 {value1} 層面無法新增 。 檢查網址 。",
+        thatValue1: "那 {value1}",
+        that: "那",
+        layerCouldnTBeAddedCheck: "層面無法新增 。 檢查網址 。"
       })
     }
   }

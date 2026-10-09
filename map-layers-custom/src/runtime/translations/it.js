@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "errore sconosciuto",
         unserializableError: "errore non serializzabile",
         disableOldAppDataActionDelete: "disabilitare vecchie app data-action, eliminare config prop non utilizzato selezionatoJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Che cosa? {value1} strato non poteva essere aggiunto. Controlla l'URL.",
+        thatValue1: "Che cosa? {value1}",
+        that: "Che cosa?",
+        layerCouldnTBeAddedCheck: "strato non poteva essere aggiunto. Controlla l'URL."
       })
     }
   }

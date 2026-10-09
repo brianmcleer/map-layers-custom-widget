@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "ข้อผิดพลาดไม่ทราบสาเหตุ",
         unserializableError: "ข้อผิดพลาดที่ไม่สามารถตรวจสอบได้",
         disableOldAppDataActionDelete: "ปิดการใช้ข้อมูลเก่าของโปรแกรม และลบอุปกรณ์ปรับแต่งค่าต่าง ๆ ที่ไม่ได้ใช้งานที่ถูกเลือกไว้",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "นั่น {value1} ไม่ อาจ เพิ่ม ชั้น ได้. ตรวจสอบที่อยู่ URL",
+        thatValue1: "นั่น {value1}",
+        that: "นั่น",
+        layerCouldnTBeAddedCheck: "ไม่ อาจ เพิ่ม ชั้น ได้. ตรวจสอบที่อยู่ URL"
       })
     }
   }

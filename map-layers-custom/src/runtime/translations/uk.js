@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "Невідома помилка",
         unserializableError: "несеріалізована помилка",
         disableOldAppDataActionDelete: "вимкнути старі дані програми, видалити невикористаний config про вибранийJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Що {value1} не можна додавати шар. Перевірити URL.",
+        thatValue1: "Що {value1}",
+        that: "Що",
+        layerCouldnTBeAddedCheck: "не можна додавати шар. Перевірити URL."
       })
     }
   }

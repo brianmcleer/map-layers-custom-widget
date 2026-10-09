@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "Неизвестная ошибка",
         unserializableError: "несериализируемая ошибка",
         disableOldAppDataActionDelete: "отключить старое приложение Data-action, удалить неиспользуемый конфигурационный реквизит выбранного JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Это {value1} Слой нельзя было добавить. Проверьте URL.",
+        thatValue1: "Это {value1}",
+        that: "Это",
+        layerCouldnTBeAddedCheck: "Слой нельзя было добавить. Проверьте URL."
       })
     }
   }

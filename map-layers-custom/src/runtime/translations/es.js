@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "error desconocido",
         unserializableError: "error unserializable",
         disableOldAppDataActionDelete: "deshabilitación de datos de aplicaciones viejas, eliminar config no utilizado prop seleccionadoJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Que {value1} capa no se podía añadir. Revisa la URL.",
+        thatValue1: "Que {value1}",
+        that: "Que",
+        layerCouldnTBeAddedCheck: "capa no se podía añadir. Revisa la URL."
       })
     }
   }

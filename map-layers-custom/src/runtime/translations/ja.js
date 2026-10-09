@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "未知のエラー",
         unserializableError: "unserializable エラー",
         disableOldAppDataActionDelete: "古いアプリのデータアクションを無効化し、未使用のコンフィグのプロパティを削除JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "お問い合わせ {value1} レイヤーを追加できません。 URL を確認してください。",
+        thatValue1: "お問い合わせ {value1}",
+        that: "お問い合わせ",
+        layerCouldnTBeAddedCheck: "レイヤーを追加できません。 URL を確認してください。"
       })
     }
   }

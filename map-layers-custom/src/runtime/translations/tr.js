@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "Bilinmeyen hata",
         unserializableError: "Başarısız olmayan hata",
         disableOldAppDataActionDelete: "Eski uygulama verilerini devre dışı bırakmak, kullanılmayan yapılandırılan yapılandırı silmekJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "İşte bu {value1} katman eklenemezdi. URL'yi kontrol edin.",
+        thatValue1: "İşte bu {value1}",
+        that: "İşte bu",
+        layerCouldnTBeAddedCheck: "katman eklenemezdi. URL'yi kontrol edin."
       })
     }
   }

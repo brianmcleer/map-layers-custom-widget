@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "ukjent feil",
         unserializableError: "uiserbar feil",
         disableOldAppDataActionDelete: "deaktivere gammel app data-action, slette ubrukte oppsett prop valgtJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Det {value1} Laget kunne ikke legges til. Sjekk URL.",
+        thatValue1: "Det {value1}",
+        that: "Det",
+        layerCouldnTBeAddedCheck: "Laget kunne ikke legges til. Sjekk URL."
       })
     }
   }

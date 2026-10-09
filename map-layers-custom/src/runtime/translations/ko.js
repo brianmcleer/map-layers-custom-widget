@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "알 수없는 오류",
         unserializableError: "unserializable 오류",
         disableOldAppDataActionDelete: "오래된 앱 데이터 활동 비활성화, 사용되지 않은 설정 prop selectedJimuLayerIds 삭제",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "이름 * {value1} 층을 추가 할 수 없습니다. URL을 확인합니다.",
+        thatValue1: "이름 * {value1}",
+        that: "이름 *",
+        layerCouldnTBeAddedCheck: "층을 추가 할 수 없습니다. URL을 확인합니다."
       })
     }
   }

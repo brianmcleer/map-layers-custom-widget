@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "onbekende fout",
         unserializableError: "onuitwisbare fout",
         disableOldAppDataActionDelete: "oude app data-action uitschakelen, ongebruikte configuratieprop geselecteerd verwijderenJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Dat {value1} laag kon niet worden toegevoegd. Controleer de URL.",
+        thatValue1: "Dat {value1}",
+        that: "Dat",
+        layerCouldnTBeAddedCheck: "laag kon niet worden toegevoegd. Controleer de URL."
       })
     }
   }

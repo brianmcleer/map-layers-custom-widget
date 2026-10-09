@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "Okänd fel",
         unserializableError: "oserialiserbart fel",
         disableOldAppDataActionDelete: "inaktivera gammal app data-action, radera oanvända konfig prop selectedJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Detta {value1} Lager kunde inte läggas till. Kontrollera webbadressen.",
+        thatValue1: "Detta {value1}",
+        that: "Detta",
+        layerCouldnTBeAddedCheck: "Lager kunde inte läggas till. Kontrollera webbadressen."
       })
     }
   }

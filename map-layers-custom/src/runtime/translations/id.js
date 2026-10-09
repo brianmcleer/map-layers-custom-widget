@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "galat tak dikenal",
         unserializableError: "kesalahan tidak serialisasi",
         disableOldAppDataActionDelete: "nonaktifkan data aplikasi -action, hapus konfigurasi yang tidak digunakan prop yang dipilih oleh LemuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Itu {value1} lapisan tidak dapat ditambahkan. Periksa URL-nya.",
+        thatValue1: "Itu {value1}",
+        that: "Itu",
+        layerCouldnTBeAddedCheck: "lapisan tidak dapat ditambahkan. Periksa URL-nya."
       })
     }
   }

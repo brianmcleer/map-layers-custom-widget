@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "ukendt fejl",
         unserializableError: "userialiserbar fejl",
         disableOldAppDataActionDelete: "deaktivere gamle app data- handling, slette ubrugte config prop udvalgt JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Det {value1} lag kunne ikke tilføjes. Tjek URL 'en.",
+        thatValue1: "Det {value1}",
+        that: "Det",
+        layerCouldnTBeAddedCheck: "lag kunne ikke tilføjes. Tjek URL 'en."
       })
     }
   }

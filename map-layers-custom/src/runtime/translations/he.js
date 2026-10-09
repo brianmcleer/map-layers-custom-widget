@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "טעות לא ידועה",
         unserializableError: "טעות בלתי אפשרית",
         disableOldAppDataActionDelete: "חוסר שימוש בנתונים של אפליקציה ישנה, מחקה פרופיל לא בשימוש JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "זה {value1} לא ניתן להוסיף שכבה. בדוק את כתובת ה-URL",
+        thatValue1: "זה {value1}",
+        that: "זה",
+        layerCouldnTBeAddedCheck: "לא ניתן להוסיף שכבה. בדוק את כתובת ה-URL"
       })
     }
   }

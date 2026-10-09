@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "неизвестна грешка",
         unserializableError: "несериозна грешка",
         disableOldAppDataActionDelete: "деактивиране на старите данни за приложения, изтриване на неизползваните конфигурации избрани JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Това. {value1} не може да бъде добавен слой. Проверете адреса.",
+        thatValue1: "Това. {value1}",
+        that: "Това.",
+        layerCouldnTBeAddedCheck: "не може да бъде добавен слой. Проверете адреса."
       })
     }
   }

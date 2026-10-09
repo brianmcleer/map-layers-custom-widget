@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "tundmatu viga",
         unserializableError: "seeriaviisiline viga",
         disableOldAppDataActionDelete: "keelab vana rakenduse andmetoimingu, kustutab kasutamata konfiguratsiooni prop valitud JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "See {value1} kihti ei saanud lisada. Kontrolli URL-i.",
+        thatValue1: "See {value1}",
+        that: "See",
+        layerCouldnTBeAddedCheck: "kihti ei saanud lisada. Kontrolli URL-i."
       })
     }
   }

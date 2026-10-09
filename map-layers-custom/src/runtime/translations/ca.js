@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "error desconegut",
         unserializableError: "Error no llegible",
         disableOldAppDataActionDelete: "Deshabilita l' acció de dades d' aplicació antiga, esborra la proposta de configuració sense usar, seleccionada JimuLayer IDs",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Això {value1} La capa no es podia afegir layer. Comprova l' URL.",
+        thatValue1: "Això {value1}",
+        that: "Això",
+        layerCouldnTBeAddedCheck: "La capa no es podia afegir layer. Comprova l' URL."
       })
     }
   }

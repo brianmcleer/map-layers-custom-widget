@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "lỗi không rõ",
         unserializableError: "Lỗi không thể gửi đi được",
         disableOldAppDataActionDelete: "tắt hoạt động dữ liệu ứng dụng cũ, xoá đạo cụ cấu hình không dùng được chọn JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Đó {value1} lớp không thể thêm vào được. Kiểm tra URL.",
+        thatValue1: "Đó {value1}",
+        that: "Đó",
+        layerCouldnTBeAddedCheck: "lớp không thể thêm vào được. Kiểm tra URL."
       })
     }
   }

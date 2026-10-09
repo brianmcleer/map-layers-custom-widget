@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "ismeretlen hiba",
         unserializableError: "nem sorozható hiba",
         disableOldAppDataActionDelete: "letiltja a régi app data-action, törölje a fel nem használt config prop kiválasztott JituLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Ez {value1} A réteget nem lehetett hozzáadni. Ellenőrizze az URL-t.",
+        thatValue1: "Ez {value1}",
+        that: "Ez",
+        layerCouldnTBeAddedCheck: "A réteget nem lehetett hozzáadni. Ellenőrizze az URL-t."
       })
     }
   }

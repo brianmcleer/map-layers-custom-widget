@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "nezināma kļūda",
         unserializableError: "nepārspējama kļūda",
         disableOldAppDataActionDelete: "atslēgt veco lietotnes datu darbību, dzēst neizmantotās konfigurācijas programmas izvēlētoJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Tas {value1} slānis nevarēja pievienot. Pārbaudiet URL.",
+        thatValue1: "Tas {value1}",
+        that: "Tas",
+        layerCouldnTBeAddedCheck: "slānis nevarēja pievienot. Pārbaudiet URL."
       })
     }
   }

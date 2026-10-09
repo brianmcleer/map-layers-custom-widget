@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "nieznany błąd",
         unserializableError: "błąd niezserializowalny",
         disableOldAppDataActionDelete: "wyłączenie data- action starej aplikacji, usunięcie niewykorzystanego propu konfiguracyjnego wybranego przez JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "To {value1} warstwa nie może być dodana. Sprawdź adres URL.",
+        thatValue1: "To {value1}",
+        that: "To",
+        layerCouldnTBeAddedCheck: "warstwa nie może być dodana. Sprawdź adres URL."
       })
     }
   }

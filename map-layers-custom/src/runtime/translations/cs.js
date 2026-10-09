@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "neznámá chyba",
         unserializableError: "neserializovatelná chyba",
         disableOldAppDataActionDelete: "deaktivovat starou aplikaci data- action, odstranit nevyužité config prop selekted JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "To {value1} vrstvu nelze přidat. Zkontrolujte URL.",
+        thatValue1: "To {value1}",
+        that: "To",
+        layerCouldnTBeAddedCheck: "vrstvu nelze přidat. Zkontrolujte URL."
       })
     }
   }

@@ -273,16 +273,16 @@
       },
       "locales": {
         "ar": {
-          "file": "5a1dce1c69e9",
+          "file": "9fc3be58855d",
           "counts": {
             "esri": 246,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 14,
+            "machine": 18,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "resetVisibility": {
@@ -354,20 +354,40 @@
               "t": "No map features were found in that KML.",
               "src": "machine",
               "h": "a8d6c19d3887"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "ذلك {value1} ولا يمكن إضافة طبقة. تحقق من الـ(يورل)",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "ذلك {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "ذلك",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "ولا يمكن إضافة طبقة. تحقق من الـ(يورل)",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "bg": {
-          "file": "641898c90ce3",
+          "file": "53d5620d8ca5",
           "counts": {
             "esri": 257,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 3,
+            "machine": 7,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -384,6 +404,26 @@
               "t": "KML (web link)",
               "src": "machine",
               "h": "67e4fe645907"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Това. {value1} не може да бъде добавен слой. Проверете адреса.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Това. {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Това.",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "не може да бъде добавен слой. Проверете адреса.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
@@ -402,16 +442,16 @@
           "entries": {}
         },
         "ca": {
-          "file": "627fe2993d9b",
+          "file": "f756c0fad2b3",
           "counts": {
             "esri": 255,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 3,
+            "machine": 7,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOceans": {
@@ -428,20 +468,40 @@
               "t": "URL",
               "src": "machine",
               "h": "0e2d9b0777a4"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Això {value1} La capa no es podia afegir layer. Comprova l' URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Això {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Això",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "La capa no es podia afegir layer. Comprova l' URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "cs": {
-          "file": "0598656be68c",
+          "file": "38bacc4feb43",
           "counts": {
             "esri": 255,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 4,
+            "machine": 8,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmHybrid": {
@@ -463,20 +523,40 @@
               "t": "mapContainer",
               "src": "machine",
               "h": "7b1eaad3e538"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "To {value1} vrstvu nelze přidat. Zkontrolujte URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "To {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "To",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "vrstvu nelze přidat. Zkontrolujte URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "da": {
-          "file": "88231863772a",
+          "file": "bf599bb27471",
           "counts": {
             "esri": 247,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 12,
+            "machine": 16,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "presetViews": {
@@ -538,20 +618,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Det {value1} lag kunne ikke tilføjes. Tjek URL 'en.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Det {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Det",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "lag kunne ikke tilføjes. Tjek URL 'en.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "de": {
-          "file": "1a017ad8c832",
+          "file": "ee9007301498",
           "counts": {
             "esri": 252,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 6,
+            "machine": 10,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "presetViews": {
@@ -583,20 +683,40 @@
               "t": "mapContainer",
               "src": "machine",
               "h": "7b1eaad3e538"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Das {value1} Layer konnte nicht hinzugefügt werden. Überprüfen Sie die URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Das {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Das",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "Layer konnte nicht hinzugefügt werden. Überprüfen Sie die URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "el": {
-          "file": "fb18936bd61a",
+          "file": "82370ae05a0c",
           "counts": {
             "esri": 253,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 5,
+            "machine": 9,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "goto": {
@@ -628,20 +748,40 @@
               "t": "KML (web link)",
               "src": "machine",
               "h": "67e4fe645907"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Αυτό... {value1} Δεν μπορούσε να προστεθεί στρώμα. Έλεγξε το URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Αυτό... {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Αυτό...",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "Δεν μπορούσε να προστεθεί στρώμα. Έλεγξε το URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "es": {
-          "file": "d4e5418ac9ff",
+          "file": "e7c420d488fa",
           "counts": {
             "esri": 249,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 9,
+            "machine": 13,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "presetViews": {
@@ -688,20 +828,40 @@
               "t": "ArcGIS web service",
               "src": "machine",
               "h": "906a483616c6"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Que {value1} capa no se podía añadir. Revisa la URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Que {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Que",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "capa no se podía añadir. Revisa la URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "et": {
-          "file": "b9276794b347",
+          "file": "3c22fc9f4d1c",
           "counts": {
             "esri": 254,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 4,
+            "machine": 8,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -723,40 +883,80 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "See {value1} kihti ei saanud lisada. Kontrolli URL-i.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "See {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "See",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "kihti ei saanud lisada. Kontrolli URL-i.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "fi": {
-          "file": "9e02d939e1ea",
+          "file": "e53902b0826e",
           "counts": {
             "esri": 259,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 1,
+            "machine": 5,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
               "t": "OpenStreetMap",
               "src": "machine",
               "h": "fa78a333f9df"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Että {value1} kerros ei voitu lisätä. Tarkista URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Että {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Että",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "kerros ei voitu lisätä. Tarkista URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "fr": {
-          "file": "76396aa78526",
+          "file": "d2c0aebbfd29",
           "counts": {
             "esri": 250,
             "esri-check": 4,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 6,
+            "machine": 10,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "detailType": {
@@ -788,20 +988,40 @@
               "t": "URL",
               "src": "machine",
               "h": "0e2d9b0777a4"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Ça {value1} La couche ne pouvait pas être ajoutée. Vérifiez l'URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Ça {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Ça",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "La couche ne pouvait pas être ajoutée. Vérifiez l'URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "he": {
-          "file": "bef645569d80",
+          "file": "ac114ceff866",
           "counts": {
             "esri": 244,
             "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 13,
+            "machine": 17,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "shapefile": {
@@ -868,6 +1088,26 @@
               "t": "לא ניתן לקרוא את ה-KML הזה.",
               "src": "machine",
               "h": "1dde16e4afe0"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "זה {value1} לא ניתן להוסיף שכבה. בדוק את כתובת ה-URL",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "זה {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "זה",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "לא ניתן להוסיף שכבה. בדוק את כתובת ה-URL",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
@@ -886,16 +1126,16 @@
           "entries": {}
         },
         "hu": {
-          "file": "7b57fcab7d78",
+          "file": "ef7e36f5a270",
           "counts": {
             "esri": 254,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 5,
+            "machine": 9,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -922,20 +1162,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Ez {value1} A réteget nem lehetett hozzáadni. Ellenőrizze az URL-t.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Ez {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Ez",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "A réteget nem lehetett hozzáadni. Ellenőrizze az URL-t.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "id": {
-          "file": "c1550af1925e",
+          "file": "043a8bb997af",
           "counts": {
             "esri": 247,
             "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 10,
+            "machine": 14,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "presetViews": {
@@ -987,20 +1247,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Itu {value1} lapisan tidak dapat ditambahkan. Periksa URL-nya.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Itu {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Itu",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "lapisan tidak dapat ditambahkan. Periksa URL-nya.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "it": {
-          "file": "81f414c3fb26",
+          "file": "50da6db6620f",
           "counts": {
             "esri": 257,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 2,
+            "machine": 6,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -1012,20 +1292,40 @@
               "t": "File",
               "src": "machine",
               "h": "2c3cafa4db3f"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Che cosa? {value1} strato non poteva essere aggiunto. Controlla l'URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Che cosa? {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Che cosa?",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "strato non poteva essere aggiunto. Controlla l'URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "ja": {
-          "file": "dd2cd4d46ed7",
+          "file": "743c08d56532",
           "counts": {
             "esri": 248,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 12,
+            "machine": 16,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "copyUrl": {
@@ -1087,20 +1387,40 @@
               "t": "KMLが読み取れなかったこと。",
               "src": "machine",
               "h": "1dde16e4afe0"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "お問い合わせ {value1} レイヤーを追加できません。 URL を確認してください。",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "お問い合わせ {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "お問い合わせ",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "レイヤーを追加できません。 URL を確認してください。",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "ko": {
-          "file": "ebedc3797987",
+          "file": "3eb68a443f99",
           "counts": {
             "esri": 242,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 2,
-            "machine": 14,
+            "machine": 18,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "goto": {
@@ -1182,20 +1502,40 @@
               "t": "KML이 읽을 수 없습니다.",
               "src": "machine",
               "h": "1dde16e4afe0"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "이름 * {value1} 층을 추가 할 수 없습니다. URL을 확인합니다.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "이름 * {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "이름 *",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "층을 추가 할 수 없습니다. URL을 확인합니다.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "lt": {
-          "file": "e7bf5475f6ce",
+          "file": "289d634f18b9",
           "counts": {
             "esri": 255,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 4,
+            "machine": 8,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "goto": {
@@ -1222,20 +1562,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Tai {value1} sluoksnis negali būti pridėta. Patikrinkite URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Tai {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Tai",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "sluoksnis negali būti pridėta. Patikrinkite URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "lv": {
-          "file": "1e1ed91d7a90",
+          "file": "a1594f486a02",
           "counts": {
             "esri": 255,
             "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 1,
+            "machine": 5,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "goto": {
@@ -1247,20 +1607,40 @@
               "t": "OpenStreetMap",
               "src": "machine",
               "h": "fa78a333f9df"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Tas {value1} slānis nevarēja pievienot. Pārbaudiet URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Tas {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Tas",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "slānis nevarēja pievienot. Pārbaudiet URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "no": {
-          "file": "54d6a36f83c9",
+          "file": "a0965604969c",
           "counts": {
             "esri": 253,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 7,
+            "machine": 11,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "detailType": {
@@ -1297,20 +1677,40 @@
               "t": "mapContainer",
               "src": "machine",
               "h": "7b1eaad3e538"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Det {value1} Laget kunne ikke legges til. Sjekk URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Det {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Det",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "Laget kunne ikke legges til. Sjekk URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "nl": {
-          "file": "9cdb11816ae1",
+          "file": "8f1b0c02f198",
           "counts": {
             "esri": 256,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 4,
+            "machine": 8,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "detailType": {
@@ -1332,20 +1732,40 @@
               "t": "URL",
               "src": "machine",
               "h": "0e2d9b0777a4"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Dat {value1} laag kon niet worden toegevoegd. Controleer de URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Dat {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Dat",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "laag kon niet worden toegevoegd. Controleer de URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "pl": {
-          "file": "639066de0426",
+          "file": "4e0978d995de",
           "counts": {
             "esri": 254,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 4,
+            "machine": 8,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "shapefile": {
@@ -1367,20 +1787,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "To {value1} warstwa nie może być dodana. Sprawdź adres URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "To {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "To",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "warstwa nie może być dodana. Sprawdź adres URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "pt-br": {
-          "file": "f6f15150b904",
+          "file": "b823c0073194",
           "counts": {
             "esri": 252,
             "esri-check": 4,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 4,
+            "machine": 8,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -1402,20 +1842,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Isso. {value1} A camada não podia ser adicionada. Verifique a URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Isso. {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Isso.",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "A camada não podia ser adicionada. Verifique a URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "pt-pt": {
-          "file": "3e4997e12eb0",
+          "file": "4127a83513b2",
           "counts": {
             "esri": 255,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 3,
+            "machine": 7,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -1432,20 +1892,40 @@
               "t": "mapContainer",
               "src": "machine",
               "h": "7b1eaad3e538"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Isso. {value1} Não foi possível adicionar camada. Verifique o URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Isso. {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Isso.",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "Não foi possível adicionar camada. Verifique o URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "ro": {
-          "file": "030f208e4529",
+          "file": "125e2bc45dea",
           "counts": {
             "esri": 256,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 2,
+            "machine": 6,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "emptyListTip": {
@@ -1462,40 +1942,80 @@
               "t": "URL",
               "src": "machine",
               "h": "0e2d9b0777a4"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Asta {value1} strat nu a putut fi adăugat. Verifică URL-ul.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Asta {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Asta",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "strat nu a putut fi adăugat. Verifică URL-ul.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "ru": {
-          "file": "5689d921c331",
+          "file": "092c21557c78",
           "counts": {
             "esri": 258,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 1,
+            "machine": 5,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
               "t": "OpenStreetMap",
               "src": "machine",
               "h": "fa78a333f9df"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Это {value1} Слой нельзя было добавить. Проверьте URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Это {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Это",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "Слой нельзя было добавить. Проверьте URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "sk": {
-          "file": "814a3f635c61",
+          "file": "7526b914f0d3",
           "counts": {
             "esri": 256,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 3,
+            "machine": 7,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -1512,20 +2032,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "To {value1} vrstva nemohol byť pridaný. Skontrolujte URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "To {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "To",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "vrstva nemohol byť pridaný. Skontrolujte URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "sl": {
-          "file": "6a2c2c899192",
+          "file": "2752794c20cf",
           "counts": {
             "esri": 256,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 1,
-            "machine": 2,
+            "machine": 6,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "goto": {
@@ -1542,6 +2082,26 @@
               "t": "URL",
               "src": "machine",
               "h": "0e2d9b0777a4"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "To je... {value1} plasti ni bilo mogoče dodati. Preveri lokacijo.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "To je... {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "To je...",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "plasti ni bilo mogoče dodati. Preveri lokacijo.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
@@ -1560,16 +2120,16 @@
           "entries": {}
         },
         "sv": {
-          "file": "2b12cd17b1f6",
+          "file": "3b6057aa82ad",
           "counts": {
             "esri": 253,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 7,
+            "machine": 11,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "shapefile": {
@@ -1606,20 +2166,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Detta {value1} Lager kunde inte läggas till. Kontrollera webbadressen.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Detta {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Detta",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "Lager kunde inte läggas till. Kontrollera webbadressen.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "th": {
-          "file": "008c55f01ea5",
+          "file": "8addfc52bdae",
           "counts": {
             "esri": 249,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 10,
+            "machine": 14,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "copyUrl": {
@@ -1671,20 +2251,40 @@
               "t": "ชั้น นั้น ไม่ อาจ ใส่ ได้. โปรดตรวจสอบที่อยู่ URL หรือหมายเลขรายการ",
               "src": "machine",
               "h": "bc9b68fb27c4"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "นั่น {value1} ไม่ อาจ เพิ่ม ชั้น ได้. ตรวจสอบที่อยู่ URL",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "นั่น {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "นั่น",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "ไม่ อาจ เพิ่ม ชั้น ได้. ตรวจสอบที่อยู่ URL",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "tr": {
-          "file": "0ff7162fe683",
+          "file": "8b8c64333f3e",
           "counts": {
             "esri": 243,
             "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 14,
+            "machine": 18,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "savedViews": {
@@ -1756,20 +2356,40 @@
               "t": "Basemap {value}",
               "src": "machine",
               "h": "8b0e764c53db"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "İşte bu {value1} katman eklenemezdi. URL'yi kontrol edin.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "İşte bu {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "İşte bu",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "katman eklenemezdi. URL'yi kontrol edin.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "zh-cn": {
-          "file": "4e5d683b73a5",
+          "file": "83b859f45a9e",
           "counts": {
             "esri": 245,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 13,
+            "machine": 17,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "copyUrl": {
@@ -1836,34 +2456,75 @@
               "t": "KML 无法读取。",
               "src": "machine",
               "h": "1dde16e4afe0"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "那个 {value1} 无法添加层 。 请检查URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "那个 {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "那个",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "无法添加层 。 请检查URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "uk": {
-          "file": "bde89eea6ac1",
+          "file": "fec111309cd5",
           "counts": {
             "esri": 259,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 4,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "thatValue1LayerCouldnTBe": {
+              "t": "Що {value1} не можна додавати шар. Перевірити URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Що {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Що",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "не можна додавати шар. Перевірити URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
+            }
+          }
         },
         "vi": {
-          "file": "7d1c4d9cdd1c",
+          "file": "8286b88a8a4f",
           "counts": {
             "esri": 255,
             "esri-check": 3,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 2,
+            "machine": 6,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "bmOSM": {
@@ -1875,20 +2536,40 @@
               "t": "URL",
               "src": "machine",
               "h": "0e2d9b0777a4"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Đó {value1} lớp không thể thêm vào được. Kiểm tra URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "Đó {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "Đó",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "lớp không thể thêm vào được. Kiểm tra URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "zh-hk": {
-          "file": "121849ad32e3",
+          "file": "b62bb4e76133",
           "counts": {
             "esri": 249,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 10,
+            "machine": 14,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "addLayer": {
@@ -1940,20 +2621,40 @@
               "t": "KML 無法讀取。",
               "src": "machine",
               "h": "1dde16e4afe0"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "那 {value1} 層面無法新增 。 檢查網址 。",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "那 {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "那",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "層面無法新增 。 檢查網址 。",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         },
         "zh-tw": {
-          "file": "121849ad32e3",
+          "file": "b62bb4e76133",
           "counts": {
             "esri": 249,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 10,
+            "machine": 14,
             "stale": 0,
-            "missing": 4
+            "missing": 0
           },
           "entries": {
             "addLayer": {
@@ -2005,6 +2706,26 @@
               "t": "KML 無法讀取。",
               "src": "machine",
               "h": "1dde16e4afe0"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "那 {value1} 層面無法新增 。 檢查網址 。",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "那 {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "那",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "層面無法新增 。 檢查網址 。",
+              "src": "machine",
+              "h": "198c5135afa4"
             }
           }
         }

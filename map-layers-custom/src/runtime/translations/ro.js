@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "Eroare necunoscută",
         unserializableError: "eroare inoperabilă",
         disableOldAppDataActionDelete: "dezactivați acțiunea de date a aplicației vechi, ștergeți suportul de configurare neutilizat selectatJimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Asta {value1} strat nu a putut fi adăugat. Verifică URL-ul.",
+        thatValue1: "Asta {value1}",
+        that: "Asta",
+        layerCouldnTBeAddedCheck: "strat nu a putut fi adăugat. Verifică URL-ul."
       })
     }
   }

@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "nežinoma klaida",
         unserializableError: "nenustatoma klaida",
         disableOldAppDataActionDelete: "išjungti seną programėlę duomenis- veiksmas, ištrinti nenaudojamą config prop pasirinktą JimuLayerids",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Tai {value1} sluoksnis negali būti pridėta. Patikrinkite URL.",
+        thatValue1: "Tai {value1}",
+        that: "Tai",
+        layerCouldnTBeAddedCheck: "sluoksnis negali būti pridėta. Patikrinkite URL."
       })
     }
   }

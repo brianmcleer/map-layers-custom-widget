@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "tuntematon virhe",
         unserializableError: "epätavallinen virhe",
         disableOldAppDataActionDelete: "Poista vanha app-datatoiminto käytöstä, poista käyttämättömät konfig-propit valittu JimuLayerIds",
-        thatValue1LayerCouldnTBe: "That {value1} layer couldn’t be added. Check the URL.",
-        thatValue1: "That {value1}",
-        that: "That",
-        layerCouldnTBeAddedCheck: "layer couldn’t be added. Check the URL."
+        thatValue1LayerCouldnTBe: "Että {value1} kerros ei voitu lisätä. Tarkista URL.",
+        thatValue1: "Että {value1}",
+        that: "Että",
+        layerCouldnTBeAddedCheck: "kerros ei voitu lisätä. Tarkista URL."
       })
     }
   }
