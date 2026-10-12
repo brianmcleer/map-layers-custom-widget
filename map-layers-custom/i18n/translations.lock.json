@@ -428,18 +428,1054 @@
           }
         },
         "bs": {
-          "file": "03be3ab299aa",
+          "file": "1dcd495d0391",
           "counts": {
             "esri": 55,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 207,
             "stale": 0,
-            "missing": 208
+            "missing": 1
           },
-          "entries": {}
+          "entries": {
+            "soloLayer": {
+              "t": "Pokaži samo ovaj sloj",
+              "src": "machine",
+              "h": "7ad1b7f1e860"
+            },
+            "matches": {
+              "t": "Poklapa se.",
+              "src": "machine",
+              "h": "9f3e9242c638"
+            },
+            "layersVisibleTooltip": {
+              "t": "Slojevi uključeni / ukupni slojevi",
+              "src": "machine",
+              "h": "74ad259f107a"
+            },
+            "zoomToVisible": {
+              "t": "Uvećaj vidljive slojeve",
+              "src": "machine",
+              "h": "13cc73fbc41d"
+            },
+            "resetVisibility": {
+              "t": "Vrati na uobičajenu vidljivost",
+              "src": "machine",
+              "h": "ff2c8d62c415"
+            },
+            "collapseList": {
+              "t": "Lista slojeva kolapsa",
+              "src": "machine",
+              "h": "ee1fea16bd2c"
+            },
+            "expandList": {
+              "t": "Proširi listu slojeva",
+              "src": "machine",
+              "h": "c8d484fdec65"
+            },
+            "showVisibleOnly": {
+              "t": "Samo vidljivi slojevi",
+              "src": "machine",
+              "h": "cb8f96954cc8"
+            },
+            "savedViews": {
+              "t": "Snimi kao VCard...",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            },
+            "presetViews": {
+              "t": "_Pretpostavke",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "saveCurrentView": {
+              "t": "Trenutni pogled...",
+              "src": "machine",
+              "h": "bd001bf59eb1"
+            },
+            "noSavedViews": {
+              "t": "Još nema snimljenih pregleda",
+              "src": "machine",
+              "h": "f243ae994e12"
+            },
+            "applyView": {
+              "t": "Koristi pogled",
+              "src": "machine",
+              "h": "01d8a5f8c458"
+            },
+            "viewNamePlaceholder": {
+              "t": "Ime fonta",
+              "src": "machine",
+              "h": "f13b6b7a495d"
+            },
+            "exportViews": {
+              "t": "Izvezi pogled...",
+              "src": "machine",
+              "h": "2cb952d899e9"
+            },
+            "importViews": {
+              "t": "Uvezi...",
+              "src": "machine",
+              "h": "671a1fb930dc"
+            },
+            "flashLayer": {
+              "t": "Bljesak / lociranje sloja",
+              "src": "machine",
+              "h": "2f176e8e0d19"
+            },
+            "copyUrl": {
+              "t": "Kopiraj URL servisa",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "refreshLayer": {
+              "t": "Osvježi sloj",
+              "src": "machine",
+              "h": "d437c8d8b29f"
+            },
+            "layerDetails": {
+              "t": "Detalji sloja",
+              "src": "machine",
+              "h": "cb55ca4274f4"
+            },
+            "detailScale": {
+              "t": "Vidljivo skaliranje",
+              "src": "machine",
+              "h": "3e1222ee37d1"
+            },
+            "detailOpenService": {
+              "t": "Otvori servis",
+              "src": "machine",
+              "h": "732f6445cc8f"
+            },
+            "detailCounting": {
+              "t": "Brojim...",
+              "src": "machine",
+              "h": "c92a5b8a0d9b"
+            },
+            "spotlight": {
+              "t": "Fokus sloja",
+              "src": "machine",
+              "h": "1a7f3fe4f4a0"
+            },
+            "clearSpotlight": {
+              "t": "Očisti fokus",
+              "src": "machine",
+              "h": "08c2e76c4d36"
+            },
+            "moveOutOfGroup": {
+              "t": "Pomjeri iz grupe",
+              "src": "machine",
+              "h": "853e8ed07048"
+            },
+            "shapefile": {
+              "t": "Snimi datoteku",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "exportMapImage": {
+              "t": "Uvezi sliku mape",
+              "src": "machine",
+              "h": "424361791e7b"
+            },
+            "addLayer": {
+              "t": "Dodaj sloj iz URL-a",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerHint": {
+              "t": "Umetnite URL servisa za osobinu ili mapu ili ID stavke ArcGIS.",
+              "src": "machine",
+              "h": "3327586431a3"
+            },
+            "addLayerLabel": {
+              "t": "Servis URL ili ID stavke",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerPlaceholder": {
+              "t": "https://... ili ID stavke 32-karaktera",
+              "src": "machine",
+              "h": "3537996b637c"
+            },
+            "addLayerWorking": {
+              "t": "Dodavanje sloja...",
+              "src": "machine",
+              "h": "128e82830b77"
+            },
+            "addLayerSuccess": {
+              "t": "Sloj je dodan.",
+              "src": "machine",
+              "h": "df13d6cae399"
+            },
+            "addLayerError": {
+              "t": "Taj sloj nije mogao biti dodan. Provjerite ID URL-a ili stavke i pokušajte ponovo.",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "addLayerNoView": {
+              "t": "Nijedna mapa još nije spojena, tako da se sloj ne može dodati.",
+              "src": "machine",
+              "h": "cfc327826924"
+            },
+            "masterOpacity": {
+              "t": "Glavna neprozirnost",
+              "src": "machine",
+              "h": "06fcab24f867"
+            },
+            "masterOpacityHint": {
+              "t": "Postavite neprozirnost za sve slojeve odjednom.",
+              "src": "machine",
+              "h": "80682b088f98"
+            },
+            "loadingBasemaps": {
+              "t": "Učitavam bazne mape...",
+              "src": "machine",
+              "h": "49c02cfbae47"
+            },
+            "bmHybrid": {
+              "t": "Imagery hybrid",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmLightGray": {
+              "t": "Lagano sivo",
+              "src": "machine",
+              "h": "3ef03be05859"
+            },
+            "bmDarkGray": {
+              "t": "Tamno siva",
+              "src": "machine",
+              "h": "076862719447"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Terrain",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "copyLayerLink": {
+              "t": "Kopiraj link na ove slojeve",
+              "src": "machine",
+              "h": "6c11efc7e7d5"
+            },
+            "linkCopied": {
+              "t": "Link kopiran",
+              "src": "machine",
+              "h": "c2e98476efb5"
+            },
+            "linkCopyFailed": {
+              "t": "Nisam mogao kopirati link",
+              "src": "machine",
+              "h": "7a456d6f436e"
+            },
+            "exportLayerCsv": {
+              "t": "Lista izvoznih slojeva (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "csvMaxScale": {
+              "t": "Maksimalna skala",
+              "src": "machine",
+              "h": "5b4b8e7f7400"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "layerUnavailable": {
+              "t": "servis ne odgovara",
+              "src": "machine",
+              "h": "8432b3694b73"
+            },
+            "showFavoritesOnly": {
+              "t": "Pokaži samo omiljene",
+              "src": "machine",
+              "h": "a40c3d5f052b"
+            },
+            "zoomToScale": {
+              "t": "Uvećaj dok se ne vidi",
+              "src": "machine",
+              "h": "7efa5ac04eca"
+            },
+            "imageryTab": {
+              "t": "Slike u blizini",
+              "src": "machine",
+              "h": "7d4843729f40"
+            },
+            "imageryIntro": {
+              "t": "Aerijalni i satelitski prikazi iz OpenStreetMap indeksa uređivača koji pokriva dio mape koju gledate. Dodaje se ispod vaših slojeva, kao drugi bazni plan.",
+              "src": "machine",
+              "h": "a82d78cd336a"
+            },
+            "imagerySearch": {
+              "t": "Traži slike po imenu",
+              "src": "machine",
+              "h": "6f0249b479fe"
+            },
+            "imageryLoading": {
+              "t": "Čitam indeks slika...",
+              "src": "machine",
+              "h": "aa33c174dc77"
+            },
+            "imageryError": {
+              "t": "Indeks slika nije mogao biti pročitan. Vaša mreža ga može blokirati. Pokušajte kasnije.",
+              "src": "machine",
+              "h": "e3f6d4117405"
+            },
+            "imageryNone": {
+              "t": "Nijedna slika u indeksu ne pokriva ovo područje.",
+              "src": "machine",
+              "h": "5c4364eeaa68"
+            },
+            "imageryBest": {
+              "t": "najbolji",
+              "src": "machine",
+              "h": "c5f5e4d75252"
+            },
+            "imageryAdded": {
+              "t": "Dodano {name} ispod vaših slojeva.",
+              "src": "machine",
+              "h": "e3b03f0b85c2"
+            },
+            "imageryNotAddable": {
+              "t": "Taj izvor koristi format koji ova mapa ne može prikazati.",
+              "src": "machine",
+              "h": "ca3ce705e391"
+            },
+            "imageryLicense": {
+              "t": "Svaki izvor ima svoju licencu i uvjete korištenja, prikazane kao atribut. Provjerite ih prije korištenja slika u proizvodu.",
+              "src": "machine",
+              "h": "d22206caeb96"
+            },
+            "helpIntro": {
+              "t": "Pogledajte koji su slojevi na mapi, uključite ih ili isključite, nađite onaj koji vam je potreban i promijenite kako izgleda.",
+              "src": "machine",
+              "h": "663a2e80a168"
+            },
+            "helpSearchPlaceholder": {
+              "t": "Traži vodič (pokušajfilter ililegenda",
+              "src": "machine",
+              "h": "531871626b9e"
+            },
+            "helpNoMatches": {
+              "t": "Ništa u vodiču ne odgovara toj riječi.",
+              "src": "machine",
+              "h": "3fe179f75330"
+            },
+            "firstRunTitle": {
+              "t": "Novi ovdje?",
+              "src": "machine",
+              "h": "b81f2e17e001"
+            },
+            "firstRunBody": {
+              "t": "Pokaži sloj da ga prikažeš na karti i kliknite na tri tačke pored sloja za više opcija.",
+              "src": "machine",
+              "h": "9a067de5da3d"
+            },
+            "firstRunHelpLink": {
+              "t": "Otvori vodič.",
+              "src": "machine",
+              "h": "2447dd6134ea"
+            },
+            "firstRunDismiss": {
+              "t": "Otpust",
+              "src": "machine",
+              "h": "70afe9eff3f2"
+            },
+            "helpStartTitle": {
+              "t": "Počnite ovdje: tri koraka",
+              "src": "machine",
+              "h": "789320b4831d"
+            },
+            "helpStart1Search": {
+              "t": "Pronađi sloj koji želite u listi. Ukucaj dio njegovog imena u okvir na vrhu da skratiš listu.",
+              "src": "machine",
+              "h": "f479a0b34a37"
+            },
+            "helpStart1": {
+              "t": "Pronađi sloj koji želite u listi. Kliknite na strelicu pored imena grupe da vidite slojeve unutar nje.",
+              "src": "machine",
+              "h": "39cac7ad2fa7"
+            },
+            "helpStart2Tick": {
+              "t": "Otključajte kutiju pored sloja da je pokažete na mapi. Otkopčajte je da je sakrijete.",
+              "src": "machine",
+              "h": "6c0f63568c07"
+            },
+            "helpStart2Eye": {
+              "t": "Kliknite oko pored sloja da ga prikažete na karti. Kliknite ponovo da ga sakrijete.",
+              "src": "machine",
+              "h": "9f2005fb8353"
+            },
+            "helpStart3Menu": {
+              "t": "Kliknite tri tačke pored sloja za više opcija, kao npr. {firstAction}.",
+              "src": "machine",
+              "h": "4924a6167d38"
+            },
+            "helpStart3": {
+              "t": "Daj mapi trenutak da prepravi nakon svake promjene.",
+              "src": "machine",
+              "h": "175d96031b37"
+            },
+            "helpLayersTitle": {
+              "t": "Uključujem i isključujem slojeve.",
+              "src": "machine",
+              "h": "a390e7e9ab7f"
+            },
+            "helpLayersTick": {
+              "t": "Označena kutija znači da je sloj na mapi. Sivo ime znači da je sloj izvan vidljivog opsega: zumiraj ili izađi i on se pojavljuje.",
+              "src": "machine",
+              "h": "965621eb3560"
+            },
+            "helpLayersEye": {
+              "t": "Otvoreno oko znači da je sloj na mapi. sivo ime znači da je sloj izvan njegovog vidljivog raspona: zumirati ili izaći i on se pojavljuje.",
+              "src": "machine",
+              "h": "a1a60fdc2b35"
+            },
+            "helpLayersGroups": {
+              "t": "Slojevi mogu sjediti unutar grupe. Kliknite strelicu pored imena grupe da je otvorite.",
+              "src": "machine",
+              "h": "f920c7ba9124"
+            },
+            "helpLayersPickOneTick": {
+              "t": "Neke grupe dozvoljavaju jedan po jedan sloj. Njihovi slojevi imaju okruglo dugme umjesto kutije: odaberite jedan i ostali u toj grupi se isključuju.",
+              "src": "machine",
+              "h": "085d2d96f9fc"
+            },
+            "helpLayersPickOneEye": {
+              "t": "Neke grupe dozvoljavaju jedan po jedan sloj. Uključite jedan od njihovih slojeva, a drugi u toj grupi se isključuju.",
+              "src": "machine",
+              "h": "c7525c909ede"
+            },
+            "helpLayersParentOn": {
+              "t": "Uključivanje sloja unutar grupe također uključuje grupu, tako da sloj pokazuje odmah.",
+              "src": "machine",
+              "h": "5cbab0a533ed"
+            },
+            "helpLayersParentOff": {
+              "t": "Sloj unutar grupe pokazuje samo kada je grupa uključena. Ukoliko nedostaje označeni sloj sa mape, provjerite njegovu grupu.",
+              "src": "machine",
+              "h": "4f4ba3d73e6c"
+            },
+            "helpLayersCount": {
+              "t": "Značka na vrhu pokazuje koliko slojeva je na ukupno, i ažuriranja kao što ide.",
+              "src": "machine",
+              "h": "99ba6731cee4"
+            },
+            "helpLayersLegend": {
+              "t": "Kliknite malu strelicu pored imena sloja da vidite njenu legendu, simbole koje koristi na mapi.",
+              "src": "machine",
+              "h": "3c7762ec3f21"
+            },
+            "helpLayersReorder": {
+              "t": "Povucite sloj gore ili dolje da promijenite koji se crta na vrhu.",
+              "src": "machine",
+              "h": "96a889225e91"
+            },
+            "helpLayersTables": {
+              "t": "Tabele su navedene ispod slojeva, ispod {tables}. Drže zapise bez lokacije, tako da nemaju krpelja.",
+              "src": "machine",
+              "h": "e1760e825023"
+            },
+            "helpLayersHealth": {
+              "t": "Naziv sloja koji se završava ({layerUnavailable}) znači da servis iza njega nije odgovorio na zadnju provjeru. Grafički element ponovo provjerava svakih nekoliko minuta i ispušta bilješku kada se vrati.",
+              "src": "machine",
+              "h": "90b0332f22f5"
+            },
+            "helpLayersCollapse": {
+              "t": "Koristite strelicu na krajnjem desnom dijelu gornje trake da preklopite cijelu listu do trake, i ponovo je vratite.",
+              "src": "machine",
+              "h": "b266096bf8ce"
+            },
+            "helpFindTitle": {
+              "t": "Pronalaženje sloja",
+              "src": "machine",
+              "h": "fd2d2fbb0c13"
+            },
+            "helpFindType": {
+              "t": "Ukucaj dio imena sloja u kutiji na vrhu. Lista se smanjuje na odgovarajuće slojeve i otvara grupe u kojima sjede.",
+              "src": "machine",
+              "h": "e38c353b696e"
+            },
+            "helpFindDeep": {
+              "t": "U pretrazi se čitaju i opisi i oznake svakog sloja, tako da riječ koja nije u imenu još uvijek može pronaći sloj.",
+              "src": "machine",
+              "h": "dfd1d7dabb2c"
+            },
+            "helpFindCount": {
+              "t": "Broj pored kutije ti govori koliko slojeva odgovara.",
+              "src": "machine",
+              "h": "a3e5e7ebf40f"
+            },
+            "helpFindClear": {
+              "t": "Očisti okvir sa x na njegovom kraju da bi ponovo vidio cijelu listu.",
+              "src": "machine",
+              "h": "7affe6586032"
+            },
+            "helpFindButton": {
+              "t": "Dugme lijevka desno od gornje trake se skriva ili pokazuje okvir. Krijući ga, također, čisti pretragu.",
+              "src": "machine",
+              "h": "5e8ac60216b4"
+            },
+            "helpFindFavorites": {
+              "t": "U meniju {batchOptions} izaberite {showFavoritesOnly} da navedete samo vaše zvjezdane slojeve i njihove grupe. Izaberite {showAllLayers} da se vratite.",
+              "src": "machine",
+              "h": "ba1b2eb0646f"
+            },
+            "helpFindVisibleOnly": {
+              "t": "U meniju {batchOptions} izaberite {showVisibleOnly} za popis samo slojeva na kojima se nalaze. Odaberite {showAllLayers} da se vratite.",
+              "src": "machine",
+              "h": "062b9153b639"
+            },
+            "helpMenuTitle": {
+              "t": "meni sloja, dugme po dugme",
+              "src": "machine",
+              "h": "1676dece4179"
+            },
+            "helpMenuIntro": {
+              "t": "Kliknite tri tačke pored sloja da otvorite njegov meni. Navedene su samo opcije koje se odnose na taj sloj.",
+              "src": "machine",
+              "h": "50c2cad0133a"
+            },
+            "helpMenuGoto": {
+              "t": "{goto}: pomiče kartu na mjesto gdje je sloj.",
+              "src": "machine",
+              "h": "2c2af5301c3e"
+            },
+            "helpMenuLabels": {
+              "t": "{showLabels}ili {hideLabels}: okreće tekstualne oznake sloja na ili off na karti.",
+              "src": "machine",
+              "h": "b55eca6a888c"
+            },
+            "helpMenuPopup": {
+              "t": "{enablePopup} ili {disablePopup}: odlučuje da li kliktanje osobine na karti otvara pop-up.",
+              "src": "machine",
+              "h": "0743c1a5d911"
+            },
+            "helpMenuTransparency": {
+              "t": "{transparency}: izblijedi sloj tako da ono što je ispod pokazuje kroz. Povuci klizač.",
+              "src": "machine",
+              "h": "cbcbd099eecd"
+            },
+            "helpMenuVisibilityRange": {
+              "t": "{visibilityRange}: postavlja koliko duboko unutra ili van morate biti zumirani prije nego što se sloj povuče.",
+              "src": "machine",
+              "h": "a9a556c0419a"
+            },
+            "helpMenuInformation": {
+              "t": "{information}: otvara stranicu sloja svojim opisom i izvorom.",
+              "src": "machine",
+              "h": "ca99cf050e21"
+            },
+            "helpMenuChangeSymbol": {
+              "t": "{changeSymbol}: bira novu boju ili simbol za sloj koji ste sami dodali.",
+              "src": "machine",
+              "h": "1e166527fbb7"
+            },
+            "helpMenuSolo": {
+              "t": "{soloLayer}: isključuje svaki drugi sloj u jednom kliku tako da je samo ovaj ostao na mapi.",
+              "src": "machine",
+              "h": "852e92ac894c"
+            },
+            "helpMenuFlash": {
+              "t": "{flashLayer}: pomiče kartu prema sloju i trepće njenim obrubom tako da je možete uočiti.",
+              "src": "machine",
+              "h": "36b43af93b2b"
+            },
+            "helpMenuCopyUrl": {
+              "t": "{copyUrl}: kopira web adresu sloja, spremna za zalijepiti u email ili drugu kartu.",
+              "src": "machine",
+              "h": "d59130d4a40f"
+            },
+            "helpMenuRefresh": {
+              "t": "{refreshLayer}: ponovo učitava sloj iz svog izvora da pokupi nedavne izmjene.",
+              "src": "machine",
+              "h": "e434e21daa8e"
+            },
+            "helpMenuZoomScale": {
+              "t": "{zoomToScale}: prikazano samo dok je sloj posiveo van. Pomjera kartu unutra ili van na uvećanje gdje taj sloj navlači.",
+              "src": "machine",
+              "h": "9eb3555b4975"
+            },
+            "helpMenuFavorite": {
+              "t": "{favoriteAdd}ili {favoriteRemove}: stavlja zvijezdu na sloj koji često koristite. zvijezde se čuvaju u ovom pregledniku.",
+              "src": "machine",
+              "h": "25791f972462"
+            },
+            "helpMenuDetails": {
+              "t": "{layerDetails}: otvara ploču sa tipom sloja, brojem osobina, poljima i linkom do servisa.",
+              "src": "machine",
+              "h": "3c97546091e9"
+            },
+            "helpMenuSpotlight": {
+              "t": "{spotlight}: prikazuje samo ovaj sloj i pokriva listu karticom dok gledate. Kliknite Izlaz fokus na kartu, ili {clearSpotlight} u meniju, da biste vratili druge slojeve nazad.",
+              "src": "machine",
+              "h": "8f2c47377528"
+            },
+            "helpMenuMove": {
+              "t": "{moveToTop}i {moveToBottom}: promijeniti koji sloj povlači preko ostalih. {moveOutOfGroup} podiže sloj iz svoje grupe.",
+              "src": "machine",
+              "h": "4bc49ebba7a9"
+            },
+            "helpMenuRemove": {
+              "t": "{remove}: uzima sloj koji ste sami dodali sa karte. Slojevi koji su došli sa mapom ne mogu biti uklonjeni.",
+              "src": "machine",
+              "h": "e619e0c7ff69"
+            },
+            "helpBarTitle": {
+              "t": "Dugmad duž vrha",
+              "src": "machine",
+              "h": "bdfb10cb0690"
+            },
+            "helpBarIntro": {
+              "t": "Sve u baru iznad liste radi na celoj mapi, ni jedan sloj.",
+              "src": "machine",
+              "h": "39393dcd9af6"
+            },
+            "helpBarBatch": {
+              "t": "{batchOptions} (ikona za provjeru liste): {batchItems}.",
+              "src": "machine",
+              "h": "bdfd36d6a2b9"
+            },
+            "helpBarViews": {
+              "t": "{savedViews} (ikona za zabilješke): zadrži skup slojeva na koje se možeš vratiti. Pogledajte dio sa snimljenim prikazima.",
+              "src": "machine",
+              "h": "7dca4ce6e95d"
+            },
+            "helpBarPresets": {
+              "t": "{savedViews} (ikona zabilješki): izaberite spreman skup slojeva koji je došao sa ovom aplikacijom. Pogledajte dio sa snimljenim prikazima.",
+              "src": "machine",
+              "h": "aaa40dd228eb"
+            },
+            "helpBarAdd": {
+              "t": "{addLayer} (plus ikona): stavite vlastiti sloj na kartu iz web adrese ili datoteke. Pogledajte dio za dodavanje vlastitog sloja.",
+              "src": "machine",
+              "h": "f96f6987ca83"
+            },
+            "helpBarOpacity": {
+              "t": "{masterOpacity}: jedan klizač koji izblijedi svaki sloj odjednom, zgodan za gledanje bazne mape ispod.",
+              "src": "machine",
+              "h": "051d9d66a3d4"
+            },
+            "helpBarBasemap": {
+              "t": "{basemap}: mijenja pozadinsku kartu, na primjer slike umjesto ulica.",
+              "src": "machine",
+              "h": "e190178cda32"
+            },
+            "helpBarLegend": {
+              "t": "{legend}: otvara jednu legendu za svaki sloj koji je na, tako da možete pročitati sve simbole na jednom mjestu.",
+              "src": "machine",
+              "h": "c8c3eb63620e"
+            },
+            "helpBarCollapse": {
+              "t": "Strelica na krajnjem desnom savija listu do samo ove šipke.",
+              "src": "machine",
+              "h": "fa2fb0ed21e4"
+            },
+            "helpBatchTurnOn": {
+              "t": "{turnOnAllLayers} i {turnOffAllLayers} prebaciti svaki sloj odjednom",
+              "src": "machine",
+              "h": "bc6df31db6c9"
+            },
+            "helpBatchReset": {
+              "t": "{resetVisibility} vraća svaki sloj natrag onako kako je bio kad se otvarala stranica",
+              "src": "machine",
+              "h": "4b785044beeb"
+            },
+            "helpBatchZoom": {
+              "t": "{zoomToVisible}pomjera mapu tako da svaki sloj koji je na uklapa se u pregled",
+              "src": "machine",
+              "h": "684328b4074f"
+            },
+            "helpBatchExport": {
+              "t": "{exportMapImage} snima sliku mape kao PNG datoteku",
+              "src": "machine",
+              "h": "9367e05ac4d9"
+            },
+            "helpBatchExpand": {
+              "t": "{expandAllLayers} i {collapseAllLayers} otvori ili zatvori svaku grupu",
+              "src": "machine",
+              "h": "55267f1fa55a"
+            },
+            "helpBatchCsv": {
+              "t": "{exportLayerCsv} sprema tabelu sa popisom svakog sloja, njegove grupe, da li je na njoj i njegove web adrese",
+              "src": "machine",
+              "h": "f1f31228485a"
+            },
+            "helpBatchLink": {
+              "t": "{copyLayerLink} kopira web adresu koja otvara ovu aplikaciju sa istim slojevima na",
+              "src": "machine",
+              "h": "30eeccf42c2d"
+            },
+            "helpViewsTitle": {
+              "t": "Snimi kao VCard...",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            },
+            "helpViewsIntro": {
+              "t": "Pogled je slika čiji su slojevi uključeni i isključeni. Sačuvajte po jedan za svaki posao koji često obavljate.",
+              "src": "machine",
+              "h": "d55f8402dab2"
+            },
+            "helpViewsPresets": {
+              "t": "Imena ispod {presetViews} na vrhu menija su došla sa aplikacijom. Izaberite jedan i slojeve prebacujte na taj skup. Ne mogu se promijeniti ili obrisati.",
+              "src": "machine",
+              "h": "d6ea43082b54"
+            },
+            "helpViews1": {
+              "t": "Uključi slojeve koje želite, kliknite na ikonu zabilješki, izaberite {saveCurrentView}, unesite ime i kliknite na {save}.",
+              "src": "machine",
+              "h": "6b42dfc2bf39"
+            },
+            "helpViews2": {
+              "t": "Da biste kasnije pogledali, kliknite na ikonu zabilješki i izaberite njeno ime. Slojevi se poklapaju.",
+              "src": "machine",
+              "h": "cfac7dee9a13"
+            },
+            "helpViews3": {
+              "t": "Pređi preko pregleda u listi i koristi ikonu za smeće za brisanje.",
+              "src": "machine",
+              "h": "a7321aaca0e1"
+            },
+            "helpViews4": {
+              "t": "{exportViews}spašava vaše poglede u datoteku. {importViews} učitava ih na drugom računaru ili ih dijeli s kolegom.",
+              "src": "machine",
+              "h": "fdc91fa1a145"
+            },
+            "helpAddTitle": {
+              "t": "Dodavanje vlastitog sloja",
+              "src": "machine",
+              "h": "c293e9747226"
+            },
+            "helpAddIntro": {
+              "t": "Kliknite ikonu plus u gornjoj traci da otvorite panel {addLayerTitle}.",
+              "src": "machine",
+              "h": "aae5947a115d"
+            },
+            "helpAdd1": {
+              "t": "Na URL kartici zalijepite web adresu za sloj (arcGIS servis, WMS, WMTS, GeoJSON, CSV ili KML link) ili 32-karakter ArcGIS stavka ID, zatim kliknite {addLayerSubmit}.",
+              "src": "machine",
+              "h": "206802d8451f"
+            },
+            "helpAdd2": {
+              "t": "Na kartici Datoteka izaberite datoteku sa vašeg računara: GeoJSON, CSV sa koordinatama, KML, ili zipped formfile.",
+              "src": "machine",
+              "h": "ab6c45fec708"
+            },
+            "helpAddImagery": {
+              "t": "Na kartici {imageryTab} izaberite zračni ili satelitski izvor koji pokriva površinu na ekranu i kliknite Dodaj. Ide ispod vaših slojeva, poput druge baze. Svaki izvor ima svoje uvjete korištenja.",
+              "src": "machine",
+              "h": "637602a43ecd"
+            },
+            "helpAdd3": {
+              "t": "Novi sloj se pojavljuje na vrhu liste. Koristite izbornik sa tri tačke da promijenite njegov simbol ili ga uklonite.",
+              "src": "machine",
+              "h": "87b2c4e03d98"
+            },
+            "helpKeepTitle": {
+              "t": "Gdje stvari žive.",
+              "src": "machine",
+              "h": "7a475a9b4308"
+            },
+            "helpKeepViews": {
+              "t": "Snimljeni pregledi se čuvaju u ovom pregledniku na ovom računaru. Oni nisu na samoj mapi, a drugi računar ili preglednik ih neće imati osim ako ih ne izvozite i uvozite.",
+              "src": "machine",
+              "h": "efd94628071a"
+            },
+            "helpKeepViewsClear": {
+              "t": "Čišćenje podataka preglednika uklanja snimljene preglede. Izvezite ih prvo ako ih želite zadržati.",
+              "src": "machine",
+              "h": "70dbca6b5305"
+            },
+            "helpKeepAdded": {
+              "t": "Slojevi koje dodate sa web adrese ili datoteke traju dok se stranica ponovo ne učita. Učitaj stranicu i nema ih.",
+              "src": "machine",
+              "h": "551cfc856212"
+            },
+            "helpKeepTicks": {
+              "t": "Uključujem i isključujem slojeve mijenjam samo ekran. Karta koju svi ostali vide nije zahvaćena.",
+              "src": "machine",
+              "h": "c0f76bf17811"
+            },
+            "helpKeepLink": {
+              "t": "Ko god je otvori, vidi te slojeve, ne mijenja se njihova mapa.",
+              "src": "machine",
+              "h": "588e5668a118"
+            },
+            "helpTroubleTitle": {
+              "t": "Ako nešto nije u redu",
+              "src": "machine",
+              "h": "6f7fec3ff1e0"
+            },
+            "helpTroubleGrey": {
+              "t": "Naziv sloja je siv i ništa ne pokazuje na mapi: sloj se povlači samo između određenih nivoa uvećanja. Zumiraj, ili izađi, dok se ime ne zatamni.",
+              "src": "machine",
+              "h": "3f19f39dc5b7"
+            },
+            "helpTroubleGroupOff": {
+              "t": "Sloj je označen, ali nedostaje sa mape: grupa mu je isključena.",
+              "src": "machine",
+              "h": "a52a66d8afd0"
+            },
+            "helpTroublePickOne": {
+              "t": "Sloj koji se sam isključi kada uključite drugi: oboje sjedite u grupi koja dozvoljava jedan po jedan sloj. Uključite onaj koji želite ponovo.",
+              "src": "machine",
+              "h": "7941d843e04c"
+            },
+            "helpTroubleNoMatches": {
+              "t": "Filter ne pokazuje slojeve: provjerite pravopis ili očistite okvir sa x da biste ponovo vidjeli sve.",
+              "src": "machine",
+              "h": "1edd055b49ff"
+            },
+            "helpTroubleAdd": {
+              "t": "{addLayerError}: provjerite da li je adresa sam sloj, a ne web stranica i da je možete otvoriti u novoj kartici.",
+              "src": "machine",
+              "h": "0d2f0f172368"
+            },
+            "helpTroubleFocus": {
+              "t": "Većina slojeva je nestala, a karta za fokusiranje sloja pokazuje: kliknite Exit fokusirajte se na karticu da ih vratite.",
+              "src": "machine",
+              "h": "343b95367cd1"
+            },
+            "helpTroubleReset": {
+              "t": "Mnogo ste se promijenili i želite početi ispočetka: otvorite {batchOptions} izbornik i izaberite {resetVisibility}.",
+              "src": "machine",
+              "h": "057ddd1efd4d"
+            },
+            "helpTroubleHealth": {
+              "t": "Jedan sloj kaže ({layerUnavailable}) i ne crta ništa: servis je dolje ili blokiran na vašoj mreži. Pričekajte nekoliko minuta i, ako bilješka ostane, recite GIS diviziji koji sloj.",
+              "src": "machine",
+              "h": "e5cf1051320a"
+            },
+            "helpTroubleLink": {
+              "t": "Link koji ste poslali prikazuje manje slojeva nego što se očekivalo: slojeve samo imena koje ova mapa ima. Uključite ono što vam treba i kopirajte novi link.",
+              "src": "machine",
+              "h": "2329bb8f7e5f"
+            },
+            "helpTroubleImagery": {
+              "t": "{imageryTab} kartica kaže da se indeks ne može čitati: mreža blokira stranicu OpenStreetMap. Pokušajte kasnije ili iz druge konekcije.",
+              "src": "machine",
+              "h": "9fdd45a49fb9"
+            },
+            "helpTroubleReload": {
+              "t": "Lista je prazna ili je zaglavljena u učitavanju: ponovo učitaj stranicu. Karta traje trenutak da se poveže na sporim mrežama.",
+              "src": "machine",
+              "h": "83fac4cb6cc8"
+            },
+            "helpTroubleContact": {
+              "t": "Kontaktirajte odjel GIS-a i spomenite ime Mapa Slojeva i ovu aplikaciju.",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            },
+            "helpTipsTitle": {
+              "t": "Dobro je znati.",
+              "src": "machine",
+              "h": "79fc372dc790"
+            },
+            "helpTipsHover": {
+              "t": "Preskoči naziv sloja da pročitaš puni naslov kada je odsječen.",
+              "src": "machine",
+              "h": "22baf456f624"
+            },
+            "helpTipsSolo": {
+              "t": "{soloLayer}u meniju jednog sloja najbrži je način da se jedan sloj poredi sa baznom mapom.",
+              "src": "machine",
+              "h": "86aca483abad"
+            },
+            "helpTipsExport": {
+              "t": "{exportMapImage}u meniju {batchOptions} daje vam sliku da zalijepite u dokument ili email.",
+              "src": "machine",
+              "h": "0ba0ba707952"
+            },
+            "helpTipsViews": {
+              "t": "Snimi pogled prije nego što počnete kliknuti. Povratak je jedan klik.",
+              "src": "machine",
+              "h": "d1dcada874d6"
+            },
+            "helpTipsOpacity": {
+              "t": "Izbljeđivanje sloja sa {transparency} često pokazuje više nego isključivanje drugih.",
+              "src": "machine",
+              "h": "a956eed8e983"
+            },
+            "helpTipsLink": {
+              "t": "Postavi slojeve jednom, izaberi {copyLayerLink} i zalijepi link u email tako da kolega otvori isti pogled.",
+              "src": "machine",
+              "h": "2431070f441a"
+            },
+            "addALayerThatAlreadyLives": {
+              "t": "Dodajte sloj koji već živi online zalijepivši njegovu web adresu. Koristite ovo za servis domaćina, ili za GeoJSON, CSV ili KML datoteku koja je objavljena na webu.",
+              "src": "machine",
+              "h": "a0d3dc3737c8"
+            },
+            "urlOrItemId": {
+              "t": "URL ili ID stavke",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            },
+            "addAFileSavedOnYour": {
+              "t": "Dodajte snimljenu datoteku na vaš računar. Samo za ovu sesiju je dodana na mapu — nije učitana ili snimljena.",
+              "src": "machine",
+              "h": "e61b37816069"
+            },
+            "dragAFileFromYourComputer": {
+              "t": "Izvucite datoteku iz svog računara ili kliknite da pregledate",
+              "src": "machine",
+              "h": "469060605e0f"
+            },
+            "symbologyAndStructureAreKeptWhere": {
+              "t": "Simbologija i struktura se čuvaju tamo gdje su podržani.",
+              "src": "machine",
+              "h": "fe6ef23dbc61"
+            },
+            "geoJSONCsvKmlOrAZipped": {
+              "t": "GeoJSON, CSV, KML ili zatvoreni file oblika (.zip)",
+              "src": "machine",
+              "h": "5f1a09894b64"
+            },
+            "removeFile": {
+              "t": "Ukloni datoteku",
+              "src": "machine",
+              "h": "304b14ba1a64"
+            },
+            "mapContainer": {
+              "t": "mapContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            },
+            "restoringYourLayers": {
+              "t": "Obnavljanje vaših slojeva...",
+              "src": "machine",
+              "h": "46e7450f36e0"
+            },
+            "showingOnly": {
+              "t": "Po_kaži podsjetnik",
+              "src": "machine",
+              "h": "93a9715544cd"
+            },
+            "onTheMapEveryOtherLayer": {
+              "t": "Svaki drugi sloj je skriven dok ne izađeš.",
+              "src": "machine",
+              "h": "676eeed11f0a"
+            },
+            "exitFocus": {
+              "t": "Izađi iz fokusa",
+              "src": "machine",
+              "h": "64cefdd6e324"
+            },
+            "thisLayer": {
+              "t": "ovaj sloj",
+              "src": "machine",
+              "h": "4438adaec099"
+            },
+            "autoDetectServiceUrlOrItem": {
+              "t": "Automatsko otkrivanje (url ili ID stavke)",
+              "src": "machine",
+              "h": "97f3197039c2"
+            },
+            "arcGISWebService": {
+              "t": "ArcGIS web servis",
+              "src": "machine",
+              "h": "906a483616c6"
+            },
+            "geoJSONWebLink": {
+              "t": "GeoJSON (web link)",
+              "src": "machine",
+              "h": "a76dc8147c80"
+            },
+            "csvWebLink": {
+              "t": "CSV (web link)",
+              "src": "machine",
+              "h": "bc66194c3edf"
+            },
+            "kmlWebLink": {
+              "t": "KML (web link)",
+              "src": "machine",
+              "h": "67e4fe645907"
+            },
+            "thatLayerCouldnTBeAdded": {
+              "t": "Taj sloj nije mogao biti dodan. Provjerite izvor i pokušajte ponovo.",
+              "src": "machine",
+              "h": "8795b0c37540"
+            },
+            "thatLayerCouldnTBeAdded2": {
+              "t": "Taj sloj nije mogao biti dodan. Provjerite ID URL-a ili stavke.",
+              "src": "machine",
+              "h": "bc9b68fb27c4"
+            },
+            "thatFileCouldnTBeAdded": {
+              "t": "Ta datoteka nije mogla biti dodana.",
+              "src": "machine",
+              "h": "cac2cf085c5f"
+            },
+            "noDrawingsWereFoundInThat": {
+              "t": "U toj datoteci nisu pronađeni crteži.",
+              "src": "machine",
+              "h": "ded5bca7ca7f"
+            },
+            "noMapFeaturesWereFoundIn": {
+              "t": "U tom KML-u nisu pronađene osobine mape.",
+              "src": "machine",
+              "h": "a8d6c19d3887"
+            },
+            "thatKmlCouldnTBeRead": {
+              "t": "Da se KML ne može čitati.",
+              "src": "machine",
+              "h": "1dde16e4afe0"
+            },
+            "thatShapefileCouldnTBeRead": {
+              "t": "Da datoteka oblika nije mogla biti pročitana. Koristite .zip koji sadrži .shp, .dbf i .prj.",
+              "src": "machine",
+              "h": "607aef554dcc"
+            },
+            "unsupportedFileUseGeoJSONCsvKml": {
+              "t": "Nepodržana datoteka. Koristite GeoJSON, CSV, KML ili zatvorenu datoteku oblika.",
+              "src": "machine",
+              "h": "09018a7cc20c"
+            },
+            "unknownError": {
+              "t": "nepoznata greška",
+              "src": "machine",
+              "h": "af6321ca7a8b"
+            },
+            "unserializableError": {
+              "t": "Neserijalizacijska greška",
+              "src": "machine",
+              "h": "76e73551597a"
+            },
+            "disableOldAppDataActionDelete": {
+              "t": "isključi aplikaciju za stare podatke, izbriši neiskorištenu konfiguraciju odabranih JimuLayerIds",
+              "src": "machine",
+              "h": "fac561742c0b"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Taj {value1} sloj nije mogao biti dodan. Provjerite URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "To {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "To.",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "sloj nije mogao biti dodan. Provjerite URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
+            }
+          }
         },
         "ca": {
           "file": "f756c0fad2b3",
@@ -1112,18 +2148,1059 @@
           }
         },
         "hr": {
-          "file": "03be3ab299aa",
+          "file": "e0e2528fe419",
           "counts": {
             "esri": 55,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 208,
             "stale": 0,
-            "missing": 208
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "soloLayer": {
+              "t": "Pokaži samo ovaj sloj",
+              "src": "machine",
+              "h": "7ad1b7f1e860"
+            },
+            "matches": {
+              "t": "Šibice",
+              "src": "machine",
+              "h": "9f3e9242c638"
+            },
+            "layersVisibleTooltip": {
+              "t": "Slojevi uključeni / ukupni slojevi",
+              "src": "machine",
+              "h": "74ad259f107a"
+            },
+            "zoomToVisible": {
+              "t": "Uvećaj na vidljive slojeve",
+              "src": "machine",
+              "h": "13cc73fbc41d"
+            },
+            "resetVisibility": {
+              "t": "Vrati na uobičajenu vidljivost",
+              "src": "machine",
+              "h": "ff2c8d62c415"
+            },
+            "collapseList": {
+              "t": "Lista slojeva kolapsa",
+              "src": "machine",
+              "h": "ee1fea16bd2c"
+            },
+            "expandList": {
+              "t": "Proširi popis slojeva",
+              "src": "machine",
+              "h": "c8d484fdec65"
+            },
+            "showVisibleOnly": {
+              "t": "Pokaži samo vidljive slojeve",
+              "src": "machine",
+              "h": "cb8f96954cc8"
+            },
+            "savedViews": {
+              "t": "_Snimljeni pogledi",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            },
+            "presetViews": {
+              "t": "Podesi",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "saveCurrentView": {
+              "t": "Spremi trenutni pogled ...",
+              "src": "machine",
+              "h": "bd001bf59eb1"
+            },
+            "noSavedViews": {
+              "t": "Još nema spremljenih pregleda",
+              "src": "machine",
+              "h": "f243ae994e12"
+            },
+            "applyView": {
+              "t": "Primijeni pogled",
+              "src": "machine",
+              "h": "01d8a5f8c458"
+            },
+            "viewNamePlaceholder": {
+              "t": "Ime prikaza",
+              "src": "machine",
+              "h": "f13b6b7a495d"
+            },
+            "exportViews": {
+              "t": "Izvezi poglede...",
+              "src": "machine",
+              "h": "2cb952d899e9"
+            },
+            "importViews": {
+              "t": "Uvezi pogled...",
+              "src": "machine",
+              "h": "671a1fb930dc"
+            },
+            "flashLayer": {
+              "t": "Bljesak / lociranje sloja",
+              "src": "machine",
+              "h": "2f176e8e0d19"
+            },
+            "copyUrl": {
+              "t": "Kopiraj URL servisa",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "refreshLayer": {
+              "t": "Osvježi sloj",
+              "src": "machine",
+              "h": "d437c8d8b29f"
+            },
+            "layerDetails": {
+              "t": "Detalji sloja",
+              "src": "machine",
+              "h": "cb55ca4274f4"
+            },
+            "detailScale": {
+              "t": "Vidljiva ljestvica",
+              "src": "machine",
+              "h": "3e1222ee37d1"
+            },
+            "detailOpenService": {
+              "t": "Otvorena usluga",
+              "src": "machine",
+              "h": "732f6445cc8f"
+            },
+            "detailCounting": {
+              "t": "Brojim...",
+              "src": "machine",
+              "h": "c92a5b8a0d9b"
+            },
+            "spotlight": {
+              "t": "Slojevi",
+              "src": "machine",
+              "h": "1a7f3fe4f4a0"
+            },
+            "clearSpotlight": {
+              "t": "Očisti fokus",
+              "src": "machine",
+              "h": "08c2e76c4d36"
+            },
+            "moveOutOfGroup": {
+              "t": "Iseli se iz grupe",
+              "src": "machine",
+              "h": "853e8ed07048"
+            },
+            "shapefile": {
+              "t": "Oblik datoteke",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "exportMapImage": {
+              "t": "Izvezi sliku mape",
+              "src": "machine",
+              "h": "424361791e7b"
+            },
+            "addLayer": {
+              "t": "Dodaj sloj iz URL- a",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerHint": {
+              "t": "Zalijepite značajku ili karti servis URL, ili ArcGIS stavku ID.",
+              "src": "machine",
+              "h": "3327586431a3"
+            },
+            "addLayerLabel": {
+              "t": "Servisni URL ili ID stavke",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerPlaceholder": {
+              "t": "CRR-a.",
+              "src": "machine",
+              "h": "3537996b637c"
+            },
+            "addLayerWorking": {
+              "t": "Dodavanje sloja...",
+              "src": "machine",
+              "h": "128e82830b77"
+            },
+            "addLayerSuccess": {
+              "t": "Sloj dodan.",
+              "src": "machine",
+              "h": "df13d6cae399"
+            },
+            "addLayerError": {
+              "t": "Taj sloj nije mogao biti dodan. Provjerite URL ili stavku ID i pokušajte ponovno.",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "addLayerNoView": {
+              "t": "Karta još nije spojena, tako da se sloj ne može dodati.",
+              "src": "machine",
+              "h": "cfc327826924"
+            },
+            "masterOpacity": {
+              "t": "Glavna neprozirnost",
+              "src": "machine",
+              "h": "06fcab24f867"
+            },
+            "masterOpacityHint": {
+              "t": "Postavite neprozirnost za sve slojeve odjednom.",
+              "src": "machine",
+              "h": "80682b088f98"
+            },
+            "loadingBasemaps": {
+              "t": "Učitavanje baznih mapa ...",
+              "src": "machine",
+              "h": "49c02cfbae47"
+            },
+            "bmHybrid": {
+              "t": "Hibrid slike",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmLightGray": {
+              "t": "Svijetlo siva",
+              "src": "machine",
+              "h": "3ef03be05859"
+            },
+            "bmDarkGray": {
+              "t": "Tamno siva",
+              "src": "machine",
+              "h": "076862719447"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Područje",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "copyLayerLink": {
+              "t": "Kopiraj poveznicu na ove slojeve",
+              "src": "machine",
+              "h": "6c11efc7e7d5"
+            },
+            "linkCopied": {
+              "t": "Link kopiran",
+              "src": "machine",
+              "h": "c2e98476efb5"
+            },
+            "linkCopyFailed": {
+              "t": "Ne mogu kopirati link",
+              "src": "machine",
+              "h": "7a456d6f436e"
+            },
+            "exportLayerCsv": {
+              "t": "Popis izvoznih slojeva (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "csvMaxScale": {
+              "t": "Maksimalna veličina",
+              "src": "machine",
+              "h": "5b4b8e7f7400"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "layerUnavailable": {
+              "t": "servis ne odgovara",
+              "src": "machine",
+              "h": "8432b3694b73"
+            },
+            "showFavoritesOnly": {
+              "t": "Prikaži samo omiljene",
+              "src": "machine",
+              "h": "a40c3d5f052b"
+            },
+            "zoomToScale": {
+              "t": "Uvećaj dok se ne vidi",
+              "src": "machine",
+              "h": "7efa5ac04eca"
+            },
+            "imageryTab": {
+              "t": "Slika u blizini",
+              "src": "machine",
+              "h": "7d4843729f40"
+            },
+            "imageryIntro": {
+              "t": "Aerial i satelitske slike iz OpenStreetMap Editor Layer Index koji pokriva dio karte koju gledate. To je dodan ispod vaših slojeva, kao drugi bazni plan.",
+              "src": "machine",
+              "h": "a82d78cd336a"
+            },
+            "imagerySearch": {
+              "t": "Traži slike po imenu",
+              "src": "machine",
+              "h": "6f0249b479fe"
+            },
+            "imageryLoading": {
+              "t": "Čitam indeks slika...",
+              "src": "machine",
+              "h": "aa33c174dc77"
+            },
+            "imageryError": {
+              "t": "Indeks slika nije mogao biti pročitan. Vaša mreža ga može blokirati. Pokušajte kasnije.",
+              "src": "machine",
+              "h": "e3f6d4117405"
+            },
+            "imageryNone": {
+              "t": "Nema slika u indeksu koji pokriva ovo područje.",
+              "src": "machine",
+              "h": "5c4364eeaa68"
+            },
+            "imageryBest": {
+              "t": "najbolji",
+              "src": "machine",
+              "h": "c5f5e4d75252"
+            },
+            "imageryAdded": {
+              "t": "Dodano {name} pod vaše slojeve.",
+              "src": "machine",
+              "h": "e3b03f0b85c2"
+            },
+            "imageryNotAddable": {
+              "t": "Taj izvor koristi format koji ova karta ne može prikazati.",
+              "src": "machine",
+              "h": "ca3ce705e391"
+            },
+            "imageryLicense": {
+              "t": "Svaki izvor ima svoju licencu i uvjete korištenja, prikazane kao atribut. Provjerite ih prije korištenja slika u proizvodu.",
+              "src": "machine",
+              "h": "d22206caeb96"
+            },
+            "helpIntro": {
+              "t": "Pogledajte koji su slojevi na karti, uključite ih ili isključite, nađite onaj koji vam je potreban i promijenite kako izgleda.",
+              "src": "machine",
+              "h": "663a2e80a168"
+            },
+            "helpSearchPlaceholder": {
+              "t": "Pretraži vodič (pokušajtefilter ililegenda",
+              "src": "machine",
+              "h": "531871626b9e"
+            },
+            "helpNoMatches": {
+              "t": "Ništa u vodiču ne odgovara toj riječi. Pokušajte drugi, ili otvorite dijelove iznad.",
+              "src": "machine",
+              "h": "3fe179f75330"
+            },
+            "firstRunTitle": {
+              "t": "Novi ovdje?",
+              "src": "machine",
+              "h": "b81f2e17e001"
+            },
+            "firstRunBody": {
+              "t": "Označite sloj kako biste ga prikazali na karti, i kliknite na tri točke pored sloja za više opcija.",
+              "src": "machine",
+              "h": "9a067de5da3d"
+            },
+            "firstRunHelpLink": {
+              "t": "Otvori vodič.",
+              "src": "machine",
+              "h": "2447dd6134ea"
+            },
+            "firstRunDismiss": {
+              "t": "Otpust",
+              "src": "machine",
+              "h": "70afe9eff3f2"
+            },
+            "helpStartTitle": {
+              "t": "Počnite ovdje: tri koraka",
+              "src": "machine",
+              "h": "789320b4831d"
+            },
+            "helpStart1Search": {
+              "t": "Pronađite sloj koji želite u popisu. Upišite dio njegovog imena u okvir na vrhu kako biste skratili popis.",
+              "src": "machine",
+              "h": "f479a0b34a37"
+            },
+            "helpStart1": {
+              "t": "Pronađite sloj koji želite u popisu. Kliknite strelicu pored imena grupe da biste vidjeli slojeve unutar njega.",
+              "src": "machine",
+              "h": "39cac7ad2fa7"
+            },
+            "helpStart2Tick": {
+              "t": "Otključajte kutiju pored sloja da je pokažete na karti. Otkopčajte je da je sakrijete.",
+              "src": "machine",
+              "h": "6c0f63568c07"
+            },
+            "helpStart2Eye": {
+              "t": "Kliknite na oko pored sloja da ga prikažete na karti. Kliknite ga opet da ga sakrijete.",
+              "src": "machine",
+              "h": "9f2005fb8353"
+            },
+            "helpStart3Menu": {
+              "t": "Kliknite tri točke pored sloja za više opcija, kao što su {firstAction}.",
+              "src": "machine",
+              "h": "4924a6167d38"
+            },
+            "helpStart3": {
+              "t": "Dajte mapi trenutak da se prepravi nakon svake promjene.",
+              "src": "machine",
+              "h": "175d96031b37"
+            },
+            "helpLayersTitle": {
+              "t": "Uključivanje i isključivanje slojeva",
+              "src": "machine",
+              "h": "a390e7e9ab7f"
+            },
+            "helpLayersTick": {
+              "t": "Označena kutija znači da je sloj na karti. Sivo ime znači da je sloj izvan svog vidljivog raspona: zumirati ili izaći i on se pojavljuje.",
+              "src": "machine",
+              "h": "965621eb3560"
+            },
+            "helpLayersEye": {
+              "t": "Otvoreno oko znači da je sloj na karti. Sivo ime znači da je sloj izvan svog vidljivog raspona: zumirati ili van i on se pojavljuje.",
+              "src": "machine",
+              "h": "a1a60fdc2b35"
+            },
+            "helpLayersGroups": {
+              "t": "Slojevi mogu sjediti unutar grupe. Kliknite strelicu pored imena grupe da je otvorite.",
+              "src": "machine",
+              "h": "f920c7ba9124"
+            },
+            "helpLayersPickOneTick": {
+              "t": "Neke grupe dozvoljavaju jedan po jedan sloj. Njihovi slojevi imaju okruglo dugme umjesto kutije: odaberite jedan i ostali u toj grupi se isključuju.",
+              "src": "machine",
+              "h": "085d2d96f9fc"
+            },
+            "helpLayersPickOneEye": {
+              "t": "Neke grupe dozvoljavaju jedan po jedan sloj. Uključite jedan od njihovih slojeva i ostale u toj grupi isključite.",
+              "src": "machine",
+              "h": "c7525c909ede"
+            },
+            "helpLayersParentOn": {
+              "t": "Uključivanje sloja unutar grupe također uključuje grupu, tako da sloj pokazuje odmah.",
+              "src": "machine",
+              "h": "5cbab0a533ed"
+            },
+            "helpLayersParentOff": {
+              "t": "Sloj unutar grupe pokazuje samo kada je grupa uključena. Ako nedostaje označeni sloj s karte, provjerite njegovu grupu.",
+              "src": "machine",
+              "h": "4f4ba3d73e6c"
+            },
+            "helpLayersCount": {
+              "t": "Značka na vrhu pokazuje koliko slojeva su na od ukupno, i ažuriranja kao što ide.",
+              "src": "machine",
+              "h": "99ba6731cee4"
+            },
+            "helpLayersLegend": {
+              "t": "Kliknite na malu strijelu pored imena sloja kako biste vidjeli njenu legendu, simbole koje koristi na karti.",
+              "src": "machine",
+              "h": "3c7762ec3f21"
+            },
+            "helpLayersReorder": {
+              "t": "Povucite sloj prema gore ili prema dolje kako biste promijenili koji se crta na vrhu.",
+              "src": "machine",
+              "h": "96a889225e91"
+            },
+            "helpLayersTables": {
+              "t": "Tablice su navedene ispod slojeva, ispod {tables}. Oni drže zapise bez lokacije, tako da nemaju krpelj okvir.",
+              "src": "machine",
+              "h": "e1760e825023"
+            },
+            "helpLayersHealth": {
+              "t": "Naziv sloja koji završava u ({layerUnavailable}) znači servis iza njega nije odgovorio na zadnju provjeru. Grafički element ponovno provjerava svakih nekoliko minuta i ispušta bilješku kada se vrati.",
+              "src": "machine",
+              "h": "90b0332f22f5"
+            },
+            "helpLayersCollapse": {
+              "t": "Koristite strelicu na krajnjem desno od gornje trake da biste sklopili cijeli popis dolje na traku, i opet ga vratiti.",
+              "src": "machine",
+              "h": "b266096bf8ce"
+            },
+            "helpFindTitle": {
+              "t": "Pronalaženje sloja",
+              "src": "machine",
+              "h": "fd2d2fbb0c13"
+            },
+            "helpFindType": {
+              "t": "Upišite dio imena sloja u kutiji na vrhu. Lista se smanjuje na odgovarajuće slojeve i otvara grupe u kojima sjede.",
+              "src": "machine",
+              "h": "e38c353b696e"
+            },
+            "helpFindDeep": {
+              "t": "U pretrazi se čita i opis i oznaka svakog sloja, tako da riječ koja nije u imenu još uvijek može pronaći sloj.",
+              "src": "machine",
+              "h": "dfd1d7dabb2c"
+            },
+            "helpFindCount": {
+              "t": "Broj pored kutije vam govori koliko slojeva odgovara.",
+              "src": "machine",
+              "h": "a3e5e7ebf40f"
+            },
+            "helpFindClear": {
+              "t": "Očistite okvir sa x na njegovom kraju da biste ponovno vidjeli puni popis.",
+              "src": "machine",
+              "h": "7affe6586032"
+            },
+            "helpFindButton": {
+              "t": "Lijevka gumb na desnoj strani gornje trake skriva ili pokazuje okvir. Skrivanje ga čisti pretraživanje previše.",
+              "src": "machine",
+              "h": "5e8ac60216b4"
+            },
+            "helpFindFavorites": {
+              "t": "U izborniku {batchOptions} odaberite {showFavoritesOnly} za popis samo vaših zvjezdanih slojeva i njihovih grupa. Odaberite {showAllLayers} za povratak.",
+              "src": "machine",
+              "h": "ba1b2eb0646f"
+            },
+            "helpFindVisibleOnly": {
+              "t": "U izborniku {batchOptions} odaberite {showVisibleOnly} za popis samo slojeva na kojima se nalaze. Odaberite {showAllLayers} za povratak.",
+              "src": "machine",
+              "h": "062b9153b639"
+            },
+            "helpMenuTitle": {
+              "t": "Izbornik sloja, gumb po gumb",
+              "src": "machine",
+              "h": "1676dece4179"
+            },
+            "helpMenuIntro": {
+              "t": "Kliknite na tri točke pored sloja da biste otvorili njegov izbornik. Navedene su samo opcije koje se odnose na taj sloj.",
+              "src": "machine",
+              "h": "50c2cad0133a"
+            },
+            "helpMenuGoto": {
+              "t": "{goto}: pomiče kartu na mjesto gdje je sloj.",
+              "src": "machine",
+              "h": "2c2af5301c3e"
+            },
+            "helpMenuLabels": {
+              "t": "{showLabels}ili {hideLabels}: uključuje tekstualne oznake sloja na karti ili izvan nje.",
+              "src": "machine",
+              "h": "b55eca6a888c"
+            },
+            "helpMenuPopup": {
+              "t": "{enablePopup} ili {disablePopup}: odlučuje da li klikom na osobinu na karti otvara se pop-up.",
+              "src": "machine",
+              "h": "0743c1a5d911"
+            },
+            "helpMenuTransparency": {
+              "t": "{transparency}: blijedi sloj tako da ono što je ispod pokazuje kroz. Povucite klizač.",
+              "src": "machine",
+              "h": "cbcbd099eecd"
+            },
+            "helpMenuVisibilityRange": {
+              "t": "{visibilityRange}: postavlja koliko duboko unutra ili van morate biti zumirani prije nego što se sloj izvuče.",
+              "src": "machine",
+              "h": "a9a556c0419a"
+            },
+            "helpMenuInformation": {
+              "t": "{information}: otvara stranicu sloja svojim opisom i izvorom.",
+              "src": "machine",
+              "h": "ca99cf050e21"
+            },
+            "helpMenuChangeSymbol": {
+              "t": "{changeSymbol}: odabire novu boju ili simbol za sloj koji ste sami dodali.",
+              "src": "machine",
+              "h": "1e166527fbb7"
+            },
+            "helpMenuSolo": {
+              "t": "{soloLayer}: isključuje svaki drugi sloj u jednom kliku tako da je samo ovaj ostao na karti.",
+              "src": "machine",
+              "h": "852e92ac894c"
+            },
+            "helpMenuFlash": {
+              "t": "{flashLayer}: pomiče kartu prema sloju i trepće njezinom obrisu tako da je možete uočiti.",
+              "src": "machine",
+              "h": "36b43af93b2b"
+            },
+            "helpMenuCopyUrl": {
+              "t": "{copyUrl}: kopira web adresu sloja, spreman za zalijepiti u e-mail ili drugu kartu.",
+              "src": "machine",
+              "h": "d59130d4a40f"
+            },
+            "helpMenuRefresh": {
+              "t": "{refreshLayer}: ponovno učitava sloj iz izvora kako bi pokupio nedavne izmjene.",
+              "src": "machine",
+              "h": "e434e21daa8e"
+            },
+            "helpMenuZoomScale": {
+              "t": "{zoomToScale}: prikazano samo dok je sloj posivljen. Pomjera mapu u ili van u zum gdje se taj sloj crta.",
+              "src": "machine",
+              "h": "9eb3555b4975"
+            },
+            "helpMenuFavorite": {
+              "t": "{favoriteAdd} ili {favoriteRemove}: stavlja zvijezdu na sloj koji često koristite. Zvijezde se čuvaju u ovom pregledniku.",
+              "src": "machine",
+              "h": "25791f972462"
+            },
+            "helpMenuDetails": {
+              "t": "{layerDetails}: otvara ploču s tipom sloja, broj značajki, polja i poveznicu s servisom.",
+              "src": "machine",
+              "h": "3c97546091e9"
+            },
+            "helpMenuSpotlight": {
+              "t": "{spotlight}: prikazuje samo ovaj sloj i pokriva popis s karticom dok gledate. Kliknite Izlaz fokus na karticu, ili {clearSpotlight} u izborniku, kako bi se drugi slojevi natrag.",
+              "src": "machine",
+              "h": "8f2c47377528"
+            },
+            "helpMenuMove": {
+              "t": "{moveToTop}i {moveToBottom}: promijeniti koji sloj povlači preko ostalih. {moveOutOfGroup} podiže sloj iz svoje skupine.",
+              "src": "machine",
+              "h": "4bc49ebba7a9"
+            },
+            "helpMenuRemove": {
+              "t": "{remove}: uzima sloj koji ste sami dodali s karte. Slojevi koji su došli s mapom ne mogu biti uklonjeni.",
+              "src": "machine",
+              "h": "e619e0c7ff69"
+            },
+            "helpBarTitle": {
+              "t": "Dugmad na vrhu",
+              "src": "machine",
+              "h": "bdfb10cb0690"
+            },
+            "helpBarIntro": {
+              "t": "Sve u baru iznad popisa radi na cijeloj karti, niti jedan sloj.",
+              "src": "machine",
+              "h": "39393dcd9af6"
+            },
+            "helpBarBatch": {
+              "t": "{batchOptions} (kontrolna ikona popisa): {batchItems}.",
+              "src": "machine",
+              "h": "bdfd36d6a2b9"
+            },
+            "helpBarViews": {
+              "t": "{savedViews} (ikona za zabilješke): zadržati skup slojeva na koje se treba vratiti. Pogledajte odjeljak Sačuvani pogledi.",
+              "src": "machine",
+              "h": "7dca4ce6e95d"
+            },
+            "helpBarPresets": {
+              "t": "{savedViews} (ikona za zabilješke): izaberite spreman skup slojeva koji je došao s ovom aplikacijom. Pogledajte odjeljak Sačuvani pogledi.",
+              "src": "machine",
+              "h": "aaa40dd228eb"
+            },
+            "helpBarAdd": {
+              "t": "{addLayer} (plus ikona): stavite vlastiti sloj na kartu s web adrese ili datoteke. Pogledajte dio Dodavanje vlastitog sloja.",
+              "src": "machine",
+              "h": "f96f6987ca83"
+            },
+            "helpBarOpacity": {
+              "t": "{masterOpacity}: jedan klizač koji izblijedi svaki sloj odjednom, zgodan za gledanje bazne mape ispod.",
+              "src": "machine",
+              "h": "051d9d66a3d4"
+            },
+            "helpBarBasemap": {
+              "t": "{basemap}: zamjenjuje pozadinsku kartu, na primjer slike umjesto ulica.",
+              "src": "machine",
+              "h": "e190178cda32"
+            },
+            "helpBarLegend": {
+              "t": "{legend}: otvara jednu legendu za svaki sloj koji je na, tako da možete pročitati sve simbole na jednom mjestu.",
+              "src": "machine",
+              "h": "c8c3eb63620e"
+            },
+            "helpBarCollapse": {
+              "t": "Strelica na krajnjem desnom savija popis dolje na samo ovaj bar.",
+              "src": "machine",
+              "h": "fa2fb0ed21e4"
+            },
+            "helpBatchTurnOn": {
+              "t": "{turnOnAllLayers} i {turnOffAllLayers} prebaciti svaki sloj odjednom",
+              "src": "machine",
+              "h": "bc6df31db6c9"
+            },
+            "helpBatchReset": {
+              "t": "{resetVisibility} vraća svaki sloj natrag onako kako je bio kad se stranica otvorila",
+              "src": "machine",
+              "h": "4b785044beeb"
+            },
+            "helpBatchZoom": {
+              "t": "{zoomToVisible} pomiče kartu tako da svaki sloj koji je na uklapa u pogledu",
+              "src": "machine",
+              "h": "684328b4074f"
+            },
+            "helpBatchExport": {
+              "t": "{exportMapImage} sprema sliku mape kao PNG datoteku",
+              "src": "machine",
+              "h": "9367e05ac4d9"
+            },
+            "helpBatchExpand": {
+              "t": "{expandAllLayers} i {collapseAllLayers} otvoriti ili zatvoriti svaku skupinu",
+              "src": "machine",
+              "h": "55267f1fa55a"
+            },
+            "helpBatchCsv": {
+              "t": "{exportLayerCsv} ušteđuje tablicu u kojoj se navodi svaki sloj, njegova skupina, je li na njoj i njegova web adresa",
+              "src": "machine",
+              "h": "f1f31228485a"
+            },
+            "helpBatchLink": {
+              "t": "{copyLayerLink} kopira web adresu koja otvara ovu aplikaciju s istim slojevima na",
+              "src": "machine",
+              "h": "30eeccf42c2d"
+            },
+            "helpViewsTitle": {
+              "t": "_Snimljeni pogledi",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            },
+            "helpViewsIntro": {
+              "t": "Pogled je slika čiji su slojevi uključeni i isključeni. Sačuvajte po jedan za svaki posao koji često obavljate.",
+              "src": "machine",
+              "h": "d55f8402dab2"
+            },
+            "helpViewsPresets": {
+              "t": "Nazivi pod {presetViews} na vrhu izbornika došli su s aplikacijom. Odaberite jednu i slojeve prebacite na taj skup. Oni se ne mogu mijenjati ili obrisati.",
+              "src": "machine",
+              "h": "d6ea43082b54"
+            },
+            "helpViews1": {
+              "t": "Uključite slojeve koje želite, kliknite na ikonu oznake, odaberite {saveCurrentView}, upišite ime i kliknite {save}.",
+              "src": "machine",
+              "h": "6b42dfc2bf39"
+            },
+            "helpViews2": {
+              "t": "Da biste kasnije pogledali, kliknite na ikonu oznake i odaberite njezino ime. Slojevi se poklapaju.",
+              "src": "machine",
+              "h": "cfac7dee9a13"
+            },
+            "helpViews3": {
+              "t": "Preskočite pogled u popisu i koristite ikonu za brisanje smeća.",
+              "src": "machine",
+              "h": "a7321aaca0e1"
+            },
+            "helpViews4": {
+              "t": "{exportViews}spremi svoje poglede na datoteku. {importViews} učitava ih na drugom računalu ili ih dijeli s kolegom.",
+              "src": "machine",
+              "h": "fdc91fa1a145"
+            },
+            "helpAddTitle": {
+              "t": "Dodavanje vlastitog sloja",
+              "src": "machine",
+              "h": "c293e9747226"
+            },
+            "helpAddIntro": {
+              "t": "Kliknite ikonu plus u gornjoj traci da otvorite ploču {addLayerTitle}.",
+              "src": "machine",
+              "h": "aae5947a115d"
+            },
+            "helpAdd1": {
+              "t": "Na URL kartici zalijepite web adresu za sloj (a ArcGIS servis, WMS, WMTS, GeoJSON, CSV ili KML link) ili 32-karakter ArcGIS item ID, zatim kliknite {addLayerSubmit}.",
+              "src": "machine",
+              "h": "206802d8451f"
+            },
+            "helpAdd2": {
+              "t": "Na kartici Datoteka, odaberite datoteku s vašeg računala: GeoJSON, CSV s koordinatama, KML, ili zipped oblik file.",
+              "src": "machine",
+              "h": "ab6c45fec708"
+            },
+            "helpAddImagery": {
+              "t": "Na kartici {imageryTab} izaberite zračni ili satelitski izvor koji pokriva područje na zaslonu i kliknite Dodaj. Ide ispod vaših slojeva, kao drugi bazni plan. Svaki izvor ima svoje uvjete korištenja.",
+              "src": "machine",
+              "h": "637602a43ecd"
+            },
+            "helpAdd3": {
+              "t": "Novi sloj se pojavljuje na vrhu liste. Koristite njegov izbornik s tri točke da promijenite njegov simbol ili ga uklonite.",
+              "src": "machine",
+              "h": "87b2c4e03d98"
+            },
+            "helpKeepTitle": {
+              "t": "Gdje stvari žive",
+              "src": "machine",
+              "h": "7a475a9b4308"
+            },
+            "helpKeepViews": {
+              "t": "Sačuvani pogledi se čuvaju u ovom pregledniku na ovom računalu. Oni nisu na samoj karti, a drugo računalo ili preglednik ih neće imati osim ako ih ne izvozite i uvozite.",
+              "src": "machine",
+              "h": "efd94628071a"
+            },
+            "helpKeepViewsClear": {
+              "t": "Čišćenje podataka preglednika uklanja snimljene preglede. Izvezite ih prvo ako ih želite zadržati.",
+              "src": "machine",
+              "h": "70dbca6b5305"
+            },
+            "helpKeepAdded": {
+              "t": "Slojevi koje dodate sa web adrese ili datoteke traju dok se stranica ponovno ne učita. Ponovno učitaj stranicu i oni su nestali.",
+              "src": "machine",
+              "h": "551cfc856212"
+            },
+            "helpKeepTicks": {
+              "t": "Uključivanje i isključivanje slojeva mijenja samo zaslon. Karta koju svi ostali vide nije zahvaćena.",
+              "src": "machine",
+              "h": "c0f76bf17811"
+            },
+            "helpKeepLink": {
+              "t": "Kopirani link nosi koji slojevi su na, ništa više. Tko god ga otvori vidi te slojeve; njihova vlastita karta nije promijenjena.",
+              "src": "machine",
+              "h": "588e5668a118"
+            },
+            "helpTroubleTitle": {
+              "t": "Ako nešto izgleda loše",
+              "src": "machine",
+              "h": "6f7fec3ff1e0"
+            },
+            "helpTroubleGrey": {
+              "t": "Naziv sloja je siv i ništa ne pokazuje na karti: sloj se povlači samo između određenih razina uvećanja. Zumirajte, ili izađite, dok se ime ne zatamni.",
+              "src": "machine",
+              "h": "3f19f39dc5b7"
+            },
+            "helpTroubleGroupOff": {
+              "t": "Sloj je označen, ali nedostaje sa mape: njegova grupa je isključena. Označite i grupu.",
+              "src": "machine",
+              "h": "a52a66d8afd0"
+            },
+            "helpTroublePickOne": {
+              "t": "Sloj isključen sam od sebe kada uključite drugi uključen: oboje sjediti u grupi koja omogućuje jedan po jedan sloj. Uključite onaj koji želite natrag na.",
+              "src": "machine",
+              "h": "7941d843e04c"
+            },
+            "helpTroubleNoMatches": {
+              "t": "Filtar ne pokazuje slojeve: provjerite pravopis, ili jasno okvir s x vidjeti sve opet.",
+              "src": "machine",
+              "h": "1edd055b49ff"
+            },
+            "helpTroubleAdd": {
+              "t": "{addLayerError}: provjerite je li adresa sam sloj, a ne web stranica, i da je možete otvoriti u novoj kartici.",
+              "src": "machine",
+              "h": "0d2f0f172368"
+            },
+            "helpTroubleFocus": {
+              "t": "Većina slojeva je nestala i Layer fokus kartica pokazuje: kliknite Exit fokus na karticu da ih vrati.",
+              "src": "machine",
+              "h": "343b95367cd1"
+            },
+            "helpTroubleReset": {
+              "t": "Puno ste se promijenili i želite početi ispočetka: otvorite izbornik {batchOptions} i odaberite {resetVisibility}.",
+              "src": "machine",
+              "h": "057ddd1efd4d"
+            },
+            "helpTroubleHealth": {
+              "t": "Sloj kaže ({layerUnavailable}) i ne crta ništa: servis je dolje ili blokiran na vašoj mreži. Pričekajte nekoliko minuta i, ako bilješka ostaje, reći GIS Division koji sloj.",
+              "src": "machine",
+              "h": "e5cf1051320a"
+            },
+            "helpTroubleLink": {
+              "t": "Link koji ste poslali pokazuje manje slojeva nego što se očekivalo: link samo imena slojeva koje ova karta ima. Uključite ono što vam treba i kopirajte novi link.",
+              "src": "machine",
+              "h": "2329bb8f7e5f"
+            },
+            "helpTroubleImagery": {
+              "t": "Tablica {imageryTab} kaže da se indeks nije mogao pročitati: mreža blokira stranicu OpenStreetMap. Pokušajte kasnije ili iz druge veze.",
+              "src": "machine",
+              "h": "9fdd45a49fb9"
+            },
+            "helpTroubleReload": {
+              "t": "Popis je prazan ili zapeo učitavanje: ponovno učitati stranicu. Karta traje trenutak za povezivanje na sporim mrežama.",
+              "src": "machine",
+              "h": "83fac4cb6cc8"
+            },
+            "helpTroubleContact": {
+              "t": "Još uvijek zapeo? Kontaktirajte GIS Division i spomenuti Mapa Slojevi ime i ovu aplikaciju.",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            },
+            "helpTipsTitle": {
+              "t": "Dobro je znati.",
+              "src": "machine",
+              "h": "79fc372dc790"
+            },
+            "helpTipsHover": {
+              "t": "Preskočite naziv sloja da pročitate cijeli naslov kada je odsječen.",
+              "src": "machine",
+              "h": "22baf456f624"
+            },
+            "helpTipsSolo": {
+              "t": "{soloLayer} u izborniku sloja najbrži je način da se jedan sloj usporedi s baznom mapom.",
+              "src": "machine",
+              "h": "86aca483abad"
+            },
+            "helpTipsExport": {
+              "t": "{exportMapImage} u izborniku {batchOptions} daje vam sliku za zalijepiti u dokument ili e-mail.",
+              "src": "machine",
+              "h": "0ba0ba707952"
+            },
+            "helpTipsViews": {
+              "t": "Spremi pogled prije nego što počneš kliktati. Povratak je onda jedan klik.",
+              "src": "machine",
+              "h": "d1dcada874d6"
+            },
+            "helpTipsOpacity": {
+              "t": "Fading sloj s {transparency} često pokazuje više od isključivanja drugih.",
+              "src": "machine",
+              "h": "a956eed8e983"
+            },
+            "helpTipsLink": {
+              "t": "Postavite slojeve jednom, odaberite {copyLayerLink}, i zalijepite link u e-mail tako da kolega otvara isti pogled.",
+              "src": "machine",
+              "h": "2431070f441a"
+            },
+            "addALayerThatAlreadyLives": {
+              "t": "Dodajte sloj koji već živi online zalijepivši svoju web adresu. Koristite ovo za uslugu domaćina, ili za GeoJSON, CSV ili KML datoteku koja je objavljena na webu.",
+              "src": "machine",
+              "h": "a0d3dc3737c8"
+            },
+            "urlOrItemId": {
+              "t": "URL ili identifikacija stavke",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            },
+            "addAFileSavedOnYour": {
+              "t": "Dodajte datoteku spremljenu na vaše računalo. Ona je dodana na kartu samo za ovu sesiju - ona nije učitana ili spremljena.",
+              "src": "machine",
+              "h": "e61b37816069"
+            },
+            "dragAFileFromYourComputer": {
+              "t": "Povucite datoteku s računala ili kliknite da pregledate",
+              "src": "machine",
+              "h": "469060605e0f"
+            },
+            "symbologyAndStructureAreKeptWhere": {
+              "t": "Simbologija i struktura čuvaju se tamo gdje su podržani.",
+              "src": "machine",
+              "h": "fe6ef23dbc61"
+            },
+            "geoJSONCsvKmlOrAZipped": {
+              "t": "GeoJSON, CSV, KML ili zipirani file oblika (.zip)",
+              "src": "machine",
+              "h": "5f1a09894b64"
+            },
+            "removeFile": {
+              "t": "Ukloni datoteku",
+              "src": "machine",
+              "h": "304b14ba1a64"
+            },
+            "mapContainer": {
+              "t": "Mapa Kontejner",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            },
+            "restoringYourLayers": {
+              "t": "Obnavljanje vaših slojeva...",
+              "src": "machine",
+              "h": "46e7450f36e0"
+            },
+            "showingOnly": {
+              "t": "Samo za prikazivanje",
+              "src": "machine",
+              "h": "93a9715544cd"
+            },
+            "onTheMapEveryOtherLayer": {
+              "t": "Svaki drugi sloj je skriven dok ne izađeš.",
+              "src": "machine",
+              "h": "676eeed11f0a"
+            },
+            "exitFocus": {
+              "t": "Izlaz iz fokusa",
+              "src": "machine",
+              "h": "64cefdd6e324"
+            },
+            "thisLayer": {
+              "t": "ovaj sloj",
+              "src": "machine",
+              "h": "4438adaec099"
+            },
+            "autoDetectServiceUrlOrItem": {
+              "t": "Automatski detektiraj (uRL usluge ili ID stavke)",
+              "src": "machine",
+              "h": "97f3197039c2"
+            },
+            "arcGISWebService": {
+              "t": "ArcGIS web servis",
+              "src": "machine",
+              "h": "906a483616c6"
+            },
+            "geoJSONWebLink": {
+              "t": "GeoJSON (web link)",
+              "src": "machine",
+              "h": "a76dc8147c80"
+            },
+            "csvWebLink": {
+              "t": "CSV (web link)",
+              "src": "machine",
+              "h": "bc66194c3edf"
+            },
+            "kmlWebLink": {
+              "t": "KML (web link)",
+              "src": "machine",
+              "h": "67e4fe645907"
+            },
+            "thatLayerCouldnTBeAdded": {
+              "t": "Taj se sloj nije mogao dodati. Provjerite izvor i pokušajte ponovno.",
+              "src": "machine",
+              "h": "8795b0c37540"
+            },
+            "thatLayerCouldnTBeAdded2": {
+              "t": "Taj sloj nije mogao biti dodan. Provjerite URL ili stavku ID.",
+              "src": "machine",
+              "h": "bc9b68fb27c4"
+            },
+            "thatFileCouldnTBeAdded": {
+              "t": "Ta datoteka nije mogla biti dodana.",
+              "src": "machine",
+              "h": "cac2cf085c5f"
+            },
+            "noDrawingsWereFoundInThat": {
+              "t": "U toj datoteci nisu pronađeni crteži.",
+              "src": "machine",
+              "h": "ded5bca7ca7f"
+            },
+            "noMapFeaturesWereFoundIn": {
+              "t": "U tom KML-u nisu pronađene značajke karte.",
+              "src": "machine",
+              "h": "a8d6c19d3887"
+            },
+            "thatKmlCouldnTBeRead": {
+              "t": "Taj KML nije se mogao pročitati.",
+              "src": "machine",
+              "h": "1dde16e4afe0"
+            },
+            "thatShapefileCouldnTBeRead": {
+              "t": "Taj oblik datoteka nije mogao biti pročitan. Koristite .zip koji sadrži .shp, .dbf, i .prj.",
+              "src": "machine",
+              "h": "607aef554dcc"
+            },
+            "unsupportedFileUseGeoJSONCsvKml": {
+              "t": "Nepodržana datoteka. Koristite GeoJSON, CSV, KML ili zatvorenu datoteku oblika.",
+              "src": "machine",
+              "h": "09018a7cc20c"
+            },
+            "basemapValue": {
+              "t": "Osnovna mapa {value}",
+              "src": "machine",
+              "h": "8b0e764c53db"
+            },
+            "unknownError": {
+              "t": "nepoznata greška",
+              "src": "machine",
+              "h": "af6321ca7a8b"
+            },
+            "unserializableError": {
+              "t": "Neserijalizacijska greška",
+              "src": "machine",
+              "h": "76e73551597a"
+            },
+            "disableOldAppDataActionDelete": {
+              "t": "onemogućiti stare radnje s podacima o aplikacijama, izbrisati neiskorištenu konfiguraciju odabranih JimuLayerIds",
+              "src": "machine",
+              "h": "fac561742c0b"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Taj {value1} sloj nije mogao biti dodan. Provjerite URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "To {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "To je...",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "sloj nije mogao biti dodan. Provjerite URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
+            }
+          }
         },
         "hu": {
           "file": "ef7e36f5a270",
@@ -2106,18 +4183,1059 @@
           }
         },
         "sr": {
-          "file": "b717e3f608c4",
+          "file": "447f8b62da14",
           "counts": {
             "esri": 55,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 208,
             "stale": 0,
-            "missing": 208
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "soloLayer": {
+              "t": "Pokaži samo ovaj sloj.",
+              "src": "machine",
+              "h": "7ad1b7f1e860"
+            },
+            "matches": {
+              "t": "Šibice",
+              "src": "machine",
+              "h": "9f3e9242c638"
+            },
+            "layersVisibleTooltip": {
+              "t": "Slojevi ukljuèeni / ukupni slojevi",
+              "src": "machine",
+              "h": "74ad259f107a"
+            },
+            "zoomToVisible": {
+              "t": "Zumiraj u vidljive slojeve",
+              "src": "machine",
+              "h": "13cc73fbc41d"
+            },
+            "resetVisibility": {
+              "t": "Resetiraj na podrazumevanu vidljivost",
+              "src": "machine",
+              "h": "ff2c8d62c415"
+            },
+            "collapseList": {
+              "t": "Списак слојева колапсаQShortcut",
+              "src": "machine",
+              "h": "ee1fea16bd2c"
+            },
+            "expandList": {
+              "t": "Прошири списак слојеваQShortcut",
+              "src": "machine",
+              "h": "c8d484fdec65"
+            },
+            "showVisibleOnly": {
+              "t": "Pokaži samo vidljive slojeve",
+              "src": "machine",
+              "h": "cb8f96954cc8"
+            },
+            "savedViews": {
+              "t": "Sačuvani pogledi",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            },
+            "presetViews": {
+              "t": "Presets",
+              "src": "machine",
+              "h": "e709e76ff542"
+            },
+            "saveCurrentView": {
+              "t": "Spremi trenutni pogled...",
+              "src": "machine",
+              "h": "bd001bf59eb1"
+            },
+            "noSavedViews": {
+              "t": "Nema još snimljenih pregleda",
+              "src": "machine",
+              "h": "f243ae994e12"
+            },
+            "applyView": {
+              "t": "Прим ијени приказQShortcut",
+              "src": "machine",
+              "h": "01d8a5f8c458"
+            },
+            "viewNamePlaceholder": {
+              "t": "_Ime prikaza:",
+              "src": "machine",
+              "h": "f13b6b7a495d"
+            },
+            "exportViews": {
+              "t": "Izvezi poglede...",
+              "src": "machine",
+              "h": "2cb952d899e9"
+            },
+            "importViews": {
+              "t": "Uvezi poglede...",
+              "src": "machine",
+              "h": "671a1fb930dc"
+            },
+            "flashLayer": {
+              "t": "Blic / lociranje sloja",
+              "src": "machine",
+              "h": "2f176e8e0d19"
+            },
+            "copyUrl": {
+              "t": "Копирај ~@ ¦УРЛ¦URL¦ servisaQShortcut",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "refreshLayer": {
+              "t": "Osvježi sloj",
+              "src": "machine",
+              "h": "d437c8d8b29f"
+            },
+            "layerDetails": {
+              "t": "Detalji sloja",
+              "src": "machine",
+              "h": "cb55ca4274f4"
+            },
+            "detailScale": {
+              "t": "Vidljiva skala",
+              "src": "machine",
+              "h": "3e1222ee37d1"
+            },
+            "detailOpenService": {
+              "t": "Otvorena usluga",
+              "src": "machine",
+              "h": "732f6445cc8f"
+            },
+            "detailCounting": {
+              "t": "Raèunajuæi...",
+              "src": "machine",
+              "h": "c92a5b8a0d9b"
+            },
+            "spotlight": {
+              "t": "Fokusiraj sloj",
+              "src": "machine",
+              "h": "1a7f3fe4f4a0"
+            },
+            "clearSpotlight": {
+              "t": "Очисти фокусQShortcut",
+              "src": "machine",
+              "h": "08c2e76c4d36"
+            },
+            "moveOutOfGroup": {
+              "t": "Iseli se iz grupe",
+              "src": "machine",
+              "h": "853e8ed07048"
+            },
+            "shapefile": {
+              "t": "ОбликDescription",
+              "src": "machine",
+              "h": "1e21d10d2150"
+            },
+            "exportMapImage": {
+              "t": "Izvezi sliku mape",
+              "src": "machine",
+              "h": "424361791e7b"
+            },
+            "addLayer": {
+              "t": "Dodaj sloj iz URL- a",
+              "src": "machine",
+              "h": "4395c4fcf83f"
+            },
+            "addLayerHint": {
+              "t": "Umetnite značajku ili servis za mapu URL, ili ArcGIS stavku ID.",
+              "src": "machine",
+              "h": "3327586431a3"
+            },
+            "addLayerLabel": {
+              "t": "URL servisa ili ID stavke",
+              "src": "machine",
+              "h": "52270adcc5c6"
+            },
+            "addLayerPlaceholder": {
+              "t": "https://... ili 32-oznaka ID",
+              "src": "machine",
+              "h": "3537996b637c"
+            },
+            "addLayerWorking": {
+              "t": "Dodavanje sloja...",
+              "src": "machine",
+              "h": "128e82830b77"
+            },
+            "addLayerSuccess": {
+              "t": "Sloj je dodan.",
+              "src": "machine",
+              "h": "df13d6cae399"
+            },
+            "addLayerError": {
+              "t": "Taj sloj nije mogao da se doda. Proverite ID URL-a ili stavke i pokušajte ponovo.",
+              "src": "machine",
+              "h": "75ae04805740"
+            },
+            "addLayerNoView": {
+              "t": "Nijedna mapa još nije spojena, tako da se sloj ne može dodati.",
+              "src": "machine",
+              "h": "cfc327826924"
+            },
+            "masterOpacity": {
+              "t": "Glavna neprozirnost",
+              "src": "machine",
+              "h": "06fcab24f867"
+            },
+            "masterOpacityHint": {
+              "t": "Postavite neprozirnost za sve slojeve odjednom.",
+              "src": "machine",
+              "h": "80682b088f98"
+            },
+            "loadingBasemaps": {
+              "t": "Учитавам баземапе...",
+              "src": "machine",
+              "h": "49c02cfbae47"
+            },
+            "bmHybrid": {
+              "t": "Imagery hybrid",
+              "src": "machine",
+              "h": "f5b59b1d317b"
+            },
+            "bmLightGray": {
+              "t": "Svetlo siva",
+              "src": "machine",
+              "h": "3ef03be05859"
+            },
+            "bmDarkGray": {
+              "t": "Tamno siva",
+              "src": "machine",
+              "h": "076862719447"
+            },
+            "bmOSM": {
+              "t": "OpenStreetMap",
+              "src": "machine",
+              "h": "fa78a333f9df"
+            },
+            "bmTerrain": {
+              "t": "Teren.",
+              "src": "machine",
+              "h": "e7d721bc9ae7"
+            },
+            "copyLayerLink": {
+              "t": "Kopiraj link na ove slojeve",
+              "src": "machine",
+              "h": "6c11efc7e7d5"
+            },
+            "linkCopied": {
+              "t": "Link kopiran",
+              "src": "machine",
+              "h": "c2e98476efb5"
+            },
+            "linkCopyFailed": {
+              "t": "Ne mogu da kopiram link",
+              "src": "machine",
+              "h": "7a456d6f436e"
+            },
+            "exportLayerCsv": {
+              "t": "Lista izvoznih slojeva (CSV)",
+              "src": "machine",
+              "h": "6c434ece4711"
+            },
+            "csvMaxScale": {
+              "t": "Maksimalna skala",
+              "src": "machine",
+              "h": "5b4b8e7f7400"
+            },
+            "csvUrl": {
+              "t": "URL",
+              "src": "machine",
+              "h": "0e2d9b0777a4"
+            },
+            "layerUnavailable": {
+              "t": "Servis se ne javlja.",
+              "src": "machine",
+              "h": "8432b3694b73"
+            },
+            "showFavoritesOnly": {
+              "t": "Prikaži samo omiljene",
+              "src": "machine",
+              "h": "a40c3d5f052b"
+            },
+            "zoomToScale": {
+              "t": "Zumiraj dok se ne vidi",
+              "src": "machine",
+              "h": "7efa5ac04eca"
+            },
+            "imageryTab": {
+              "t": "Slika u blizini",
+              "src": "machine",
+              "h": "7d4843729f40"
+            },
+            "imageryIntro": {
+              "t": "Zračni i satelitski prikazi iz OpenStreetMap Editor Layer Indexa koji pokriva deo mape koju gledate. Dodaje se ispod vaših slojeva, kao drugi bazni plan.",
+              "src": "machine",
+              "h": "a82d78cd336a"
+            },
+            "imagerySearch": {
+              "t": "Traži slike po imenu",
+              "src": "machine",
+              "h": "6f0249b479fe"
+            },
+            "imageryLoading": {
+              "t": "Èitam indeks slika...",
+              "src": "machine",
+              "h": "aa33c174dc77"
+            },
+            "imageryError": {
+              "t": "Indeks slika se ne može proèitati.",
+              "src": "machine",
+              "h": "e3f6d4117405"
+            },
+            "imageryNone": {
+              "t": "Nema slika u indeksu koje pokrivaju ovo podruèje.",
+              "src": "machine",
+              "h": "5c4364eeaa68"
+            },
+            "imageryBest": {
+              "t": "Najbolji.",
+              "src": "machine",
+              "h": "c5f5e4d75252"
+            },
+            "imageryAdded": {
+              "t": "Dodato {name} ispod vaših slojeva.",
+              "src": "machine",
+              "h": "e3b03f0b85c2"
+            },
+            "imageryNotAddable": {
+              "t": "Taj izvor koristi format koji ova mapa ne može da prikaže.",
+              "src": "machine",
+              "h": "ca3ce705e391"
+            },
+            "imageryLicense": {
+              "t": "Svaki izvor ima svoju licencu i termine upotrebe, prikazane kao atribut. Proverite ih pre korišćenja slika u proizvodu.",
+              "src": "machine",
+              "h": "d22206caeb96"
+            },
+            "helpIntro": {
+              "t": "Pogledajte koji su slojevi na mapi, ukljuèite ih ili iskljuèite, naðite onaj koji vam je potreban, i promenite kako izgleda.",
+              "src": "machine",
+              "h": "663a2e80a168"
+            },
+            "helpSearchPlaceholder": {
+              "t": "Pretraži vodiè (pokušajfilter ililegenda",
+              "src": "machine",
+              "h": "531871626b9e"
+            },
+            "helpNoMatches": {
+              "t": "Ništa u vodièu ne odgovara toj reèi.",
+              "src": "machine",
+              "h": "3fe179f75330"
+            },
+            "firstRunTitle": {
+              "t": "Novi ovde?",
+              "src": "machine",
+              "h": "b81f2e17e001"
+            },
+            "firstRunBody": {
+              "t": "Označite sloj da ga prikažete na mapi, i kliknite na tri tačke pored sloja za više opcija.",
+              "src": "machine",
+              "h": "9a067de5da3d"
+            },
+            "firstRunHelpLink": {
+              "t": "Otvori vodiè.",
+              "src": "machine",
+              "h": "2447dd6134ea"
+            },
+            "firstRunDismiss": {
+              "t": "Otpust.",
+              "src": "machine",
+              "h": "70afe9eff3f2"
+            },
+            "helpStartTitle": {
+              "t": "Poènite ovde: tri koraka.",
+              "src": "machine",
+              "h": "789320b4831d"
+            },
+            "helpStart1Search": {
+              "t": "Pronađi sloj koji želiš u listi. Ukucaj deo njegovog imena u kutiju na vrhu da skratiš listu.",
+              "src": "machine",
+              "h": "f479a0b34a37"
+            },
+            "helpStart1": {
+              "t": "Pronađi sloj koji želiš u listi. Klikni na strelu pored imena grupe da vidiš slojeve unutar nje.",
+              "src": "machine",
+              "h": "39cac7ad2fa7"
+            },
+            "helpStart2Tick": {
+              "t": "Otkopèaj kutiju pored sloja da je pokažeš na mapi.",
+              "src": "machine",
+              "h": "6c0f63568c07"
+            },
+            "helpStart2Eye": {
+              "t": "Klikni oko pored sloja da ga pokažeš na mapi. Klikni ponovo da ga sakriješ.",
+              "src": "machine",
+              "h": "9f2005fb8353"
+            },
+            "helpStart3Menu": {
+              "t": "Klikni na tri tačke pored sloja za više opcija, kao što je {firstAction}.",
+              "src": "machine",
+              "h": "4924a6167d38"
+            },
+            "helpStart3": {
+              "t": "Daj mapi trenutak da se prepravi nakon svake promene.",
+              "src": "machine",
+              "h": "175d96031b37"
+            },
+            "helpLayersTitle": {
+              "t": "Ukljuèujem i gasim slojeve.",
+              "src": "machine",
+              "h": "a390e7e9ab7f"
+            },
+            "helpLayersTick": {
+              "t": "Označena kutija znači da je sloj na mapi. Sivo ime znači da je sloj izvan svog vidljivog opsega: zumirati ili izaći i on se pojavljuje.",
+              "src": "machine",
+              "h": "965621eb3560"
+            },
+            "helpLayersEye": {
+              "t": "Otvoreno oko znači da je sloj na mapi. sivo ime znači da je sloj izvan svog vidljivog raspona: zumirati ili izaći i on se pojavljuje.",
+              "src": "machine",
+              "h": "a1a60fdc2b35"
+            },
+            "helpLayersGroups": {
+              "t": "Slojevi mogu da sednu unutar grupe. Kliknite strelu pored imena grupe da je otvorite.",
+              "src": "machine",
+              "h": "f920c7ba9124"
+            },
+            "helpLayersPickOneTick": {
+              "t": "Neke grupe dozvoljavaju jedan sloj u isto vreme. Njihovi slojevi imaju okruglo dugme umesto kutije: odaberite jednog i ostale u toj grupi se isključuju.",
+              "src": "machine",
+              "h": "085d2d96f9fc"
+            },
+            "helpLayersPickOneEye": {
+              "t": "Neke grupe dozvoljavaju jedan sloj u isto vreme.",
+              "src": "machine",
+              "h": "c7525c909ede"
+            },
+            "helpLayersParentOn": {
+              "t": "Uključivanje sloja unutar grupe takođe uključuje grupu, tako da sloj pokazuje odmah.",
+              "src": "machine",
+              "h": "5cbab0a533ed"
+            },
+            "helpLayersParentOff": {
+              "t": "Sloj unutar grupe pokazuje samo kada je grupa uključena. Ako nedostaje označeni sloj sa mape, proverite njegovu grupu.",
+              "src": "machine",
+              "h": "4f4ba3d73e6c"
+            },
+            "helpLayersCount": {
+              "t": "Značka na vrhu pokazuje koliko slojeva je na ukupnom nivou, i ažuriranja kao što idete.",
+              "src": "machine",
+              "h": "99ba6731cee4"
+            },
+            "helpLayersLegend": {
+              "t": "Klikni na malu strelu pored imena sloja da vidiš njenu legendu, simbole koje koristi na mapi.",
+              "src": "machine",
+              "h": "3c7762ec3f21"
+            },
+            "helpLayersReorder": {
+              "t": "Povuci sloj gore ili dole da ga promeniš.",
+              "src": "machine",
+              "h": "96a889225e91"
+            },
+            "helpLayersTables": {
+              "t": "Stolovi su navedeni ispod slojeva, ispod {tables}. Drže zapise bez lokacije, tako da nemaju krpelj kutiju.",
+              "src": "machine",
+              "h": "e1760e825023"
+            },
+            "helpLayersHealth": {
+              "t": "Naziv sloja koji se završava u ({layerUnavailable}) znači servis iza njega nije odgovorio na poslednju proveru. Vidžet ponovo proverava svakih nekoliko minuta i ispušta notu kada se vrati.",
+              "src": "machine",
+              "h": "90b0332f22f5"
+            },
+            "helpLayersCollapse": {
+              "t": "Koristite strelu na krajnjem desnom delu gornje trake da složite celu listu do trake, i ponovo da je vratite.",
+              "src": "machine",
+              "h": "b266096bf8ce"
+            },
+            "helpFindTitle": {
+              "t": "Pronalaženje sloja",
+              "src": "machine",
+              "h": "fd2d2fbb0c13"
+            },
+            "helpFindType": {
+              "t": "Ukucaj deo imena sloja u kutiji na vrhu. Lista se smanjuje na odgovarajuće slojeve i otvara grupe u kojima sede.",
+              "src": "machine",
+              "h": "e38c353b696e"
+            },
+            "helpFindDeep": {
+              "t": "U pretresu se očitava i opis i oznaka svakog sloja, tako da reč koja nije u imenu još uvek može da pronađe sloj.",
+              "src": "machine",
+              "h": "dfd1d7dabb2c"
+            },
+            "helpFindCount": {
+              "t": "Broj pored kutije ti govori koliko slojeva se poklapa.",
+              "src": "machine",
+              "h": "a3e5e7ebf40f"
+            },
+            "helpFindClear": {
+              "t": "Oèistite kutiju sa x na njenom kraju da biste ponovo videli celu listu.",
+              "src": "machine",
+              "h": "7affe6586032"
+            },
+            "helpFindButton": {
+              "t": "Lijevka na desnoj strani gornje šipke se krije ili pokazuje kutiju.",
+              "src": "machine",
+              "h": "5e8ac60216b4"
+            },
+            "helpFindFavorites": {
+              "t": "U jelovniku {batchOptions} izaberite {showFavoritesOnly} da navedete samo vaše zvezdane slojeve i njihove grupe. Odaberite {showAllLayers} da se vratite.",
+              "src": "machine",
+              "h": "ba1b2eb0646f"
+            },
+            "helpFindVisibleOnly": {
+              "t": "U meniju {batchOptions} izaberi {showVisibleOnly} da nabrojiš samo slojeve koji su na njemu. Izaberi {showAllLayers} da se vratiš.",
+              "src": "machine",
+              "h": "062b9153b639"
+            },
+            "helpMenuTitle": {
+              "t": "Meni slojeva, dugme po dugme.",
+              "src": "machine",
+              "h": "1676dece4179"
+            },
+            "helpMenuIntro": {
+              "t": "Klikni na tri tačke pored sloja da otvoriš jelovnik. Navedene su samo opcije koje se odnose na taj sloj.",
+              "src": "machine",
+              "h": "50c2cad0133a"
+            },
+            "helpMenuGoto": {
+              "t": "{goto}: pomera mapu na mesto gde je sloj.",
+              "src": "machine",
+              "h": "2c2af5301c3e"
+            },
+            "helpMenuLabels": {
+              "t": "{showLabels}ili {hideLabels}: uključuje tekstualne oznake sloja na ili off na mapi.",
+              "src": "machine",
+              "h": "b55eca6a888c"
+            },
+            "helpMenuPopup": {
+              "t": "{enablePopup} ili {disablePopup}: odlučuje da li kliktanje na osobinu na mapi otvara pop-up.",
+              "src": "machine",
+              "h": "0743c1a5d911"
+            },
+            "helpMenuTransparency": {
+              "t": "{transparency}: izblijedi sloj tako da ono što je ispod pokazuje kroz. Povuci klizač.",
+              "src": "machine",
+              "h": "cbcbd099eecd"
+            },
+            "helpMenuVisibilityRange": {
+              "t": "{visibilityRange}: postavlja koliko duboko unutra ili napolje morate biti zumirani pre nego što se sloj povuče.",
+              "src": "machine",
+              "h": "a9a556c0419a"
+            },
+            "helpMenuInformation": {
+              "t": "{information}: otvara stranicu sloja svojim opisom i izvorom.",
+              "src": "machine",
+              "h": "ca99cf050e21"
+            },
+            "helpMenuChangeSymbol": {
+              "t": "{changeSymbol}: bira novu boju ili simbol za sloj koji ste sami dodali.",
+              "src": "machine",
+              "h": "1e166527fbb7"
+            },
+            "helpMenuSolo": {
+              "t": "{soloLayer}: isključuje svaki drugi sloj u jednom kliku tako da je samo ovaj ostao na mapi.",
+              "src": "machine",
+              "h": "852e92ac894c"
+            },
+            "helpMenuFlash": {
+              "t": "{flashLayer}: pomera mapu do sloja i trepće njenim obrubom tako da možete da je uočite.",
+              "src": "machine",
+              "h": "36b43af93b2b"
+            },
+            "helpMenuCopyUrl": {
+              "t": "{copyUrl}: kopira veb-adresu sloja, spremna da zalepi u e-mail ili drugu mapu.",
+              "src": "machine",
+              "h": "d59130d4a40f"
+            },
+            "helpMenuRefresh": {
+              "t": "{refreshLayer}: ponovo učitava sloj iz svog izvora kako bi pokupio nedavna uređivanja.",
+              "src": "machine",
+              "h": "e434e21daa8e"
+            },
+            "helpMenuZoomScale": {
+              "t": "{zoomToScale}: prikazano samo dok je sloj posiven napolje. Pomera mapu unutra ili napolje u zum gde se taj sloj crta.",
+              "src": "machine",
+              "h": "9eb3555b4975"
+            },
+            "helpMenuFavorite": {
+              "t": "{favoriteAdd}ili {favoriteRemove}: stavlja zvezdu na sloj koji često koristite. Zvezde se čuvaju u ovom pretraživaču.",
+              "src": "machine",
+              "h": "25791f972462"
+            },
+            "helpMenuDetails": {
+              "t": "{layerDetails}: otvara ploču sa tipom sloja, brojem osobina, poljima i linkom na servis.",
+              "src": "machine",
+              "h": "3c97546091e9"
+            },
+            "helpMenuSpotlight": {
+              "t": "{spotlight}: prikazuje samo ovaj sloj i pokriva listu karticom dok gledate. Klikni Izlaz fokusiraj se na karticu, ili {clearSpotlight} u meniju, da vratiš ostale slojeve nazad.",
+              "src": "machine",
+              "h": "8f2c47377528"
+            },
+            "helpMenuMove": {
+              "t": "{moveToTop}i {moveToBottom}: promijeniti koji sloj povlači preko ostalih. {moveOutOfGroup} podiže sloj iz svoje grupe.",
+              "src": "machine",
+              "h": "4bc49ebba7a9"
+            },
+            "helpMenuRemove": {
+              "t": "{remove}: uzima sloj koji ste sami dodali sa mape. Slojevi koji su došli sa mapom ne mogu biti uklonjeni.",
+              "src": "machine",
+              "h": "e619e0c7ff69"
+            },
+            "helpBarTitle": {
+              "t": "Dugmad na vrhu",
+              "src": "machine",
+              "h": "bdfb10cb0690"
+            },
+            "helpBarIntro": {
+              "t": "Sve u baru iznad liste radi na celoj mapi, ni jedan sloj.",
+              "src": "machine",
+              "h": "39393dcd9af6"
+            },
+            "helpBarBatch": {
+              "t": "{batchOptions} (provjera lista ikona): {batchItems}.",
+              "src": "machine",
+              "h": "bdfd36d6a2b9"
+            },
+            "helpBarViews": {
+              "t": "{savedViews} (ikona za zabilješke): zadržite skup slojeva kojima ćete se vratiti. Pogledajte Sekciju Sačuvanih pogleda.",
+              "src": "machine",
+              "h": "7dca4ce6e95d"
+            },
+            "helpBarPresets": {
+              "t": "{savedViews} (ikona za zabilješke): izaberite spreman set slojeva koji je došao sa ovom aplikacijom. Pogledajte Sekciju Sačuvanih pogleda.",
+              "src": "machine",
+              "h": "aaa40dd228eb"
+            },
+            "helpBarAdd": {
+              "t": "{addLayer} (plus ikona): stavite sopstveni sloj na mapu sa veb adrese ili fajla. Pogledajte deo sa dodatkom sopstvenog sloja.",
+              "src": "machine",
+              "h": "f96f6987ca83"
+            },
+            "helpBarOpacity": {
+              "t": "{masterOpacity}: jedan klizač koji izbledi svaki sloj odjednom, zgodan za gledanje bazne mape ispod.",
+              "src": "machine",
+              "h": "051d9d66a3d4"
+            },
+            "helpBarBasemap": {
+              "t": "{basemap}: menja mapu pozadine, na primer slike umesto ulica.",
+              "src": "machine",
+              "h": "e190178cda32"
+            },
+            "helpBarLegend": {
+              "t": "{legend}: otvara jednu legendu za svaki sloj koji je na, tako da možete pročitati sve simbole na jednom mestu.",
+              "src": "machine",
+              "h": "c8c3eb63620e"
+            },
+            "helpBarCollapse": {
+              "t": "Strela na krajnjem desnom savija listu do samo ove šipke.",
+              "src": "machine",
+              "h": "fa2fb0ed21e4"
+            },
+            "helpBatchTurnOn": {
+              "t": "{turnOnAllLayers} i {turnOffAllLayers} prebaciti svaki sloj odjednom",
+              "src": "machine",
+              "h": "bc6df31db6c9"
+            },
+            "helpBatchReset": {
+              "t": "{resetVisibility} vraća svaki sloj nazad onako kako je bilo kada se stranica otvorila",
+              "src": "machine",
+              "h": "4b785044beeb"
+            },
+            "helpBatchZoom": {
+              "t": "{zoomToVisible} pomiče mapu tako da svaki sloj koji je na uklapa se u pogledu",
+              "src": "machine",
+              "h": "684328b4074f"
+            },
+            "helpBatchExport": {
+              "t": "{exportMapImage} sprema sliku mape kao PNG datoteku",
+              "src": "machine",
+              "h": "9367e05ac4d9"
+            },
+            "helpBatchExpand": {
+              "t": "{expandAllLayers} i {collapseAllLayers} otvoriti ili zatvoriti svaku grupu",
+              "src": "machine",
+              "h": "55267f1fa55a"
+            },
+            "helpBatchCsv": {
+              "t": "{exportLayerCsv} štedi tabelu koja nabraja svaki sloj, njegovu grupu, da li je na njoj, i njegovu web adresu",
+              "src": "machine",
+              "h": "f1f31228485a"
+            },
+            "helpBatchLink": {
+              "t": "{copyLayerLink} kopira veb adresu koja otvara ovu aplikaciju sa istim slojevima na",
+              "src": "machine",
+              "h": "30eeccf42c2d"
+            },
+            "helpViewsTitle": {
+              "t": "Sačuvani pogledi",
+              "src": "machine",
+              "h": "c0c4dac89fed"
+            },
+            "helpViewsIntro": {
+              "t": "Pogled je slika od kojih su slojevi ukljuèeni i iskljuèeni. Sačuvaj po jedan za svaki posao koji radiš često.",
+              "src": "machine",
+              "h": "d55f8402dab2"
+            },
+            "helpViewsPresets": {
+              "t": "Imena pod {presetViews} na vrhu menija došla su sa aplikacijom. Odaberite jedan i slojeve prebacite na taj skup. Oni se ne mogu menjati ili brisati.",
+              "src": "machine",
+              "h": "d6ea43082b54"
+            },
+            "helpViews1": {
+              "t": "Uključite slojeve koje želite, kliknite na ikonu za zabilješke, izaberite {saveCurrentView}, ukucajte ime i kliknite {save}.",
+              "src": "machine",
+              "h": "6b42dfc2bf39"
+            },
+            "helpViews2": {
+              "t": "Da biste kasnije pogledali, kliknite na ikonu za zabilješke i izaberite njeno ime. Slojevi se poklapaju.",
+              "src": "machine",
+              "h": "cfac7dee9a13"
+            },
+            "helpViews3": {
+              "t": "Preskoči pogled u listi i iskoristi ikonu za brisanje smeća.",
+              "src": "machine",
+              "h": "a7321aaca0e1"
+            },
+            "helpViews4": {
+              "t": "{exportViews}sačuva vaše poglede u fajl. {importViews} učitava ih na drugom računaru ili ih deli sa kolegom.",
+              "src": "machine",
+              "h": "fdc91fa1a145"
+            },
+            "helpAddTitle": {
+              "t": "Dodavanje sopstvenog sloja",
+              "src": "machine",
+              "h": "c293e9747226"
+            },
+            "helpAddIntro": {
+              "t": "Kliknite ikonu plus u gornjoj traci da otvorite panel {addLayerTitle}.",
+              "src": "machine",
+              "h": "aae5947a115d"
+            },
+            "helpAdd1": {
+              "t": "Na URL kartici zalijepite veb adresu za sloj (arcGIS servis, WMS, WMTS, GeoJSON, CSV ili KML link) ili arcGIS arcGIS item ID, zatim kliknite {addLayerSubmit}.",
+              "src": "machine",
+              "h": "206802d8451f"
+            },
+            "helpAdd2": {
+              "t": "Na kartici File, odaberite datoteku sa vašeg računara: GeoJSON, CSV sa koordinatama, KML, ili zipped formfile.",
+              "src": "machine",
+              "h": "ab6c45fec708"
+            },
+            "helpAddImagery": {
+              "t": "Na kartici {imageryTab} izaberite vazdušni ili satelitski izvor koji pokriva površinu na ekranu i kliknite na Dodaj. Ide ispod vaših slojeva, kao drugi bazni plan. Svaki izvor ima svoje uslove upotrebe.",
+              "src": "machine",
+              "h": "637602a43ecd"
+            },
+            "helpAdd3": {
+              "t": "Novi sloj se pojavljuje na vrhu liste. Koristite njegov meni sa tri tačke da promenite njegov simbol ili ga uklonite.",
+              "src": "machine",
+              "h": "87b2c4e03d98"
+            },
+            "helpKeepTitle": {
+              "t": "Gde stvari žive.",
+              "src": "machine",
+              "h": "7a475a9b4308"
+            },
+            "helpKeepViews": {
+              "t": "Sačuvani pogledi se čuvaju u ovom pretraživaču na ovom računaru. Oni nisu na samoj mapi, a drugi računar ili preglednik ih neće imati ukoliko ih ne izvozite i ne uvozite.",
+              "src": "machine",
+              "h": "efd94628071a"
+            },
+            "helpKeepViewsClear": {
+              "t": "Čišćenje podataka preglednika uklanja snimljene preglede. Izvezite ih prvo ako želite da ih zadržite.",
+              "src": "machine",
+              "h": "70dbca6b5305"
+            },
+            "helpKeepAdded": {
+              "t": "Slojevi koje dodate sa veb adrese ili fajla traju dok se stranica ponovo ne učita.",
+              "src": "machine",
+              "h": "551cfc856212"
+            },
+            "helpKeepTicks": {
+              "t": "Ukljuèujem i gasim slojeve, menjam samo ekran, mapa koju svi ostali vide nije zahvaæena.",
+              "src": "machine",
+              "h": "c0f76bf17811"
+            },
+            "helpKeepLink": {
+              "t": "Kopirana veza nosi koji slojevi su na, ništa više. Ko god ga otvori vidi te slojeve; njihova mapa se ne menja.",
+              "src": "machine",
+              "h": "588e5668a118"
+            },
+            "helpTroubleTitle": {
+              "t": "Ako nešto nije u redu",
+              "src": "machine",
+              "h": "6f7fec3ff1e0"
+            },
+            "helpTroubleGrey": {
+              "t": "Naziv sloja je siv i ništa ne pokazuje na mapi: sloj se crta samo između određenih nivoa uvećanja. Zumiraj, ili izađi, dok se ime ne zatamni.",
+              "src": "machine",
+              "h": "3f19f39dc5b7"
+            },
+            "helpTroubleGroupOff": {
+              "t": "Sloj je oznaèen, ali nedostaje sa mape, njegova grupa je iskljuèena.",
+              "src": "machine",
+              "h": "a52a66d8afd0"
+            },
+            "helpTroublePickOne": {
+              "t": "Sloj koji se sam isključi kada uključite drugi: oba sede u grupi koja omogućava jedan sloj u isto vreme. Uključite onaj koji želite ponovo.",
+              "src": "machine",
+              "h": "7941d843e04c"
+            },
+            "helpTroubleNoMatches": {
+              "t": "Filter ne pokazuje slojeve: proverite pravopis, ili očistite kutiju sa x da biste ponovo videli sve.",
+              "src": "machine",
+              "h": "1edd055b49ff"
+            },
+            "helpTroubleAdd": {
+              "t": "{addLayerError}: proverite da li je adresa sam sloj, a ne veb stranica, i da možete da je otvorite u novoj kartici.",
+              "src": "machine",
+              "h": "0d2f0f172368"
+            },
+            "helpTroubleFocus": {
+              "t": "Većina slojeva je nestala, a pokazuje se karta za fokusiranje sloja: kliknite Exit fokusirajte se na karticu da ih vratite.",
+              "src": "machine",
+              "h": "343b95367cd1"
+            },
+            "helpTroubleReset": {
+              "t": "Mnogo ste se promenili i želite da počnete ispočetka: otvorite meni {batchOptions} i izaberite {resetVisibility}.",
+              "src": "machine",
+              "h": "057ddd1efd4d"
+            },
+            "helpTroubleHealth": {
+              "t": "Sloj kaže ({layerUnavailable}) i ne crta ništa: servis je dole ili blokiran na vašoj mreži. Sačekajte nekoliko minuta i, ako poruka ostane, recite GIS diviziji koji sloj.",
+              "src": "machine",
+              "h": "e5cf1051320a"
+            },
+            "helpTroubleLink": {
+              "t": "Link koji ste poslali pokazuje manje slojeva nego što se očekivalo: link koji imaju samo nazivi koje ova mapa ima. Uključite ono što vam treba i kopirajte novi link.",
+              "src": "machine",
+              "h": "2329bb8f7e5f"
+            },
+            "helpTroubleImagery": {
+              "t": "Tabica {imageryTab} kaže da indeks nije mogao da se pročita: mreža blokira sajt OpenStreetMap. Pokušajte ponovo kasnije ili iz druge veze.",
+              "src": "machine",
+              "h": "9fdd45a49fb9"
+            },
+            "helpTroubleReload": {
+              "t": "Lista je prazna ili zaglavljena u učitavanju: ponovo učitaj stranicu. Mapa traje trenutak da se poveže na sporim mrežama.",
+              "src": "machine",
+              "h": "83fac4cb6cc8"
+            },
+            "helpTroubleContact": {
+              "t": "- Kontaktirajte GIS diviziju i pomenite ime Mapa Slojeva i ovu aplikaciju.",
+              "src": "machine",
+              "h": "4b380fb7e782"
+            },
+            "helpTipsTitle": {
+              "t": "Dobro je znati.",
+              "src": "machine",
+              "h": "79fc372dc790"
+            },
+            "helpTipsHover": {
+              "t": "Prekrijte ime sloja da proèitate puni naslov kada je odseèen.",
+              "src": "machine",
+              "h": "22baf456f624"
+            },
+            "helpTipsSolo": {
+              "t": "{soloLayer}u meniju jednog sloja najbrži je način da se uporedi jedan sloj sa baznom mapom.",
+              "src": "machine",
+              "h": "86aca483abad"
+            },
+            "helpTipsExport": {
+              "t": "{exportMapImage} u meniju {batchOptions} daje vam sliku da zalepite u dokument ili e-mail.",
+              "src": "machine",
+              "h": "0ba0ba707952"
+            },
+            "helpTipsViews": {
+              "t": "Sačuvaj pogled pre nego što klikneš. Povratak je jedan klik.",
+              "src": "machine",
+              "h": "d1dcada874d6"
+            },
+            "helpTipsOpacity": {
+              "t": "Nestajanje sloja sa {transparency} često pokazuje više od isključivanja drugih.",
+              "src": "machine",
+              "h": "a956eed8e983"
+            },
+            "helpTipsLink": {
+              "t": "Postavite slojeve jednom, izaberite {copyLayerLink} i zalepite link u e-mail tako da kolega otvori isti pogled.",
+              "src": "machine",
+              "h": "2431070f441a"
+            },
+            "addALayerThatAlreadyLives": {
+              "t": "Dodajte sloj koji već živi online zalijepivši svoju web adresu. Koristite ovo za uslugu domaćina, ili za GeoJSON, CSV, ili KML datoteku koja je objavljena na webu.",
+              "src": "machine",
+              "h": "a0d3dc3737c8"
+            },
+            "urlOrItemId": {
+              "t": "URL ili ID stavke",
+              "src": "machine",
+              "h": "dad658ea3fe1"
+            },
+            "addAFileSavedOnYour": {
+              "t": "Dodajte datoteku spremljenu na vaš računar. Ona se dodaje na mapu samo za ovu sesiju — ona nije učitana ili spremljena.",
+              "src": "machine",
+              "h": "e61b37816069"
+            },
+            "dragAFileFromYourComputer": {
+              "t": "Izvucite datoteku sa svog kompjutera, ili kliknite da pregledate",
+              "src": "machine",
+              "h": "469060605e0f"
+            },
+            "symbologyAndStructureAreKeptWhere": {
+              "t": "Simbologija i struktura se čuvaju tamo gde su podržani.",
+              "src": "machine",
+              "h": "fe6ef23dbc61"
+            },
+            "geoJSONCsvKmlOrAZipped": {
+              "t": "GeoJSON, CSV, KML, или зипован облик фајл (.zip)",
+              "src": "machine",
+              "h": "5f1a09894b64"
+            },
+            "removeFile": {
+              "t": "Ukloni datoteku",
+              "src": "machine",
+              "h": "304b14ba1a64"
+            },
+            "mapContainer": {
+              "t": "МапаContainer",
+              "src": "machine",
+              "h": "7b1eaad3e538"
+            },
+            "restoringYourLayers": {
+              "t": "Obnavljajuæi vaše slojeve...",
+              "src": "machine",
+              "h": "46e7450f36e0"
+            },
+            "showingOnly": {
+              "t": "Samo za pokazivanje.",
+              "src": "machine",
+              "h": "93a9715544cd"
+            },
+            "onTheMapEveryOtherLayer": {
+              "t": "Svaki drugi sloj je sakriven dok ne izaðete.",
+              "src": "machine",
+              "h": "676eeed11f0a"
+            },
+            "exitFocus": {
+              "t": "Izlaz iz fokusa",
+              "src": "machine",
+              "h": "64cefdd6e324"
+            },
+            "thisLayer": {
+              "t": "Ovaj sloj.",
+              "src": "machine",
+              "h": "4438adaec099"
+            },
+            "autoDetectServiceUrlOrItem": {
+              "t": "Аутоматски детект (service URL или item ID)",
+              "src": "machine",
+              "h": "97f3197039c2"
+            },
+            "arcGISWebService": {
+              "t": "ArcGIS web servis",
+              "src": "machine",
+              "h": "906a483616c6"
+            },
+            "geoJSONWebLink": {
+              "t": "GeoJSON (web link)",
+              "src": "machine",
+              "h": "a76dc8147c80"
+            },
+            "csvWebLink": {
+              "t": "CSV (веб веза)",
+              "src": "machine",
+              "h": "bc66194c3edf"
+            },
+            "kmlWebLink": {
+              "t": "КМЛ (веб веза)",
+              "src": "machine",
+              "h": "67e4fe645907"
+            },
+            "thatLayerCouldnTBeAdded": {
+              "t": "Taj sloj se nije mogao dodati. Provjerite izvor i pokušajte ponovo.",
+              "src": "machine",
+              "h": "8795b0c37540"
+            },
+            "thatLayerCouldnTBeAdded2": {
+              "t": "Taj sloj nije mogao da se doda. Proverite URL ili ID stavke.",
+              "src": "machine",
+              "h": "bc9b68fb27c4"
+            },
+            "thatFileCouldnTBeAdded": {
+              "t": "Taj fajl nije mogao da se doda.",
+              "src": "machine",
+              "h": "cac2cf085c5f"
+            },
+            "noDrawingsWereFoundInThat": {
+              "t": "Nema crteža u tom dosijeu.",
+              "src": "machine",
+              "h": "ded5bca7ca7f"
+            },
+            "noMapFeaturesWereFoundIn": {
+              "t": "U tom KML-u nisu pronaðene osobine mape.",
+              "src": "machine",
+              "h": "a8d6c19d3887"
+            },
+            "thatKmlCouldnTBeRead": {
+              "t": "Taj KML nije mogao da se pročita.",
+              "src": "machine",
+              "h": "1dde16e4afe0"
+            },
+            "thatShapefileCouldnTBeRead": {
+              "t": "Taj file oblika se nije mogao pročitati. Koristite .zip koji sadrži .shp, .dbf, i .prj.",
+              "src": "machine",
+              "h": "607aef554dcc"
+            },
+            "unsupportedFileUseGeoJSONCsvKml": {
+              "t": "Nepodržan fajl. Koristite GeoJSON, CSV, KML, ili zatvorenu datoteku oblika.",
+              "src": "machine",
+              "h": "09018a7cc20c"
+            },
+            "basemapValue": {
+              "t": "Баземап {value}",
+              "src": "machine",
+              "h": "8b0e764c53db"
+            },
+            "unknownError": {
+              "t": "nepoznata greška",
+              "src": "machine",
+              "h": "af6321ca7a8b"
+            },
+            "unserializableError": {
+              "t": "Neserijalizacijska greška",
+              "src": "machine",
+              "h": "76e73551597a"
+            },
+            "disableOldAppDataActionDelete": {
+              "t": "onemogući stare aplikacijske data-action, izbriši neiskorištene konfiguracijske propelectedJimuLayerIds",
+              "src": "machine",
+              "h": "fac561742c0b"
+            },
+            "thatValue1LayerCouldnTBe": {
+              "t": "Taj {value1} sloj nije mogao da se doda. Provjerite URL.",
+              "src": "machine",
+              "h": "75cfde8cae59"
+            },
+            "thatValue1": {
+              "t": "To {value1}",
+              "src": "machine",
+              "h": "d5e0a434d823"
+            },
+            "that": {
+              "t": "To.",
+              "src": "machine",
+              "h": "8a430b0436fb"
+            },
+            "layerCouldnTBeAddedCheck": {
+              "t": "sloj se nije mogao dodati. Provjerite URL.",
+              "src": "machine",
+              "h": "198c5135afa4"
+            }
+          }
         },
         "sv": {
           "file": "3b6057aa82ad",
@@ -2919,18 +6037,404 @@
           "entries": {}
         },
         "bs": {
-          "file": "d51806b5e0c2",
+          "file": "a5f9ee860e12",
           "counts": {
             "esri": 30,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 77,
             "stale": 0,
-            "missing": 77
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "autoIncludeSectionLabel": {
+              "t": "Automatski uključi nove podslojeve",
+              "src": "machine",
+              "h": "0043f11a8a3b"
+            },
+            "autoIncludeSectionDesc": {
+              "t": "Uključite bilo koju grupu čiji se novi podslojevi trebaju automatski pojaviti u razmještenoj aplikaciji — nema potrebe za obnovom ili ponovnom objavom kada dodate slojeve toj grupi u web karti.",
+              "src": "machine",
+              "h": "cf36551e4404"
+            },
+            "autoIncludeAria": {
+              "t": "Automatski uključi dodane podslojeve",
+              "src": "machine",
+              "h": "e44bb2924ba5"
+            },
+            "autoIncludeLoading": {
+              "t": "Učitavam grupne slojeve sa mape...",
+              "src": "machine",
+              "h": "b78ec1dd1ba3"
+            },
+            "autoIncludeNoGroups": {
+              "t": "Na ovoj mapi nisu pronađeni grupni slojevi. Dodaj grupu u web mapu (u pregledniku mapa) i osvježi za automatsko uključivanje.",
+              "src": "machine",
+              "h": "b431538d301e"
+            },
+            "enhancedOptionsLabel": {
+              "t": "Opcije pojašnjenja",
+              "src": "machine",
+              "h": "87215c958f7a"
+            },
+            "enhancedOptionsDesc": {
+              "t": "Dodatne značajke koje dodaje ovaj vlastiti grafički element Layers.",
+              "src": "machine",
+              "h": "0659c8458bdf"
+            },
+            "autoShowParentLayers": {
+              "t": "Uključi nadređene grupe kada je postavljen sloj",
+              "src": "machine",
+              "h": "7c110a3e5d74"
+            },
+            "soloLayer": {
+              "t": "DodajPrikaži samo ovaj sloj akcija",
+              "src": "machine",
+              "h": "93f8c82ebad8"
+            },
+            "enablePickOneGroups": {
+              "t": "Izaberi jedan sloj po grupi (radio dugmad)",
+              "src": "machine",
+              "h": "02d72b9bf65b"
+            },
+            "pickOneGroupsLabel": {
+              "t": "Grupe koje dozvoljavaju jedan po jedan sloj",
+              "src": "machine",
+              "h": "e71f4b6ec071"
+            },
+            "pickOneDesc": {
+              "t": "Uključite bilo koju grupu čiji slojevi trebaju prikazivati jedan po jedan. UzKoristite kutije za krpelje na, ti slojevi dobijaju okrugla dugmad umjesto kutija; sa ikonama oka grupa i dalje dozvoljava samo jednu.",
+              "src": "machine",
+              "h": "f98a8642868a"
+            },
+            "pickOneAria": {
+              "t": "Jedan po jedan sloj u",
+              "src": "machine",
+              "h": "6b997154a8b2"
+            },
+            "pickOneLoading": {
+              "t": "Učitavam grupne slojeve sa mape...",
+              "src": "machine",
+              "h": "b78ec1dd1ba3"
+            },
+            "pickOneNoGroups": {
+              "t": "Na ovoj mapi nisu pronađeni grupni slojevi. Dodaj grupu u web mapu (u Preglednik mapa) i osvježi.",
+              "src": "machine",
+              "h": "96c8cf8fdb67"
+            },
+            "enableShareLink": {
+              "t": "DodajKopiraj link na ove slojeve do opcija serije",
+              "src": "machine",
+              "h": "12da76a93316"
+            },
+            "shareLinkNeedsBatch": {
+              "t": "Kopiraj link se pojavljuje u meniju opcija serije, pa uključiOmogući opcije serije slojeva i u opcijama.",
+              "src": "machine",
+              "h": "a4a9e2a7e660"
+            },
+            "telemetryLayers": {
+              "t": "Sloj za snimanje i isključivanje klikova u telemetriji korištenja (samo ime i putanja grupe)",
+              "src": "machine",
+              "h": "3590b438c3d1"
+            },
+            "reportBrokenLayers": {
+              "t": "Prijavite slojeve koji ne učitavaju ili ne crtaju u telemetriji korištenja (samo putanja i razum sloja)",
+              "src": "machine",
+              "h": "dc804869ebcf"
+            },
+            "searchLayerDescriptions": {
+              "t": "Pretraži opise i oznake, ne samo imena",
+              "src": "machine",
+              "h": "70ca7f44a1c4"
+            },
+            "enableLayerCsv": {
+              "t": "DodajExport lista slojeva (CSV) u opcije serije",
+              "src": "machine",
+              "h": "a2547b86d5d2"
+            },
+            "layerCsvNeedsBatch": {
+              "t": "Lista izvoznih slojeva se pojavljuje u meniju opcija serije, pa uključiOmogući opcije serije slojeva u opcijama kao dobro.",
+              "src": "machine",
+              "h": "4039e7ddda87"
+            },
+            "enableLayerHealth": {
+              "t": "Provjerite servise slojeva na tajmeru i označite one koji ne odgovaraju",
+              "src": "machine",
+              "h": "80f8731493cf"
+            },
+            "layerHealthMinutes": {
+              "t": "Minuta između provjere (1 do 120)",
+              "src": "machine",
+              "h": "07118934f2e7"
+            },
+            "zoomToScale": {
+              "t": "Uvećaj dok se ne vidi",
+              "src": "machine",
+              "h": "7efa5ac04eca"
+            },
+            "enableImageryIndex": {
+              "t": "Slike u blizini kartice (OpenStreetMap editor Layer Index)",
+              "src": "machine",
+              "h": "a8215c6b623f"
+            },
+            "imageryIndexUrl": {
+              "t": "Index URL (ostavi praznim za osmlab.github.io kopiju)",
+              "src": "machine",
+              "h": "8d3044bb2878"
+            },
+            "enableFavorites": {
+              "t": "Neka korisnici odzvanjaju omiljenim slojevima i filtriraju im",
+              "src": "machine",
+              "h": "49e7a9cf3a46"
+            },
+            "cleanLayerNames": {
+              "t": "Očisti imena slojeva u listi (razmaci do razmaka)",
+              "src": "machine",
+              "h": "23189ca8246a"
+            },
+            "cleanNamePrefix": {
+              "t": "Prefiks na traku (pravilan izraz, neosjetljiv na slova)",
+              "src": "machine",
+              "h": "e361c4daabe8"
+            },
+            "cleanNamePrefixHint": {
+              "t": "Na primjer: GJ_CityOf_sde.",
+              "src": "machine",
+              "h": "aaf18174f507"
+            },
+            "cleanNameTitleCase": {
+              "t": "Naslov Slučaja imena",
+              "src": "machine",
+              "h": "3ebc8b8676ff"
+            },
+            "translateLayerNames": {
+              "t": "Pokaži imena slojeva u jeziku aplikacije",
+              "src": "machine",
+              "h": "a19db8ac493c"
+            },
+            "translateLayerNamesHint": {
+              "t": "Prikaz samo: naslovi web mape se ne mijenjaju. Slijedi locale=, preglednik, ArcGIS profil i Jezički prekidač, uživo.",
+              "src": "machine",
+              "h": "9a9173809d13"
+            },
+            "layerNamesFromMemory": {
+              "t": "Koristi dijeljenu memoriju za prevođenje",
+              "src": "machine",
+              "h": "0ab6d9284790"
+            },
+            "layerNameMemoryUrl": {
+              "t": "URL memorije za prijevod (direktorij sa <locale>.json)",
+              "src": "machine",
+              "h": "87a2b5dfacee"
+            },
+            "layerNameMtUrl": {
+              "t": "LibreTranslate server za neprevedena imena (opcija)",
+              "src": "machine",
+              "h": "9d36c626a00b"
+            },
+            "layerNameMtKey": {
+              "t": "LibreTranslate API ključ (opcionalno)",
+              "src": "machine",
+              "h": "da74da9da949"
+            },
+            "layerNameKeep": {
+              "t": "Zadrži ova imena onakva kakva su (jedna po liniji)",
+              "src": "machine",
+              "h": "316f187836a5"
+            },
+            "layerNameOverrides": {
+              "t": "Vaši prijevodi (JSON: name -> {locale: text})",
+              "src": "machine",
+              "h": "c378016275f9"
+            },
+            "layerNameOverridesBad": {
+              "t": "Nije još važeća JSON; posljednja ispravna verzija se čuva.",
+              "src": "machine",
+              "h": "1bf414f6c5c9"
+            },
+            "collectLayerNames": {
+              "t": "Sakupi imena slojeva",
+              "src": "machine",
+              "h": "b00d4a11820c"
+            },
+            "collectLayerNamesHint": {
+              "t": "Dodaje svako ime sloja na mapi u vaše prijevode ispod, i kopira datoteku koju zajednička memorija može pročitati (sačuvaj je u repo i dodaj njen sirovi URL u exb-i18n-kit memorije/izvori.json).",
+              "src": "machine",
+              "h": "1006ac04fd95"
+            },
+            "collectLayerNamesDone": {
+              "t": "{count} imena prikupljena i kopirana u clipboard.",
+              "src": "machine",
+              "h": "da3c9159f3aa"
+            },
+            "presetViewsLabel": {
+              "t": "Prethodni pogledi (ugrađeni u aplikaciju)",
+              "src": "machine",
+              "h": "cc7f83870863"
+            },
+            "presetViewsDesc": {
+              "t": "Uključi slojeve koje želite u mapi, zatim kliknite prethodno postavljeno Dodaj iz mape. Predlošci se pojavljuju na vrhu menija snimljenih pregleda za svakog korisnika i ne mogu se mijenjati od njih. Prikazuju čak i kada su snimljeni pregledi slojeva isključeni.",
+              "src": "machine",
+              "h": "f0938e95997f"
+            },
+            "presetNone": {
+              "t": "Još nema predodređenih.",
+              "src": "machine",
+              "h": "6e9162a71ea7"
+            },
+            "presetAdd": {
+              "t": "Dodaj prethodno postavljeno iz mape",
+              "src": "machine",
+              "h": "c719842f0b3f"
+            },
+            "presetName": {
+              "t": "Prethodni naziv",
+              "src": "machine",
+              "h": "eb39e1d78db8"
+            },
+            "presetLayersOn": {
+              "t": "slojevi na",
+              "src": "machine",
+              "h": "660b898bc1cd"
+            },
+            "presetUpdate": {
+              "t": "Ažuriraj sa mape",
+              "src": "machine",
+              "h": "567b8541147a"
+            },
+            "presetUpdateHint": {
+              "t": "Zamijeni ovo prethodno postavljeno slojevima koji su trenutno na karti",
+              "src": "machine",
+              "h": "5fd36bdc264f"
+            },
+            "extraLayerTools": {
+              "t": "Dodaj dodatne alate za slojeve (flash, copy URL, osvježenje, detalji)",
+              "src": "machine",
+              "h": "64ee59c260b7"
+            },
+            "enableAddLayer": {
+              "t": "Dodaj sloj iz URL- a (zaglavlje)",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "enableMasterOpacity": {
+              "t": "Glavni klizač neprozirnosti (zaglavlje)",
+              "src": "machine",
+              "h": "b0dbdc1cf4ca"
+            },
+            "enableBasemapSwitcher": {
+              "t": "Basemap switcher (zaglavlje)",
+              "src": "machine",
+              "h": "5d881263120e"
+            },
+            "enableLegendPanel": {
+              "t": "Kombinovana legenda ploča (zaglavlje)",
+              "src": "machine",
+              "h": "02c37253070a"
+            },
+            "flashLayer": {
+              "t": "Bljesak / lociranje",
+              "src": "machine",
+              "h": "a45bb9429bb4"
+            },
+            "copyUrl": {
+              "t": "Kopiraj URL servisa",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "layerDetails": {
+              "t": "Detalji sloja",
+              "src": "machine",
+              "h": "cb55ca4274f4"
+            },
+            "spotlight": {
+              "t": "Fokus sloja",
+              "src": "machine",
+              "h": "1a7f3fe4f4a0"
+            },
+            "moveLayer": {
+              "t": "Pomjeri na vrh / dno",
+              "src": "machine",
+              "h": "26fb386c0ed4"
+            },
+            "showLayerCount": {
+              "t": "Pokaži značku vidljivog sloja",
+              "src": "machine",
+              "h": "b6312a2d26d1"
+            },
+            "enableLayerViews": {
+              "t": "Prikaži snimljene preglede slojeva",
+              "src": "machine",
+              "h": "a17a0c68808c"
+            },
+            "collapsibleList": {
+              "t": "Dopusti urušavanje liste slojeva",
+              "src": "machine",
+              "h": "26351cbda169"
+            },
+            "startCollapsed": {
+              "t": "Pokreni kolaps kada se aplikacija učita",
+              "src": "machine",
+              "h": "ba5157678809"
+            },
+            "filterPlaceholderLabel": {
+              "t": "Tekst koji drži polje za filter",
+              "src": "machine",
+              "h": "845520a6cdc7"
+            },
+            "importExportLabel": {
+              "t": "Uvezi postavke za / izvoz",
+              "src": "machine",
+              "h": "0ae72ad6642c"
+            },
+            "importExportDesc": {
+              "t": "Snimi opcije i pojačane opcije u XML datoteku ili ih učitaj iz jedne. Izbor mape nije uključen.",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "Podešavanje XML-a",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "Podešavanje XML-a",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importSuccess": {
+              "t": "Postavke uvezene. Ne zaboravite snimiti grafički element.",
+              "src": "machine",
+              "h": "300b8b3e68d9"
+            },
+            "importError": {
+              "t": "Nisam mogao pročitati tu datoteku. Provjerite da li je XML datoteka izvezena iz ovog grafičkog elementa.",
+              "src": "machine",
+              "h": "a9edbe244d56"
+            },
+            "importEmpty": {
+              "t": "U toj datoteci nisu pronađene prepoznate postavke.",
+              "src": "machine",
+              "h": "cd1d16092e10"
+            },
+            "exportError": {
+              "t": "Ne mogu izvesti postavke.",
+              "src": "machine",
+              "h": "6ebc6bd9c4b7"
+            },
+            "showHelpGuide": {
+              "t": "Pokaži vodič za pomoć",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            },
+            "showTheQuestionMarkButtonThat": {
+              "t": "Pokaži dugme sa znakom pitanja koje otvara vodič za pomoć grafičkog elementa",
+              "src": "machine",
+              "h": "62c4e81a84ca"
+            }
+          }
         },
         "ca": {
           "file": "214f71590a20",
@@ -3134,18 +6638,404 @@
           }
         },
         "hr": {
-          "file": "d51806b5e0c2",
+          "file": "1cfbd2b6261f",
           "counts": {
             "esri": 30,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 77,
             "stale": 0,
-            "missing": 77
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "autoIncludeSectionLabel": {
+              "t": "Automatski uključi nove podslojeve",
+              "src": "machine",
+              "h": "0043f11a8a3b"
+            },
+            "autoIncludeSectionDesc": {
+              "t": "Uključite za bilo koju grupu čiji novi podslojevi trebaju se automatski pojaviti u razmještenoj aplikaciji — nema obnove ili ponovnog objavljivanja potrebnog kada dodate slojeve toj grupi na web karti.",
+              "src": "machine",
+              "h": "cf36551e4404"
+            },
+            "autoIncludeAria": {
+              "t": "Automatski uključi nove podslojeve dodane",
+              "src": "machine",
+              "h": "e44bb2924ba5"
+            },
+            "autoIncludeLoading": {
+              "t": "Učitavanje skupnih slojeva s karte...",
+              "src": "machine",
+              "h": "b78ec1dd1ba3"
+            },
+            "autoIncludeNoGroups": {
+              "t": "Na ovoj mapi nisu pronađeni skupni slojevi. Dodajte grupu u web mapu (u pregledniku mapa) i osvježite je za automatsko uključivanje.",
+              "src": "machine",
+              "h": "b431538d301e"
+            },
+            "enhancedOptionsLabel": {
+              "t": "Poboljšane opcije",
+              "src": "machine",
+              "h": "87215c958f7a"
+            },
+            "enhancedOptionsDesc": {
+              "t": "Dodatne značajke koje dodaje ovaj prilagođeni Mapa slojevi widget.",
+              "src": "machine",
+              "h": "0659c8458bdf"
+            },
+            "autoShowParentLayers": {
+              "t": "Uključite matične grupe kada je sloj provjeren na",
+              "src": "machine",
+              "h": "7c110a3e5d74"
+            },
+            "soloLayer": {
+              "t": "Dodaj a Prikaži samo ovaj sloj radnja",
+              "src": "machine",
+              "h": "93f8c82ebad8"
+            },
+            "enablePickOneGroups": {
+              "t": "Odaberite jedan sloj po grupi (radio gumbi)",
+              "src": "machine",
+              "h": "02d72b9bf65b"
+            },
+            "pickOneGroupsLabel": {
+              "t": "Grupe koje omogućuju jedan po jedan sloj",
+              "src": "machine",
+              "h": "e71f4b6ec071"
+            },
+            "pickOneDesc": {
+              "t": "Uključite za bilo koju skupinu čiji slojevi trebaju pokazati jedan po jedan. UzKoristite krpelj kutije na, ti slojevi dobiti okrugle tipke umjesto kutije; s očnim ikonama grupa još uvijek omogućuje samo jedan.",
+              "src": "machine",
+              "h": "f98a8642868a"
+            },
+            "pickOneAria": {
+              "t": "Jedan po jedan sloj u",
+              "src": "machine",
+              "h": "6b997154a8b2"
+            },
+            "pickOneLoading": {
+              "t": "Učitavanje skupnih slojeva s karte...",
+              "src": "machine",
+              "h": "b78ec1dd1ba3"
+            },
+            "pickOneNoGroups": {
+              "t": "Na ovoj mapi nisu pronađeni skupni slojevi. Dodajte grupu u web mapu (u Map Vieweru) i osvježite je.",
+              "src": "machine",
+              "h": "96c8cf8fdb67"
+            },
+            "enableShareLink": {
+              "t": "DodajKopiraj link na ove slojeve u opcije serije",
+              "src": "machine",
+              "h": "12da76a93316"
+            },
+            "shareLinkNeedsBatch": {
+              "t": "Kopiraj link se pojavljuje u izborniku opcija serije, tako da uključiteOmogućiti opcije serije slojeva u opcijama kao dobro.",
+              "src": "machine",
+              "h": "a4a9e2a7e660"
+            },
+            "telemetryLayers": {
+              "t": "Zabilježite sloj na i off klikova u korištenoj telemetriji (samo ime i putanja grupe)",
+              "src": "machine",
+              "h": "3590b438c3d1"
+            },
+            "reportBrokenLayers": {
+              "t": "Izvješćivanje o slojevima koji ne učitavaju ili ne crtaju u korištenoj telemetriji (samo putanja i razum slojeva)",
+              "src": "machine",
+              "h": "dc804869ebcf"
+            },
+            "searchLayerDescriptions": {
+              "t": "Pretraži opise i oznake također, ne samo imena",
+              "src": "machine",
+              "h": "70ca7f44a1c4"
+            },
+            "enableLayerCsv": {
+              "t": "DodatiExportova lista slojeva (CSV) opcijama serije",
+              "src": "machine",
+              "h": "a2547b86d5d2"
+            },
+            "layerCsvNeedsBatch": {
+              "t": "Popis izvoznih slojeva pojavljuje se u izborniku opcija serije, pa uključiteOmogućite opcije serije u opcijama kao dobro.",
+              "src": "machine",
+              "h": "4039e7ddda87"
+            },
+            "enableLayerHealth": {
+              "t": "Provjeri servise slojeva na tajmeru i označi one koji ne odgovaraju",
+              "src": "machine",
+              "h": "80f8731493cf"
+            },
+            "layerHealthMinutes": {
+              "t": "Minuti između provjere (1 do 120)",
+              "src": "machine",
+              "h": "07118934f2e7"
+            },
+            "zoomToScale": {
+              "t": "Uvećaj dok se ne vidi",
+              "src": "machine",
+              "h": "7efa5ac04eca"
+            },
+            "enableImageryIndex": {
+              "t": "Slika u blizini kartice (OpenStreetMap uređivač Layer Index)",
+              "src": "machine",
+              "h": "a8215c6b623f"
+            },
+            "imageryIndexUrl": {
+              "t": "Index URL (ostavi prazninu za osmlab.github.io kopiju)",
+              "src": "machine",
+              "h": "8d3044bb2878"
+            },
+            "enableFavorites": {
+              "t": "Neka korisnici zvijezda omiljenih slojeva i filter za njih",
+              "src": "machine",
+              "h": "49e7a9cf3a46"
+            },
+            "cleanLayerNames": {
+              "t": "Očisti nazive slojeva u popisu (razmaci do razmaka)",
+              "src": "machine",
+              "h": "23189ca8246a"
+            },
+            "cleanNamePrefix": {
+              "t": "Prefiks za skidanje (regularni izraz, slučaj bez osjetljivosti)",
+              "src": "machine",
+              "h": "e361c4daabe8"
+            },
+            "cleanNamePrefixHint": {
+              "t": "na primjer: GJ_CityOf_sde.",
+              "src": "machine",
+              "h": "aaf18174f507"
+            },
+            "cleanNameTitleCase": {
+              "t": "Naziv predmeta",
+              "src": "machine",
+              "h": "3ebc8b8676ff"
+            },
+            "translateLayerNames": {
+              "t": "Prikaži imena slojeva u jeziku aplikacije",
+              "src": "machine",
+              "h": "a19db8ac493c"
+            },
+            "translateLayerNamesHint": {
+              "t": "Prikaži samo: naslovi web mape ne mijenjaju. Slijedi locale=, preglednik, ArcGIS profil i jezični mjenjač, uživo.",
+              "src": "machine",
+              "h": "9a9173809d13"
+            },
+            "layerNamesFromMemory": {
+              "t": "Koristi dijeljenu translacijsku memoriju",
+              "src": "machine",
+              "h": "0ab6d9284790"
+            },
+            "layerNameMemoryUrl": {
+              "t": "URL memorije prijevoda (mapa s <locale>.json)",
+              "src": "machine",
+              "h": "87a2b5dfacee"
+            },
+            "layerNameMtUrl": {
+              "t": "LibreTranslate poslužitelj za neprevedena imena (opcionalno)",
+              "src": "machine",
+              "h": "9d36c626a00b"
+            },
+            "layerNameMtKey": {
+              "t": "LibreTranslate API ključ (opcionalno)",
+              "src": "machine",
+              "h": "da74da9da949"
+            },
+            "layerNameKeep": {
+              "t": "Zadržite ta imena onakva kakva jesu (jedna po liniji)",
+              "src": "machine",
+              "h": "316f187836a5"
+            },
+            "layerNameOverrides": {
+              "t": "Vaši prijevodi (JSON: name -> { locale: text })",
+              "src": "machine",
+              "h": "c378016275f9"
+            },
+            "layerNameOverridesBad": {
+              "t": "JSON još nije valjan; čuva se posljednja valjana verzija.",
+              "src": "machine",
+              "h": "1bf414f6c5c9"
+            },
+            "collectLayerNames": {
+              "t": "Zbiraj nazive slojeva",
+              "src": "machine",
+              "h": "b00d4a11820c"
+            },
+            "collectLayerNamesHint": {
+              "t": "Dodaje svaki naziv sloja na mapi u vaše prijevode ispod, i kopira datoteku koju zajednička memorija može pročitati (sačuvaj je u repo i dodaj njen sirov URL u exb-i18n-kit memorije/izvori.json).",
+              "src": "machine",
+              "h": "1006ac04fd95"
+            },
+            "collectLayerNamesDone": {
+              "t": "{count} imena prikupljena i kopirana u međuspremnik.",
+              "src": "machine",
+              "h": "da3c9159f3aa"
+            },
+            "presetViewsLabel": {
+              "t": "Pretpostavljeni pogledi (ugrađeni u aplikaciju)",
+              "src": "machine",
+              "h": "cc7f83870863"
+            },
+            "presetViewsDesc": {
+              "t": "Uključite slojeve koje želite u mapi, a zatim kliknite Dodaj unaprijed postavljene s karte. Predlošci se pojavljuju na vrhu izbornika Sačuvanih pogleda za svakog korisnika i ne mogu se mijenjati od njih. Prikazuju čak i kada su pohranjeni pogledi na slojeve isključeni.",
+              "src": "machine",
+              "h": "f0938e95997f"
+            },
+            "presetNone": {
+              "t": "Još nema unaprijed postavljenih.",
+              "src": "machine",
+              "h": "6e9162a71ea7"
+            },
+            "presetAdd": {
+              "t": "Dodaj unaprijed postavljeno iz mape",
+              "src": "machine",
+              "h": "c719842f0b3f"
+            },
+            "presetName": {
+              "t": "Prethodni naziv",
+              "src": "machine",
+              "h": "eb39e1d78db8"
+            },
+            "presetLayersOn": {
+              "t": "slojevi na",
+              "src": "machine",
+              "h": "660b898bc1cd"
+            },
+            "presetUpdate": {
+              "t": "Ažuriraj s karte",
+              "src": "machine",
+              "h": "567b8541147a"
+            },
+            "presetUpdateHint": {
+              "t": "Zamijeni ovo prethodno postavljeno slojevima koji su trenutno na mapi",
+              "src": "machine",
+              "h": "5fd36bdc264f"
+            },
+            "extraLayerTools": {
+              "t": "Dodaj dodatne alate za slojeve (flash, copy URL, osvježenje, detalji)",
+              "src": "machine",
+              "h": "64ee59c260b7"
+            },
+            "enableAddLayer": {
+              "t": "Dodaj sloj iz URL- a (zaglavlje)",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "enableMasterOpacity": {
+              "t": "Glavni klizač neprozirnosti (zaglavlje)",
+              "src": "machine",
+              "h": "b0dbdc1cf4ca"
+            },
+            "enableBasemapSwitcher": {
+              "t": "Basemap switcher (zaglavlje)",
+              "src": "machine",
+              "h": "5d881263120e"
+            },
+            "enableLegendPanel": {
+              "t": "Kombinirana legenda ploča (zaglavlje)",
+              "src": "machine",
+              "h": "02c37253070a"
+            },
+            "flashLayer": {
+              "t": "Bljesak / lociranje",
+              "src": "machine",
+              "h": "a45bb9429bb4"
+            },
+            "copyUrl": {
+              "t": "Kopiraj URL servisa",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "layerDetails": {
+              "t": "Detalji sloja",
+              "src": "machine",
+              "h": "cb55ca4274f4"
+            },
+            "spotlight": {
+              "t": "Slojevi",
+              "src": "machine",
+              "h": "1a7f3fe4f4a0"
+            },
+            "moveLayer": {
+              "t": "Premjesti na vrh / dno",
+              "src": "machine",
+              "h": "26fb386c0ed4"
+            },
+            "showLayerCount": {
+              "t": "Prikaži značku vidljivog sloja",
+              "src": "machine",
+              "h": "b6312a2d26d1"
+            },
+            "enableLayerViews": {
+              "t": "Omogući spremljene preglede slojeva",
+              "src": "machine",
+              "h": "a17a0c68808c"
+            },
+            "collapsibleList": {
+              "t": "Dopusti urušavanje liste slojeva",
+              "src": "machine",
+              "h": "26351cbda169"
+            },
+            "startCollapsed": {
+              "t": "Započni kolaps kada se aplikacija učitava",
+              "src": "machine",
+              "h": "ba5157678809"
+            },
+            "filterPlaceholderLabel": {
+              "t": "Filtar okvir mjestodrÅ3⁄4i tekst",
+              "src": "machine",
+              "h": "845520a6cdc7"
+            },
+            "importExportLabel": {
+              "t": "Postavke uvoza / izvoza",
+              "src": "machine",
+              "h": "0ae72ad6642c"
+            },
+            "importExportDesc": {
+              "t": "Spremi Opcije i pojačane opcije u XML datoteku, ili ih učitaj iz jedne. Izbor mape nije uključen.",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "Postavke izvoza (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "Postavke uvoza (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importSuccess": {
+              "t": "Postavke uvezene. Zapamti spremiti widget.",
+              "src": "machine",
+              "h": "300b8b3e68d9"
+            },
+            "importError": {
+              "t": "Nisam mogao pročitati tu datoteku. Provjerite je li XML datoteka izvezena iz ovog grafičkog elementa.",
+              "src": "machine",
+              "h": "a9edbe244d56"
+            },
+            "importEmpty": {
+              "t": "U toj datoteci nisu pronađene prepoznate postavke.",
+              "src": "machine",
+              "h": "cd1d16092e10"
+            },
+            "exportError": {
+              "t": "Ne mogu izvesti postavke.",
+              "src": "machine",
+              "h": "6ebc6bd9c4b7"
+            },
+            "showHelpGuide": {
+              "t": "Prikaži vodič pomoći",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            },
+            "showTheQuestionMarkButtonThat": {
+              "t": "Prikaži gumb s upitnikom koji otvara vodič za pomoć widgetu",
+              "src": "machine",
+              "h": "62c4e81a84ca"
+            }
+          }
         },
         "hu": {
           "file": "c9a0244cf624",
@@ -3504,18 +7394,404 @@
           }
         },
         "sr": {
-          "file": "e38572fe8f78",
+          "file": "815d262442b9",
           "counts": {
             "esri": 29,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 77,
             "stale": 0,
-            "missing": 77
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "autoIncludeSectionLabel": {
+              "t": "Auto-uključi nove pod-slojeve",
+              "src": "machine",
+              "h": "0043f11a8a3b"
+            },
+            "autoIncludeSectionDesc": {
+              "t": "Uključite se za bilo koju grupu čiji novi podslojevi treba da se automatski pojave u razmještenoj aplikaciji — nema potrebe za obnovom ili odbijanjem kada dodate slojeve toj grupi na veb mapi.",
+              "src": "machine",
+              "h": "cf36551e4404"
+            },
+            "autoIncludeAria": {
+              "t": "Automatski uključi nove podslojeve dodate u",
+              "src": "machine",
+              "h": "e44bb2924ba5"
+            },
+            "autoIncludeLoading": {
+              "t": "Uèitavam grupne slojeve sa mape...",
+              "src": "machine",
+              "h": "b78ec1dd1ba3"
+            },
+            "autoIncludeNoGroups": {
+              "t": "Na ovoj mapi nisu pronađeni grupni slojevi. Dodajte grupu u veb mapu (u Map Viewer) i osvježite se za upotrebu auto-uključite.",
+              "src": "machine",
+              "h": "b431538d301e"
+            },
+            "enhancedOptionsLabel": {
+              "t": "Poboljšane opcije",
+              "src": "machine",
+              "h": "87215c958f7a"
+            },
+            "enhancedOptionsDesc": {
+              "t": "Dodatne značajke koje dodaje ovaj prilagođeni Map Layers widget.",
+              "src": "machine",
+              "h": "0659c8458bdf"
+            },
+            "autoShowParentLayers": {
+              "t": "Uključite roditeljske grupe kada je sloj provjeren",
+              "src": "machine",
+              "h": "7c110a3e5d74"
+            },
+            "soloLayer": {
+              "t": "Dodaj aPokaži samo ovaj sloj radnja",
+              "src": "machine",
+              "h": "93f8c82ebad8"
+            },
+            "enablePickOneGroups": {
+              "t": "Odaberite jedan sloj po grupi (radio dugmad)",
+              "src": "machine",
+              "h": "02d72b9bf65b"
+            },
+            "pickOneGroupsLabel": {
+              "t": "Grupe koje dozvoljavaju jedan po jedan sloj",
+              "src": "machine",
+              "h": "e71f4b6ec071"
+            },
+            "pickOneDesc": {
+              "t": "Uključite bilo koju grupu čiji slojevi treba da pokazuju jedan po jedan. SaKoristite krpelj kutije na, ti slojevi dobijaju okrugla dugmad umesto kutija; sa ikonama oka grupa i dalje dozvoljava samo jednu.",
+              "src": "machine",
+              "h": "f98a8642868a"
+            },
+            "pickOneAria": {
+              "t": "Sloj po sloj.",
+              "src": "machine",
+              "h": "6b997154a8b2"
+            },
+            "pickOneLoading": {
+              "t": "Uèitavam grupne slojeve sa mape...",
+              "src": "machine",
+              "h": "b78ec1dd1ba3"
+            },
+            "pickOneNoGroups": {
+              "t": "Na ovoj mapi nisu pronađeni grupni slojevi. Dodati grupu u veb mapu (u Map Viewer) i osvežiti.",
+              "src": "machine",
+              "h": "96c8cf8fdb67"
+            },
+            "enableShareLink": {
+              "t": "DodajKopiraj link na ove slojeve u opcije serije",
+              "src": "machine",
+              "h": "12da76a93316"
+            },
+            "shareLinkNeedsBatch": {
+              "t": "Kopir link se pojavljuje u meniju opcija serije, tako da uključiEnable layer sery options in Options kao dobro.",
+              "src": "machine",
+              "h": "a4a9e2a7e660"
+            },
+            "telemetryLayers": {
+              "t": "Sloj za snimanje i isključivanje klikova u korišćenju telemetrije (samo ime i grupna putanja)",
+              "src": "machine",
+              "h": "3590b438c3d1"
+            },
+            "reportBrokenLayers": {
+              "t": "Prijavite slojeve koji ne učitavaju ili crtaju u upotrebi telemetriju (samo put i razum slojeva)",
+              "src": "machine",
+              "h": "dc804869ebcf"
+            },
+            "searchLayerDescriptions": {
+              "t": "Pretraži opise i oznake, ne samo imena",
+              "src": "machine",
+              "h": "70ca7f44a1c4"
+            },
+            "enableLayerCsv": {
+              "t": "AddExport layer list (CSV) to sery options",
+              "src": "machine",
+              "h": "a2547b86d5d2"
+            },
+            "layerCsvNeedsBatch": {
+              "t": "Lista izvoznih slojeva se pojavljuje u meniju opcija serije, pa uključiEnable layer sery options in Options kao i.",
+              "src": "machine",
+              "h": "4039e7ddda87"
+            },
+            "enableLayerHealth": {
+              "t": "Proverite servise slojeva na tajmeru i označite one koji ne odgovaraju",
+              "src": "machine",
+              "h": "80f8731493cf"
+            },
+            "layerHealthMinutes": {
+              "t": "Minuta između provera (1 do 120)",
+              "src": "machine",
+              "h": "07118934f2e7"
+            },
+            "zoomToScale": {
+              "t": "Zumiraj dok se ne vidi",
+              "src": "machine",
+              "h": "7efa5ac04eca"
+            },
+            "enableImageryIndex": {
+              "t": "Слике у близини (OpenStreetMap editor Layer Index)",
+              "src": "machine",
+              "h": "a8215c6b623f"
+            },
+            "imageryIndexUrl": {
+              "t": "Index URL (остави празно за osmlab.github.io копију)",
+              "src": "machine",
+              "h": "8d3044bb2878"
+            },
+            "enableFavorites": {
+              "t": "Neka korisnici odzvanjaju omiljenim slojevima i filtriraju ih.",
+              "src": "machine",
+              "h": "49e7a9cf3a46"
+            },
+            "cleanLayerNames": {
+              "t": "Očistite imena slojeva u listi (razmaci do razmaka)",
+              "src": "machine",
+              "h": "23189ca8246a"
+            },
+            "cleanNamePrefix": {
+              "t": "Prefiks za skidanje (regularni izraz, slučaj-bezosećajan)",
+              "src": "machine",
+              "h": "e361c4daabe8"
+            },
+            "cleanNamePrefixHint": {
+              "t": "na primer: GJ_CityOf_sde.",
+              "src": "machine",
+              "h": "aaf18174f507"
+            },
+            "cleanNameTitleCase": {
+              "t": "Naslov Sluèaj imena",
+              "src": "machine",
+              "h": "3ebc8b8676ff"
+            },
+            "translateLayerNames": {
+              "t": "Prikaži imena slojeva u aplikacijskom jeziku",
+              "src": "machine",
+              "h": "a19db8ac493c"
+            },
+            "translateLayerNamesHint": {
+              "t": "Prikaz samo: naslovi veb mapa se ne menjaju. Sledi locale=, pretraživač, ArcGIS profil i Jezični prekidač, uživo.",
+              "src": "machine",
+              "h": "9a9173809d13"
+            },
+            "layerNamesFromMemory": {
+              "t": "Koristi dijeljenu translacijsku memoriju",
+              "src": "machine",
+              "h": "0ab6d9284790"
+            },
+            "layerNameMemoryUrl": {
+              "t": "УРЛ преводилачке меморије (фасцикла са <locale>.json)",
+              "src": "machine",
+              "h": "87a2b5dfacee"
+            },
+            "layerNameMtUrl": {
+              "t": "LibreTranslate сервер за непреведена имена (опција)",
+              "src": "machine",
+              "h": "9d36c626a00b"
+            },
+            "layerNameMtKey": {
+              "t": "LibreTranslate API кључ (опционално)",
+              "src": "machine",
+              "h": "da74da9da949"
+            },
+            "layerNameKeep": {
+              "t": "Zadržite ova imena onakva kakva su (jedna po liniji)",
+              "src": "machine",
+              "h": "316f187836a5"
+            },
+            "layerNameOverrides": {
+              "t": "Ваши преводи (JSON: name -> { locale: text})",
+              "src": "machine",
+              "h": "c378016275f9"
+            },
+            "layerNameOverridesBad": {
+              "t": "Nevažeća JSON još uvek; poslednja valjana verzija se čuva.",
+              "src": "machine",
+              "h": "1bf414f6c5c9"
+            },
+            "collectLayerNames": {
+              "t": "Sakupi imena slojeva",
+              "src": "machine",
+              "h": "b00d4a11820c"
+            },
+            "collectLayerNamesHint": {
+              "t": "Dodaje svako ime sloja na mapi u vaše prevode ispod, i kopira datoteku koju zajednička memorija može da pročita (sačuvaj je u repo i dodaj njen sirovi URL u exb-i18n-kit memory/sources.json).",
+              "src": "machine",
+              "h": "1006ac04fd95"
+            },
+            "collectLayerNamesDone": {
+              "t": "{count}imena prikupljena i kopirana u clipboard.",
+              "src": "machine",
+              "h": "da3c9159f3aa"
+            },
+            "presetViewsLabel": {
+              "t": "Preset pogledi (ugrađeni u aplikaciju)",
+              "src": "machine",
+              "h": "cc7f83870863"
+            },
+            "presetViewsDesc": {
+              "t": "Uključite slojeve koje želite na mapi, a zatim kliknite na Add unaprijed postavljene sa mape. Predlošci se pojavljuju na vrhu menija Sačuvanih pogleda za svakog korisnika i ne mogu se menjati od njih. Prikazuju čak i kada su snimljeni pogledi na slojeve isključeni.",
+              "src": "machine",
+              "h": "f0938e95997f"
+            },
+            "presetNone": {
+              "t": "Još nema predodreðenih.",
+              "src": "machine",
+              "h": "6e9162a71ea7"
+            },
+            "presetAdd": {
+              "t": "Dodaj prethodno postavljeno sa mape",
+              "src": "machine",
+              "h": "c719842f0b3f"
+            },
+            "presetName": {
+              "t": "Preset name",
+              "src": "machine",
+              "h": "eb39e1d78db8"
+            },
+            "presetLayersOn": {
+              "t": "slojevi na",
+              "src": "machine",
+              "h": "660b898bc1cd"
+            },
+            "presetUpdate": {
+              "t": "Ažuriraj sa mape",
+              "src": "machine",
+              "h": "567b8541147a"
+            },
+            "presetUpdateHint": {
+              "t": "Zameni ovo postavljeno sa slojevima koji su trenutno na mapi",
+              "src": "machine",
+              "h": "5fd36bdc264f"
+            },
+            "extraLayerTools": {
+              "t": "Dodaj dodatne alate za slojeve (flash, copy URL, osvježenje, detalji)",
+              "src": "machine",
+              "h": "64ee59c260b7"
+            },
+            "enableAddLayer": {
+              "t": "Dodaj sloj iz URL- a (zaglavlje)",
+              "src": "machine",
+              "h": "ec15835ee145"
+            },
+            "enableMasterOpacity": {
+              "t": "Glavni klizaè neprozirnosti (zaglavlje)",
+              "src": "machine",
+              "h": "b0dbdc1cf4ca"
+            },
+            "enableBasemapSwitcher": {
+              "t": "Basemap switcher (заглавље)",
+              "src": "machine",
+              "h": "5d881263120e"
+            },
+            "enableLegendPanel": {
+              "t": "Kombinovana legendarska ploča (zaglavlje)",
+              "src": "machine",
+              "h": "02c37253070a"
+            },
+            "flashLayer": {
+              "t": "Bljesak / lociranje",
+              "src": "machine",
+              "h": "a45bb9429bb4"
+            },
+            "copyUrl": {
+              "t": "Копирај ~@ ¦УРЛ¦URL¦ servisaQShortcut",
+              "src": "machine",
+              "h": "6a19b6b3a54a"
+            },
+            "layerDetails": {
+              "t": "Detalji sloja",
+              "src": "machine",
+              "h": "cb55ca4274f4"
+            },
+            "spotlight": {
+              "t": "Fokusiraj sloj",
+              "src": "machine",
+              "h": "1a7f3fe4f4a0"
+            },
+            "moveLayer": {
+              "t": "Pomaknite se na vrh / dno",
+              "src": "machine",
+              "h": "26fb386c0ed4"
+            },
+            "showLayerCount": {
+              "t": "Pokaži znaèku vidljivog sloja",
+              "src": "machine",
+              "h": "b6312a2d26d1"
+            },
+            "enableLayerViews": {
+              "t": "Omogući snimljene preglede slojeva",
+              "src": "machine",
+              "h": "a17a0c68808c"
+            },
+            "collapsibleList": {
+              "t": "Dozvoli urušavanje liste slojeva",
+              "src": "machine",
+              "h": "26351cbda169"
+            },
+            "startCollapsed": {
+              "t": "Započni kolaps kada se aplikacija učitava",
+              "src": "machine",
+              "h": "ba5157678809"
+            },
+            "filterPlaceholderLabel": {
+              "t": "Текст за место у филтеру@ info: whatsthis",
+              "src": "machine",
+              "h": "845520a6cdc7"
+            },
+            "importExportLabel": {
+              "t": "Увези / извози поставкеQShortcut",
+              "src": "machine",
+              "h": "0ae72ad6642c"
+            },
+            "importExportDesc": {
+              "t": "Spremi Opcije i pojačane opcije u XML datoteku, ili ih učitaj iz jedne. Izbor mape nije uključen.",
+              "src": "machine",
+              "h": "2bc5163eb957"
+            },
+            "exportSettings": {
+              "t": "Поставке извоза (XML)",
+              "src": "machine",
+              "h": "00ce211f734c"
+            },
+            "importSettings": {
+              "t": "Поставке увоза (XML)",
+              "src": "machine",
+              "h": "83e57391e841"
+            },
+            "importSuccess": {
+              "t": "Postavke uvezene. Zapamti da sačuvaš grafički element.",
+              "src": "machine",
+              "h": "300b8b3e68d9"
+            },
+            "importError": {
+              "t": "Nisam mogao da pročitam taj fajl. Proverite da li je XML datoteka izvezena iz ovog grafičkog elementa.",
+              "src": "machine",
+              "h": "a9edbe244d56"
+            },
+            "importEmpty": {
+              "t": "U toj datoteci nisu pronaðena prepoznata podešavanja.",
+              "src": "machine",
+              "h": "cd1d16092e10"
+            },
+            "exportError": {
+              "t": "Ne mogu da izvezem postavke.",
+              "src": "machine",
+              "h": "6ebc6bd9c4b7"
+            },
+            "showHelpGuide": {
+              "t": "Pokaži vodič za pomoć",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            },
+            "showTheQuestionMarkButtonThat": {
+              "t": "Prikaži dugme sa znakom pitanja koje otvara vodič za pomoć grafičkom elementu",
+              "src": "machine",
+              "h": "62c4e81a84ca"
+            }
+          }
         },
         "sv": {
           "file": "9677d05d12af",
