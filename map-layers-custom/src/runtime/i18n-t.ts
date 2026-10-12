@@ -40,5 +40,8 @@ export const __m: any = new Proxy(__messages as any, {
 export function __locale (): string | undefined {
   const locale = intl && intl.locale
   if (typeof locale !== 'string' || !locale) return undefined
-  try { return Intl.getCanonicalLocales(locale)[0] } catch (e) { return undefined }
+  // Intl.getCanonicalLocales is ES2016; Experience Builder type-checks against ES2015 libs.
+  const canon = (Intl as any).getCanonicalLocales
+  if (typeof canon !== 'function') return locale
+  try { return canon(locale)[0] } catch (e) { return undefined }
 }
