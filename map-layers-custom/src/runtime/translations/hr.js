@@ -66,7 +66,7 @@ System.register([], function (e) {
         addLayerHint: "Zalijepite značajku ili karti servis URL, ili ArcGIS stavku ID.",
         addLayerLabel: "Servisni URL ili ID stavke",
         addLayerSubmit: "Dodaj sloj",
-        addLayerPlaceholder: "CRR-a.",
+        addLayerPlaceholder: "CRR-a",
         addLayerWorking: "Dodavanje sloja...",
         addLayerSuccess: "Sloj dodan.",
         addLayerError: "Taj sloj nije mogao biti dodan. Provjerite URL ili stavku ID i pokušajte ponovno.",
@@ -223,7 +223,7 @@ System.register([], function (e) {
         helpTroubleImagery: "Tablica {imageryTab} kaže da se indeks nije mogao pročitati: mreža blokira stranicu OpenStreetMap. Pokušajte kasnije ili iz druge veze.",
         helpTroubleReload: "Popis je prazan ili zapeo učitavanje: ponovno učitati stranicu. Karta traje trenutak za povezivanje na sporim mrežama.",
         helpTroubleContact: "Još uvijek zapeo? Kontaktirajte GIS Division i spomenuti Mapa Slojevi ime i ovu aplikaciju.",
-        helpTipsTitle: "Dobro je znati.",
+        helpTipsTitle: "Dobro je znati",
         helpTipsHover: "Preskočite naziv sloja da pročitate cijeli naslov kada je odsječen.",
         helpTipsSolo: "{soloLayer} u izborniku sloja najbrži je način da se jedan sloj usporedi s baznom mapom.",
         helpTipsExport: "{exportMapImage} u izborniku {batchOptions} daje vam sliku za zalijepiti u dokument ili e-mail.",
@@ -265,7 +265,7 @@ System.register([], function (e) {
         disableOldAppDataActionDelete: "onemogućiti stare radnje s podacima o aplikacijama, izbrisati neiskorištenu konfiguraciju odabranih JimuLayerIds",
         thatValue1LayerCouldnTBe: "Taj {value1} sloj nije mogao biti dodan. Provjerite URL.",
         thatValue1: "To {value1}",
-        that: "To je...",
+        that: "To je",
         layerCouldnTBeAddedCheck: "sloj nije mogao biti dodan. Provjerite URL."
       })
     }

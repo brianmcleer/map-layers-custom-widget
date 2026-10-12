@@ -265,7 +265,7 @@ System.register([], function (e) {
         disableOldAppDataActionDelete: "onemogočite staro dejanje- aplikacijo, zbrišite neuporabljen konfig prop izbraneJimuLayerIds",
         thatValue1LayerCouldnTBe: "To je... {value1} plasti ni bilo mogoče dodati. Preveri lokacijo.",
         thatValue1: "To je... {value1}",
-        that: "To je...",
+        that: "To je",
         layerCouldnTBeAddedCheck: "plasti ni bilo mogoče dodati. Preveri lokacijo."
       })
     }

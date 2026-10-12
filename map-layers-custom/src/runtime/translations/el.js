@@ -265,7 +265,7 @@ System.register([], function (e) {
         disableOldAppDataActionDelete: "απενεργοποιήστε την παλιά ενέργεια δεδομένων εφαρμογών, διαγράψτε το μη χρησιμοποιηθέν εργαλείο ρυθμίσεων επιλεγμένοJimuLayerIds",
         thatValue1LayerCouldnTBe: "Αυτό... {value1} Δεν μπορούσε να προστεθεί στρώμα. Έλεγξε το URL.",
         thatValue1: "Αυτό... {value1}",
-        that: "Αυτό...",
+        that: "Αυτό",
         layerCouldnTBeAddedCheck: "Δεν μπορούσε να προστεθεί στρώμα. Έλεγξε το URL."
       })
     }

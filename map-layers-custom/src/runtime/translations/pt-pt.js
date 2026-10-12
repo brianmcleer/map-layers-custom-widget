@@ -265,7 +265,7 @@ System.register([], function (e) {
         disableOldAppDataActionDelete: "desactivar a acção de dados da aplicação antiga, apagar o suporte de configuração não utilizado seleccionadoJimuLayerIds",
         thatValue1LayerCouldnTBe: "Isso. {value1} Não foi possível adicionar camada. Verifique o URL.",
         thatValue1: "Isso. {value1}",
-        that: "Isso.",
+        that: "Isso",
         layerCouldnTBeAddedCheck: "Não foi possível adicionar camada. Verifique o URL."
       })
     }

@@ -265,7 +265,7 @@ System.register([], function (e) {
         disableOldAppDataActionDelete: "деактивиране на старите данни за приложения, изтриване на неизползваните конфигурации избрани JimuLayerIds",
         thatValue1LayerCouldnTBe: "Това. {value1} не може да бъде добавен слой. Проверете адреса.",
         thatValue1: "Това. {value1}",
-        that: "Това.",
+        that: "Това",
         layerCouldnTBeAddedCheck: "не може да бъде добавен слой. Проверете адреса."
       })
     }

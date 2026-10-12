@@ -263,10 +263,10 @@ System.register([], function (e) {
         unknownError: "خطأ مجهول",
         unserializableError: "خطأ غير معقول",
         disableOldAppDataActionDelete: "عدم تطبيق بيانات التطبيق القديم، حذف الوصايا غير المستعملة المختارة",
-        thatValue1LayerCouldnTBe: "ذلك {value1} ولا يمكن إضافة طبقة. تحقق من الـ(يورل)",
+        thatValue1LayerCouldnTBe: "ذلك {value1} ولا يمكن إضافة طبقة. تحقق من الـ(يورل).",
         thatValue1: "ذلك {value1}",
         that: "ذلك",
-        layerCouldnTBeAddedCheck: "ولا يمكن إضافة طبقة. تحقق من الـ(يورل)"
+        layerCouldnTBeAddedCheck: "ولا يمكن إضافة طبقة. تحقق من الـ(يورل)."
       })
     }
   }
