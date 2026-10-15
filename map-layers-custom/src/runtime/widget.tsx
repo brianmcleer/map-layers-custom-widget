@@ -30,6 +30,7 @@ import { readShareIds, applyShareIds } from './lib/share-link'
 import { cleanTitle, decorateTitle } from './lib/display-title'
 import { loadMemory, machineTranslate, translateName, memoryLocale, DEFAULT_MEMORY_URL } from './lib/layer-name-i18n'
 import { isFavorite, subscribeFavorites } from './lib/favorites'
+import { CategoryPanel } from './components/attribute-categories-panel'
 import { __setIntl } from './i18n-t'
 
 const allDefaultMessages = Object.assign({}, defaultMessages, jimuDefaultMessages)
@@ -180,6 +181,10 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     // the visibilityMode each had before, so a config change or unmount can
     // put the map back the way the web map author left it.
     _pickOneOriginalModes: Map<any, string> = new Map<any, string>()
+    // Expand layers by attribute value: one panel per configured layer, keyed by the
+    // layer object so a list rebuild reuses the values and the user's check state.
+    // The signature records the settings the panel was built with; a change rebuilds it.
+    _categoryPanels: Map<any, { panel: CategoryPanel, signature: string }> = new Map<any, { panel: CategoryPanel, signature: string }>()
 
     constructor(props) {
         super(props)
@@ -241,6 +246,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             this._reparentHandle = null
         }
         this.restorePickOneGroups(new Set<string>())
+        this.destroyCategoryPanels(() => true)
         this.destroyLayerList()
         this.destroyTableList()
     }
@@ -333,6 +339,8 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             changeSymbol: !!config.changeSymbolForRuntimeLayers,
             solo: mapMode && !!config.soloLayer,
             pickOne: mapMode && this.pickOneGroupIdSet().size > 0,
+            categories: mapMode && this.categoryLayerCount() > 0,
+            categoryCounts: mapMode && this.categoryLayerCount() > 0 && !!config.attributeCategoryCounts,
             shareLink: mapMode && !!config.layerBatchOptions && !!config.enableShareLink,
             searchDeep: !!config.searchLayers && !!config.searchLayerDescriptions,
             layerCsv: mapMode && !!config.layerBatchOptions && !!config.enableLayerCsv,
@@ -398,7 +406,11 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                 favoriteRemove: tr('favoriteRemove'),
                 showFavoritesOnly: tr('showFavoritesOnly'),
                 imageryTab: tr('imageryTab'),
-                zoomToScale: tr('zoomToScale')
+                zoomToScale: tr('zoomToScale'),
+                categoriesPanelTitle: tr('categoriesPanelTitle'),
+                categoriesAll: tr('categoriesAll'),
+                categoriesNoneLink: tr('categoriesNoneLink'),
+                categoriesNoValue: tr('categoriesNoValue')
             }
         }
     }
@@ -645,6 +657,9 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         host.appendChild(container)
 
         this.destroyLayerList()
+        // Category panels for layers that are no longer configured restore their layers now;
+        // the ones still configured are reused by the item-created callback below.
+        this.pruneCategoryPanels()
 
         let option: any = {
             view: view,
@@ -1225,6 +1240,91 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         })
     }
 
+    // ==================== Expand layers by attribute value ====================
+
+    // The per-layer category settings for the active map view, or an empty object
+    // when the option is off. Same check the settings panel and the help guide use.
+    categoryConfigMap(): { [jlvId: string]: { field: string } } {
+        const config: any = this.props.config || {}
+        if (!config.useMapWidget || !config.enableAttributeCategories) return {}
+        const raw: any = config.attributeCategories?.[this.state.jimuMapViewId]
+        if (!raw) return {}
+        const plain: any = raw.asMutable ? raw.asMutable({ deep: true }) : raw
+        const out: { [jlvId: string]: { field: string } } = {}
+        for (const id of Object.keys(plain)) {
+            const field = plain[id] && typeof plain[id].field === 'string' ? plain[id].field.trim() : ''
+            if (field) out[id] = { field }
+        }
+        return out
+    }
+
+    categoryLayerCount(): number {
+        return Object.keys(this.categoryConfigMap()).length
+    }
+
+    // The field configured for a list item's layer, or null. Sublayers of a map service
+    // resolve through the same jimuLayerViewId lookup the customize list uses.
+    categoryFieldFor(layer: any): string | null {
+        if (!layer || !this.jimuMapView) return null
+        const map = this.categoryConfigMap()
+        if (Object.keys(map).length === 0) return null
+        let jlvId: string = null
+        try { jlvId = this.jimuMapView.getJimuLayerViewIdByAPILayer(layer) } catch (e) { return null }
+        return jlvId && map[jlvId] ? map[jlvId].field : null
+    }
+
+    // Returns the panel for a layer, building it on first sight or when its settings changed.
+    categoryPanelFor(layer: any, field: string): CategoryPanel {
+        const config: any = this.props.config || {}
+        const showCounts = !!config.attributeCategoryCounts
+        const max = Math.max(1, Math.min(500, Math.round(Number(config.attributeCategoryMax)) || 50))
+        const signature = `${field}|${showCounts ? 1 : 0}|${max}`
+        const existing = this._categoryPanels.get(layer)
+        if (existing && existing.signature === signature) return existing.panel
+        if (existing) {
+            try { existing.panel.destroy() } catch (e) { /* noop */ }
+            this._categoryPanels.delete(layer)
+        }
+        const title = (): string => { try { return String(layer.title || layer.id || '') } catch (e) { return '' } }
+        const panel = new CategoryPanel({
+            layer,
+            field,
+            showCounts,
+            max,
+            t: this.t,
+            onChange: (shown: number, total: number) => {
+                // Layer title and counts only: attribute values never reach the telemetry.
+                this.beacon?.action('category-filter', `${title()} | ${shown} of ${total}`)
+            },
+            onError: (e: any) => { this.beacon?.error(e, 'category-values') }
+        })
+        this._categoryPanels.set(layer, { panel, signature })
+        panel.load()
+        return panel
+    }
+
+    // Destroys the panels `drop` says to, restoring each layer's original expression.
+    destroyCategoryPanels(drop: (layer: any) => boolean) {
+        if (!this._categoryPanels || this._categoryPanels.size === 0) return
+        this._categoryPanels.forEach((entry, layer) => {
+            if (!drop(layer)) return
+            try { entry.panel.destroy() } catch (e) { /* noop */ }
+            this._categoryPanels.delete(layer)
+        })
+    }
+
+    // Called on every list rebuild: panels for layers no longer configured (option off,
+    // layer removed from the settings, map view changed) go away and restore their layers.
+    pruneCategoryPanels() {
+        const wanted = this.categoryConfigMap()
+        const any = Object.keys(wanted).length > 0
+        this.destroyCategoryPanels((layer: any) => {
+            if (!any) return true
+            const field = this.categoryFieldFor(layer)
+            return !field
+        })
+    }
+
     // Watches the map's top-level layer collection. When a layer is added there
     // at runtime (e.g. dragged out of a group), promote it so the whitelist
     // filter does not hide it, and reveal it in the current list immediately.
@@ -1428,13 +1528,36 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             // Display name plus marks (favorite star, service note) survive list rebuilds.
             if (!isTableList && listItem.layer) this.refreshItemTitle(listItem)
 
+            let legendPanel = false
             if (!isTableList && this.props.config?.useMapWidget && this.props.config?.enableLegend && listItem.layer.legendEnabled) {
                 if (typeof listItem.layer?.id !== 'string' || !listItem.layer.id.startsWith('jimu-draw')) {
+                    legendPanel = true
                     listItem.panel = {
                         content: 'legend',
                         // The JSAPI handle the layer invisible case, it will not have a selected UI.
                         // https://devtopia.esri.com/WebGIS/arcgis-js-api/issues/51484
                         open: this.props.config?.showAllLegend
+                    }
+                }
+            }
+
+            // Expand by attribute value: the configured field's values become check boxes in
+            // the item's panel, beside the legend when that is on too.
+            if (!isTableList && listItem.layer) {
+                const field = this.categoryFieldFor(listItem.layer)
+                if (field) {
+                    try {
+                        const panel = this.categoryPanelFor(listItem.layer, field)
+                        const open = !!this.props.config?.attributeCategoryOpen || (legendPanel && !!this.props.config?.showAllLegend)
+                        const panelOptions: any = {
+                            content: legendPanel ? ['legend', panel.el] : panel.el,
+                            open,
+                            title: this.t('categoriesPanelTitle')
+                        }
+                        if (!legendPanel) panelOptions.icon = 'filter'
+                        listItem.panel = panelOptions
+                    } catch (e) {
+                        this.beacon?.error(e, 'category-panel')
                     }
                 }
             }

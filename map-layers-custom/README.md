@@ -6,6 +6,7 @@ A customized version of Esri's Map Layers widget for ArcGIS Experience Builder. 
 
 - Auto-include new sub-layers. Designate a parent group so layers added to it later appear automatically in deployed apps, with no whitelist edits or redeploy.
 - Pick one layer per group (radio buttons). Choose group layers that allow only one layer on at a time; with tick boxes on, those layers show round buttons.
+- Expand layers by attribute value. Pick a field for a feature layer or map service sublayer and users get its values as tick boxes under the layer: untick a category to hide those features, with optional counts. One layer stays one layer; no layer views per category.
 - Copy link to these layers. A batch option that copies a page address opening the app with the same layers on.
 - Export layer list (CSV). A batch option that saves every layer, group and sublayer with its state and URL.
 - Layer health check. Services behind the list are checked on a timer; a layer whose service does not answer is marked in the list and reported to telemetry.

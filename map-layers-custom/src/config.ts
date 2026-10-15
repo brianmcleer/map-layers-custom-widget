@@ -129,9 +129,33 @@ export interface Config {
   pickOneGroupIds?: {
     [jimuMapViewId: string]: string[]
   }
+  // Expand layers by attribute value. A configured layer gets a panel under its
+  // name listing the distinct values of one field as check boxes; unchecking a
+  // value hides those features (definitionExpression on the layer or sublayer).
+  // One field per layer, keyed by jimuMapViewId then jimuLayerViewId (map
+  // specific, not in the XML export). The switch and the three options below
+  // are portable.
+  enableAttributeCategories?: boolean
+  // Show a feature count beside each value (one grouped count query per layer).
+  attributeCategoryCounts?: boolean
+  // Open the value panel as soon as the list loads (otherwise the user clicks
+  // the panel button beside the layer).
+  attributeCategoryOpen?: boolean
+  // Most distinct values listed per layer (default 50, 1 to 500).
+  attributeCategoryMax?: number
+  attributeCategories?: {
+    [jimuMapViewId: string]: {
+      [jimuLayerViewId: string]: AttributeCategoryConfig
+    }
+  }
   customizeLayerOptions?: {
     [jimuMapViewId: string]: CustomizeLayerOption
   }
+}
+
+export interface AttributeCategoryConfig {
+  // Field name as the service spells it (not the alias).
+  field: string
 }
 
 export interface PresetView {

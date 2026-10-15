@@ -12,7 +12,7 @@ import {
   AllDataSourceTypes,
   type WidgetJson
 } from 'jimu-core'
-import { Switch, Radio, Label, Alert, Checkbox, TextInput, TextArea, Button, defaultMessages as jimuDefaultMessages } from 'jimu-ui'
+import { Switch, Radio, Label, Alert, Checkbox, TextInput, TextArea, Button, Select, Option, defaultMessages as jimuDefaultMessages } from 'jimu-ui'
 import {
   MapWidgetSelector,
   SettingSection,
@@ -29,6 +29,7 @@ import { getStyle } from './lib/style'
 import { type JimuMapView, JimuMapViewComponent, MapViewManager } from 'jimu-arcgis'
 import { visibleLayerIds } from '../runtime/lib/share-link'
 import { DEFAULT_MEMORY_URL, namesAsDefaultTs } from '../runtime/lib/layer-name-i18n'
+import { isCategoryFieldType } from '../runtime/lib/attribute-categories'
 import type { PresetView } from '../config'
 import { __setIntl, __t } from './i18n-t'
 
@@ -56,6 +57,16 @@ export interface WidgetSettingState {
   // that view has finished (drives the loading versus empty-state message).
   pickOneGroupInfos: { [jmvId: string]: Array<{ jlvId: string, title: string }> }
   pickOneLoaded: { [jmvId: string]: boolean }
+  // Layers that can expand by attribute value (feature layers and map service
+  // sublayers) per map view, with the fields the panel can list.
+  categoryLayerInfos: { [jmvId: string]: CategoryLayerInfo[] }
+  categoryLoaded: { [jmvId: string]: boolean }
+}
+
+export interface CategoryLayerInfo {
+  jlvId: string
+  title: string
+  fields: Array<{ name: string, alias: string }>
 }
 
 export type WidgetSettingProps = AllWidgetSettingProps<IMConfig> & ExtraProps & {
@@ -105,7 +116,8 @@ WidgetSettingState
     'enableShareLink', 'telemetryLayers', 'reportBrokenLayers', 'searchLayerDescriptions', 'enableLayerCsv',
     'enableLayerHealth', 'layerHealthMinutes', 'cleanLayerNames', 'cleanNamePrefix', 'cleanNameTitleCase',
     'enableFavorites', 'enableImageryIndex', 'imageryIndexUrl', 'toolZoomToScale',
-    'translateLayerNames', 'layerNamesFromMemory', 'layerNameMemoryUrl', 'layerNameMtUrl', 'layerNameMtKey', 'layerNameKeep', 'layerNameOverrides'
+    'translateLayerNames', 'layerNamesFromMemory', 'layerNameMemoryUrl', 'layerNameMtUrl', 'layerNameMtKey', 'layerNameKeep', 'layerNameOverrides',
+    'enableAttributeCategories', 'attributeCategoryCounts', 'attributeCategoryOpen', 'attributeCategoryMax'
   ]
 
   static mapExtraStateProps = (state: IMState): ExtraProps => {
@@ -125,7 +137,9 @@ WidgetSettingState
       groupLayerInfosLoaded: false,
       importStatus: null,
       pickOneGroupInfos: {},
-      pickOneLoaded: {}
+      pickOneLoaded: {},
+      categoryLayerInfos: {},
+      categoryLoaded: {}
     }
     // this.setDefaultConfig()
   }
@@ -350,6 +364,9 @@ WidgetSettingState
       if (this.props.config?.enablePickOneGroups) {
         this.loadPickOneGroupInfos()
       }
+      if (this.props.config?.enableAttributeCategories) {
+        this.loadCategoryLayerInfos()
+      }
     })
   }
 
@@ -562,6 +579,202 @@ WidgetSettingState
             {rowsFor(jmvId)}
           </div>
         ))}
+      </div>
+    )
+  }
+
+  // ----- Expand layers by attribute value ----------------------------------
+
+  // Every layer in every map view that has a definitionExpression and fields: feature
+  // layers at any group depth and the sublayers of map image layers. Each is loaded so
+  // its fields are known; only field types the panel can list are offered.
+  loadCategoryLayerInfos = async () => {
+    const views = this.getAllMapViews()
+    const ids = Object.keys(views)
+    if (ids.length === 0) return
+    for (const jmvId of ids) {
+      const jmv = views[jmvId]
+      let infos: CategoryLayerInfo[] = []
+      try {
+        if (jmv?.view && (jmv.view as any).when) {
+          await (jmv.view as any).when()
+        }
+        if (jmv?.view?.map) {
+          infos = await this.collectCategoryLayers(jmv)
+        }
+      } catch (e) { /* leave empty */ }
+      this.setState((prev) => ({
+        categoryLayerInfos: { ...prev.categoryLayerInfos, [jmvId]: infos },
+        categoryLoaded: { ...prev.categoryLoaded, [jmvId]: true }
+      }))
+    }
+  }
+
+  collectCategoryLayers = async (jmv: JimuMapView): Promise<CategoryLayerInfo[]> => {
+    const result: CategoryLayerInfo[] = []
+    const seen = new Set<string>()
+    const fieldsOf = (layer: any): Array<{ name: string, alias: string }> => {
+      const raw: any = layer && layer.fields
+      const arr: any[] = raw ? (Array.isArray(raw) ? raw : (raw.toArray ? raw.toArray() : [])) : []
+      return arr
+        .filter((f: any) => f && typeof f.name === 'string' && isCategoryFieldType(f.type))
+        .map((f: any) => ({ name: f.name, alias: f.alias && f.alias !== f.name ? `${f.alias} (${f.name})` : f.name }))
+    }
+    const visit = async (layers: any, path: string) => {
+      if (!layers) return
+      const arr: any[] = []
+      if (layers.forEach) {
+        layers.forEach((l: any) => arr.push(l))
+      } else if (Array.isArray(layers)) {
+        arr.push(...layers)
+      }
+      for (const layer of arr) {
+        if (!layer) continue
+        if (layer.load && layer.loadStatus !== 'loaded') {
+          try { await layer.load() } catch (e) { /* ignore */ }
+        }
+        const title = String(layer.title || layer.id || '')
+        const label = path ? `${path} > ${title}` : title
+        const supportsExpression = 'definitionExpression' in layer && typeof layer.queryFeatures === 'function'
+        if (supportsExpression) {
+          const fields = fieldsOf(layer)
+          if (fields.length > 0) {
+            try {
+              const jlvId = jmv.getJimuLayerViewIdByAPILayer(layer)
+              if (jlvId && !seen.has(jlvId)) {
+                seen.add(jlvId)
+                result.push({ jlvId, title: label, fields })
+              }
+            } catch (e) { /* unresolved */ }
+          }
+        }
+        if (layer.layers) await visit(layer.layers, label)
+        else if (layer.sublayers) await visit(layer.sublayers, label)
+      }
+    }
+    await visit(jmv.view.map.layers, '')
+    return result
+  }
+
+  categoryFieldFor = (jmvId: string, jlvId: string): string => {
+    const entry: any = this.props.config?.attributeCategories?.[jmvId]?.[jlvId]
+    return entry && typeof entry.field === 'string' ? entry.field : ''
+  }
+
+  onCategoryFieldChange = (jmvId: string, jlvId: string, field: string) => {
+    let cfg = this.props.config
+    if (field) {
+      cfg = cfg.setIn(['attributeCategories', jmvId, jlvId], { field })
+    } else {
+      const raw: any = cfg.attributeCategories?.[jmvId]
+      if (raw) cfg = cfg.setIn(['attributeCategories', jmvId], raw.without(jlvId))
+    }
+    this.props.onSettingChange({ id: this.props.id, config: cfg })
+  }
+
+  onEnableCategoriesChange = (enabled: boolean) => {
+    this.onOptionsChanged(enabled, 'enableAttributeCategories')
+    if (enabled) {
+      this.setState({ categoryLayerInfos: {}, categoryLoaded: {} }, () => { this.loadCategoryLayerInfos() })
+    }
+  }
+
+  // The per-view, per-layer field pickers shown under the option.
+  getCategoryLayerList = () => {
+    const views = this.getAllMapViews()
+    const jmvIds = Object.keys(views)
+    const multi = jmvIds.length > 1
+    const cfg: any = this.props.config || {}
+
+    const rowsFor = (jmvId: string): React.ReactNode => {
+      const infos = this.state.categoryLayerInfos[jmvId]
+      const loaded = !!this.state.categoryLoaded[jmvId]
+      if (!loaded) {
+        return <div className='auto-include-empty'>{this.getTranslatedString('attributeCategoriesLoading')}</div>
+      }
+      if (!infos || infos.length === 0) {
+        return <div className='auto-include-empty'>{this.getTranslatedString('attributeCategoriesNoLayers')}</div>
+      }
+      return infos.map(info => {
+        const current = this.categoryFieldFor(jmvId, info.jlvId)
+        const known = info.fields.some(f => f.name === current)
+        return (
+          <SettingRow key={info.jlvId} flow='wrap' label={info.title} className='auto-include-row'>
+            <Select
+              size='sm'
+              className='w-100'
+              value={current}
+              aria-label={`${this.getTranslatedString('attributeCategoryAria')} ${info.title}`}
+              onChange={(evt: any) => { this.onCategoryFieldChange(jmvId, info.jlvId, String(evt.target.value || '')) }}
+            >
+              <Option value=''>{this.getTranslatedString('attributeCategoryNotExpanded')}</Option>
+              {!known && current && <Option value={current}>{current}</Option>}
+              {info.fields.map(f => <Option key={f.name} value={f.name}>{f.alias}</Option>)}
+            </Select>
+          </SettingRow>
+        )
+      })
+    }
+
+    const viewLabel = (jmvId: string): string => {
+      const dsId = views[jmvId]?.dataSourceId
+      return (dsId && this.props.dsJsons?.[dsId]?.label) || dsId || jmvId
+    }
+
+    return (
+      <div className='auto-include-section w-100' role='group' aria-label={this.getTranslatedString('enableAttributeCategories')}>
+        <div className='auto-include-header-row'>
+          <Label className='auto-include-header'>{this.getTranslatedString('attributeCategoriesLabel')}</Label>
+          <a
+            className='auto-include-refresh'
+            role='button'
+            tabIndex={0}
+            onClick={() => { this.loadCategoryLayerInfos() }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') { this.loadCategoryLayerInfos() }
+            }}
+          >
+            {this.getTranslatedString('pickOneRefresh')}
+          </a>
+        </div>
+        <div className='auto-include-desc'>{this.getTranslatedString('attributeCategoriesDesc')}</div>
+        {jmvIds.length === 0 && <div className='auto-include-empty'>{this.getTranslatedString('attributeCategoriesLoading')}</div>}
+        {jmvIds.map(jmvId => (
+          <div key={jmvId}>
+            {multi && <div className='auto-include-desc'><strong>{viewLabel(jmvId)}</strong></div>}
+            {rowsFor(jmvId)}
+          </div>
+        ))}
+        <SettingRow tag='label' label={this.getTranslatedString('attributeCategoryCounts')} className='mt-2'>
+          <Switch
+            className='can-x-switch'
+            checked={!!cfg.attributeCategoryCounts}
+            data-key='attributeCategoryCounts'
+            onChange={(evt) => { this.onOptionsChanged(evt.target.checked, 'attributeCategoryCounts') }}
+          />
+        </SettingRow>
+        <SettingRow tag='label' label={this.getTranslatedString('attributeCategoryOpen')}>
+          <Switch
+            className='can-x-switch'
+            checked={!!cfg.attributeCategoryOpen}
+            data-key='attributeCategoryOpen'
+            onChange={(evt) => { this.onOptionsChanged(evt.target.checked, 'attributeCategoryOpen') }}
+          />
+        </SettingRow>
+        <SettingRow flow='wrap' label={this.getFormattedMessage('attributeCategoryMax')}>
+          <TextInput
+            className='w-100'
+            size='sm'
+            type='number'
+            min={1}
+            max={500}
+            value={String(cfg.attributeCategoryMax ?? 50)}
+            onChange={(evt) => {
+              const n = Math.max(1, Math.min(500, Math.round(Number(evt.target.value)) || 50))
+              this.props.onSettingChange({ id: this.props.id, config: this.props.config.set('attributeCategoryMax', n) })
+            }}
+          />
+        </SettingRow>
       </div>
     )
   }
@@ -828,6 +1041,7 @@ WidgetSettingState
     const searchOn = !!(this.props.config && this.props.config.searchLayers)
     const extraToolsOn = !!(this.props.config && this.props.config.extraLayerTools)
     const pickOneOn = !!(this.props.config && this.props.config.enablePickOneGroups)
+    const categoriesOn = !!(this.props.config && this.props.config.enableAttributeCategories)
     const healthOn = !!(this.props.config && this.props.config.enableLayerHealth)
     const addLayerOn = !!(this.props.config && this.props.config.enableAddLayer)
     const cleanOn = !!(this.props.config && this.props.config.cleanLayerNames)
@@ -851,6 +1065,15 @@ WidgetSettingState
           />
         </SettingRow>
         {pickOneOn && this.getPickOneGroupList()}
+        <SettingRow tag='label' label={this.getFormattedMessage('enableAttributeCategories')}>
+          <Switch
+            className='can-x-switch'
+            checked={categoriesOn}
+            data-key='enableAttributeCategories'
+            onChange={(evt) => { this.onEnableCategoriesChange(evt.target.checked) }}
+          />
+        </SettingRow>
+        {categoriesOn && this.getCategoryLayerList()}
         {this.getSwitchOption('enableShareLink')}
         {(this.props.config?.enableShareLink && !this.props.config?.layerBatchOptions) &&
           <SettingRow flow='wrap'>

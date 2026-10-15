@@ -8,6 +8,10 @@
   3. Auto-runs 'git init' on first use if the folder is not a git repo yet.
   4. Commits.
   5. Publishes the repo to GitHub on first run, or pushes updates after.
+  0. Pulls the latest shared translations into the widget's language files first
+     (exb-i18n-kit sync, when the kit clone sits next to this repo and the widget has been
+     localized). New English strings get machine translations from the kit's GitHub Action;
+     this step is only the pull. Skip with -SkipTranslations. A failed pull warns and goes on.
   6. (Optional) Cuts a versioned GitHub Release with a downloadable zip. The zip is
      built from a staging copy with the editor-only files in $ReleaseOnlyExclude
      removed (Visual Studio type shims, dev tools). Those stay in the GitHub repo.
@@ -26,7 +30,8 @@
 
 param(
     [string]$Release = "",
-    [string]$CommitMessage = "Update widget ($(Get-Date -Format 'yyyy-MM-dd'))"
+    [string]$CommitMessage = "Update widget ($(Get-Date -Format 'yyyy-MM-dd'))",
+    [switch]$SkipTranslations
 )
 
 $ErrorActionPreference = "Stop"
@@ -89,6 +94,38 @@ if ($Release -ne "") {
     if ($manifestVersion -and ($Release -ne "v$manifestVersion")) {
         throw "Release tag $Release does not match manifest.json version $manifestVersion. Bump manifest.json and package.json in the EB folder (never the repo copy; /MIR reverts it), or pass -Release v$manifestVersion."
     }
+}
+
+# ----- Translations: pull the shared memory into the language files -------------------
+# exb-i18n-kit's GitHub Action machine-translates every registered widget's English and
+# writes memory/<locale>.json in the kit repo. `sync` pulls that into this widget's 39 locale
+# files per part, keeping hand edits and Esri matches. Runs in the EB source folder, so the
+# mirror below carries the fresh files. Only when the widget has been localized (lock file)
+# and the kit clone sits beside this repo (Documents\GitHub\exb-i18n-kit).
+$kitPath = Join-Path (Split-Path $RepoPath -Parent) "exb-i18n-kit"
+$kitCli  = Join-Path $kitPath "bin\exb-i18n.js"
+$lock    = Join-Path $ExbWidgetPath "i18n\translations.lock.json"
+if ($SkipTranslations) {
+    Write-Host "`n==> Translations: skipped (-SkipTranslations)."
+} elseif (-not (Test-Path $kitCli)) {
+    Write-Host "`n==> Translations: exb-i18n-kit not found at $kitPath; skipped."
+} elseif (-not (Test-Path $lock)) {
+    Write-Host "`n==> Translations: widget not localized yet (no i18n\translations.lock.json); skipped."
+} elseif (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+    Write-Warning "Translations: node not on PATH; skipped."
+} else {
+    $o = $ErrorActionPreference; $ErrorActionPreference = "Continue"
+    try {
+        # publish-all.ps1 pulls the kit once for the whole family and sets this flag.
+        if ($env:EXB_I18N_KIT_PULLED -ne "1") {
+            git -C $kitPath pull --ff-only --quiet 2>&1 | Out-Null
+        }
+        Write-Host "`n==> Translations: pulling shared memory into $WidgetName ..."
+        & node $kitCli sync "$ExbWidgetPath" 2>&1 | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+        if ($LASTEXITCODE -ne 0) { Write-Warning "Translations: exb-i18n sync exited with code $LASTEXITCODE. Publishing with the language files as they are." }
+    } catch {
+        Write-Warning "Translations: $($_.Exception.Message). Publishing with the language files as they are."
+    } finally { $ErrorActionPreference = $o }
 }
 
 Write-Host "`n==> Syncing widget files (skipping $($ExcludeDirs -join ', '))..."

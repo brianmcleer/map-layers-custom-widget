@@ -44,7 +44,7 @@ const LABEL_KEYS = [
   'disablePopup', 'transparency', 'visibilityRange', 'information', 'changeSymbol', 'soloLayer', 'flashLayer',
   'copyUrl', 'refreshLayer', 'layerDetails', 'spotlight', 'clearSpotlight', 'moveToTop', 'moveToBottom',
   'moveOutOfGroup', 'remove', 'copyLayerLink', 'exportLayerCsv', 'layerUnavailable', 'favoriteAdd', 'favoriteRemove',
-  'showFavoritesOnly', 'imageryTab', 'zoomToScale'
+  'showFavoritesOnly', 'imageryTab', 'zoomToScale', 'categoriesPanelTitle', 'categoriesAll', 'categoriesNoneLink', 'categoriesNoValue'
 ]
 /* Strings that come from jimu-ui's shared messages at runtime, not this widget's file. */
 const JIMU_LABELS = {
@@ -58,7 +58,7 @@ LABEL_KEYS.forEach((k) => { labelsText[k] = messages[k] ?? JIMU_LABELS[k]; asser
 const FLAGS = [
   'mapMode', 'tickBoxes', 'autoShowParents', 'reorder', 'layerLegend', 'tables', 'search', 'batch', 'layerCount',
   'collapsible', 'savedViews', 'presetViews', 'addLayer', 'masterOpacity', 'basemapSwitcher', 'legendPanel', 'goto', 'labels',
-  'popup', 'transparency', 'visibilityRange', 'information', 'changeSymbol', 'solo', 'pickOne', 'shareLink', 'searchDeep', 'layerCsv', 'layerHealth', 'favorites', 'imagery', 'zoomToScale', 'flash', 'copyUrl',
+  'popup', 'transparency', 'visibilityRange', 'information', 'changeSymbol', 'solo', 'pickOne', 'categories', 'categoryCounts', 'shareLink', 'searchDeep', 'layerCsv', 'layerHealth', 'favorites', 'imagery', 'zoomToScale', 'flash', 'copyUrl',
   'refresh', 'details', 'spotlight', 'move'
 ]
 const features = (on, overrides = {}) => {
@@ -141,7 +141,8 @@ test('feature gating: the words for an off feature are absent from the whole gui
     search: 'funnel', batch: labelsText.batchOptions, pickOne: 'one layer at a time',
     shareLink: labelsText.copyLayerLink, searchDeep: 'description and tags', layerCsv: labelsText.exportLayerCsv,
     layerHealth: labelsText.layerUnavailable, presetViews: 'came with the app', favorites: labelsText.favoriteAdd,
-    imagery: labelsText.imageryTab, zoomToScale: labelsText.zoomToScale
+    imagery: labelsText.imageryTab, zoomToScale: labelsText.zoomToScale,
+    categories: labelsText.categoriesPanelTitle, categoryCounts: 'how many features'
   }
   for (const [flag, word] of Object.entries(wordFor)) {
     const txt = textOf(buildHelpSections(t, features(true, { [flag]: false, ...(flag === 'savedViews' ? { presetViews: false } : {}) })))

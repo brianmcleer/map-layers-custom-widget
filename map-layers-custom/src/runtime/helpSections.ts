@@ -37,6 +37,10 @@ export interface HelpFeatures {
   solo: boolean
   /* at least one group in this map view runs in pick-one (radio button) mode */
   pickOne: boolean
+  /* at least one layer in this map view expands by attribute value */
+  categories: boolean
+  /* those value rows carry a feature count */
+  categoryCounts: boolean
   /* batch options menu has Copy link to these layers */
   shareLink: boolean
   /* search box also reads descriptions and tags */
@@ -114,6 +118,10 @@ export interface HelpLabels {
   showFavoritesOnly: string
   imageryTab: string
   zoomToScale: string
+  categoriesPanelTitle: string
+  categoriesAll: string
+  categoriesNoneLink: string
+  categoriesNoValue: string
 }
 
 type T = (id: string, values?: Record<string, string>) => string
@@ -197,6 +205,9 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
         f.tickBoxes ? t('helpLayersTick') : t('helpLayersEye'),
         t('helpLayersGroups'),
         ...when(f.pickOne, f.tickBoxes ? 'helpLayersPickOneTick' : 'helpLayersPickOneEye'),
+        ...(f.categories ? [t('helpLayersCategories', { categoriesPanelTitle: L.categoriesPanelTitle })] : []),
+        ...(f.categories ? [t('helpLayersCategoriesLinks', { categoriesAll: L.categoriesAll, categoriesNoneLink: L.categoriesNoneLink, categoriesNoValue: L.categoriesNoValue })] : []),
+        ...(f.categories && f.categoryCounts ? [t('helpLayersCategoryCounts')] : []),
         f.autoShowParents ? t('helpLayersParentOn') : t('helpLayersParentOff'),
         ...when(f.layerCount, 'helpLayersCount'),
         ...when(f.layerLegend, 'helpLayersLegend'),
@@ -310,6 +321,7 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       t('helpTroubleGrey'),
       ...when(!f.autoShowParents, 'helpTroubleGroupOff'),
       ...when(f.pickOne, 'helpTroublePickOne'),
+      ...(f.categories ? [t('helpTroubleCategories', { categoriesPanelTitle: L.categoriesPanelTitle, categoriesAll: L.categoriesAll })] : []),
       ...when(f.search, 'helpTroubleNoMatches'),
       ...(f.addLayer ? [t('helpTroubleAdd', { addLayerError: L.addLayerError })] : []),
       ...when(f.spotlight, 'helpTroubleFocus'),
@@ -331,6 +343,7 @@ export function buildHelpSections (t: T, f: HelpFeatures): HelpSection[] {
       ...(f.solo ? [t('helpTipsSolo', { soloLayer: L.soloLayer })] : []),
       ...(f.batch && f.mapMode ? [t('helpTipsExport', { exportMapImage: L.exportMapImage, batchOptions: L.batchOptions })] : []),
       ...when(f.savedViews, 'helpTipsViews'),
+      ...when(f.categories, 'helpTipsCategories'),
       ...(f.transparency ? [t('helpTipsOpacity', { transparency: L.transparency })] : []),
       ...(f.shareLink && f.batch && f.mapMode ? [t('helpTipsLink', { copyLayerLink: L.copyLayerLink })] : [])
     ]
