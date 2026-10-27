@@ -29,7 +29,9 @@ import type { BeaconHandle } from '../shared/beacon'
 import { readShareIds, applyShareIds } from './lib/share-link'
 import { cleanTitle, decorateTitle } from './lib/display-title'
 import { loadMemory, machineTranslate, translateName, memoryLocale, DEFAULT_MEMORY_URL } from './lib/layer-name-i18n'
-import { isFavorite, subscribeFavorites } from './lib/favorites'
+import { isFavorite, subscribeFavorites, getFavorites } from './lib/favorites'
+import { registerBridge, unregisterBridge, notifyBridge, walkItems, setItemVisible, openToItem, selectItem, findItem, flashRow, applyPresetToMap, buildParentMap, BRIDGE_VERSION } from './lib/layer-bridge'
+import type { LayerListBridge } from './lib/layer-bridge'
 import { CategoryPanel } from './components/attribute-categories-panel'
 import { __setIntl } from './i18n-t'
 
@@ -224,6 +226,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     }
 
     componentWillUnmount() {
+        unregisterBridge(this.props.id)
         this._unmounted = true
         if (this._refreshTimer) {
             clearTimeout(this._refreshTimer)
@@ -262,6 +265,87 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         // First-run hint shows until the user dismisses it once (or opens the guide)
         if (!this.readHintDismissed()) this.setState({ showFirstRunHint: true })
         this.syncNameLanguage()
+        this.registerLayerBridge()
+    }
+
+    // ==================== Layer list bridge (other widgets work through this list) ====================
+
+    // Publishes window.__exbLayerLists[<widget id>] (lib/layer-bridge.ts) so an assistant such as
+    // Mappy sees the tree exactly as this list shows it and switches layers through the list's
+    // own rules instead of poking the map behind its back.
+    registerLayerBridge() {
+        const self = this
+        const list = (): any => self.layerListRef && self.layerListRef.current
+        const tables = (): any => self.tableListRef && self.tableListRef.current
+        const listFor = (layer: any): any => findItem(list()?.operationalItems, layer) ? list() : tables()
+        const view = (): any => self.viewFromMapWidget || self.jmvFromMap?.view || null
+        let label = ''
+        try { label = getAppStore().getState()?.appConfig?.widgets?.[this.props.id]?.label || '' } catch (e) { /* no store */ }
+        const bridge: LayerListBridge = {
+            version: BRIDGE_VERSION,
+            widgetId: this.props.id,
+            label: label || this.translate('_widgetLabel'),
+            get ready () { return !self._unmounted && !!list()?.operationalItems && self.state.listLoadStatus === LoadStatus.Fulfilled },
+            get view () { return view() },
+            get mapWidgetId () { return (self.props.useMapWidgetIds && self.props.useMapWidgetIds[0]) || null },
+            get element () { const host = self.layerListContainerRef.current; return host?.closest('.widget-layerlist') as HTMLElement || host || null },
+            items: () => {
+                const l = list()
+                if (!l?.operationalItems) return []
+                const config: any = self.props.config || {}
+                const options = {
+                    titleOf: (item: any) => self.displayTitle(item.layer) || String(item.title || ''),
+                    favorite: (layer: any) => !!config.enableFavorites && isFavorite(self.props.id, layer?.id)
+                }
+                return [...walkItems(l.operationalItems, options), ...walkItems(tables()?.operationalItems, options).map(item => ({ ...item, isTable: true }))]
+            },
+            setVisible: (layer: any, on: boolean) => {
+                const l = list()
+                const map = view()?.map
+                const parents = (self.props.config?.autoShowParentLayers !== false && map) ? buildParentMap(map) : null
+                // Pick-one groups are exclusive layers, so the SDK switches the siblings off itself.
+                return setItemVisible(l?.operationalItems, layer, on, parents ? (x: any) => parents.get(x) : undefined)
+            },
+            reveal: (layer: any) => {
+                const l = listFor(layer)
+                if (!l?.operationalItems) return false
+                const item = openToItem(l.operationalItems, layer)
+                if (!item) return false
+                // Clear temporary search/favorites/visible-only filters through their owner.
+                window.dispatchEvent(new CustomEvent('exb-layer-list-reveal', { detail: { widgetId: self.props.id } }))
+                l.filterPredicate = null
+                selectItem(l, item)
+                if (self.state.isListCollapsed) self.setState({ isListCollapsed: false })
+                // Rows render after the tree opens; try a few times.
+                let tries = 0
+                const attempt = () => {
+                    if (self._unmounted) return
+                    const found = openToItem(l.operationalItems, layer)
+                    if (found) selectItem(l, found)
+                    if (flashRow(l === tables() ? self.tableListContainerRef.current : self.layerListContainerRef.current, found || item)) return
+                    if (++tries < 16) setTimeout(attempt, 200)
+                }
+                setTimeout(attempt, 120)
+                return true
+            },
+            presets: () => self.currentPresets().map(p => ({ id: p.id, name: p.name })),
+            applyPreset: (idOrName: string) => {
+                const want = String(idOrName || '').trim().toLowerCase()
+                const p = self.currentPresets().find(x => x.id.toLowerCase() === want || x.name.toLowerCase() === want)
+                const map = view()?.map
+                if (!p || !map) return false
+                applyPresetToMap(map, p.layerIds, self.props.config?.autoShowParentLayers !== false)
+                self.beacon?.action('apply-preset', p.name)
+                return true
+            },
+            favorites: () => {
+                const ids = getFavorites(self.props.id)
+                const out: string[] = []
+                try { view()?.map?.allLayers?.forEach((lyr: any) => { if (lyr && ids.has(String(lyr.id))) out.push(self.displayTitle(lyr)) }) } catch (e) { /* noop */ }
+                return out
+            }
+        }
+        registerBridge(bridge)
     }
 
     // ==================== In-widget help guide (shared pattern, see WIDGETHANDOFF Section 10) ====================
@@ -710,6 +794,9 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             // the Move-out menu) visible, even though it no longer matches the
             // group-based whitelist.
             this.setupReparentPromotion(layerList);
+
+            // Tell widgets working through this list (Mappy) that the tree is ready.
+            notifyBridge(this.props.id)
         })
 
         this.layerListRef.current = layerList

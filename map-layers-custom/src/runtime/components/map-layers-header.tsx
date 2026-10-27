@@ -217,6 +217,19 @@ export default function MapLayersHeader(props: MapLayersHeaderProps) {
     const [searchIndex, setSearchIndex] = useState<SearchIndex | null>(null)
     const originalExpandStatesRef = useRef<Map<any, boolean>>(new Map())
     const hadActiveSearchRef = useRef(false)
+    useEffect(() => {
+        const reveal = (event: any) => {
+            if (event?.detail?.widgetId !== widgetId) return
+            originalExpandStatesRef.current = new Map()
+            hadActiveSearchRef.current = false
+            setSearchInput('')
+            setVisibleOnly(false)
+            setFavoritesOnly(false)
+            setMatchCount(null)
+        }
+        window.addEventListener('exb-layer-list-reveal', reveal)
+        return () => window.removeEventListener('exb-layer-list-reveal', reveal)
+    }, [widgetId])
     // Snapshot of the authored default visibility, captured once per refresh,
     // used by the "Reset to default visibility" batch action.
     const defaultVisibilityRef = useRef<Map<string, boolean>>(new Map())

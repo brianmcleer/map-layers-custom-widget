@@ -2,6 +2,14 @@
 
 Newest first. Every release bumps `manifest.json` and `package.json` together.
 
+## 1.50.1 (2026-10-26)
+
+- Fixed: the layer list bridge's reveal highlighted the group around a layer (and picked the group when a group and a layer share a name). It now matches the row by the names above it and its depth, and draws the highlight over that one row only (the row's own line, not its nested rows), following it while the list scrolls. Waits up to about three seconds for rows inside a just-opened group to render.
+
+## 1.50.0 (2026-10-26)
+
+- Added: **layer list bridge** for widgets that work through this list, first used by Mappy (the in-app assistant). The widget publishes `window.__exbLayerLists[<widget id>]` (`src/runtime/lib/layer-bridge.ts`, contract version 1, no Experience Builder imports) and fires `exb-layer-list-change` when it registers, finishes building the list, or unmounts. Other widgets can read the tree exactly as the list shows it (customize whitelist applied, display names, groups at any depth, tick state, effective visibility, scale state, pick-one groups, favorites), switch a layer through the list items (rows above ticked, a group with nothing ticked gets its rows ticked, the top one only in a pick-one group, hidden container groups turned on when auto show parents is on), reveal a layer (opens the rows above, expands a collapsed list, scrolls the row into view and flashes an outline), list and apply builder presets, and read the starred layers. Nothing changes for users when no other widget uses it.
+
 ## 1.49.0 (2026-10-15)
 
 Idea from an Esri Community request: the Map Layers widget only switches whole layers or layer views, so showing one asset category at a time meant one layer view per category, which clutters the list and splits the data for display only.

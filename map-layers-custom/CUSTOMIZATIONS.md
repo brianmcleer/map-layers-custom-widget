@@ -84,3 +84,4 @@ runtime behavior. Drop this folder into your Experience Builder
 (`npm start` for dev, `npm run build:prod` for production) to regenerate
 `dist/`. Non-English locale strings for the new keys fall back to English until
 translated in `src/**/translations/<locale>.js`.
+- Layer list bridge (1.50.0): `window.__exbLayerLists` contract in `src/runtime/lib/layer-bridge.ts`, registered in `componentDidMount`, removed in `componentWillUnmount`, `exb-layer-list-change` event after the list builds.
