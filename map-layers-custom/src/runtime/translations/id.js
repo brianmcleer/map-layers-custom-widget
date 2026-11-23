@@ -126,7 +126,7 @@ System.register([], function (e) {
         categoriesEmptyValue: "(kosong)",
         categoriesLoading: "Membaca nilai...",
         categoriesError: "Nilai-nilai tersebut tidak dapat dibaca. Muat ulang halaman untuk mencoba lagi.",
-        categoriesNone: "undo-type",
+        categoriesNone: "Undo-type.",
         categoriesTruncated: "Hanya yang pertama {max} nilai terdaftar. Fitur dengan nilai lain tetap menggambar.",
         helpTitle: "Bantuan",
         helpIntro: "Lihat lapisan mana yang ada di peta, nyalakan atau matikan, temukan yang Anda butuhkan, dan ubah yang terlihat.",

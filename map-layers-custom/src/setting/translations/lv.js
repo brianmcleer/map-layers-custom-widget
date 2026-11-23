@@ -45,7 +45,7 @@ System.register([], function (e) {
         attributeCategoriesLabel: "Slāņi un lauku paplašināt",
         attributeCategoriesDesc: "Izvēlieties lauku jebkuram slānim, kura īpašības būtu jānorāda kategorijā ar tā nosaukumu. Lietotāji atzīmē un neatzīmē kategorijas, lai parādītu vai slēptu šīs funkcijas; tīmekļa karte un pats slānis netiek mainīts. Darbi par funkciju slāņiem un kartes pakalpojumu apakšslāņiem.",
         attributeCategoryAria: "Lauks paplašināms ar",
-        attributeCategoryNotExpanded: "neplaķēti",
+        attributeCategoryNotExpanded: "Neplaķēti",
         attributeCategoriesLoading: "Ielādē slāņus un laukus no kartes...",
         attributeCategoriesNoLayers: "Šajā kartē netika atrasti slāņi ar tekstu vai visa skaita laukiem.",
         attributeCategoryCounts: "Rādīt funkciju skaitu katrā kategorijā",

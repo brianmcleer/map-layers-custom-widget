@@ -45,7 +45,7 @@ System.register([], function (e) {
         attributeCategoriesLabel: "Layers und das Feld zu erweitern durch",
         attributeCategoriesDesc: "Wählen Sie ein Feld für jede Ebene, deren Funktionen nach Kategorie unter ihrem Namen aufgelistet werden sollen. Benutzer kreuzen und enthaken Kategorien, um diese Funktionen anzuzeigen oder zu verbergen; die Webkarte und die Ebene selbst werden nicht geändert. Arbeitet an Feature Layers und Map Service Sublayers.",
         attributeCategoryAria: "Feld zu erweitern von for",
-        attributeCategoryNotExpanded: "nicht erweitert",
+        attributeCategoryNotExpanded: "Nicht erweitert",
         attributeCategoriesLoading: "Ladeebenen und Felder aus der Karte...",
         attributeCategoriesNoLayers: "In dieser Karte wurden keine Ebenen mit Text oder ganzzahligen Feldern gefunden.",
         attributeCategoryCounts: "Zeigen Sie eine Feature Count neben jeder Kategorie",

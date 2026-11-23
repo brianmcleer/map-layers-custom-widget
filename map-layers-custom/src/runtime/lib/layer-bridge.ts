@@ -213,12 +213,18 @@ export function flashRow (host: HTMLElement | null, item: any): boolean {
   const chain: string[] = []
   let p: any = item.parent
   while (p) { chain.unshift(plainTitle(p.title || p.layer?.title || '')); p = p.parent }
-  const rows = Array.from(host.querySelectorAll(ROW_SEL)) as HTMLElement[]
+  // The list components draw their rows inside their own shadow roots, which
+  // querySelectorAll on the host does not enter. Search those roots too.
+  const roots: ParentNode[] = [host]
+  host.querySelectorAll('arcgis-layer-list, arcgis-table-list').forEach((el) => { if (el.shadowRoot) roots.push(el.shadowRoot) })
+  const within = (el: Node): boolean => roots.some(root => root.contains(el))
+  const rows: HTMLElement[] = []
+  roots.forEach((root) => { rows.push(...(Array.from(root.querySelectorAll(ROW_SEL)) as HTMLElement[])) })
   const labelOf = (el: HTMLElement): string => plainTitle(String((el as any).label || el.getAttribute('label') || el.getAttribute('aria-label') || (el.textContent || '').split('\n').map(s => s.trim()).filter(Boolean)[0] || ''))
   const ancestorsOf = (el: HTMLElement): string[] => {
     const names: string[] = []
     let up = el.parentElement ? el.parentElement.closest(ROW_SEL) as HTMLElement : null
-    while (up && host.contains(up)) { names.unshift(labelOf(up)); up = up.parentElement ? up.parentElement.closest(ROW_SEL) as HTMLElement : null }
+    while (up && within(up)) { names.unshift(labelOf(up)); up = up.parentElement ? up.parentElement.closest(ROW_SEL) as HTMLElement : null }
     return names
   }
   const matches = rows.filter(el => labelOf(el) === want)

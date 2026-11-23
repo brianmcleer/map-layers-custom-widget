@@ -8,8 +8,14 @@ import {
     type JimuLayerView
 } from 'jimu-arcgis'
 import { WidgetPlaceholder, Popper, defaultMessages as jimuDefaultMessages, Loading, getFocusableElements, LoadingType, Paper } from 'jimu-ui'
+// Registers the Maps SDK map components (<arcgis-layer-list>, <arcgis-table-list>)
+// through Experience Builder's shared bundle. Nothing is bundled here.
+import 'arcgis-map-components'
+// Read as a namespace so loadArcGISMapComponents (Experience Builder 1.21+) can be used when present.
+import * as jimuCoreExports from 'jimu-core'
 import type { IMConfig } from '../config'
 import { getStyle } from './lib/style'
+import { OptionAnchorManager, applyVisibleToggleColor, eventPath, findClickedAction, innerActionButton, styleListShadowRoot } from './lib/list-components'
 import type Action from './actions/action'
 import defaultMessages from './translations/default'
 import layerListIcon from '../../icon.svg'
@@ -63,6 +69,8 @@ export interface WidgetState {
     listLoadStatus: LoadStatus
     tableLoadStatus: LoadStatus
     isActionListPopperOpen: boolean
+    // Bumped each time the options menu opens, so its Popper is re-created at the new anchor.
+    actionListPopperVersion: number
     actionListDOM: React.ReactNode
     nativeActionPopper: React.JSX.Element
     oldConfigUpdated: boolean
@@ -143,8 +151,6 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     private sceneView: any
     private MapView: any
     private SceneView: any
-    private LayerList: any
-    private TableList: any
     private readonly layerListActions: Action[]
     private renderPromise: Promise<void>
     private currentUseMapWidgetId: string
@@ -164,6 +170,18 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     layerListContainerRef: React.RefObject<HTMLDivElement>
     tableListContainerRef: React.RefObject<HTMLDivElement>
     optionBtnRef: React.MutableRefObject<HTMLElement | null>
+    // The options button sits inside the list component's shadow root, where a Popper
+    // cannot anchor. The manager keeps a stand-in on the page (lib/list-components.ts).
+    private readonly optionAnchorManager = new OptionAnchorManager()
+    // The calcite-action whose options menu is open.
+    private optionActionElementRef: HTMLElement | null = null
+    // Set when a click on the open menu's own button dismissed it as a "click outside",
+    // so the click that follows does not open it straight back up.
+    private suppressNextOptionClickAfterDismiss = false
+    // Watches the layer list's shadow root to keep the tick-box color applied.
+    private layerListShadowObserver: MutationObserver | null = null
+    private layerListShadowMappingRafId: number | null = null
+    // <arcgis-layer-list> and <arcgis-table-list> elements.
     layerListRef: React.MutableRefObject<any | null>
     tableListRef: React.MutableRefObject<any | null>
     oldSublayersSetMap: Map<string, Set<string>>
@@ -196,6 +214,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
             jimuMapViewId: null,
             listLoadStatus: LoadStatus.Pending,
             isActionListPopperOpen: false,
+            actionListPopperVersion: 0,
             actionListDOM: null,
             tableLoadStatus: LoadStatus.Pending,
             nativeActionPopper: null,
@@ -252,6 +271,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         this.destroyCategoryPanels(() => true)
         this.destroyLayerList()
         this.destroyTableList()
+        this.optionAnchorManager.cleanup()
     }
 
     componentDidMount() {
@@ -519,6 +539,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         // Close the popper when dataAction toggled OR config changed
         // This could keep the action list's state to the latest
         if (this.props.enableDataAction !== prevProps.enableDataAction || this.props.config !== prevProps.config) {
+            this.optionAnchorManager.cleanup()
             this.optionBtnRef.current = null
             this.setState({ isActionListPopperOpen: false })
         }
@@ -557,23 +578,47 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         }
     }
 
+    // The fake "options" action: by id where the SDK exposes it, else by its title.
+    isOptionActionElement = (element: HTMLElement): boolean => {
+        return element.getAttribute('data-action-id') === 'option-action' ||
+            element.title === this.translate('options') || element.title === 'Options'
+    }
+
     bindClickHandler() {
         const bindHelper = (refNode: HTMLElement) => {
             if (refNode && !refNode.onclick) {
                 refNode.onclick = (e) => {
-                    const target = e.target as HTMLElement
+                    // The list draws inside a shadow root, so the action is read from the click's path.
+                    const { actionElement, buttonElement } = findClickedAction(e)
                     // Only manipulate the fake action
-                    if (target.nodeName === 'CALCITE-ACTION' && target.title === this.translate('options')) {
-                        if (this.optionBtnRef.current !== target) {
-                            this.optionBtnRef.current = target
-                            // The popper here is kept mounted, this results in re-render the popper's content
-                            // instead of creating a new popper component, which causes overlap problem.
-                            // Give the popper a random key so it will force the popper to re-calculate the position again.
-                            this.setState({ isActionListPopperOpen: true, nativeActionPopper: null })
-                        } else {
-                            this.setState({ isActionListPopperOpen: !this.state.isActionListPopperOpen, nativeActionPopper: null })
-                        }
+                    if (!actionElement || !this.isOptionActionElement(actionElement)) return
+
+                    const sameAction = this.optionActionElementRef === actionElement
+                    const anchorSource = buttonElement || innerActionButton(actionElement) || actionElement
+                    // This same click already closed the menu through the Popper's click-outside.
+                    const dismissedByThisClick = !this.state.isActionListPopperOpen && this.suppressNextOptionClickAfterDismiss
+                    this.optionBtnRef.current = this.optionAnchorManager.ensure(anchorSource)
+                    this.optionActionElementRef = actionElement
+
+                    if (dismissedByThisClick) {
+                        this.suppressNextOptionClickAfterDismiss = false
+                        return
                     }
+                    if (this.state.isActionListPopperOpen && sameAction) {
+                        this.optionAnchorManager.cleanup()
+                        this.optionActionElementRef = null
+                        this.setState({ isActionListPopperOpen: false, nativeActionPopper: null })
+                        return
+                    }
+                    this.suppressNextOptionClickAfterDismiss = false
+                    // The popper here is kept mounted, this results in re-render the popper's content
+                    // instead of creating a new popper component, which causes overlap problem.
+                    // A new version re-creates the popper so it re-calculates the position.
+                    this.setState({
+                        isActionListPopperOpen: true,
+                        nativeActionPopper: null,
+                        actionListPopperVersion: this.state.actionListPopperVersion + 1
+                    })
                 }
             }
         }
@@ -590,7 +635,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         if (prevState.helpOpen !== this.state.helpOpen || prevState.showFirstRunHint !== this.state.showFirstRunHint) {
             return true
         }
-        if (prevState.actionListDOM !== this.state.actionListDOM) {
+        if (prevState.actionListDOM !== this.state.actionListDOM || prevState.actionListPopperVersion !== this.state.actionListPopperVersion) {
             return true
         }
         if (prevState.tableLoadStatus !== this.state.tableLoadStatus) {
@@ -686,88 +731,181 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         return ret
     }
 
+    // The map components are registered by the 'arcgis-map-components' import. In the
+    // data source mode there may be no Map widget on the page to have loaded them, so
+    // ask Experience Builder to load them too when it offers that (1.21+).
+    private loadMapComponentsPromise: Promise<any> | null = null
+    ensureMapComponentsLoaded = async (): Promise<void> => {
+        const load: (() => Promise<any>) | undefined = (jimuCoreExports as any).loadArcGISMapComponents
+        if (typeof load === 'function') {
+            if (!this.loadMapComponentsPromise) this.loadMapComponentsPromise = load()
+            try {
+                await this.loadMapComponentsPromise
+            } catch (error) {
+                this.loadMapComponentsPromise = null
+                throw error
+            }
+        }
+        // Bounded, so a page where the components never register reports an error
+        // instead of showing the loading dots forever.
+        let timer: ReturnType<typeof setTimeout> | null = null
+        try {
+            await Promise.race([
+                Promise.all([
+                    customElements.whenDefined('arcgis-layer-list'),
+                    customElements.whenDefined('arcgis-table-list')
+                ]),
+                new Promise((resolve, reject) => {
+                    timer = setTimeout(() => { reject(new Error('The layer list components are not registered')) }, 15000)
+                })
+            ])
+        } finally {
+            if (timer) clearTimeout(timer)
+        }
+    }
+
+    onLayerListTriggerAction = (evt: any) => {
+        this.onLayerListActionsTriggered(evt?.detail)
+    }
+
+    onTableListTriggerAction = (evt: any) => {
+        this.onLayerListActionsTriggered(evt?.detail, true)
+    }
+
+    // Puts the list component into its host (replacing any earlier one) and waits for it to load.
+    mountListComponent = async (host: HTMLElement, element: any): Promise<void> => {
+        host.replaceChildren(element)
+        if (typeof element.componentOnReady === 'function') await element.componentOnReady()
+        styleListShadowRoot(element.shadowRoot)
+    }
+
+    destroyListComponent = (element: any, onTriggerAction: (evt: any) => void) => {
+        element.removeEventListener('arcgisTriggerAction', onTriggerAction)
+        element.remove()
+        // destroy() returns a promise on the component
+        try {
+            Promise.resolve(element.destroy?.()).catch((error) => { console.warn(error) })
+        } catch (error) { console.warn(error) }
+    }
+
+    // Keeps the tick-box color applied inside the layer list's shadow root as rows are drawn.
+    teardownLayerListShadowMapping = () => {
+        if (this.layerListShadowMappingRafId != null) {
+            window.cancelAnimationFrame(this.layerListShadowMappingRafId)
+            this.layerListShadowMappingRafId = null
+        }
+        if (this.layerListShadowObserver) {
+            this.layerListShadowObserver.disconnect()
+            this.layerListShadowObserver = null
+        }
+    }
+
+    setupLayerListShadowMapping = (layerList: any) => {
+        this.teardownLayerListShadowMapping()
+        const start = () => {
+            const root = layerList.shadowRoot
+            if (!root) {
+                this.layerListShadowMappingRafId = window.requestAnimationFrame(start)
+                return
+            }
+            this.layerListShadowMappingRafId = null
+            const apply = () => { applyVisibleToggleColor(root, !!this.props.config?.useTickBoxes) }
+            apply()
+            this.layerListShadowObserver = new MutationObserver(apply)
+            this.layerListShadowObserver.observe(root, { childList: true, subtree: true })
+        }
+        start()
+    }
+
     destroyTableList() {
-        this.tableListRef.current && !this.tableListRef.current.destroyed && this.tableListRef.current.destroy()
+        const tableList = this.tableListRef.current
+        if (tableList) {
+            this.destroyListComponent(tableList, this.onTableListTriggerAction)
+            this.tableListRef.current = null
+        }
     }
 
     destroyLayerList() {
-        this.layerListRef.current && !this.layerListRef.current.destroyed && this.layerListRef.current.destroy()
+        this.teardownLayerListShadowMapping()
+        const layerList = this.layerListRef.current
+        if (layerList) {
+            this.destroyListComponent(layerList, this.onLayerListTriggerAction)
+            this.layerListRef.current = null
+        }
     }
 
     async createTableList(view: any | any) {
         this.setState({ tableLoadStatus: LoadStatus.Pending })
-        await this.getModule('esri/widgets/TableList', () => this.TableList, (value) => { this.TableList = value })
+        await this.ensureMapComponentsLoaded()
 
-        // The host div is gone if the widget unmounted or showTables flipped off while the module loaded
+        // The host div is gone if the widget unmounted or showTables flipped off while the components loaded
         const host = this.tableListContainerRef.current
         if (this._unmounted || !host) return null
 
-        const container = document && document.createElement('div')
-        container.className = 'table-list'
-        host.appendChild(container)
-
         this.destroyTableList()
 
-        this.tableListRef.current = new this.TableList({
-            container: container,
-            map: view.map,
-            dragEnabled: this.props.config?.reorderLayers,
-            listItemCreatedFunction: this.defineLayerListActionsGenerator(true)
-        })
+        // <arcgis-table-list> in place of the TableList widget class (deprecated in SDK 5.0).
+        const tableList: any = document.createElement('arcgis-table-list')
+        tableList.className = 'table-list'
+        tableList.view = view
+        tableList.map = view.map
+        tableList.dragEnabled = this.props.config?.reorderLayers
+        tableList.listItemCreatedFunction = this.defineLayerListActionsGenerator(true)
+        tableList.addEventListener('arcgisTriggerAction', this.onTableListTriggerAction)
 
-        this.tableListRef.current.on('trigger-action', (event) => {
-            this.onLayerListActionsTriggered(event, true)
-        })
+        await this.mountListComponent(host, tableList)
+        if (this._unmounted) {
+            this.destroyListComponent(tableList, this.onTableListTriggerAction)
+            return null
+        }
 
+        this.tableListRef.current = tableList
         return this.tableListRef.current
     }
 
     async createLayerList(view: any | any) {
         this.setState({ listLoadStatus: LoadStatus.Pending })
-        if (!this.LayerList) {
-            const modules = await loadArcGISJSAPIModules([
-                'esri/widgets/LayerList'
-            ])
-            this.LayerList = modules[0]
-        }
+        await this.ensureMapComponentsLoaded()
 
         // The host div is gone if the widget unmounted (panel closed, page switched) or fell back to the
-        // placeholder while the LayerList module or the view loaded. Bail quietly: nothing to render into.
+        // placeholder while the components or the view loaded. Bail quietly: nothing to render into.
         const host = this.layerListContainerRef.current
         if (this._unmounted || !host) return null
-
-        const container = document && document.createElement('div')
-        container.className = 'jimu-widget'
-        host.appendChild(container)
 
         this.destroyLayerList()
         // Category panels for layers that are no longer configured restore their layers now;
         // the ones still configured are reused by the item-created callback below.
         this.pruneCategoryPanels()
 
-        let option: any = {
-            view: view,
-            listItemCreatedFunction: this.defineLayerListActionsGenerator(false),
-            container: container
-        }
+        // <arcgis-layer-list> in place of the LayerList widget class (deprecated in SDK 5.0).
+        // Properties are set before the element is attached, so it binds to this view
+        // instead of looking for a parent <arcgis-map>.
+        const layerList: any = document.createElement('arcgis-layer-list')
+        layerList.className = 'jimu-widget'
+        layerList.view = view
+        layerList.listItemCreatedFunction = this.defineLayerListActionsGenerator(false)
         if (this.props.config.useMapWidget) {
-            option = {
-                ...option,
-                dragEnabled: this.props.config?.reorderLayers ?? false,
-                visibilityAppearance: this.props.config?.useTickBoxes ? 'checkbox' : 'default',
-            }
+            layerList.dragEnabled = this.props.config?.reorderLayers ?? false
+            layerList.visibilityAppearance = this.props.config?.useTickBoxes ? 'checkbox' : 'default'
+        }
+        layerList.addEventListener('arcgisTriggerAction', this.onLayerListTriggerAction)
+
+        await this.mountListComponent(host, layerList)
+        if (this._unmounted) {
+            this.destroyListComponent(layerList, this.onLayerListTriggerAction)
+            return null
+        }
+        this.setupLayerListShadowMapping(layerList)
+        this.layerListRef.current = layerList
+
+        if (this.props.config.expandAllLayers && layerList.operationalItems) {
+            this.toggleExpand(layerList.operationalItems, true)
         }
 
-        const layerList = new this.LayerList(option)
-
-        layerList.on('trigger-action', (event) => {
-            this.onLayerListActionsTriggered(event)
-        })
-
-        layerList.when(() => {
-            if (this.props.config.expandAllLayers) {
-                this.toggleExpand(layerList.operationalItems, true)
-            }
+        // The rest runs once the list is in place and renderLayerList has marked it loaded
+        // (the LayerList widget ran this from its when() callback).
+        setTimeout(() => {
+            if (this._unmounted || this.layerListRef.current !== layerList) return
 
             // Set up visibility watchers after the layer list is ready
             this.setLayerVisibilityWatchers(layerList);
@@ -797,9 +935,8 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
 
             // Tell widgets working through this list (Mappy) that the tree is ready.
             notifyBridge(this.props.id)
-        })
+        }, 0)
 
-        this.layerListRef.current = layerList
         return layerList
     }
 
@@ -1740,11 +1877,13 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
     }
 
     onLayerListActionsTriggered = (event, isTableList = false) => {
-        const action = event.action
-        const listItem = event.item
+        const action = event?.action
+        const listItem = event?.item
+        if (!action || !listItem) return
         const actionObj = this.layerListActions.find(
             (actionObj) => actionObj.id === action.id
         )
+        if (!actionObj) return
 
         this.beacon?.action('apply-action', actionObj?.id)
 
@@ -2035,10 +2174,30 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
         }
     }
 
-    onToggleActionsPopper = () => {
+    onToggleActionsPopper = (evt?: any, type?: string) => {
+        const isClickOutside = type === 'clickOutside'
+        if (isClickOutside) {
+            // A click on an options button (this row's or another's) is "outside" this
+            // menu, but the click handler is about to close or move it. Leave it to the handler.
+            const path = eventPath(evt)
+            const clickedOption = path.find((node) => node instanceof HTMLElement && node.tagName === 'CALCITE-ACTION' && this.isOptionActionElement(node))
+            const hosts = [this.layerListContainerRef.current, this.tableListContainerRef.current]
+            if (clickedOption && hosts.some((host) => !!host && (path.includes(host) || host.contains(clickedOption)))) return
+        }
+
+        // A click on this menu's own button also reads as "outside" (the button is inside
+        // the list's shadow root). Remember it so the click handler does not reopen the menu.
+        this.suppressNextOptionClickAfterDismiss = isClickOutside && this.optionAnchorManager.isClickInsideCurrentOptionAnchor(evt)
+        const focusTarget = this.optionAnchorManager.sourceAnchor || this.optionBtnRef.current
+        this.optionAnchorManager.cleanup()
+        if (!isClickOutside) {
+            this.suppressNextOptionClickAfterDismiss = false
+            this.optionActionElementRef = null
+        }
+        this.optionBtnRef.current = focusTarget
         this.setState({ isActionListPopperOpen: false, actionListDOM: null })
         if (isKeyboardMode()) {
-            const focusableElements: HTMLElement[] = getFocusableElements(this.optionBtnRef.current)
+            const focusableElements: HTMLElement[] = getFocusableElements(focusTarget)
             focusElementInKeyboardMode(focusableElements[0])
         }
     }
@@ -2239,7 +2398,7 @@ export class Widget extends React.PureComponent<WidgetProps & ExtraProps, Widget
                 }
                 {
                     this.state.actionListDOM &&
-                    <Popper style={{ minWidth: '170px', overflow: 'hidden' }} keepMount reference={this.optionBtnRef.current} open={this.state.isActionListPopperOpen} toggle={this.onToggleActionsPopper}>
+                    <Popper key={this.state.actionListPopperVersion} style={{ minWidth: '170px', overflow: 'hidden' }} keepMount reference={this.optionBtnRef.current} open={this.state.isActionListPopperOpen} toggle={this.onToggleActionsPopper}>
                         {this.state.actionListDOM}
                     </Popper>
                 }

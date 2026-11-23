@@ -43,7 +43,7 @@ System.register([], function (e) {
         pickOneRefresh: "Atnaujinti",
         enableAttributeCategories: "Išplėsti sluoksnius pagal atributo reikšmę",
         attributeCategoriesLabel: "Lapai ir laukas išplėsti",
-        attributeCategoriesDesc: "Pasirinkite lauką bet kokio sluoksnio, kurių funkcijos turėtų būti išvardyti pagal kategoriją savo vardu. Vartotojai pažymėti ir atžymėti kategorijas, kad parodyti arba paslėpti šias funkcijas; žiniatinklio žemėlapis ir pats sluoksnis nepasikeitė. NAME OF TRANSLATORS",
+        attributeCategoriesDesc: "Pasirinkite lauką bet kokio sluoksnio, kurių funkcijos turėtų būti išvardyti pagal kategoriją savo vardu. Vartotojai pažymėti ir atžymėti kategorijas, kad parodyti arba paslėpti šias funkcijas; žiniatinklio žemėlapis ir pats sluoksnis nepasikeitė. NAME OF TRANSLATORS.",
         attributeCategoryAria: "Laukai plėstis",
         attributeCategoryNotExpanded: "Kurių storis ne didesnis kaip 0,35 mm",
         attributeCategoriesLoading: "Pakrovimo sluoksniai ir laukai iš žemėlapio...",

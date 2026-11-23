@@ -228,7 +228,7 @@ System.register([], function (e) {
         helpTroubleGrey: "レイヤー名は灰色で、マップに何も表示しません。レイヤーは特定のズームレベルの間にのみ描画されます。 名前が暗くなるまで、ズームイン、またはアウトします。",
         helpTroubleGroupOff: "レイヤーが刻まれていますが、マップから欠落しています。そのグループはオフです。 グループを切り替える.",
         helpTroublePickOne: "レイヤーは、別のレイヤーをオンにしたとき自身で切り替わります。両方のグループに座って、1つのレイヤーを一度に割り当てます。 バックアップしたいものをオンにします。",
-        helpTroubleCategories: "レイヤーのいくつかの機能は、マップから欠落しています。そのカテゴリの1つは未熟です。 オープン {categoriesPanelTitle} レイヤーの下をクリックし、クリックします {categoriesAll}お問い合わせ",
+        helpTroubleCategories: "レイヤーのいくつかの機能は、マップから欠落しています。そのカテゴリの1つは未熟です。 オープン {categoriesPanelTitle} レイヤーの下をクリックし、クリックします {categoriesAll}お問い合わせ.",
         helpTroubleNoMatches: "filter はレイヤーを表示しません: スペルをチェックするか、X でボックスをクリアして、もう一度すべてを確認します。",
         helpTroubleAdd: "{addLayerError}: アドレスがレイヤー自体、Webページではなく、新しいタブで開くことができることを確認してください。",
         helpTroubleFocus: "ほとんどのレイヤーが消え、レイヤーのフォーカスカードが表示されます。カードの出口の焦点をクリックして、それらを戻します。",

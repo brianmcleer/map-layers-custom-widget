@@ -125,7 +125,7 @@ System.register([], function (e) {
         categoriesNoValue: "(vertės nėra)",
         categoriesEmptyValue: "(neužpildyta)",
         categoriesLoading: "Skaitomos reikšmės...",
-        categoriesError: "reikšmių nepavyko perskaityti. Prijungti puslapį ir bandyti dar kartą.",
+        categoriesError: "Reikšmių nepavyko perskaityti. Prijungti puslapį ir bandyti dar kartą.",
         categoriesNone: "NAME OF TRANSLATORS",
         categoriesTruncated: "A {max} reikšmės išvardytos. Savybės su kitomis reikšmėmis išlaikyti piešimo.",
         helpTitle: "Pagalba",

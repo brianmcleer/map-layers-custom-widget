@@ -2,6 +2,12 @@
 
 Newest first. Every release bumps `manifest.json` and `package.json` together.
 
+## 1.51.0 (2026-11-23)
+
+- Changed: the layer list, table list, legend panel and visibility range slider now use the Maps SDK `arcgis-layer-list`, `arcgis-table-list`, `arcgis-legend` and `arcgis-scale-range-slider` components instead of the `LayerList`, `TableList`, `Legend` and `ScaleRangeSlider` widget classes. Reason: Esri deprecated the widgets in the ArcGIS Maps SDK for JavaScript at version 5.0 and plans to remove them as early as Q1 2027, so anything built on them stops working on an Experience Builder release that ships without them. See [Deprecation: Widgets in ArcGIS Maps SDK for JavaScript](https://support.esri.com/en-us/knowledge-base/deprecation-widgets-in-arcgis-maps-sdk-for-javascript-000040437).
+- The components draw inside a shadow root, so three things moved into the new `src/runtime/lib/list-components.ts`, following what Esri's own Map Layers widget does in Experience Builder 1.21: the element and class rules from `lib/style.ts` are added inside the shadow root; the options button click is read from the click's composed path; and the options menu anchors to a stand-in element on the page (`OptionAnchorManager`).
+- The layer list bridge's row highlight (`flashRow`) now looks for rows inside the list components' shadow roots.
+
 ## 1.50.1 (2026-10-26)
 
 - Fixed: the layer list bridge's reveal highlighted the group around a layer (and picked the group when a group and a layer share a name). It now matches the row by the names above it and its depth, and draws the highlight over that one row only (the row's own line, not its nested rows), following it while the list scrolls. Waits up to about three seconds for rows inside a just-opened group to render.

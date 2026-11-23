@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { css, hooks, type IMThemeVariables, jsx, React } from 'jimu-core'
-import { MapViewManager, loadArcGISJSAPIModules } from 'jimu-arcgis'
+import { MapViewManager } from 'jimu-arcgis'
+// Registers <arcgis-legend> through Experience Builder's shared bundle (nothing is bundled here).
+import 'arcgis-map-components'
 import { Button, FloatingPanel, Tooltip } from 'jimu-ui'
 import message from '../translations/default'
 
@@ -47,40 +49,50 @@ export default function LegendPanel (props: Props) {
     return (jmv?.view as any) || null
   }, [viewFromMapWidget, jimuMapViewId])
 
-  // Create/destroy the JSAPI Legend widget alongside the panel.
+  // Takes the <arcgis-legend> element out of the panel and destroys it.
+  const destroyLegend = useCallback(() => {
+    const legend = legendRef.current
+    if (!legend) return
+    legendRef.current = null
+    try { legend.remove() } catch (e) { /* noop */ }
+    // destroy() returns a promise on the component
+    try { Promise.resolve(legend.destroy?.()).catch((): void => undefined) } catch (e) { /* noop */ }
+  }, [])
+
+  // Create/destroy the <arcgis-legend> component alongside the panel. It replaces
+  // the Legend widget class, which Esri deprecated in SDK 5.0.
   useEffect(() => {
     let cancelled = false
     if (open && containerRef.current && !legendRef.current) {
       const view = resolveView()
       if (view) {
-        loadArcGISJSAPIModules(['esri/widgets/Legend']).then(([Legend]: any[]) => {
-          if (cancelled || !containerRef.current) return
+        customElements.whenDefined('arcgis-legend').then(() => {
+          if (cancelled || !containerRef.current || legendRef.current) return
           try {
-            legendRef.current = new Legend({ view, container: containerRef.current })
+            const legend: any = document.createElement('arcgis-legend')
+            // Set before the element is attached, so it binds to this view
+            // instead of looking for a parent <arcgis-map>.
+            legend.view = view
+            legend.style.display = 'block'
+            legend.style.width = '100%'
+            containerRef.current.replaceChildren(legend)
+            legendRef.current = legend
           } catch (e) {
             console.error('Legend create failed', e)
           }
-        }).catch((e: any) => { console.error('Legend module load failed', e) })
+        }).catch((e: any) => { console.error('Legend component load failed', e) })
       }
     }
     return () => {
       cancelled = true
-      if (!open && legendRef.current) {
-        try { legendRef.current.destroy() } catch (e) { /* noop */ }
-        legendRef.current = null
-      }
+      if (!open) destroyLegend()
     }
-  }, [open, resolveView])
+  }, [open, resolveView, destroyLegend])
 
   // Clean up on unmount.
   useEffect(() => {
-    return () => {
-      if (legendRef.current) {
-        try { legendRef.current.destroy() } catch (e) { /* noop */ }
-        legendRef.current = null
-      }
-    }
-  }, [])
+    return () => { destroyLegend() }
+  }, [destroyLegend])
 
   const onClose = useCallback(() => { setOpen(false) }, [])
 

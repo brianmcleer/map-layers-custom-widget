@@ -41,7 +41,7 @@
 import { getAppStore } from 'jimu-core'
 
 export const BEACON_TAG = 'exb-beacon-sink'
-export const BEACON_VERSION = '1.1.1'
+export const BEACON_VERSION = '1.1.2'
 
 export interface BeaconHandle {
   /** Record a key action. Keep names short and stable ("open", "export-pdf", "search"). */
@@ -136,6 +136,11 @@ function scrub (s: string): string {
     .replace(/([?&])token=[^&\s]*/gi, '$1token=REDACTED')
     .replace(/(https?:\/\/[^\s?#]+)\?[^\s]*/gi, '$1')
     .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, 'EMAIL')
+    // Hosted feature services reject any text with HTML-like markup (cross-site scripting
+    // filter), and browser stacks are full of "at <anonymous>". Swap the angle brackets for
+    // look-alike characters so error rows are not thrown away.
+    .replace(/</g, '\u2039')
+    .replace(/>/g, '\u203A')
 }
 
 function browserFamily (): string {

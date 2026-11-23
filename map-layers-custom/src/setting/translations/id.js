@@ -41,7 +41,7 @@ System.register([], function (e) {
         pickOneLoading: "Memuat lapis grup dari peta...",
         pickOneNoGroups: "Tidak ada lapisan grup yang ditemukan dalam peta ini. Tambahkan grup dalam peta web (dalam Penilik Peta) dan segarkan.",
         pickOneRefresh: "Muat Ulang",
-        enableAttributeCategories: "undo-type",
+        enableAttributeCategories: "Undo-type",
         attributeCategoriesLabel: "Lapisan dan lapangan untuk diperluas",
         attributeCategoriesDesc: "Pilih sebuah field untuk lapis apapun yang fitur harus didaftarkan oleh kategori di bawah namanya. Pengguna centang dan untick kategori untuk menampilkan atau menyembunyikan fitur tersebut; peta web dan lapis itu sendiri tidak berubah. Bekerja pada lapisan fitur dan sublayer layanan peta.",
         attributeCategoryAria: "Ruas untuk diperluas",
